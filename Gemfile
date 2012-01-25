@@ -8,6 +8,7 @@ gem 'simple_form'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
 gem 'thin'
+gem 'haml'
 
 group :test, :development do
   gem 'factory_girl_rails'
