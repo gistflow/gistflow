@@ -8,6 +8,7 @@ gem 'simple_form'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
 gem 'thin'
+gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 
 group :test, :development do
   gem 'factory_girl_rails'
