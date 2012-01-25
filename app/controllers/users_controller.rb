@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    render omniauth.inspect
+    render :text => omniauth.inspect
     # account = Account::Github.find_or_create_by_omniauth(omniauth)
     # current_user = account.user
     # redirect_to root_path
