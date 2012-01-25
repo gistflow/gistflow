@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Account::Github do
   describe '#find_or_create_by_omniauth' do
+    let(:auth) do
+      
+    end
+    
     it { Account::Github.should respond_to(:find_or_create_by_omniauth) }
     
     context 'account persisted' do
