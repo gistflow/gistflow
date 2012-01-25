@@ -1,6 +1,7 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
-  factory :github do
+  factory :account_github, :class => Account::Github do
+    user
+    sequence(:token) { |n| "token_#{n}" }
+    sequence(:github_id) { |n| n }
   end
 end

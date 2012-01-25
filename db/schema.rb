@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(:version => 20120125165831) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
+    t.integer "github_id"
     t.integer "user_id"
   end
 
+  add_index "account_githubs", ["github_id"], :name => "index_account_githubs_on_github_id", :unique => true
   add_index "account_githubs", ["token"], :name => "index_account_githubs_on_token", :unique => true
 
   create_table "comments", :force => true do |t|
@@ -65,6 +67,11 @@ ActiveRecord::Schema.define(:version => 20120125165831) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
+    t.string   "name"
+    t.string   "email"
+    t.string   "home_page"
+    t.string   "github_page"
+    t.string   "gravatar_id"
     t.datetime "created_at"
   end
 
