@@ -195,7 +195,6 @@ DEPENDENCIES
   guard-rspec
   heroku
   jquery-rails
-  omniauth
   omniauth-github!
   pg
   rails (= 3.2.0)
