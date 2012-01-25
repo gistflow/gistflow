@@ -1,3 +1,3 @@
 Gistflow::Application.routes.draw do
-  match 'authentication' => 'users#create'
+  match '/auth/:provider/callback' => 'users#create'
 end
