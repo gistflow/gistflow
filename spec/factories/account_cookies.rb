@@ -1,6 +1,6 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
-  factory :cookie do
+  factory :cookie, :class => Account::Cookie do
+    user
+    sequence(:secret) { |n| "secret_#{n}" }
   end
 end
