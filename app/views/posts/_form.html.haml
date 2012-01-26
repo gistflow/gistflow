@@ -5,3 +5,9 @@
     = f.input :body
   .actions
     = f.button :submit
+
+.gists
+  %ul
+    - @gists.each do |gist|
+      %li 
+        = link_to gist["description"], gist_js_url(gist["id"])

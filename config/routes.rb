@@ -1,6 +1,7 @@
 Gistflow::Application.routes.draw do
   resources :posts
-
+  
+  root :to => 'application#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
