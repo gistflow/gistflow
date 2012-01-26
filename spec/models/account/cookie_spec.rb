@@ -14,4 +14,13 @@ describe Account::Cookie do
       it { Account::Cookie.user_by_secret('foo').should be_nil }
     end
   end
+  
+  describe '#generate_secret!' do
+    let(:cookie) { Account::Cookie.new }
+    
+    it 'should generate random string' do
+      cookie.generate_secret!
+      cookie.secret.should be
+    end
+  end
 end
