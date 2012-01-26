@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
+  before_filter :user_gists, :only => [:new, :edit]
+  
   def index
     @posts = Post.all
+    current_user = "ksjfnkjfnkw"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +28,6 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-    @gists = User.last.gists.slice(-20, 20)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +38,6 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
-    @gists = User.last.gists[-10..10]
   end
 
   # POST /posts
@@ -81,5 +82,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def user_gists
+    @gists = User.last.github_gists.last(20)
   end
 end
