@@ -10,4 +10,4 @@
   %ul
     - @gists.each do |gist|
       %li 
-        = link_to gist["description"], gist_js_url(gist["id"])
+        = link_to gist["description"], "#import_gist_#{gist['id']}", :class => "import_gist", :id => gist["id"]
