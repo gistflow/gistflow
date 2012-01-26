@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
 protected
   
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id]) || begin
+    @current_user ||= (User.find_by_id(session[:user_id]) || begin
       Account::Cookie.user_by_secret(cookies[:secret])
-    end
+    end)
   end
   helper_method :current_user
   
