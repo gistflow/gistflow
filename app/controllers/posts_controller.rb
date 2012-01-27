@@ -1,92 +1,52 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.json
-  before_filter :user_gists, :only => [:new, :edit]
-  
   def index
-    @posts = Post.all
-    current_user = "ksjfnkjfnkw"
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
+    @posts = Post.all.map { |p| Posts::ShowPresenter.new(p) }
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
-    end
+    post = Post.find(params[:id])
+    @presenter = Posts::ShowPresenter.new(post)
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
   def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
-    end
+    post = current_user.posts.build
+    @presenter = Posts::FormPresenter.new(post)
   end
 
-  # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    post = current_user.posts.find(params[:id])
+    @presenter = Posts::FormPresenter.new(post)
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
-    @post = Post.new(params[:post])
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    post = current_user.posts.build(params[:post])
+    if post.save
+      redirect_to post, notice: 'Post was successfully created.'
+    else
+      @presenter = Posts::FormPresenter.new(post)
+      render :new
     end
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.json
   def update
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    post = current_user.posts.find(params[:id])
+    if post.update_attributes(params[:post])
+      redirect_to post, notice: 'Post was successfully updated.'
+    else
+      @presenter = Posts::FormPresenter.new(post)
+      render :edit
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-    end
+    post = current_user.posts.find(params[:id])
+    post.destroy
+    redirect_to root_path
   end
   
-  private
+private
   
-  def user_gists
-    @gists = User.last.github_gists.last(20)
+  def current_user
+    User.last
   end
 end
