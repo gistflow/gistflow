@@ -7,13 +7,13 @@ class Posts::ShowPresenter
     @post = post
   end
   
-  def title
-    post.title
-  end
-  
   def body
     CGI::escapeHTML(post.body).gsub(/\{gist:(\d+)\}/) do
       Github::Gist.script_tag($1)
     end.html_safe
+  end
+  
+  def method_missing(method)
+    post.public_send(method) if post.respond_to? method
   end
 end
