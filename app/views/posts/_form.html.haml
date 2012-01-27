@@ -1,4 +1,4 @@
-= simple_form_for(@post) do |f|
+= simple_form_for(@presenter.post) do |f|
   = f.error_notification
   .inputs
     = f.input :title
@@ -6,8 +6,8 @@
   .actions
     = f.button :submit
 
+%h2 Gists
 .gists
   %ul
-    - @gists.each do |gist|
-      %li 
-        = link_to gist["description"], "#import_gist_#{gist['id']}", :class => "import_gist", :id => gist["id"]
+    - @presenter.github_gists.each do |gist|
+      %li= link_to gist["description"], "#import_gist_#{gist['id']}", :class => "import_gist", :id => gist["id"]
