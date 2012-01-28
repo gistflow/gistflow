@@ -1,6 +1,13 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :post do
-  end
+    user
+    title { Faker::Lorem.sentence }
+    body { "#{Faker::Lorem.paragraph}" }
+    
+    trait :with_gist do
+      body { "#{Faker::Lorem.paragraph} {gist:777}" }
+    end
+    
+    factory :post_with_gist, :traits => [:with_gist]
+  end  
 end

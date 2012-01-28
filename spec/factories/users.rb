@@ -1,6 +1,7 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
-  factory :user do
+  factory :user, :aliases => [:author, :commenter] do
+    name { "Mad Max" }
+    sequence(:username) { |n| "user_#{n}" }
+    sequence(:email) { |n| "user_#{n}@gistflow.com" }
   end
 end
