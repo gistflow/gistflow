@@ -1,4 +1,4 @@
-class FavoritePostsUsers < ActiveRecord::Migration  
+class FavoritePostsLovers < ActiveRecord::Migration  
   def self.up
     create_table :favorite_posts_lovers, :id => false do |t|
         t.integer :post_id
