@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/intridea/omniauth-github.git
+  revision: d6e44c435ded9c99796ad635a793ec6b8a508c68
+  specs:
+    omniauth-github (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,6 +62,12 @@ GEM
     factory_girl_rails (1.6.0)
       factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
+    faraday (0.7.6)
+      addressable (~> 2.2)
+      multipart-post (~> 1.1)
+      rack (~> 1.1)
     ffi (1.0.11)
     guard (1.0.0)
       ffi (>= 0.5.0)
@@ -61,6 +75,7 @@ GEM
     guard-rspec (0.6.0)
       guard (>= 0.10.0)
     haml (3.1.4)
+    hashie (1.2.0)
     heroku (2.18.1)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -88,6 +103,16 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    multipart-post (1.1.4)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
+    omniauth (1.0.2)
+      hashie (~> 1.2)
+      rack
+    omniauth-oauth2 (1.0.0)
+      oauth2 (~> 0.5.0)
+      omniauth (~> 1.0)
     pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -174,10 +199,12 @@ DEPENDENCIES
   airbrake
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  faker
   guard-rspec
   haml
   heroku
   jquery-rails
+  omniauth-github!
   pg
   rails (= 3.2.0)
   rspec-rails

@@ -10,10 +10,12 @@ gem 'twitter-bootstrap-rails'
 gem 'thin'
 gem 'airbrake'
 gem 'haml'
+gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 
 group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'faker'
   gem 'guard-rspec'
   gem 'sqlite3'
 end
