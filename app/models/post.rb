@@ -6,4 +6,6 @@ class Post < ActiveRecord::Base
     :join_table => :favorite_posts_lovers
   
   default_scope :order => 'created_at DESC'
+  
+  before_save { raise 'booo' }
 end
