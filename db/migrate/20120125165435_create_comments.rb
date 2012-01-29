@@ -1,12 +1,11 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.string :type
-      t.references :post, :polymorphic => true
       t.boolean :question
+      t.text :body
       t.integer :author_id
       t.integer :consignee_id
-      t.text :body
+      t.belongs_to :post
       t.timestamps
     end
   end
