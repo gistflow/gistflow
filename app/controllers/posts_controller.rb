@@ -43,10 +43,4 @@ class PostsController < ApplicationController
     post.destroy
     redirect_to root_path
   end
-  
-private
-  
-  def current_user
-    User.last
-  end
 end
