@@ -4,10 +4,11 @@ class ApplicationController < ActionController::Base
 protected
   
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id]) || begin
-      Account::Cookie.user_by_secret(cookie[:secret])
-    end
+    @current_user ||= (User.find_by_id(session[:user_id]) || begin
+      Account::Cookie.user_by_secret(cookies[:secret])
+    end)
   end
+  helper_method :current_user
   
   def current_user=(user)
     if @current_user = user
@@ -18,4 +19,11 @@ protected
       cookies.delete(:secret)
     end
   end
+  helper_method :current_user=
+  
+  def user_signed_in?
+    !!current_user
+  end
+  helper_method :user_signed_in?
+
 end

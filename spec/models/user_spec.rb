@@ -13,7 +13,11 @@ describe User do
       user.create_cookie_secret.should == user.account_cookies.last.secret
     end
   end
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> development
   describe '#favorite posts' do
     let(:user) { Factory(:user) }
     let(:post) { Factory(:post) }

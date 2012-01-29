@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def create
     account = Account::Github.find_or_create_by_omniauth(omniauth)
-    current_user = account.user
+    self.current_user = account.user
     redirect_to root_path
   end
 
