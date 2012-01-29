@@ -25,4 +25,5 @@ protected
     !!current_user
   end
   helper_method :user_signed_in?
+
 end

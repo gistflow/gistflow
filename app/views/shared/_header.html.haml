@@ -1,0 +1,10 @@
+.row
+  .logo.span11= link_to_unless_current 'Gistflow', root_path
+
+  .authentication.span4.offset1
+    - if user_signed_in?
+      = link_to current_user.username, '', :class => 'login'
+      = link_to 'settings'
+      = link_to 'logout', logout_path
+    - else
+      = link_to 'login through GitHub', login_url
