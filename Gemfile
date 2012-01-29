@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.1'
 
 gem 'state_machine'
 gem 'jquery-rails'
@@ -18,6 +18,7 @@ group :test, :development do
   gem 'faker'
   gem 'guard-rspec'
   gem 'sqlite3'
+  gem 'tork'
 end
 
 group :test do
