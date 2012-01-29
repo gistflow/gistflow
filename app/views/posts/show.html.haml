@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b Title:
+  = @presenter.title
+%p
+  %b Body:
+  = @presenter.body
+= link_to 'Edit', edit_post_path(@presenter.post)
+|
+\#{link_to 'Back', posts_path}

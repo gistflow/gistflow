@@ -13,3 +13,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.idea
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+config/database.yml
+public/system/**/*
+.idea/
+.DS_Store

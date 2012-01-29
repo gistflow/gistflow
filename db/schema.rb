@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125165831) do
+ActiveRecord::Schema.define(:version => 20120128224634) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -31,11 +31,22 @@ ActiveRecord::Schema.define(:version => 20120125165831) do
 
   create_table "comments", :force => true do |t|
     t.string   "type"
-    t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "post_type"
+    t.boolean  "question"
+    t.integer  "author_id"
+    t.integer  "consignee_id"
+    t.text     "body"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
+
+  create_table "favorite_posts_lovers", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "favorite_posts_lovers", ["post_id", "user_id"], :name => "index_favorite_posts_lovers_on_post_id_and_user_id", :unique => true
 
   create_table "gists", :force => true do |t|
     t.integer "user_id"
@@ -45,7 +56,8 @@ ActiveRecord::Schema.define(:version => 20120125165831) do
   end
 
   create_table "posts", :force => true do |t|
-    t.text     "content"
+    t.string   "title"
+    t.text     "body"
     t.string   "state"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
