@@ -16,4 +16,16 @@ module ApplicationHelper
   def avatar_image(user, size)
     image_tag user.gravatar(size)
   end
+  
+  def title(title)
+    content_for(:title, title)
+  end
+  
+  def credits
+    creators = ['releu', 'makaroni4', 'agentcooper'].shuffle.map do |u|
+      link_to "@#{u}", "https://github.com/#{u}"
+    end
+    
+    "Created by #{creators[0]}, #{creators[1]} and #{creators[2]}".html_safe
+  end
 end

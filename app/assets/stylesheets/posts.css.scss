@@ -7,9 +7,13 @@
 		margin-left: 40px;
 	}
 	.caption {
-		
-	}
-	.author {
-		font-weight: bold;
+		text-align: right;
+		.author {
+			font-weight: bold;
+		}
+		.comments {
+			text-decoration: none;
+			color: white;
+		}
 	}
 }
