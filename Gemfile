@@ -6,7 +6,6 @@ gem 'state_machine'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'heroku'
-gem 'taps'
 gem 'twitter-bootstrap-rails'
 gem 'thin'
 gem 'airbrake'
@@ -21,6 +20,7 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'sqlite3'
   gem 'tork'
+  gem 'taps'
 end
 
 group :test do

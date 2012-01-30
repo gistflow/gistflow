@@ -2,6 +2,7 @@
   %ul.unstyled
     %li= link_to 'New Post', new_post_path
 
-%h1 Stream
+.page-header
+  %h1 Stream
 = render @posts
 = paginate @posts
