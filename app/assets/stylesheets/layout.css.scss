@@ -3,7 +3,9 @@ header {
 	h1 {
 		a:hover { text-decoration: none; }
 	}
-	
+	.page-header {
+		margin: 0;
+	}
 	.authentication {
 		float: right;
 		text-align: right;
