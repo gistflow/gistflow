@@ -16,6 +16,14 @@ class User < ActiveRecord::Base
   end
   
   def github_gists
-    []
+    Github::User.new(username).gists
+  end
+  
+  def gravatar(size = 50)
+    if gravatar_id
+      "http://www.gravatar.com/avatar/#{gravatar_id}?size=#{size}"
+    else
+      "http://www.gravatar.com/avatar/?size=#{size}"
+    end
   end
 end

@@ -1,3 +1,6 @@
 - presenter = Posts::ShowPresenter.new(post)
-%h3= link_to presenter.title, post_path(presenter.post)
-%p= presenter.body
+.post
+  %h3= link_to presenter.title, post_path(presenter.post)
+  .avatar= avatar_image(post.user, 30)
+  .body= presenter.body
+  .author= link_to post.user.username, user_path(post.user)
