@@ -12,4 +12,8 @@ module ApplicationHelper
       'https://github.com/login/oauth/authorize?client_id=83dfd929d47091e3902d'
     end
   end
+  
+  def avatar_image(user, size)
+    image_tag user.gravatar(size)
+  end
 end

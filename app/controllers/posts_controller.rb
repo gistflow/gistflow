@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.map { |p| Posts::ShowPresenter.new(p) }
+    @posts = Post.page(params[:page])
   end
 
   def show

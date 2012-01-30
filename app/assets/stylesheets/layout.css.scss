@@ -1,13 +1,21 @@
 header {
 	padding: 10px 0 20px;
 	.logo {
-		font-size: 24px;
+		font-size: 28px;
+		line-height: 33px;
 		font-weight: bold;
+		a:hover {
+			text-decoration: none;
+		}
 	}
 	
 	.authentication {
+		text-align: right;
 		.login {
 			font-weight: bold;
+		}
+		ul {
+			float: right;
 		}
 	}
 }

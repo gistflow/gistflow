@@ -1,0 +1,131 @@
+FFFFFFFFFFFFFFFF
+
+Failures:
+
+  1) PostsController GET index assigns all posts as @posts
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:39:in `block (3 levels) in <top (required)>'
+
+  2) PostsController GET show assigns the requested post as @post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:47:in `block (3 levels) in <top (required)>'
+
+  3) PostsController GET new assigns a new post as @post
+     Failure/Error: get :new, {}, valid_session
+     ActiveRecord::StatementInvalid:
+       Could not find table 'users'
+     # ./app/controllers/application_controller.rb:7:in `current_user'
+     # ./app/controllers/posts_controller.rb:12:in `new'
+     # spec/controllers/posts_controller_spec.rb:55:in `block (3 levels) in <top (required)>'
+
+  4) PostsController GET edit assigns the requested post as @post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:62:in `block (3 levels) in <top (required)>'
+
+  5) PostsController POST create with valid params creates a new Post
+     Failure/Error: expect {
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:71:in `block (4 levels) in <top (required)>'
+
+  6) PostsController POST create with valid params assigns a newly created post as @post
+     Failure/Error: post :create, {:post => valid_attributes}, valid_session
+     ActiveRecord::StatementInvalid:
+       Could not find table 'users'
+     # ./app/controllers/application_controller.rb:7:in `current_user'
+     # ./app/controllers/posts_controller.rb:22:in `create'
+     # spec/controllers/posts_controller_spec.rb:77:in `block (4 levels) in <top (required)>'
+
+  7) PostsController POST create with valid params redirects to the created post
+     Failure/Error: post :create, {:post => valid_attributes}, valid_session
+     ActiveRecord::StatementInvalid:
+       Could not find table 'users'
+     # ./app/controllers/application_controller.rb:7:in `current_user'
+     # ./app/controllers/posts_controller.rb:22:in `create'
+     # spec/controllers/posts_controller_spec.rb:83:in `block (4 levels) in <top (required)>'
+
+  8) PostsController POST create with invalid params assigns a newly created but unsaved post as @post
+     Failure/Error: post :create, {:post => {}}, valid_session
+     ActiveRecord::StatementInvalid:
+       Could not find table 'users'
+     # ./app/controllers/application_controller.rb:7:in `current_user'
+     # ./app/controllers/posts_controller.rb:22:in `create'
+     # spec/controllers/posts_controller_spec.rb:92:in `block (4 levels) in <top (required)>'
+
+  9) PostsController POST create with invalid params re-renders the 'new' template
+     Failure/Error: post :create, {:post => {}}, valid_session
+     ActiveRecord::StatementInvalid:
+       Could not find table 'users'
+     # ./app/controllers/application_controller.rb:7:in `current_user'
+     # ./app/controllers/posts_controller.rb:22:in `create'
+     # spec/controllers/posts_controller_spec.rb:99:in `block (4 levels) in <top (required)>'
+
+  10) PostsController PUT update with valid params updates the requested post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:108:in `block (4 levels) in <top (required)>'
+
+  11) PostsController PUT update with valid params assigns the requested post as @post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:118:in `block (4 levels) in <top (required)>'
+
+  12) PostsController PUT update with valid params redirects to the post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:124:in `block (4 levels) in <top (required)>'
+
+  13) PostsController PUT update with invalid params assigns the post as @post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:132:in `block (4 levels) in <top (required)>'
+
+  14) PostsController PUT update with invalid params re-renders the 'edit' template
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:140:in `block (4 levels) in <top (required)>'
+
+  15) PostsController DELETE destroy destroys the requested post
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:151:in `block (3 levels) in <top (required)>'
+
+  16) PostsController DELETE destroy redirects to the posts list
+     Failure/Error: post = Post.create! valid_attributes
+     ActiveRecord::StatementInvalid:
+       Could not find table 'posts'
+     # spec/controllers/posts_controller_spec.rb:158:in `block (3 levels) in <top (required)>'
+
+Finished in 0.17918 seconds
+16 examples, 16 failures
+
+Failed examples:
+
+rspec spec/controllers/posts_controller_spec.rb:38 # PostsController GET index assigns all posts as @posts
+rspec spec/controllers/posts_controller_spec.rb:46 # PostsController GET show assigns the requested post as @post
+rspec spec/controllers/posts_controller_spec.rb:54 # PostsController GET new assigns a new post as @post
+rspec spec/controllers/posts_controller_spec.rb:61 # PostsController GET edit assigns the requested post as @post
+rspec spec/controllers/posts_controller_spec.rb:70 # PostsController POST create with valid params creates a new Post
+rspec spec/controllers/posts_controller_spec.rb:76 # PostsController POST create with valid params assigns a newly created post as @post
+rspec spec/controllers/posts_controller_spec.rb:82 # PostsController POST create with valid params redirects to the created post
+rspec spec/controllers/posts_controller_spec.rb:89 # PostsController POST create with invalid params assigns a newly created but unsaved post as @post
+rspec spec/controllers/posts_controller_spec.rb:96 # PostsController POST create with invalid params re-renders the 'new' template
+rspec spec/controllers/posts_controller_spec.rb:107 # PostsController PUT update with valid params updates the requested post
+rspec spec/controllers/posts_controller_spec.rb:117 # PostsController PUT update with valid params assigns the requested post as @post
+rspec spec/controllers/posts_controller_spec.rb:123 # PostsController PUT update with valid params redirects to the post
+rspec spec/controllers/posts_controller_spec.rb:131 # PostsController PUT update with invalid params assigns the post as @post
+rspec spec/controllers/posts_controller_spec.rb:139 # PostsController PUT update with invalid params re-renders the 'edit' template
+rspec spec/controllers/posts_controller_spec.rb:150 # PostsController DELETE destroy destroys the requested post
+rspec spec/controllers/posts_controller_spec.rb:157 # PostsController DELETE destroy redirects to the posts list

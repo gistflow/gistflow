@@ -1,10 +1,15 @@
 .row
-  .logo.span11= link_to_unless_current 'Gistflow', root_path
+  .logo.span10= link_to_unless_current 'Gistflow', root_path
 
-  .authentication.span4.offset1
-    - if user_signed_in?
-      = link_to current_user.username, '', :class => 'login'
-      = link_to 'settings'
-      = link_to 'logout', logout_path
-    - else
-      = link_to 'login through GitHub', login_url
+  .authentication.span6
+    %ul.breadcrumb
+      - if user_signed_in?
+        %li
+          = link_to current_user.username, '', :class => 'login'
+          %span.divider= '|'
+        %li
+          = link_to 'settings'
+          %span.divider= '|'
+        %li= link_to 'logout', logout_path
+      - else
+        %li= link_to 'login through GitHub', login_url

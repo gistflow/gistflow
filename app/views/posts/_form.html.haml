@@ -1,13 +1,13 @@
-= simple_form_for(@presenter.post) do |f|
-  = f.error_notification
-  .inputs
-    = f.input :title
-    = f.input :body
-  .actions
-    = f.button :submit
+- content_for :sidebar do
+  %h3 Gists
+  .gists
+    %ul
+      - @presenter.github_gists.each do |gist|
+        %li= link_to gist["description"], "#import_gist_#{gist['id']}", :class => "import_gist", :id => gist["id"]
 
-%h2 Gists
-.gists
-  %ul
-    - @presenter.github_gists.each do |gist|
-      %li= link_to gist["description"], "#import_gist_#{gist['id']}", :class => "import_gist", :id => gist["id"]
+= simple_form_for(@presenter.post, :html => { :class => 'form-stacked' }) do |f|
+  = f.error_notification
+  = f.input :title, :input_html => { :class => 'span9' }
+  = f.input :body, :input_html => { :class => 'span9', :size => '40x6' }
+  .actions
+    = f.button :submit, :class => 'primary btn'

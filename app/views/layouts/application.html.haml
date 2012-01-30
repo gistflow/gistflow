@@ -2,7 +2,7 @@
 %html
   %head
     %title Gistflow
-    = stylesheet_link_tag    'application'
+    = stylesheet_link_tag    'application', 'http://twitter.github.com//bootstrap/1.4.0/bootstrap.min.css'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
@@ -10,14 +10,10 @@
     .container
       .content
         .row
-          .span11
+          .span10
             = yield
-          .span4.offset1
-            %h3 Sidebar
-            %ul
-              %li= link_to "New post", new_post_path
-              %li= link_to "Link2", "/path2"
-              %li= link_to "Link3", "/path3"
+          .span6.sidebar
+            = render 'shared/sidebar'
     %footer
       .container
         = link_to 'github', 'https://github.com/gist-flow/gistflow'

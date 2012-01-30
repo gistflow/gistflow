@@ -1,0 +1,17 @@
+.F..........
+
+Failures:
+
+  1) Account::Github#find_or_create_by_omniauth account persisted should find account
+     Failure/Error: let(:account) { Factory(:account_github) }
+     ActiveRecord::RecordInvalid:
+       Validation failed: Username has already been taken, Email has already been taken
+     # spec/models/account/github_spec.rb:61:in `block (4 levels) in <top (required)>'
+     # spec/models/account/github_spec.rb:63:in `block (4 levels) in <top (required)>'
+
+Finished in 1.15 seconds
+12 examples, 1 failure
+
+Failed examples:
+
+rspec spec/models/account/github_spec.rb:66 # Account::Github#find_or_create_by_omniauth account persisted should find account
