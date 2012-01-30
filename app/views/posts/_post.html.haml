@@ -1,9 +1,8 @@
 - presenter = Posts::ShowPresenter.new(post)
 .post
-  %h3= link_to presenter.title, post_path(presenter.post)
+  %h4= link_to presenter.title, post_path(presenter.post)
   .avatar= avatar_image(post.user, 30)
   .body= presenter.body
   .clear
   .caption
-    = "##{post.id}"
-    %span.author= link_to post.user.username, user_path(post.user)
+    = link_to "#{post.comments.size} comments", post_path(post), :class => "comments label"

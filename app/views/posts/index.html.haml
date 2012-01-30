@@ -1,8 +1,6 @@
-- content_for :sidebar do
-  %ul.unstyled
-    %li= link_to 'New Post', new_post_path
-
-.page-header
-  %h1 Stream
+- title 'Stream'
+- content_for(:sidebar) do
+  - if user_signed_in?
+    %p= link_to 'New Post', new_post_path, :class => 'btn small'
 = render @posts
 = paginate @posts

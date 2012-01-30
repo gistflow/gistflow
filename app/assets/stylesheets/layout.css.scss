@@ -1,26 +1,24 @@
 header {
-	padding: 10px 0 20px;
-	.logo {
-		font-size: 28px;
-		line-height: 33px;
-		font-weight: bold;
-		color: #bfbfbf;
-		a {
-			color: #bfbfbf;
-		}
-		a:hover {
-			text-decoration: none;
-		}
+	padding: 10px 0 10px;
+	h1 {
+		a:hover { text-decoration: none; }
 	}
 	
 	.authentication {
+		float: right;
 		text-align: right;
-		.login {
-			font-weight: bold;
-		}
+		.login { font-weight: bold; }
 		ul {
-			float: right;
 			margin: 0;
 		}
 	}
+}
+
+.form-stacked {
+	padding-left: 0;
+}
+
+footer {
+	background: #eee;
+	padding: 30px 0;
 }
