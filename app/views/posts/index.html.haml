@@ -1,3 +1,7 @@
-%h1 Posts
+- content_for :sidebar do
+  %ul.unstyled
+    %li= link_to 'New Post', new_post_path
+
+%h1 Stream
 = render @posts
-= link_to 'New Post', new_post_path
+= paginate @posts

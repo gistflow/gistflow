@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
       cookie.generate_secret!
     end.secret
   end
+  
+  def github_gists
+    []
+  end
 end

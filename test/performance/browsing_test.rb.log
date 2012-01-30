@@ -1,0 +1,6 @@
+Specify ruby-prof as application's dependency in Gemfile to run benchmarks.
+No examples found.
+
+
+Finished in 0.01506 seconds
+0 examples, 0 failures

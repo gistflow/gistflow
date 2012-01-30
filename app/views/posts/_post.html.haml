@@ -1,0 +1,3 @@
+- presenter = Posts::ShowPresenter.new(post)
+%h3= link_to presenter.title, post_path(presenter.post)
+%p= presenter.body

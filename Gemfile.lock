@@ -90,6 +90,10 @@ GEM
       railties (>= 3.2.0.beta, < 5.0)
       thor (~> 0.14)
     json (1.6.5)
+    kaminari (0.13.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      railties (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     less (2.0.9)
@@ -211,6 +215,7 @@ DEPENDENCIES
   haml
   heroku
   jquery-rails
+  kaminari
   omniauth-github!
   pg
   rails (= 3.2.1)

@@ -6,8 +6,13 @@ header {
 	}
 	
 	.authentication {
+		text-align: right;
+		font-size: 14px;
 		.login {
 			font-weight: bold;
+		}
+		ul {
+			float: right;
 		}
 	}
 }

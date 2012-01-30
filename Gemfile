@@ -10,6 +10,7 @@ gem 'twitter-bootstrap-rails'
 gem 'thin'
 gem 'airbrake'
 gem 'haml'
+gem 'kaminari'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 
 group :test, :development do
