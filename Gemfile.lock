@@ -167,15 +167,26 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    sequel (3.20.0)
     simple_form (1.5.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    sinatra (1.0)
+      rack (>= 1.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.5)
+    sqlite3-ruby (1.3.3)
+      sqlite3 (>= 1.3.3)
     state_machine (1.1.2)
+    taps (0.3.23)
+      rack (>= 1.0.1)
+      rest-client (>= 1.4.0, < 1.7.0)
+      sequel (~> 3.20.0)
+      sinatra (~> 1.0.0)
+      sqlite3-ruby (~> 1.2)
     term-ansicolor (1.0.7)
     therubyracer (0.9.9)
       libv8 (~> 3.3.10)
@@ -224,6 +235,7 @@ DEPENDENCIES
   simple_form
   sqlite3
   state_machine
+  taps
   therubyracer
   thin
   tork

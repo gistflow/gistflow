@@ -3,4 +3,7 @@
   %h3= link_to presenter.title, post_path(presenter.post)
   .avatar= avatar_image(post.user, 30)
   .body= presenter.body
-  .author= link_to post.user.username, user_path(post.user)
+  .clear
+  .caption
+    = "##{post.id}"
+    %span.author= link_to post.user.username, user_path(post.user)

@@ -4,6 +4,10 @@ header {
 		font-size: 28px;
 		line-height: 33px;
 		font-weight: bold;
+		color: #bfbfbf;
+		a {
+			color: #bfbfbf;
+		}
 		a:hover {
 			text-decoration: none;
 		}
@@ -16,6 +20,7 @@ header {
 		}
 		ul {
 			float: right;
+			margin: 0;
 		}
 	}
 }
