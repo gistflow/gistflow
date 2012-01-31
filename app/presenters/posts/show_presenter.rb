@@ -13,6 +13,10 @@ class Posts::ShowPresenter
     end.html_safe
   end
   
+  def title
+    post.title[0..50]
+  end
+  
   def method_missing(method)
     post.public_send(method) if post.respond_to? method
   end

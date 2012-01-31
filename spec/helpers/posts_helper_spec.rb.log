@@ -1,9 +1,0 @@
-*
-
-Pending:
-  PostsHelper add some examples to (or delete) spec/helpers/posts_helper_spec.rb
-    # No reason given
-    # spec/helpers/posts_helper_spec.rb:14
-
-Finished in 0.01371 seconds
-1 example, 0 failures, 1 pending
