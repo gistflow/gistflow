@@ -20,6 +20,21 @@ header {
 	padding-left: 0;
 }
 
+#instant_form {
+	margin-bottom: 20px;
+	textarea {
+		display: block;
+		width: 570px;
+		margin-bottom: 5px;
+	}
+	.button {
+		float: right;
+	}
+	ul {
+		float: right;
+	}
+}
+
 footer {
 	background: #eee;
 	padding: 30px 0;

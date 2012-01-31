@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require bootstrap.css
+ *= require css3buttons.css
  *= require_tree .
 */
 

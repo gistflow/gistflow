@@ -2,12 +2,15 @@
 	margin-bottom: 18px;
 	.avatar {
 		float: left;
+		padding: 1px;
+		border: 1px solid #BFBFBF;
+		line-height: 1px;
 	}
 	.body {
 		margin-left: 40px;
 	}
 	.caption {
-		text-align: right;
+		float: right;
 		.author {
 			font-weight: bold;
 		}

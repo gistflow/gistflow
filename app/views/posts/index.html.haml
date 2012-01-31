@@ -1,6 +1,5 @@
 - title 'Stream'
-- content_for(:sidebar) do
-  - if user_signed_in?
-    %p= link_to 'New Post', new_post_path, :class => 'btn small'
+= render 'instant_form'
+%h2= yield(:title)
 = render @posts
 = paginate @posts
