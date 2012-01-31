@@ -21,7 +21,7 @@ header {
 }
 
 #instant_form {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	textarea {
 		display: block;
 		width: 570px;
@@ -32,6 +32,14 @@ header {
 	}
 	ul {
 		float: right;
+	}
+	ul.new-post {
+		float: left;
+		padding: 3px 0;
+		font-size: 12px;
+		a {
+			color: #bfbfbf;
+		}
 	}
 }
 
