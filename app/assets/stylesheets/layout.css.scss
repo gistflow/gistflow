@@ -2,6 +2,12 @@ header {
 	padding: 10px 0 10px;
 	h1 {
 		a:hover { text-decoration: none; }
+		small {
+			color: #333;
+			a {
+				color: #bfbfbf;
+			}
+		}
 	}
 	.page-header {
 		margin: 0;

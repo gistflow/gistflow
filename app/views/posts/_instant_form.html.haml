@@ -1,11 +1,11 @@
 - if user_signed_in?
   = form_for current_user.posts.build, :html => { :id => 'instant_form' } do |f|
     %h6 New message
-    = f.text_area :content, :size => '40x2'
+    = f.text_area :content, :size => '40x2', :id => 'post_body'
     %ul.new-post.unstyled
       %li= link_to 'Advanced form', new_post_path
     %ul.button-group
-      %li= f.submit 'Post', :class => 'button'
+      %li= f.submit 'Article', :class => 'button'
       %li= f.submit 'Question', :class => 'button'
       %li= f.submit 'Community', :class => 'button'
     .clear
