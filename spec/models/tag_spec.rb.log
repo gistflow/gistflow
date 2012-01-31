@@ -1,9 +1,0 @@
-*
-
-Pending:
-  Tag add some examples to (or delete) spec/models/tag_spec.rb
-    # No reason given
-    # spec/models/tag_spec.rb:4
-
-Finished in 0.01148 seconds
-1 example, 0 failures, 1 pending
