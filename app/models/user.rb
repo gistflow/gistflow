@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_posts, :class_name => "Post", 
     :join_table => :favorite_posts_lovers
   
-  validates :username, :name, :email, :presence => true
-  validates :username, :email, :uniqueness => true
+  validates :username, :name, :presence => true
+  validates :username, :uniqueness => true
   
   def create_cookie_secret
     account_cookies.create! do |cookie|
