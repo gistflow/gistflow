@@ -11,5 +11,9 @@
         %li= link_to 'logout', logout_path
       - else
         %li= link_to 'login through GitHub', login_url
-  %h1= link_to_unless_current 'Gistflow', root_path
+  %h1
+    = link_to_unless_current 'Gistflow', root_path
+    %small= link_to_unless_current 'articles', articles_path
+    %small= link_to_unless_current 'questions', questions_path
+    %small= link_to_unless_current 'community', comminity_index_path
 
