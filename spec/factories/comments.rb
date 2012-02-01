@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :comment do
     user
+    post
     body { "#{Faker::Lorem.paragraph}" }
     
     trait :with_mention do

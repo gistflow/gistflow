@@ -1,0 +1,2 @@
+module Replaceable
+end
