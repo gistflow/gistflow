@@ -30,13 +30,12 @@ ActiveRecord::Schema.define(:version => 20120131190220) do
   add_index "account_githubs", ["token"], :name => "index_account_githubs_on_token", :unique => true
 
   create_table "comments", :force => true do |t|
-    t.boolean  "question"
+    t.boolean  "question",   :default => false
     t.text     "body"
-    t.integer  "author_id"
-    t.integer  "consignee_id"
+    t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "favorite_posts_lovers", :id => false, :force => true do |t|
