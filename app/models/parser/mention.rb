@@ -5,7 +5,7 @@ module Parser
     end
     
     def usernames
-      usernames = @content.scan(/@([\w\-]+)/).flatten.uniq
+      usernames = @content.scan(/[^\w]@([\w\-]+)[^\.]/).flatten.uniq
       User.where(:username => usernames).select(:username).map(&:username)
     end
   end

@@ -10,7 +10,7 @@ class Posts::ShowPresenter
   attr_reader :post
   
   def initialize(post)
-    @post = post
+    @record = post
   end
   
   def preview

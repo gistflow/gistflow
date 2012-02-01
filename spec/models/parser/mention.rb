@@ -12,6 +12,11 @@ describe Parser::Mention do
       comment = Factory(:comment)
       it {Parser::Mention.new(comment.body).usernames.should == []}
     end
+    
+    context 'should not parse emails' do
+      comment = Factory(:comment)
+      it {Parser::Mention.new(comment.body).usernames.should == []}
+    end
   end
   
 end
