@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     post = post_model.new(params[:post])
     post.user = current_user
     if post.save
-      redirect_to post_path(post), notice: 'Post was successfully created.'
+      redirect_to custom_path || post_path(post)
     else
       @presenter = Posts::FormPresenter.new(post)
       render :new
@@ -51,12 +51,25 @@ class PostsController < ApplicationController
 protected
 
   def assign_type
-    if t = (params[:type] || params[:submit])
+    if t = (params[:type] || params[:commit])
       params[:type] = "Post::#{t}"
     end
   end
   
   def post_model
     params[:type].constantize rescue Post
+  end
+  
+  def custom_path
+    case params[:source]
+    when 'root' then
+      root_path
+    when 'Post::Article' then
+      articles_path
+    when 'Post::Community' then
+      comminity_index_path
+    when 'Post::Question' then
+      questions_path
+    end
   end
 end
