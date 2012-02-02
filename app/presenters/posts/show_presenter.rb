@@ -12,7 +12,9 @@ class Posts::ShowPresenter
   end
   
   def body
-    parsed_body || parsed_preview || parsed_title
+    Markdown.markdown begin
+      parsed_body || parsed_preview || parsed_title
+    end
   end
   
   def title
@@ -42,6 +44,6 @@ protected
   end
   
   def parse_content_parts
-    content.gsub("\r", '').split("\n\n")
+    content.gsub("\r", '').split("\n\n", 3)
   end
 end

@@ -6,12 +6,12 @@ gem 'state_machine'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'heroku'
-gem 'twitter-bootstrap-rails'
 gem 'thin'
 gem 'airbrake'
 gem 'haml'
 gem 'kaminari'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
+gem 'redcarpet'
 
 group :test, :development do
   gem 'factory_girl_rails'
@@ -19,7 +19,6 @@ group :test, :development do
   gem 'faker'
   gem 'guard-rspec'
   gem 'sqlite3'
-  gem 'tork'
   gem 'taps'
 end
 
