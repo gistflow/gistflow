@@ -6,13 +6,10 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    %header.container= render 'shared/header'
-    .container
-      .content
-        .row
-          .span10
-            = yield
-          .span6.sidebar
-            = render 'shared/sidebar'
+    .wrap
+      %header=  render 'shared/header'
+      #main=    yield
+      #sidebar= render 'shared/sidebar'
+      .clear
     %footer
-      .container= credits
+      .wrap= credits

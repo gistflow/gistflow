@@ -16,4 +16,8 @@ class Post < ActiveRecord::Base
   def body
     ''
   end
+  
+  def preview
+    ''
+  end
 end
