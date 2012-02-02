@@ -1,4 +1,4 @@
 - title 'Articles'
 = render 'instant_form'
-= render @posts
+= render :partial => 'post', :collection => @posts
 = paginate @posts

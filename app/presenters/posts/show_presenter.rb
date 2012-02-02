@@ -7,17 +7,41 @@ class Posts::ShowPresenter
     @post = post
   end
   
+  def preview
+    parsed_preview || parsed_title
+  end
+  
   def body
-    CGI::escapeHTML(post.body).gsub(/\{gist:(\d+)\}/) do
-      Github::Gist.script_tag($1)
-    end.html_safe
+    parsed_body || parsed_preview || parsed_title
   end
   
   def title
-    post.title[0..50]
+    if parsed_preview
+      parsed_title
+    else
+      "#{post.user.username} wrote"
+    end
   end
   
-  def method_missing(method)
-    post.public_send(method) if post.respond_to? method
+protected
+
+  def content
+    post.content
+  end
+  
+  def parsed_title
+    @parsed_title ||= parse_content_parts[0]
+  end
+  
+  def parsed_preview
+    @parsed_preview ||= parse_content_parts[1]
+  end
+  
+  def parsed_body
+    @parsed_body ||= parse_content_parts[2]
+  end
+  
+  def parse_content_parts
+    content.gsub("\r", '').split("\n\n")
   end
 end

@@ -1,8 +1,8 @@
 - presenter = Posts::ShowPresenter.new(post)
 .post
-  %h4= link_to presenter.title, post_path(presenter.post)
+  %h4= presenter.title
   .avatar= avatar_image(post.user, 26)
-  .body= presenter.body
+  .body= presenter.preview
   .clear
   .caption
     = link_to "Comments (#{post.comments.size})", post_path(post)
