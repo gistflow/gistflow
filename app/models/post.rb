@@ -7,16 +7,13 @@ class Post < ActiveRecord::Base
   
   default_scope :order => 'created_at DESC'
   
-  validates :title, :body, :presence => true
-  validates :title, :length => 10..255
-  validates :body, :length => { :minimum => 10 }
+  validates :content, :presence => true
   
-  def content
-    body
+  def title
+    ''
   end
   
-  def content=(content)
-    self.body = content
-    self.title = content.gsub(/\{gist:\d+\}/, '').gsub(/  /, '')[0..255]
+  def body
+    ''
   end
 end

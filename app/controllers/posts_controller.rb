@@ -1,15 +1,18 @@
 class PostsController < ApplicationController
+  before_filter :assign_type
+  
   def index
-    @posts = Post.page(params[:page])
+    @posts = post_model.page(params[:page])
   end
 
   def show
-    post = Post.find(params[:id])
+    post = post_model.find(params[:id])
     @presenter = Posts::ShowPresenter.new(post)
   end
 
   def new
-    post = current_user.posts.build
+    post = post_model.new
+    post.user = current_user
     @presenter = Posts::FormPresenter.new(post)
   end
 
@@ -19,9 +22,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.build(params[:post])
+    post = post_model.new(params[:post])
+    post.user = current_user
     if post.save
-      redirect_to post, notice: 'Post was successfully created.'
+      redirect_to post_path(post), notice: 'Post was successfully created.'
     else
       @presenter = Posts::FormPresenter.new(post)
       render :new
@@ -31,7 +35,7 @@ class PostsController < ApplicationController
   def update
     post = current_user.posts.find(params[:id])
     if post.update_attributes(params[:post])
-      redirect_to post, notice: 'Post was successfully updated.'
+      redirect_to post_path(post), notice: 'Post was successfully updated.'
     else
       @presenter = Posts::FormPresenter.new(post)
       render :edit
@@ -42,5 +46,17 @@ class PostsController < ApplicationController
     post = current_user.posts.find(params[:id])
     post.destroy
     redirect_to root_path
+  end
+  
+protected
+
+  def assign_type
+    if t = (params[:type] || params[:submit])
+      params[:type] = "Post::#{t}"
+    end
+  end
+  
+  def post_model
+    params[:type].constantize rescue Post
   end
 end
