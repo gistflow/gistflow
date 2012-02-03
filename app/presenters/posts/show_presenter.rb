@@ -51,7 +51,7 @@ protected
     when Post::Question then
       questions_path
     when Post::Community then
-      community_index_path
+      comminity_index_path
     end
   end
 
