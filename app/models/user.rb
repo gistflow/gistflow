@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  
+  LIKABLE_TYPES = ["Post", "Comment"]
+  
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
   has_many :comments, :foreign_key => :author_id
@@ -13,6 +16,13 @@ class User < ActiveRecord::Base
     account_cookies.create! do |cookie|
       cookie.generate_secret!
     end.secret
+  end
+  
+  def like(record)
+    likes.build(
+      :likable_id => record.id, 
+      :likable_type => record.class.name
+    ).save if LIKABLE_TYPES.include?(record.class.name)
   end
   
   def github_gists
