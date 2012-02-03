@@ -9,7 +9,7 @@ Gistflow::Application.routes.draw do
   end
   resources :articles, :only => :index, :controller => :posts, :type => 'Article'
   resources :questions, :only => :index, :controller => :posts, :type => 'Question'
-  resources :comminity, :only => :index, :controller => :posts, :type => 'Community'
+  resources :community, :only => :index, :controller => :posts, :type => 'Community'
   resources :tags, :only => :show
   root to: 'posts#index'
 end

@@ -67,7 +67,7 @@ protected
     when 'Post::Article' then
       articles_path
     when 'Post::Community' then
-      comminity_index_path
+      community_index_path
     when 'Post::Question' then
       questions_path
     end

@@ -59,7 +59,7 @@ protected
   def categories_items
     { :articles  => articles_path,
       :questions => questions_path,
-      :community => comminity_index_path }.map do |name, link|
+      :community => community_index_path }.map do |name, link|
       link_to_unless_current name, link
     end
   end
