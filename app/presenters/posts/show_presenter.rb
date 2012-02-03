@@ -45,13 +45,13 @@ class Posts::ShowPresenter
 protected
 
   def type_path
-    case post.class
-    when Post::Article then
+    case post.class.to_s
+    when 'Post::Article' then
       articles_path
-    when Post::Question then
+    when 'Post::Question' then
       questions_path
-    when Post::Community then
-      comminity_index_path
+    when 'Post::Community' then
+      community_index_path
     end
   end
 
