@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131190220) do
+ActiveRecord::Schema.define(:version => 20120203211609) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20120131190220) do
     t.string  "source_type"
     t.integer "github_id"
   end
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "likable_id"
+    t.string   "likable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
 
   create_table "posts", :force => true do |t|
     t.text     "content"
