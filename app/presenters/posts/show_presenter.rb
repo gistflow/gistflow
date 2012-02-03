@@ -1,5 +1,11 @@
 class Posts::ShowPresenter
+  attr_reader :controller # stub method for url helper
+  
   extend ActiveModel::Naming
+  include ActionView::Helpers::UrlHelper
+  include Rails.application.routes.url_helpers
+  
+  include ActionView::Helpers::DateHelper
   
   attr_reader :post
   
@@ -19,13 +25,35 @@ class Posts::ShowPresenter
   
   def title
     if parsed_preview
-      parsed_title
+      link_to parsed_title, post_path(post)
     else
-      "#{post.user.username} wrote"
+      u = link_to user.username, user_path(:id => user.username), :class => 'username'
+      t = link_to type, type_path
+      w = time_ago_in_words(post.created_at)
+      "#{u} wrote in #{t} #{w} ago".html_safe
     end
   end
   
+  def user
+    post.user
+  end
+  
+  def type
+    post.type.split('::').last.downcase
+  end
+  
 protected
+
+  def type_path
+    case post.class
+    when Post::Article then
+      articles_path
+    when Post::Question then
+      questions_path
+    when Post::Community then
+      community_index_path
+    end
+  end
 
   def content
     post.content

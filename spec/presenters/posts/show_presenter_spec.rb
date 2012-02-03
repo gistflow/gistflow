@@ -8,9 +8,9 @@ describe Posts::ShowPresenter do
       end
       let(:presenter) { Posts::ShowPresenter.new(post) }
       
-      it { presenter.title.should == 'title'  }
-      it { presenter.preview.should == 'preview'  }
-      it { presenter.body.should == 'body'  }
+      it { presenter.title.should include('title') }
+      it { presenter.preview.should include('preview') }
+      it { presenter.body.should include('body')  }
     end
     
     context 'context with only title and preview' do
@@ -19,9 +19,9 @@ describe Posts::ShowPresenter do
       end
       let(:presenter) { Posts::ShowPresenter.new(post) }
       
-      it { presenter.title.should == 'title'  }
-      it { presenter.preview.should == 'preview'  }
-      it { presenter.body.should == 'preview'  }
+      it { presenter.title.should include('title')  }
+      it { presenter.preview.should include('preview')  }
+      it { presenter.body.should include('preview')  }
     end
     
     context 'context with only title' do
@@ -31,8 +31,8 @@ describe Posts::ShowPresenter do
       it do
         presenter.title.should == "#{post.user.username} wrote"
       end
-      it { presenter.preview.should == 'title'  }
-      it { presenter.body.should == 'title'  }
+      it { presenter.preview.should include('title') }
+      it { presenter.body.should include('title') }
     end
   end
 end
