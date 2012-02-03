@@ -1,34 +1,35 @@
 .post {
-	margin-bottom: 18px;
-	.title {
-		line-height: 36px;
-		font-size: 16px;
-		.username {
-		  font-weight: bold;
-		}
-	}
-	.avatar {
-		float: left;
-		padding: 1px;
-		border: 1px solid #BFBFBF;
-		line-height: 1px;
-	}
-	.preview {
-		margin-left: 40px;
-	}
-	.notice {
-		float: right;
-		.author {
-			font-weight: bold;
-		}
-		.comments {
-			text-decoration: none;
-			color: white;
-		}
-	}
-	&.detail {
-		.body {
-			margin: 0 0 20px 0;
-		}
-	}
+  margin-bottom: 18px;
+  .title {
+    line-height: 28px;
+    font-size: 15px;
+    .username {
+      font-weight: bold;
+    }
+  }
+  .avatar {
+    float: left;
+    padding: 1px;
+    border: 1px solid #BFBFBF;
+    line-height: 1px;
+  }
+  .preview {
+    margin-left: 40px;
+  }
+  .notice {
+    float: right;
+    font-size: 12px;
+    .author {
+      font-weight: bold;
+    }
+    .comments {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  &.detail {
+    .body {
+      margin: 0 0 20px 0;
+    }
+  }
 }
