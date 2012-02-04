@@ -19,10 +19,10 @@ class User < ActiveRecord::Base
   end
   
   def like(record)
-    likes.create(
+    likes.build(
       :likable_id => record.id, 
-      :likable_type => record.type
-    ) if LIKABLE_TYPES.include?(record.type)
+      :likable_type => record.class.name
+    ).save if LIKABLE_TYPES.include?(record.class.name)
   end
   
   def github_gists
