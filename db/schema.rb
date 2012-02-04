@@ -63,11 +63,12 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
   add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
 
   create_table "posts", :force => true do |t|
+    t.integer  "comments_count", :default => 0
     t.text     "content"
     t.integer  "state_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "type"
   end
 
