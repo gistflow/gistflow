@@ -48,6 +48,12 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
   
+  def like
+    post = Post.find(params[:id])
+    flash[:alert] = "You can't like this post" unless current_user.like(post)
+    redirect_to :back
+  end
+  
 protected
 
   def assign_type

@@ -4,5 +4,11 @@
   .avatar= avatar_image(post.user, 26)
   .preview= presenter.preview
   .clear
+  .notice
+    - if user_signed_in? and !post.liked_by_user?(current_user) and post.user != current_user
+      = link_to "Like", like_post_path(post)
+    - else
+      .like_counter= "#{post.likes.count}"
+    
   .notice= link_to "Comments (#{post.comments.size})", post_path(post)
   .clear
