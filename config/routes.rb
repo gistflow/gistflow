@@ -3,7 +3,10 @@ Gistflow::Application.routes.draw do
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
   
-  resources :posts
+  resources :posts do
+    get :like, :on => :member
+  end
+  
   resources :users, :only => :show do
     resources :gists, :only => :index
   end
