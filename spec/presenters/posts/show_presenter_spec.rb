@@ -28,7 +28,7 @@ describe Posts::ShowPresenter do
       let(:post) { Factory(:post, :content => 'title') }
       let(:presenter) { Posts::ShowPresenter.new(post) }
       
-      it do
+      it "should display title with username wrote" do
         presenter.title.should == "#{post.user.username} wrote"
       end
       it { presenter.preview.should include('title') }
