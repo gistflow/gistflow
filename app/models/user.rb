@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
+  
+  LIKABLE_TYPES = ["Post::Article", "Post::Question", "Post:Community", "Comment"]
+  
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
-  has_many :comments, :foreign_key => :author_id
-  has_many :answer_comments, :class_name => "Comment", :foreign_key => :consignee_id  
+  has_many :likes
+  has_many :comments
   has_and_belongs_to_many :favorite_posts, :class_name => "Post", 
     :join_table => :favorite_posts_lovers
   
@@ -13,6 +16,13 @@ class User < ActiveRecord::Base
     account_cookies.create! do |cookie|
       cookie.generate_secret!
     end.secret
+  end
+  
+  def like(record)
+    likes.build(
+      :likable_id => record.id, 
+      :likable_type => record.class.name
+    ).save if LIKABLE_TYPES.include?(record.class.name)
   end
   
   def github_gists

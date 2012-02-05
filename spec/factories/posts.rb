@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :post do
+  factory :post, :class => "Post::Article" do
     user
     content { Faker::Lorem.paragraph }
     trait :with_gist do
