@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203211609) do
+ActiveRecord::Schema.define(:version => 20120205094457) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
   end
 
   add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
 
   create_table "posts", :force => true do |t|
     t.integer  "comments_count", :default => 0
