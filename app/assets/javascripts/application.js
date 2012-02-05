@@ -13,3 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+  $(function () {
+    var alert = $('.alert');
+    if (alert.length > 0) {
+      alert.show().animate({height: alert.outerHeight()}, 200);
+
+      window.setTimeout(function() {
+        alert.slideUp();
+      }, 3000);
+    }
+  });
+
+});

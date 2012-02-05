@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(:version => 20120205094457) do
     t.text     "content"
     t.integer  "state_id"
     t.integer  "user_id"
+    t.string   "type"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.string   "type"
   end
 
   create_table "posts_tags", :id => false, :force => true do |t|

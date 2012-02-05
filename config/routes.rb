@@ -5,6 +5,7 @@ Gistflow::Application.routes.draw do
   
   resources :posts do
     get :like, :on => :member
+    get :add_to_favorites, :on => :member
   end
   
   resources :users, :only => :show do

@@ -5,6 +5,8 @@
   .preview= presenter.preview
   .clear
   .notice
+    = link_to "To favorites", add_to_favorites_post_path(post)
+  .notice
     - if user_signed_in? and !post.liked_by_user?(current_user) and post.user != current_user
       = link_to "Like", like_post_path(post)
     - else

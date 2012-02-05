@@ -54,6 +54,16 @@ class PostsController < ApplicationController
     redirect_to :back
   end
   
+  def add_to_favorites
+    post = Post.find(params[:id])
+    if current_user and current_user.add_to_favorites(post)
+      flash[:notice] = 'Post is in your favorites.'
+    else
+      flash[:alert] = 'You can\'t add this post to favorites.'
+    end
+    redirect_to :back
+  end
+  
 protected
 
   def assign_type

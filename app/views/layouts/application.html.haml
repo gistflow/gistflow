@@ -6,6 +6,9 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+    - if flash[:notice] || flash[:alert]
+      %div{:class => "alert #{flash[:alert].blank? ? 'success' : 'error'}", :style => 'display: none'}
+        = flash[:notice] || flash[:alert]
     .wrap
       %header=  render 'shared/header'
       #main=    yield
