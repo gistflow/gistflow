@@ -15,3 +15,28 @@
 */
 
 .clear { clear: both; }
+
+.alert {
+  overflow: hidden;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  color: #fff;
+  padding: 9px 0;
+  text-shadow: rgba(99,130,0,.75) 1px 1px 1px;
+  font-size: 21px;
+    &.success {
+      background-color: rgb(161, 195, 0);
+      background-color: rgba(161, 195, 0, .8);
+    }
+    
+    &.error{
+      background-color: rgb(161, 0, 0);
+      background-color: rgba(161, 0, 0, .8);
+    }
+    
+}

@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
   def mark_notifications_read
     notifications.unread.update_all(:read => true)
   end
+  
+  def add_to_favorites(post)
+    favorite_posts << post unless favorite_posts.include?(post)
+  end
 end

@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :content
       t.integer :state_id
       t.belongs_to :user
+      t.string :type
       t.timestamps
     end
   end
