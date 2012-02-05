@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   
-  LIKABLE_TYPES = ["Post::Article", "Post::Question", "Post:Community", "Comment"]
-  
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
   has_many :likes
@@ -24,7 +22,7 @@ class User < ActiveRecord::Base
     likes.build(
       :likable_id => record.id, 
       :likable_type => record.class.name
-    ).save if LIKABLE_TYPES.include?(record.class.name)
+    ).save
   end
   
   def github_gists
@@ -39,7 +37,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def read_notifications
-    notifications.unread.map{ |n| n.update_attribute(:read, true) }
+  def mark_notifications_read
+    notifications.unread.update_all(:read => true)
   end
 end

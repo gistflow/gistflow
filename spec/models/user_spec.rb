@@ -25,4 +25,16 @@ describe User do
     it{ user.favorite_posts.should == [post] }
     it{ post.lovers.should == [user] }
   end
+  
+  describe '#mark_notifications_read' do
+    user = Factory(:user)
+    post = Factory(:post, :content => "#{Faker::Lorem.paragraph} @#{user.username}}")
+    comment = Factory(:comment, :body => "#{Faker::Lorem.paragraph} @#{user.username}}")
+    
+    before(:each) do
+      user.mark_notifications_read
+    end
+    
+    it { user.notifications.unread.count.should == 0 }
+  end
 end
