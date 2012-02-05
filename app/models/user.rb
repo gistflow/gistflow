@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :likes
   has_many :comments
-  has_many :comments, :foreign_key => :author_id
-  has_many :answer_comments, :class_name => "Comment", :foreign_key => :consignee_id  
   has_many :notifications
   
   has_and_belongs_to_many :favorite_posts, :class_name => "Post", 
