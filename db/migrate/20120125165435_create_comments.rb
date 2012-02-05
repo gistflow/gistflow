@@ -5,6 +5,7 @@ class CreateComments < ActiveRecord::Migration
       t.text :body
       t.belongs_to :user
       t.belongs_to :post
+      t.integer :likes_count, :default => 0
       t.timestamps
     end
   end

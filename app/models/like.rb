@@ -9,7 +9,15 @@ class Like < ActiveRecord::Base
   validates :user_id, :uniqueness => { :scope => [:likable_id, :likable_type] }
   validates :user, :exclusion => { :in => proc(&:unavailable_users) }
 
+  after_create :increment_likes_count
+
   def unavailable_users
     [likable.user]
+  end
+  
+  private
+  
+  def increment_likes_count
+    self.likable.increment!(:likes_count)
   end
 end
