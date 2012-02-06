@@ -1,0 +1,6 @@
+- presenter = Comments::ShowPresenter.new(comment)
+.comment
+  .title= presenter.title
+  .avatar= avatar_image(presenter.user, 26)
+  .content= presenter.content
+  .clear  

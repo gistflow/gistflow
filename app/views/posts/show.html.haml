@@ -1,6 +1,17 @@
 .post.detail
   %h2= @presenter.title
   .body= @presenter.body
-- content_for(:sidebar) do
-  - if current_user == @presenter.post.user
-    = link_to 'Edit', edit_post_path(@presenter.post), :class => 'btn'
+
+.caption Comments
+
+- if user_signed_in?
+  = form_for @presenter.post.comments.build, :url => post_comments_path(@presenter.post) do |f|
+    .body= f.text_area :content, :size => '40x2', :id => 'post_body'
+    .question.left
+      = f.check_box :question
+      = f.label :question, 'Is it a Question?'
+    %ul.button-group
+      %li= f.submit 'Comment', :class => 'button'
+    .clear
+
+= render @presenter.comments

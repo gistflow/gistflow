@@ -1,13 +1,10 @@
 class Posts::ShowPresenter
-  attr_reader :controller # stub method for url helper
+  attr_reader :controller, :post
   
   extend ActiveModel::Naming
   include ActionView::Helpers::UrlHelper
-  include Rails.application.routes.url_helpers
-  
   include ActionView::Helpers::DateHelper
-  
-  attr_reader :post
+  include Rails.application.routes.url_helpers
   
   def initialize(post)
     @post = post
@@ -47,7 +44,7 @@ class Posts::ShowPresenter
   end
   
   def comments
-    post.comments
+    post.comments.select(&:persisted?)
   end
   
 protected

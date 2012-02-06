@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     if current_user and current_user.add_to_favorites(post)
       flash[:notice] = 'Post is in your favorites.'
     else
-      flash[:alert] = 'You can\'t add this post to favorites.'
+      flash[:alert] = "You can't add this post to favorites."
     end
     redirect_to :back
   end

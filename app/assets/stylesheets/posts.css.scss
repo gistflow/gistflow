@@ -1,4 +1,4 @@
-.post {
+.post, .comment {
   margin-bottom: 18px;
   .title {
     line-height: 28px;
@@ -13,7 +13,7 @@
     border: 1px solid #BFBFBF;
     line-height: 1px;
   }
-  .preview {
+  .preview, .content {
     margin-left: 40px;
   }
   .notice {

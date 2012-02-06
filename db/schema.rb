@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20120205094457) do
 
   create_table "comments", :force => true do |t|
     t.boolean  "question",    :default => false
-    t.text     "body"
+    t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "likes_count", :default => 0
