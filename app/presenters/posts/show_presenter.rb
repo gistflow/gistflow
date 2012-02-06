@@ -42,6 +42,14 @@ class Posts::ShowPresenter
     post.type.split('::').last.downcase
   end
   
+  def likes_count
+    post.likes_count
+  end
+  
+  def comments
+    post.comments
+  end
+  
 protected
 
   def type_path
