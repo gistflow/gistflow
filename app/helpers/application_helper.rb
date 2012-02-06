@@ -54,6 +54,15 @@ module ApplicationHelper
     end
   end
   
+  def cookie_gists
+    JSON.parse(cookies[:gists]).map do |raw|
+      Github::Gist.new(
+        :id => raw['id'],
+        :description => raw['description']
+      )
+    end
+  end
+  
 protected
   
   def categories_items
