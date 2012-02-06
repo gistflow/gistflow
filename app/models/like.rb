@@ -15,7 +15,7 @@ class Like < ActiveRecord::Base
     [likable.user]
   end
   
-  private
+protected
   
   def increment_likes_count
     self.likable.increment!(:likes_count)

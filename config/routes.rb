@@ -6,6 +6,7 @@ Gistflow::Application.routes.draw do
   resources :posts do
     get :like, :on => :member
     get :add_to_favorites, :on => :member
+    resources :comments, :only => :create
   end
   
   resources :users, :only => :show
@@ -14,6 +15,7 @@ Gistflow::Application.routes.draw do
   resources :articles, :only => :index, :controller => :posts, :type => 'Article'
   resources :questions, :only => :index, :controller => :posts, :type => 'Question'
   resources :community, :only => :index, :controller => :posts, :type => 'Community'
+  
   resources :tags, :only => :show
   root to: 'posts#index'
 end
