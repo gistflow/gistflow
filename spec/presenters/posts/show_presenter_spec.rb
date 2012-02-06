@@ -29,7 +29,8 @@ describe Posts::ShowPresenter do
       let(:presenter) { Posts::ShowPresenter.new(post) }
       
       it "should display title with username wrote" do
-        presenter.title.should == "#{post.user.username} wrote"
+        presenter.title.should include("#{post.user.username}")
+        presenter.title.should include("wrote")
       end
       it { presenter.preview.should include('title') }
       it { presenter.body.should include('title') }

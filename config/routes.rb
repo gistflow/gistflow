@@ -8,9 +8,9 @@ Gistflow::Application.routes.draw do
     get :add_to_favorites, :on => :member
   end
   
-  resources :users, :only => :show do
-    resources :gists, :only => :index
-  end
+  resources :users, :only => :show
+  resources :gists, :only => [:show, :index]
+  
   resources :articles, :only => :index, :controller => :posts, :type => 'Article'
   resources :questions, :only => :index, :controller => :posts, :type => 'Question'
   resources :community, :only => :index, :controller => :posts, :type => 'Community'

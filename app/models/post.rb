@@ -15,17 +15,5 @@ class Post < ActiveRecord::Base
   
   default_scope :order => 'created_at DESC'
   
-  validates :content, :presence => true
-  
-  def title
-    ''
-  end
-  
-  def body
-    ''
-  end
-  
-  def preview
-    ''
-  end
+  validates :content, :user, :presence => true
 end
