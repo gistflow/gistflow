@@ -23,4 +23,19 @@
   h6 {
     font-weight: bold;
   }
+  
+  p {
+    line-height: 18px;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: circle;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul, ol {
+    margin-left: 2em;
+  }
 }

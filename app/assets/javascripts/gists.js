@@ -11,6 +11,7 @@ $(function(){
       link = ("/gists/" + id + ".json"),
       element = $(this)
     $.getJSON(link, function(data){
+      element.removeClass("loading")
       element.html(data.div)
     })
   })
