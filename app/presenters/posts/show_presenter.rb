@@ -77,6 +77,6 @@ protected
   end
   
   def parse_content_parts
-    content.gsub("\r", '').split("\n\n", 3)
+    content.to_s.gsub("\r", '').split("\n\n", 3)
   end
 end

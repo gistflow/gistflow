@@ -1,9 +1,9 @@
-%h6= @presenter.post.new_record? ? "New post" : "Edit post"
+.caption= @presenter.post.new_record? ? "New post" : "Edit post"
 = simple_form_for(@presenter.post, :html => { :class => 'form-stacked' }) do |f|
   = f.error_notification
-  = f.input :title, :input_html => { :class => 'span9' }
-  = f.input :body, :as => :text, :input_html => { :class => 'span9', :size => '40x12' }
-  = f.input :preview, :as => :text, :input_html => { :class => 'span9', :size => '40x3' }
+  = f.input :title
+  = f.input :body, :as => :text, :input_html => { :size => '40x12' }
+  = f.input :preview, :as => :text, :input_html => { :size => '40x3' }
   %ul.button-group
     %li Post as
     %li= f.button :submit, 'Article', :class => 'btn big'
