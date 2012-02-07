@@ -1,10 +1,10 @@
 $(function(){
-  // var gists = $("#gists")
-  // if (gists) {
-  //   $.getJSON("/gists.json", function(data){
-  //     gists.html(data.div)
-  //   })
-  // }
+  var gists = $("#gists")
+  if (gists) {
+    $.getJSON("/gists.json", function(data){
+      gists.html(data.div)
+    })
+  }
 
   $("div.gistable").each(function(){
     var id = $(this).data('gist-id'),

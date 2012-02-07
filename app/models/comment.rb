@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   
   attr_accessible :content, :question
   
-  def content
-    body
+  def body
+    content
   end
 end

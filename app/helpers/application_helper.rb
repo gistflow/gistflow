@@ -102,7 +102,6 @@ protected
         "notifications#{unread_notifications_block}".html_safe,     
         notifications_path
       )
-      items << link_to('settings')
       items << link_to('logout', logout_path)
     else
       items << link_to('login', login_url, :class => 'login')
