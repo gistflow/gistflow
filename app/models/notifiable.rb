@@ -9,7 +9,7 @@ module Notifiable
     post = self.class.name == "Comment" ? self.post : self
       
     controller = post.class.name.split('::').last.pluralize.downcase
-    controller = "posts" if post.class.name = Post::Community
+    controller = "posts" if post.class.name == "Post::Community"
     
     link_to title, "#{controller}/#{self.id}"
   end

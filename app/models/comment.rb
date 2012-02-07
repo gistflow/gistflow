@@ -9,4 +9,8 @@ class Comment < ActiveRecord::Base
   validates :content, :user, :presence => true
   
   attr_accessible :content, :question
+  
+  def content
+    body
+  end
 end
