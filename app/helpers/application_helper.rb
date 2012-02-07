@@ -60,7 +60,7 @@ module ApplicationHelper
         :id => raw['id'],
         :description => raw['description']
       )
-    end
+    end if cookies[:gists]
   end
   
   def link_to_notifiable(notification)
