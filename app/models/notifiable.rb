@@ -7,9 +7,11 @@ module Notifiable
   def link_to_post
     title = self.content[0..40]
     post = self.class.name == "Comment" ? self.post : self
+      
+    controller = post.class.name.split('::').last.pluralize.downcase
+    controller = "posts" if post.class.name = Post::Community
     
-    link_to title, 
-      "#{post.class.name.split('::').last.pluralize.downcase}/#{self.id}"
+    link_to title, "#{controller}/#{self.id}"
   end
   
   def create_notifications
