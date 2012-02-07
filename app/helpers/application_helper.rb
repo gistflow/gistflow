@@ -63,6 +63,20 @@ module ApplicationHelper
     end
   end
   
+  def link_to_notifiable(notification)
+    username = notification.notifiable.user.username
+    user_link = link_to(
+      username, 
+      user_path(:id => username), 
+      :class => 'username'
+    )
+    record_link = notification.notifiable.link_to_post
+    
+    time = time_ago_in_words(notification.created_at)
+    
+    "#{user_link} mentioned you in #{record_link} #{time} ago".html_safe
+  end
+  
 protected
   
   def categories_items
@@ -77,6 +91,17 @@ protected
     items = []
     if user_signed_in?
       items << link_to(current_user.username, '', :class => 'username')
+      
+      unread_notifications = current_user.notifications.unread
+      unread_notifications_block = content_tag(
+        :span, "+#{unread_notifications.count}", 
+        :class => "unread_notification_counter"
+      ) if unread_notifications.any?
+      
+      items << link_to(
+        "notifications#{unread_notifications_block}".html_safe,     
+        notifications_path
+      )
       items << link_to('settings')
       items << link_to('logout', logout_path)
     else

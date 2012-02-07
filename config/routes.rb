@@ -4,18 +4,29 @@ Gistflow::Application.routes.draw do
   match '/logout' => 'sessions#destroy'
   
   resources :posts do
-    get :like, :on => :member
-    get :add_to_favorites, :on => :member
+    match :like, :on => :member, :via => :post
+    match :add_to_favorites, :on => :member, :via => :post
     resources :comments, :only => :create
   end
   
-  resources :users, :only => :show
-  resources :gists, :only => [:show, :index]
+  resources :notifications, :only => :index
   
-  resources :articles, :only => :index, :controller => :posts, :type => 'Article'
-  resources :questions, :only => :index, :controller => :posts, :type => 'Question'
-  resources :community, :only => :index, :controller => :posts, :type => 'Community'
+  resources :users, :only => :show do
+    resources :gists, :only => :index
+  end
   
+  resources :articles, 
+    :only => [:index, :show], 
+    :controller => :posts, 
+    :type => 'Article'
+  resources :questions,
+    :only => [:index, :show], 
+    :controller => :posts, 
+    :type => 'Question'
+  resources :community, 
+    :only => [:index, :show], 
+    :controller => :posts, 
+    :type => 'Community'
   resources :tags, :only => :show
   root to: 'posts#index'
 end

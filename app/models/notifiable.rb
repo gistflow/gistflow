@@ -1,6 +1,15 @@
 module Notifiable
+    
   def self.included(base)
     base.after_create :create_notifications
+  end
+  
+  def link_to_post
+    title = self.content[0..40]
+    post = self.class.name == "Comment" ? self.post : self
+    
+    link_to title, 
+      "#{post.class.name.split('::').last.pluralize.downcase}/#{self.id}"
   end
   
   def create_notifications
