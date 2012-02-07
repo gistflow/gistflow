@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  attr_accessor :title, :preview, :body
+  
   include Replaceable::Mentionable
   include Replaceable::Gistable
   include Notifiable
@@ -15,5 +17,26 @@ class Post < ActiveRecord::Base
   
   validates :content, :user, :presence => true
   
-  attr_accessible :content
+  attr_accessible :content, :title, :preview, :body
+  
+  def title=(text)
+    @title = text.strip
+    build_content
+  end
+  
+  def preview=(text)
+    @preview = text.strip
+    build_content
+  end
+  
+  def body=(text)
+    @body = text.strip
+    build_content
+  end
+  
+protected
+  
+  def build_content
+    write_attribute :content, [title, preview, body].join("\n\n")
+  end
 end
