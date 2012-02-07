@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require auto_resize
 //= require_tree .
+
+$(function(){
+  $('textarea').autosize()
+})
