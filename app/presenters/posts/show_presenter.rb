@@ -11,12 +11,12 @@ class Posts::ShowPresenter
   end
   
   def preview
-    parsed_preview || parsed_title
+    (parsed_preview || parsed_title).html_safe
   end
   
   def body
     Markdown.markdown begin
-      parsed_body || parsed_preview || parsed_title
+      (parsed_body || parsed_preview || parsed_title).html_safe
     end
   end
   
@@ -61,6 +61,9 @@ protected
   end
 
   def content
+    post.replace_tags!
+    post.replace_usernames!
+    post.replace_gists!
     post.content
   end
   

@@ -48,11 +48,11 @@ module ApplicationHelper
   end
   
   def credits
-    creators = ['releu', 'makaroni4', 'agentcooper'].shuffle.map do |u|
+    creators = ['releu', 'makaroni4'].shuffle.map do |u|
       link_to "@#{u}", "https://github.com/#{u}"
     end
     
-    "Created by #{creators[0]}, #{creators[1]} and #{creators[2]}".html_safe
+    "Created by #{creators[0]} and #{creators[1]}".html_safe
   end
   
   def categories_menu

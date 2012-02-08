@@ -1,9 +1,11 @@
 class Post < ActiveRecord::Base
   attr_accessor :title, :preview, :body
-  
+  include Replaceable::Taggable
   include Replaceable::Mentionable
   include Replaceable::Gistable
+  include Likable
   include Notifiable
+  
   
   belongs_to :user
   has_many :comments

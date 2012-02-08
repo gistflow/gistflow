@@ -21,6 +21,6 @@ class Comments::ShowPresenter
   end
   
   def content
-    comment.content
+    comment.replace_gists.replace_usernames.replace_tags.content
   end
 end

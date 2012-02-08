@@ -1,7 +1,7 @@
 module Replaceable
   module Taggable
-    def replace_tags
-      #parser
+    def replace_tags!
+      self
     end
   end
 end
