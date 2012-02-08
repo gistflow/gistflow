@@ -7,6 +7,9 @@ class Comments::ShowPresenter
   include Rails.application.routes.url_helpers
   
   def initialize(comment)
+    comment.replace_gists!
+    comment.replace_tags!
+    comment.replace_usernames!
     @comment = comment
   end
   
@@ -21,6 +24,6 @@ class Comments::ShowPresenter
   end
   
   def content
-    comment.replace_gists.replace_usernames.replace_tags.content
+    comment.content
   end
 end
