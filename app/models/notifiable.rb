@@ -15,7 +15,10 @@ module Notifiable
   end
   
   def create_notifications
-    Parser::Mention.new(self.content).user_ids.each do |user_id|
+    user_ids = Parser::Mention.new(self.content).user_ids
+    user_ids.delete(self.user.id)
+    
+    user_ids.each do |user_id|
       Notification.create(
         :user_id => user_id,
         :notifiable_id => self.id,
