@@ -1,6 +1,11 @@
 - if user_signed_in?
-  .caption Your Gists
+  .caption 
+    - if @user and @user != current_user
+      = "#{@user.username}'s"
+    - else
+      Your
+    Gists
   #gists
     = render :partial => 'gists/list', :locals => { :gists => cookie_gists }
 
-.caption Popular
+= sidebar_block("Recent posts", recent_posts)

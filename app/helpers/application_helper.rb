@@ -65,6 +65,23 @@ module ApplicationHelper
     end
   end
   
+  def sidebar_block(title, posts)
+    capture_haml do
+      haml_tag :div, :class => 'caption' do
+        haml_concat title
+      end
+
+      posts.each do |post|
+        haml_tag :div, :class => 'sidebar_link' do
+          #FIX post.title from content
+          #FIX post_path to models_path
+          haml_concat link_to(post.content[0..30], post_path(post)).html_safe
+        end
+      end
+
+    end
+  end
+  
   def authentication_menu
     capture_haml do
       haml_tag :ul, :class => 'authentication' do
@@ -116,7 +133,12 @@ protected
   def authentication_items
     items = []
     if user_signed_in?
-      items << link_to(current_user.username, '', :class => 'username')
+      
+      items << link_to(
+        current_user.username, 
+        user_path(current_user.username), 
+        :class => 'username'
+      )
       
       unread_notifications = current_user.notifications.unread
       unread_notifications_block = content_tag(

@@ -1,0 +1,5 @@
+%h1
+  - #FIX cool style for this header
+  = "#{@user.username}'s posts"
+= render :partial => 'posts/post', :collection => @posts
+= paginate @posts

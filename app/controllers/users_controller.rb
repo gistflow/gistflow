@@ -5,7 +5,12 @@ class UsersController < ApplicationController
     self.current_user = account.user
     redirect_to root_path
   end
-
+  
+  def show
+    @user = User.find_by_username(params[:id])
+    @posts = @user.posts.page(params[:page])
+  end
+  
 protected
 
   def omniauth

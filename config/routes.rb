@@ -11,7 +11,7 @@ Gistflow::Application.routes.draw do
   
   resources :notifications, :only => :index
   
-  resources :users, :only => :show
+  resources :users, :only => :show, :key => :username
   resources :gists, :only => [:show, :index]
   
   resources :articles, 
