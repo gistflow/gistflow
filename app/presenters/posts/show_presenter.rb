@@ -7,6 +7,9 @@ class Posts::ShowPresenter
   include Rails.application.routes.url_helpers
   
   def initialize(post)
+    post.replace_gists!
+    post.replace_tags!
+    post.replace_usernames!
     @post = post
   end
   
@@ -61,10 +64,7 @@ protected
   end
 
   def content
-    post.replace_tags!
-    post.replace_usernames!
-    post.replace_gists!
-    post.content
+    post.content.html_safe
   end
   
   def parsed_title
