@@ -4,6 +4,7 @@ Gistflow::Application.routes.draw do
   match '/logout' => 'sessions#destroy'
   
   resources :posts do
+    match :tagged, :on => :collection
     match :like, :on => :member, :via => :post
     match :add_to_favorites, :on => :member, :via => :post
     resources :comments, :only => :create
