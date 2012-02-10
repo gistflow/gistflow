@@ -101,6 +101,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.0.4)
     multipart-post (1.1.4)
+    newrelic_rpm (3.3.1)
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
@@ -210,6 +211,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   kaminari
+  newrelic_rpm
   omniauth-github!
   pg
   rails (= 3.2.1)
