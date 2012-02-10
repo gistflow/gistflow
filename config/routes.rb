@@ -9,9 +9,12 @@ Gistflow::Application.routes.draw do
     resources :comments, :only => :create
   end
   
+  resources :tags, :only => :show
+  
   resources :notifications, :only => :index
   
-  resources :users, :only => :show, :key => :username
+  resources :subscriptions, :only => [:create, :destroy]
+  resources :users, :only => :show
   resources :gists, :only => [:show, :index]
   
   resources :articles, 

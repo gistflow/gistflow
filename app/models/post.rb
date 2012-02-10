@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   include Replaceable::Gistable
   include Likable
   include Notifiable
-  
+  include Taggable
   
   belongs_to :user
   has_many :comments
@@ -19,7 +19,9 @@ class Post < ActiveRecord::Base
   
   validates :content, :user, :presence => true
   
-  attr_accessible :content, :title, :preview, :body
+  attr_accessor :tag_names
+  attr_accessible :content, :title, :preview, :body, :tag_names
+  
   
   def title=(text)
     @title = text.strip

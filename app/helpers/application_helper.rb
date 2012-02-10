@@ -20,6 +20,18 @@ module ApplicationHelper
     end
   end
   
+  def post_tags(post)
+    capture_haml do
+      haml_tag :div, :class => "tags" do
+        post.tags.each do |tag|
+          haml_tag :a, :href => tag_path(tag.name) do
+            haml_concat "##{tag.name}"
+          end
+        end
+      end
+    end
+  end
+  
   def alert_classes(type)
     classes = ['alert']
     classes << case type.to_sym
@@ -65,11 +77,30 @@ module ApplicationHelper
     end
   end
   
-  def sidebar_block(title, posts)
+  def user_gists_title(user)
+    title = user == current_user ? "Your gists" : "#{user.username} on Github"
+    
     capture_haml do
-      haml_tag :div, :class => 'caption' do
-        haml_concat title
-      end
+      caption_haml title
+    end
+  end
+  
+  def caption_haml(title)
+    haml_tag :div, :class => 'caption' do
+      haml_concat title
+    end
+  end
+  
+  def user_page_title(user)
+    name = current_user == user ? "Your" : "#{user.username}'s"
+    capture_haml do
+      caption_haml "#{name} posts"
+    end
+  end
+  
+  def sidebar_posts(title, posts, more_url)
+    capture_haml do
+      caption_haml title
 
       posts.each do |post|
         haml_tag :div, :class => 'sidebar_link' do
@@ -78,7 +109,9 @@ module ApplicationHelper
           haml_concat link_to(post.content[0..30], post_path(post)).html_safe
         end
       end
-
+      haml_tag :div, :class => 'sidebar_link' do
+        haml_concat link_to "more", more_url
+      end
     end
   end
   
@@ -155,6 +188,12 @@ protected
       items << link_to('login', login_url, :class => 'login')
     end
     items
+  end
+  
+  def subscription_form(subscription)
+    locals = { :subscription => subscription }
+    partial = subscription.new_record? ? 'form' : 'destroy_form'
+    render :partial => "subscriptions/#{partial}", :locals => locals
   end
   
 end

@@ -68,18 +68,18 @@ protected
   end
   
   def parsed_title
-    @parsed_title ||= parse_content_parts[0]
+    @parsed_title ||= content_parts[0]
   end
   
   def parsed_preview
-    @parsed_preview ||= parse_content_parts[1]
+    @parsed_preview ||= content_parts[1]
   end
   
   def parsed_body
-    @parsed_body ||= parse_content_parts[2]
+    @parsed_body ||= content_parts[2]
   end
   
-  def parse_content_parts
-    content.to_s.gsub("\r", '').split("\n\n", 3)
+  def content_parts
+    @content_parts ||= content.to_s.gsub("\r", '').split("\n\n", 3)
   end
 end
