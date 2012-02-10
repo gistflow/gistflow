@@ -64,11 +64,6 @@ class PostsController < ApplicationController
     redirect_to :back
   end
   
-  def tagged
-    @posts = Post.tagged_with(params[:tags]).page(params[:page])
-    render 'index'
-  end
-  
 protected
 
   def assign_type

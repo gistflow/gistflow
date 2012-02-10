@@ -1,11 +1,2 @@
-- if user_signed_in?
-  .caption 
-    - if @user and @user != current_user
-      = "#{@user.username}'s"
-    - else
-      Your
-    Gists
-  #gists
-    = render :partial => 'gists/list', :locals => { :gists => cookie_gists }
-
-= sidebar_block("Recent posts", recent_posts)
+= yield(:sidebar_gists).blank? ? render(:partial => 'shared/sidebar_gists', :locals => { :user => current_user, :gists => cookie_gists }) : yield(:sidebar_gists)
+= sidebar_posts "Recent posts", recent_posts, root_url

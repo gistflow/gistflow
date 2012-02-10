@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :comments
   has_many :notifications
+  has_many :subscriptions
+  has_many :tags, :through => :subscriptions
   
   has_and_belongs_to_many :favorite_posts, :class_name => "Post", 
     :join_table => :favorite_posts_lovers

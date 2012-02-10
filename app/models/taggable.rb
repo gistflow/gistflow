@@ -12,8 +12,8 @@ module Taggable
   end
   
   def assign_tags
-    new_tag_ids = self.tag_names.split(',').compact.map{ |name|
-      Tag.find_or_create_by_name(name.strip).id
+    new_tag_ids = self.tag_names.to_s.split(',').compact.map{ |name|
+      Tag.find_or_create_by_name(name.strip.gsub(' ', '_')).id
     }
     
     self.tag_ids = new_tag_ids

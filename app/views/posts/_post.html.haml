@@ -1,8 +1,11 @@
 - presenter = Posts::ShowPresenter.new(post)
 .post
   .title= presenter.title
+  
   .avatar= avatar_image(post.user, 26)
-  .preview= presenter.preview.html_safe
+  .preview
+    = presenter.preview.html_safe
+    = post_tags(post)
   .clear
   .notice.button-group.minor-group
     = link_to "Remember", add_to_favorites_post_path(post), :method => :post, :class => 'button'
