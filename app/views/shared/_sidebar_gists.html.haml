@@ -2,5 +2,5 @@
 - if gists.any?
   #gists
     = render :partial => 'gists/list', :locals => { :gists => gists }
-- else
+- elsif user
   = link_to "http://github.com/#{user.username}", "http://github.com/#{user.username}", :target => "_blank"
