@@ -7,16 +7,19 @@ class Posts::ShowPresenter
   include Rails.application.routes.url_helpers
   
   def initialize(post)
+    post.replace_gists!
+    post.replace_tags!
+    post.replace_usernames!
     @post = post
   end
   
   def preview
-    parsed_preview || parsed_title
+    (parsed_preview || parsed_title).html_safe
   end
   
   def body
     Markdown.markdown begin
-      parsed_body || parsed_preview || parsed_title
+      (parsed_body || parsed_preview || parsed_title).html_safe
     end
   end
   
@@ -61,22 +64,22 @@ protected
   end
 
   def content
-    post.content
+    post.content.html_safe
   end
   
   def parsed_title
-    @parsed_title ||= parse_content_parts[0]
+    @parsed_title ||= content_parts[0]
   end
   
   def parsed_preview
-    @parsed_preview ||= parse_content_parts[1]
+    @parsed_preview ||= content_parts[1]
   end
   
   def parsed_body
-    @parsed_body ||= parse_content_parts[2]
+    @parsed_body ||= content_parts[2]
   end
   
-  def parse_content_parts
-    content.to_s.gsub("\r", '').split("\n\n", 3)
+  def content_parts
+    @content_parts ||= content.to_s.gsub("\r", '').split("\n\n", 3)
   end
 end

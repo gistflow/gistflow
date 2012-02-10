@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205094457) do
+ActiveRecord::Schema.define(:version => 20120210114457) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(:version => 20120205094457) do
   end
 
   add_index "posts_tags", ["post_id", "tag_id"], :name => "index_posts_tags_on_post_id_and_tag_id", :unique => true
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer "user_id"
+    t.integer "tag_id"
+  end
+
+  add_index "subscriptions", ["tag_id", "user_id"], :name => "index_subscriptions_on_tag_id_and_user_id", :unique => true
 
   create_table "tags", :force => true do |t|
     t.string "name"

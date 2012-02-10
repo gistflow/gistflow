@@ -1,0 +1,6 @@
+.caption
+  = @tag.name
+  - if @subscription
+    = subscription_form(@subscription)
+= render :partial => 'posts/post', :collection => @posts
+= paginate @posts

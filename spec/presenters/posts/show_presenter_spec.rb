@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Posts::ShowPresenter do
   describe 'title and body' do
-    context 'content with title and body and preview' do
+    context 'content with title and body and preview', :focus => true do
       let(:post) do
         Factory(:post, :content => %w(title preview body).join("\n\n"))
       end

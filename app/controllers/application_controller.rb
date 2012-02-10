@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-protected
   
+protected
+  def recent_posts
+    Post.limit(5)
+  end
+  helper_method :recent_posts
+
   def current_user
     @current_user ||= (User.find_by_id(session[:user_id]) || begin
       Account::Cookie.user_by_secret(cookies[:secret])

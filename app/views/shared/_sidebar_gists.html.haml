@@ -1,0 +1,6 @@
+= user_gists_title(user)
+- if gists.any?
+  #gists
+    = render :partial => 'gists/list', :locals => { :gists => gists }
+- else
+  = link_to "http://github.com/#{user.username}", "http://github.com/#{user.username}", :target => "_blank"
