@@ -78,6 +78,7 @@ module ApplicationHelper
   end
   
   def user_gists_title(user)
+    return unless user_signed_in?
     title = user == current_user ? "Your gists" : "#{user.username} on Github"
     
     capture_haml do
@@ -128,15 +129,6 @@ module ApplicationHelper
         end
       end
     end
-  end
-  
-  def cookie_gists
-    JSON.parse(cookies[:gists]).map do |raw|
-      Github::Gist.new(
-        :id => raw['id'],
-        :description => raw['description']
-      )
-    end if cookies[:gists]
   end
   
   def link_to_notifiable(notification)

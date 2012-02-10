@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
 protected
+
   def recent_posts
     Post.limit(5)
   end
@@ -29,5 +30,11 @@ protected
     !!current_user
   end
   helper_method :user_signed_in?
+  
+  def authenticate!
+    unless user_signed_in?
+      redirect_to root_path, :alert => 'You should be logged in.'
+    end
+  end
 
 end

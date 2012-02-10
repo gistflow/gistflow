@@ -1,15 +1,11 @@
 class GistsController < ApplicationController
+  before_filter :authenticate!
+  
+  respond_to :json
+  
   def index
     @gists = current_user.github_gists
-    cookies.permanent[:gists] = @gists.map do |g|
-      { :id => g.id,
-        :description => g.description }
-    end.to_json
-    respond_to do |format|
-      format.json do
-        render :json => { :div => render_to_string('index.html.haml', :layout => false) }
-      end
-    end
+    respond_with div: render_to_string('index.html.haml', layout: false)
   end
   
   def show
