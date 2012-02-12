@@ -1,0 +1,39 @@
+.list-item {
+  margin-bottom: 18px;
+  .title {
+    line-height: 28px;
+    font-size: 15px;
+    .username {
+      font-weight: bold;
+    }
+  }
+  .avatar {
+    float: left;
+    padding: 1px;
+    border: 1px solid #BFBFBF;
+    line-height: 1px;
+  }
+  .preview, .content {
+    margin-left: 40px;
+  }
+  .notice {
+    margin-left: 5px;
+    float: right;
+    .like_counter {
+      color: #5BB75B;
+      font-weight: bold;
+    }
+    .author {
+      font-weight: bold;
+    }
+    .comments {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  &.detail {
+    .body {
+      margin: 0 0 20px 0;
+    }
+  }
+}
