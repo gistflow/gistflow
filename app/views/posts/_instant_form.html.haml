@@ -2,7 +2,7 @@
   .caption New message
   = form_for current_user.posts.build, :html => { :id => 'instant_form' } do |f|
     = hidden_field_tag :source, params[:type] || 'root'
-    = f.text_area :content, :size => '40x2', :id => 'post_body'
+    .form-item= f.text_area :content, :size => '40x2', :id => 'post_body'
     %ul.left
       %li= link_to 'Advanced form', new_post_path
     %ul.button-group
