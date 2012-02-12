@@ -46,8 +46,16 @@ form {
 }
 
 
-#instant_form {
-  .form-item {
-    margin: 0;
+#instant_form textarea {
+  margin-bottom: 5px;
+}
+
+.global_search_form {
+  float: right;
+  margin-right: 20px;
+  
+  #search {
+    width: 150px;
   }
 }
+  
