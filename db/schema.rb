@@ -100,7 +100,8 @@ ActiveRecord::Schema.define(:version => 20120210114457) do
   add_index "subscriptions", ["tag_id", "user_id"], :name => "index_subscriptions_on_tag_id_and_user_id", :unique => true
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "posts_count", :default => 0
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true

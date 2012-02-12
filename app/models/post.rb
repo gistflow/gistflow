@@ -19,8 +19,7 @@ class Post < ActiveRecord::Base
   
   validates :content, :user, :presence => true
   
-  attr_accessor :tag_names
-  attr_accessible :content, :title, :preview, :body, :tag_names
+  attr_accessible :content, :title, :preview, :body
   
   
   def title=(text)

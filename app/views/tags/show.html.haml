@@ -1,5 +1,7 @@
 .caption
   = @tag.name
+  %span.hint
+    = pluralize @tag.posts_count, "post"
   - if @subscription
     = subscription_form(@subscription)
 = render :partial => 'posts/post', :collection => @posts
