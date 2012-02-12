@@ -5,8 +5,8 @@ input, textarea {
 	padding: 4px;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 	border: 1px solid #CCC;
+	margin-bottom: 2px;
 	color: #555;
-	margin-bottom: 9px;
 }
 
 input[type=text], textarea {
@@ -14,11 +14,17 @@ input[type=text], textarea {
 }
 
 form {
+  .form-item {
+    margin-bottom: 14px;
+    .hint {
+      color: #999;
+    }
+  }
+  
 	margin-bottom: 10px;
 	textarea {
 		display: block;
 		width: 570px;
-		margin-bottom: 5px;
 		border: 1px solid #ddd;
 		outline: 0;
 	}
@@ -43,4 +49,9 @@ form {
 	label {
 	  display: block;
 	}
+}
+
+
+#instant_form textarea {
+  margin-bottom: 5px;
 }

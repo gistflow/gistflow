@@ -1,13 +1,19 @@
 .caption= @presenter.post.new_record? ? "New post" : "Edit post"
 = form_for @presenter.post, :class => 'well' do |f|
-  = f.label :title
-  = f.text_field :title
+  .form-item
+    = f.label :title
+    = f.text_field :title, :placeholder => 'Enjoy the GistFlow...'
+    .hint Some text here
   
-  = f.label :body
-  = f.text_area :body, :size => '40x12'
+  .form-item
+    = f.label :body
+    = f.text_area :body, :size => '40x12'
+    .hint Render in the post page
   
-  = f.label :preview
-  = f.text_area :preview, :size => '40x3'
+  .form-item
+    = f.label :preview
+    = f.text_area :preview, :size => '40x3'
+    .hint Render in the posts list
   
   %ul.button-group
     %li.help Post as
