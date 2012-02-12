@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(post)
     else
       @presenter = Posts::ShowPresenter.new(post)
-      render 'posts/show'
+      render :'posts/show'
     end
   end
 end

@@ -1,6 +1,5 @@
 class GistsController < ApplicationController
   before_filter :authenticate!
-  
   respond_to :json
   
   def index
@@ -10,8 +9,6 @@ class GistsController < ApplicationController
   
   def show
     @gist = Github::Gist.find(params[:id])
-    respond_to do |format|
-      format.json { render :json => @gist }
-    end
+    respond_with @gist
   end
 end
