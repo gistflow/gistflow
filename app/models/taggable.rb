@@ -32,7 +32,7 @@ module Taggable
   end
   
   def update_posts_counts(by = 1)
-    original_value_sql = "CASE WHEN `posts_count` IS NULL THEN 0 ELSE `posts_count` END"
-    self.tags.update_all("`posts_count` = #{original_value_sql} + #{by.to_i}")
+    original_value_sql = "CASE WHEN 'posts_count' IS NULL THEN 0 ELSE 'posts_count' END"
+    self.tags.update_all("'posts_count' = #{original_value_sql} + #{by.to_i}")
   end
 end
