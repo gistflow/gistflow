@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :post, :class => "Post::Article" do
     user
     content { Faker::Lorem.paragraph }
-    tag_names { Faker::Lorem.words(3).join(',') }
     
     trait :with_gist do
       content { "#{Faker::Lorem.paragraph} {gist:777}" }
@@ -11,7 +10,6 @@ FactoryGirl.define do
     trait :with_tag do
       content { "#tag_1 #{Faker::Lorem.paragraph}" }
     end
-    
     
     factory :post_with_gist, :traits => [:with_gist]
     factory :post_with_tag, :traits => [:with_tag]

@@ -19,9 +19,7 @@ class Post < ActiveRecord::Base
   
   validates :content, :user, :presence => true
   
-  attr_accessor :tag_names
-  attr_accessible :content, :title, :preview, :body, :tag_names
-  
+  attr_accessible :content, :title, :preview, :body
   
   def title=(text)
     @title = text.strip
@@ -36,6 +34,10 @@ class Post < ActiveRecord::Base
   def body=(text)
     @body = text.strip
     build_content
+  end
+  
+  def link_name
+    content[0..30]
   end
   
 protected

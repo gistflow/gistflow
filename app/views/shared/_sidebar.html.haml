@@ -1,2 +1,4 @@
-= yield(:sidebar_gists).blank? ? render(:partial => 'shared/sidebar_gists', :locals => { :user => current_user, :gists => [] }) : yield(:sidebar_gists)
-= sidebar_posts "Recent posts", recent_posts, root_url
+= render 'users/sidebar'
+= render 'gists/sidebar'
+= render 'posts/sidebar'
+= render 'tags/sidebar'

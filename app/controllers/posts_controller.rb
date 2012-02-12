@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include Controllers::Tipable
   before_filter :assign_type
   
   def index
@@ -63,6 +64,33 @@ class PostsController < ApplicationController
     end
     redirect_to :back
   end
+  
+  def search
+    @search = params[:search].strip
+    
+    case @search[0]
+
+    when '#'
+      if tag = Tag.find_by_name(@search[1..-1])
+        redirect_to tag_path(tag.name) and return
+      end
+    when '@'
+      if user = User.find_by_username(@search[1..-1])
+        redirect_to user_path(user.username) and return
+        return
+      end
+    else
+      @posts = Post.where("posts.content LIKE '%#{@search}%'")
+      
+      if @posts.any?
+        @posts = @posts.page(params[:page])
+        render 'index' and return
+      end
+    end
+    
+    render 'nothing_found'
+  end
+  
   
 protected
 

@@ -1,5 +1,8 @@
 language: ruby
 rvm:
   - 1.9.3
-before_script: "bundle exec rake db:migrate"
-
+before_script: "bundle exec rake db:migrate:reset"
+notifications:
+  email:
+    - releu@me.com
+    - makaroni4@gmail.com

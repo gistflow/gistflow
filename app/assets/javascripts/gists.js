@@ -1,5 +1,5 @@
 $(function(){
-  var gists = $("#gists")
+  var gists = $("#gists.current-user")
   if (gists) {
     $.getJSON("/gists.json", function(data){
       gists.html(data.div)

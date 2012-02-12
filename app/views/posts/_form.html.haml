@@ -1,12 +1,24 @@
 .caption= @presenter.post.new_record? ? "New post" : "Edit post"
-= simple_form_for(@presenter.post, :html => { :class => 'form-stacked' }) do |f|
-  = f.error_notification
-  = f.input :title
-  = f.input :body, :as => :text, :input_html => { :size => '40x12' }
-  = f.input :tag_names
-  = f.input :preview, :as => :text, :input_html => { :size => '40x3' }
+= form_for @presenter.post, :class => 'well' do |f|
+  .form-item
+    = f.label :title
+    = f.text_field :title, :placeholder => 'Enjoy the GistFlow...'
+    .hint Some text here
+  
+  .form-item
+    = f.label :body
+    = f.text_area :body, :size => '40x12'
+    .hint Render in the post page
+  
+  .form-item
+    = f.label :preview
+    = f.text_area :preview, :size => '40x3'
+    .hint Render in the posts list
+  
   %ul.button-group
-    %li Post as
-    %li= f.button :submit, 'Article', :class => 'btn big'
-    %li= f.button :submit, 'Question', :class => 'btn big'
-    %li= f.button :submit, 'Community', :class => 'btn big'
+    %li.help Post as
+    %li= f.submit 'Article', :class => 'button'
+    %li= f.submit 'Question', :class => 'button'
+    %li= f.submit 'Community', :class => 'button'
+
+  .clear
