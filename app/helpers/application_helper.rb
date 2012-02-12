@@ -1,10 +1,14 @@
 module ApplicationHelper
-  def title(title)
-    content_for(:title, title)
+  def caption(caption)
+    capture_haml do
+      haml_tag(:div, { :class => :caption }) do
+        haml_concat caption
+      end
+    end
   end
   
   def avatar_image(user, size = 26)
-    image_tag user.gravatar(size)
+    image_tag user.gravatar(size), :size => '26x26'
   end
   
   def credits
@@ -65,6 +69,11 @@ module ApplicationHelper
     time = time_ago_in_words(notification.created_at)
     
     "#{user_link} mentioned you in #{record_link} #{time} ago".html_safe
+  end
+  
+  def link_to_github_user(user)
+    link = "http://github.com/#{user.username}"
+    link_to link, link, :target => "_blank"
   end
   
   def subscription_form(subscription)

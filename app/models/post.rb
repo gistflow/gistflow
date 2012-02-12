@@ -21,7 +21,6 @@ class Post < ActiveRecord::Base
   
   attr_accessible :content, :title, :preview, :body
   
-  
   def title=(text)
     @title = text.strip
     build_content
@@ -35,6 +34,10 @@ class Post < ActiveRecord::Base
   def body=(text)
     @body = text.strip
     build_content
+  end
+  
+  def link_name
+    content[0..30]
   end
   
 protected

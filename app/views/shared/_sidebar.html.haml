@@ -1,7 +1,4 @@
-= yield(:sidebar_gists).blank? ? render(:partial => 'shared/sidebar_gists', :locals => { :user => current_user, :gists => [] }) : yield(:sidebar_gists)
-= sidebar_posts "Recent posts", recent_posts, root_url
-- if user_signed_in?
-  .caption
-    Tags
-  - current_user.subscriptions.limit(30).each do |subscription|
-    = link_to subscription.tag.name, tag_path(subscription.tag.name)
+= render 'users/sidebar'
+= render 'gists/sidebar'
+= render 'posts/sidebar'
+= render 'tags/sidebar'

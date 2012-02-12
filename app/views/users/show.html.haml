@@ -1,7 +1,3 @@
 = user_page_title(@user)
 = render :partial => 'posts/post', :collection => @posts
 = paginate @posts
-
-- if @user != current_user
-  - content_for :sidebar_gists do
-    = render :partial => 'shared/sidebar_gists', :locals => { :user => @user, :gists => [] }
