@@ -5,7 +5,7 @@ module Replaceable
     def replace_tags!
       self.content = self.content.split(/ /).map do |word|
         if tag = word.scan(TAG).flatten.first and Tag.where(:name => tag).exists?
-          link_to("##{tag}", "tags/#{tag}").html_safe
+          link_to("##{tag}", "/tags/#{tag}").html_safe
         else
           word
         end
