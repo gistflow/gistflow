@@ -1,7 +1,6 @@
 - presenter = Posts::ShowPresenter.new(post)
-.post
+.post.list-item
   .title= presenter.title
-  
   .avatar= avatar_image(post.user, 26)
   .preview
     = presenter.preview.html_safe
