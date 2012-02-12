@@ -39,6 +39,8 @@ module ApplicationHelper
       'alert-success'
     when :alert then
       'alert-error'
+    when :info then
+      'alert-info'
     end
     classes.join ' '
   end

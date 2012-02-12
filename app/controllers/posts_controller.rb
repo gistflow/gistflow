@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include Controllers::Tipable
   before_filter :assign_type
   
   def index
