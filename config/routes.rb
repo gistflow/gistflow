@@ -2,7 +2,7 @@ Gistflow::Application.routes.draw do
   match '/auth/:provider/callback' => 'users#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
-  match '/search' => 'posts#search'
+  match '/search' => 'posts#search', :as => :search_posts
   
   resources :posts do
     match :like, :on => :member, :via => :post
