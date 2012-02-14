@@ -1,5 +1,5 @@
 .caption= @presenter.post.new_record? ? "New post" : "Edit post"
-= form_for @presenter.post, :class => 'well' do |f|
+= form_for @presenter.post do |f|
   .form-item
     = f.label :title
     = f.text_field :title, :placeholder => 'Enjoy the GistFlow...'
