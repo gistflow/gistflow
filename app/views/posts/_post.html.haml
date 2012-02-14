@@ -1,14 +1,14 @@
 - presenter = Posts::ShowPresenter.new(post)
-- cache presenter.cache_key do
-  .post.list-item
+.post.list-item
+  - cache presenter.cache_key do
     .title= presenter.title
     .avatar= avatar_image(post.user)
     .preview
       = presenter.preview.html_safe
     .clear
-.notice.button-group.minor-group
-  - if user_signed_in?
-    = link_to_memorize presenter
-    = link_to_like presenter
-  = link_to "Comments (#{presenter.comments_count})", post_path(post), :class => 'button icon comment'
-.clear
+  .notice.button-group.minor-group
+    - if user_signed_in?
+      = link_to_memorize presenter
+      = link_to_like presenter
+    = link_to "Comments (#{presenter.comments_count})", post_path(post), :class => 'button icon comment'
+  .clear

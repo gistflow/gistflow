@@ -1,6 +1,4 @@
-module Taggable
-  include Replaceable::Taggable
-  
+module Taggable  
   def self.included(base)
     base.class_eval do
       has_and_belongs_to_many :tags
@@ -16,7 +14,8 @@ module Taggable
   end
   
   def assign_tags
-    self.tags = tag_names.map do |name|    
+    raw = Replaceable.new(content)
+    self.tags = raw.tag_names.map do |name|    
       Tag.find_or_create_by_name(name)
     end
   end
