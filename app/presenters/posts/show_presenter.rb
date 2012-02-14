@@ -51,6 +51,10 @@ class Posts::ShowPresenter
     post.comments_count
   end
   
+  def comments
+    post.comments.to_a.select(&:persisted?)
+  end
+  
 protected
 
   def type_path
