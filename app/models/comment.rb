@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  include Likable
-  include Notifiable
+  include Models::Likable
+  include Models::Notifiable
   
   belongs_to :user
   belongs_to :post, :counter_cache => true

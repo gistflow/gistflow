@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
   attr_accessor :title, :preview, :body
-  include Likable
-  include Notifiable
-  include Taggable
+  include Models::Likable
+  include Models::Notifiable
+  include Models::Taggable
   
   belongs_to :user
   has_many :comments
