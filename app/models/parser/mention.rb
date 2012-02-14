@@ -6,11 +6,20 @@ module Parser
     end
     
     def usernames
-      User.where(:username => @raw_usernames).select(:username).map(&:username)
+      users.map &:username
     end
     
     def user_ids
-      User.where(:username => @raw_usernames).select(:id).map(&:id)
+      users.map &:id
     end
+  
+  protected
+    
+    def users
+      @users ||= begin
+        @raw_usernames.any? ? User.where(:username => @raw_usernames) : []
+      end
+    end
+  
   end
 end

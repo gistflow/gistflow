@@ -155,6 +155,7 @@ http://github.com/necolas/css3-github-buttons
 .button.fork.icon:active:before { background-position: -12px -144px; }
 
 .button.like.icon:before { background-position: 0 -156px; }
+.button.like.icon.disabled:before { background-position: 0 -156px !important; }
 .button.like.icon:hover:before,
 .button.like.icon:focus:before,
 .button.like.icon:active:before { background-position: -12px -156px; }

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   # include Controllers::Tipable
   before_filter :assign_type
+  before_filter :authenticate!, :except => [:index, :show]
   
   def index
     @posts = params[:q] ? post_model.search(params[:q]) : post_model.scoped
@@ -45,24 +46,24 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = current_user.posts.find(params[:id])
-    post.destroy
+    current_user.posts.find(params[:id]).destroy
     redirect_to root_path
   end
   
   def like
-    post = Post.find(params[:id])
-    flash[:alert] = "You can't like this post" unless current_user.like(post)
+    current_user.like Post.find(params[:id])
     redirect_to :back
   end
   
-  def favorite
-    post = Post.find(params[:id])
-    if current_user.favorite(post)
-      flash[:notice] = 'Post is in your favorites.'
-    else
-      flash[:alert] = "You can't add this post to favorites."
-    end
+  def memorize
+    current_user.memorize Post.find(params[:id])
+    flash[:notice] = 'The post was memorized'
+    redirect_to :back
+  end
+  
+  def forgot
+    current_user.forgot Post.find(params[:id])
+    flash[:notice] = 'The post was forgotten'
     redirect_to :back
   end
   
