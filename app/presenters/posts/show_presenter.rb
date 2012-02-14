@@ -15,13 +15,24 @@ class Posts::ShowPresenter
   end
   
   def preview
-    (parsed_preview || parsed_title).html_safe
+    @preview ||= begin
+      content = (parsed_preview || parsed_title)
+      raw = Replaceable.new(content)
+      raw.replace_tags!
+      raw.replace_usernames!
+      raw.content.html_safe
+    end
   end
   
   def body
-    Markdown.markdown begin
-      (parsed_body || parsed_preview || parsed_title).html_safe
-    end
+    @body ||= (Markdown.markdown begin
+      content = (parsed_body || parsed_preview || parsed_title)
+      raw = Replaceable.new(content)
+      raw.replace_tags!
+      raw.replace_gists!
+      raw.replace_usernames!
+      raw.content.html_safe
+    end)
   end
   
   def title
@@ -69,10 +80,7 @@ protected
   end
 
   def content
-    post.replace_gists!
-    post.replace_tags!
-    post.replace_usernames!
-    @content ||= post.content.html_safe
+    post.content
   end
   
   def parsed_title
