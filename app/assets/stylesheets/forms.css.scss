@@ -1,6 +1,9 @@
 form {
   .form-item {
     margin-bottom: 14px;
+    &.no-margin {
+      margin: 0;
+    }
     .hint {
       color: #999;
     }
@@ -39,6 +42,9 @@ form {
 		a {
 			color: #bfbfbf;
 		}
+		label {
+		  display: inline-block;
+		}
 	}
 	label {
 	  display: block;
@@ -46,9 +52,11 @@ form {
 }
 
 
-#instant_form textarea {
-  margin-bottom: 5px;
-}
+#instant_form {
+  textarea {
+    margin-bottom: 5px;
+  }
+} 
 
 #search {
   input[type=search] {
