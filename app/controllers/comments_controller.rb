@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  cache_sweeper :post_sweeper, :only => [:create]
+  
   def create
     post = Post.find(params[:post_id])
     comment = post.comments.build(params[:comment])
