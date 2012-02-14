@@ -6,7 +6,8 @@ Gistflow::Application.routes.draw do
   resources :posts do
     member do
       post :like
-      post :favorite
+      post :memorize
+      delete :forgot
     end
     collection do
       post :search

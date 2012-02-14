@@ -1,6 +1,6 @@
 class Like < ActiveRecord::Base
   
-  LIKABLE_TYPES = ["Post::Article", "Post::Question", "Post:Community", "Comment"]
+  LIKABLE_TYPES = ["Post::Article", "Post::Question", "Post::Community", "Comment"]
   
   belongs_to :user
   belongs_to :likable, :polymorphic => true

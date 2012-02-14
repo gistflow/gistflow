@@ -19,9 +19,12 @@
   .notice {
     margin-left: 5px;
     float: right;
-    .like_counter {
-      color: #5BB75B;
-      font-weight: bold;
+    a.button.disabled {
+      background-color: whiteSmoke;
+      color: #4b4b4b;
+      &:hover {
+        background-color: whiteSmoke;
+      }
     }
     .author {
       font-weight: bold;

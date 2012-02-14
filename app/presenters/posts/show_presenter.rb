@@ -46,8 +46,8 @@ class Posts::ShowPresenter
     post.likes_count
   end
   
-  def comments
-    post.comments.select(&:persisted?)
+  def comments_count
+    post.comments_count
   end
   
 protected
