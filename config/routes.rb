@@ -2,14 +2,14 @@ Gistflow::Application.routes.draw do
   match '/auth/:provider/callback' => 'users#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
-  match '/search' => 'posts#search', :as => :search_posts
   
   resources :posts do
-    match :like, :on => :member, :via => :post
-    match :add_to_favorites, :on => :member, :via => :post
-    resources :comments, :only => :create
-    
+    member do
+      post :like
+      post :favorite
+    end
     collection do
+      post :search
       resources :articles, {
         :only => [:index, :show],
         :controller => :posts, 
@@ -26,16 +26,13 @@ Gistflow::Application.routes.draw do
         :type => 'Post::Community'
       }
     end
+    resources :comments, :only => :create
   end
   
-  resources :tags, :only => :show
-  
+  resources :tags, :users, :only => :show
   resources :notifications, :only => :index
-  
   resources :subscriptions, :only => [:create, :destroy]
-  resources :users, :only => :show
   resources :gists, :only => [:show, :index]
-  resources :tags, :only => :show
   
   root to: 'posts#index'
 end

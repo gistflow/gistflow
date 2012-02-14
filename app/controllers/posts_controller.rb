@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
-  include Controllers::Tipable
+  # include Controllers::Tipable
   before_filter :assign_type
   
   def index
-    @posts = post_model.page(params[:page])
+    @posts = params[:q] ? post_model.search(params[:q]) : post_model.scoped
+    @posts = @posts.page(params[:page])
   end
 
   def show
@@ -55,9 +56,9 @@ class PostsController < ApplicationController
     redirect_to :back
   end
   
-  def add_to_favorites
+  def favorite
     post = Post.find(params[:id])
-    if current_user and current_user.add_to_favorites(post)
+    if current_user.favorite(post)
       flash[:notice] = 'Post is in your favorites.'
     else
       flash[:alert] = "You can't add this post to favorites."
@@ -66,29 +67,7 @@ class PostsController < ApplicationController
   end
   
   def search
-    @search = params[:search].strip
-    
-    case @search[0]
-
-    when '#'
-      if tag = Tag.find_by_name(@search[1..-1])
-        redirect_to tag_path(tag.name) and return
-      end
-    when '@'
-      if user = User.find_by_username(@search[1..-1])
-        redirect_to user_path(user.username) and return
-        return
-      end
-    else
-      @posts = Post.where("posts.content LIKE '%#{@search}%'")
-      
-      if @posts.any?
-        @posts = @posts.page(params[:page])
-        render 'index' and return
-      end
-    end
-    
-    render 'nothing_found'
+    redirect_to root_path(:q => params[:q].strip)
   end
   
   

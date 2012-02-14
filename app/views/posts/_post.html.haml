@@ -6,7 +6,7 @@
     = presenter.preview.html_safe
   .clear
   .notice.button-group.minor-group
-    = link_to "Remember", add_to_favorites_post_path(post), :method => :post, :class => 'button'
+    = link_to "Remember", favorite_post_path(post), :method => :post, :class => 'button'
     - if user_signed_in? and post.user != current_user
       = link_to "Like (#{presenter.likes_count})", like_post_path(post), :method => :post, :class => 'button icon like'
     = link_to "Comments (#{presenter.comments.size})", post_path(post), :class => 'button icon comment'
