@@ -50,12 +50,10 @@ form {
   margin-bottom: 5px;
 }
 
-.global_search_form {
-  float: right;
-  margin-right: 20px;
-  
-  #search {
-    width: 150px;
+#search {
+  input[type=search] {
+    width: 200px;
+    font-size: 14px;
   }
 }
   
