@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
+
   # include Controllers::Tipable
   before_filter :assign_type
   before_filter :authenticate!, :except => [:index, :show]
