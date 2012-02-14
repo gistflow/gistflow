@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
     notifications.unread.update_all(:read => true)
   end
   
-  def add_to_favorites(post)
+  def favorite(post)
     favorite_posts << post unless favorite_posts.include?(post)
   end
 end
