@@ -17,4 +17,5 @@
 
 $(function(){
   $('textarea').autosize()
+  $('a[href=#]').live('click', function(){ return false })
 })
