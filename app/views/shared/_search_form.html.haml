@@ -1,4 +1,5 @@
 = caption 'Search'
 #search
   = form_tag search_posts_path do
-    = search_field_tag :q, params[:q], :placeholder => "#tag @name text", :id => nil
+    = search_field_tag :q, params[:q], :placeholder => "#tag, @name or text", :id => nil
+    %span.submit↵
