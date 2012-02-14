@@ -21,9 +21,11 @@ class Comments::ShowPresenter
   end
   
   def content
-    comment.replace_gists!
-    comment.replace_tags!
-    comment.replace_usernames!
-    @content ||= comment.content
+    @content ||= begin
+      raw = Replaceable.new(comment.content)
+      raw.replace_gists!
+      raw.replace_tags!
+      raw.replace_usernames!
+    end
   end
 end
