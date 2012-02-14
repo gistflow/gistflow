@@ -1,7 +1,7 @@
 module Github
   class Gist
     extend ActiveModel::Naming
-    attr_accessor :id, :description, :html_url
+    attr_accessor :id, :description, :html_url, :lang
     
     def initialize(id_or_attributes)
       if id_or_attributes.is_a? Hash
@@ -28,7 +28,8 @@ module Github
       raw.map do |gist|
         new(
           :description => gist['description'],
-          :id => gist['id']
+          :id => gist['id'],
+          :lang => gist['files'].values.first['language'].to_s.downcase
         ) 
       end
     end

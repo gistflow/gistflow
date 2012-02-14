@@ -18,7 +18,7 @@ $(function(){
   
   var box = $("#post_body")
   $("a.importable-gist").live('click', function(){
-    box.val(box.val() + "{gist:" + $(this).data('gistId') + "}")
+    box.val(box.val() + "{gist:" + $(this).data('gistId') + "}" + " #" + $(this).data('gistLang') + " ") 
     return false
   })
 })
