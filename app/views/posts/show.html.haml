@@ -1,6 +1,11 @@
-.post.detail.markdown
+.list-item.markdown
   %h1= @presenter.title
   .body= @presenter.body
+  - if user_signed_in?
+    .notice.button-group.minor-group
+      = link_to_memorize @presenter
+      = link_to_like @presenter
+    .clear
 
 =caption 'Comments'
 
