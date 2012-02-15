@@ -48,7 +48,7 @@ class Post < ActiveRecord::Base
   end
   
   def link_name
-    content[0..30]
+    "#{content[0..30].strip}.."
   end
   
 protected

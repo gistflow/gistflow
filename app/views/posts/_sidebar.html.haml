@@ -2,4 +2,7 @@
   = caption 'Remembrance'
   %ul
     - sidebar_presenter.posts.each do |post|
-      %li= link_to post.link_name, post_path(:id => post.id)
+      %li
+        = link_to post.user.username, user_path(:id => post.user.username)
+        = post.link_name
+        = link_to 'show', post_path(:id => post.id)
