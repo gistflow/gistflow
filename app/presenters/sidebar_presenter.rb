@@ -11,7 +11,7 @@ class SidebarPresenter
   end
   
   def posts
-    @posts || user.favorite_posts.limit(5)
+    @posts || user.favorite_posts.includes(:user).limit(5)
   end
   
   def gists
