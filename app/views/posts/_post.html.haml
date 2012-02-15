@@ -1,5 +1,5 @@
 - presenter = Posts::ShowPresenter.new(post)
-.post.list-item
+.list-item
   - cache presenter.cache_key do
     .title= presenter.title
     .avatar= avatar_image(post.user)
