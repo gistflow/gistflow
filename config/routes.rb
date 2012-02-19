@@ -11,21 +11,9 @@ Gistflow::Application.routes.draw do
     end
     collection do
       post :search
-      resources :articles, {
-        :only => [:index, :show],
-        :controller => :posts, 
-        :type => 'Post::Article'
-      }
-      resources :questions, {
-        :only => [:index, :show], 
-        :controller => :posts, 
-        :type => 'Post::Question'
-      }
-      resources :community, {
-        :only => [:index, :show], 
-        :controller => :posts, 
-        :type => 'Post::Community'
-      }
+      get :articles
+      get :questions
+      get :community
     end
     resources :comments, :only => :create
   end

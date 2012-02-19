@@ -2,16 +2,20 @@ module Models
   module Likable
     extend ActiveSupport::Concern
     
-    def liked_by_user?(user)
-      Like.where(
-        :likable_id   => id,
-        :likable_type => self.class.name,
-        :user_id      => user_id
-      ).exists?
+    def liked_by?(user)
+      $redis.sismember redis_key, user.id
+    end
+        
+    def likes_count
+      $redis.scard redis_key
+    end
+    
+    def like(record)
+      $redis.sadd record.redis_key, id
     end
 
-    def likes
-      Like.where(:likable_id => id, :likable_type => self.class.name)
+    def redis_key
+      "likes:#{id}:#{self.class.model_name}"
     end
   end
 end

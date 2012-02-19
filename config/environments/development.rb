@@ -11,8 +11,8 @@ Gistflow::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.perform_caching = true
-  config.cache_store = :dalli_store
+  config.perform_caching = false
+  # config.cache_store = :dalli_store
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false

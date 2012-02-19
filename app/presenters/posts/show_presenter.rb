@@ -36,14 +36,10 @@ class Posts::ShowPresenter
   end
   
   def title
-    if parsed_preview
-      link_to parsed_title, post_path(post)
-    else
-      u = link_to user.username, user_path(:id => user.username), :class => 'username'
-      t = link_to type, type_path
-      w = time_ago_in_words(post.created_at)
-      "#{u} wrote in #{t} #{w} ago".html_safe
-    end
+    u = link_to user.username, user_path(:id => user.username), :class => 'username'
+    t = link_to type, type_path
+    w = time_ago_in_words(post.created_at)
+    "#{u} wrote in #{t} #{w} ago".html_safe
   end
   
   def user
@@ -71,11 +67,11 @@ protected
   def type_path
     case post.class.to_s
     when 'Post::Article' then
-      articles_path
+      articles_posts_path
     when 'Post::Question' then
-      questions_path
+      questions_posts_path
     when 'Post::Community' then
-      community_index_path
+      community_posts_path
     end
   end
 

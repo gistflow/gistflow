@@ -19,24 +19,23 @@ module ApplicationHelper
     "Created by #{creators[0]} and #{creators[1]}".html_safe
   end
   
-  def link_to_memorize(presenter)
-    options = { :class => :button }
-    if current_user.memorized? presenter.post
-      link_to 'Forgot', forgot_post_path(presenter.post), 
-        options.merge(:method => :delete)
+  def link_to_memorize(post)
+    if current_user.memorized? post
+      link_to 'Forgot', forgot_post_path(post), 
+        :method => :delete, :remote => true, :class => 'button replaceable'
     else
-      link_to 'Memorize', memorize_post_path(presenter.post),
-        options.merge(:method => :post)
+      link_to 'Memorize', memorize_post_path(post),
+        :method => :post, :remote => true, :class => 'button replaceable'
     end
   end
   
-  def link_to_like(presenter)
-    if current_user == presenter.user or current_user.liked? presenter.post
-      link_to "#{presenter.likes_count} Likes", '#',
-        :class => 'button icon like disabled', :method => :post
+  def link_to_like(post)
+    if current_user == post.user or post.liked_by? current_user
+      link_to "#{post.likes_count} Likes", '#',
+        :class => 'button icon like disabled'
     else
-      link_to "Like (#{presenter.likes_count})", like_post_path(presenter.post),
-        :class => 'button icon like', :method => :post
+      link_to "Like", like_post_path(post),
+        :class => 'button icon like replaceable', :method => :post, :remote => true
     end
   end
     
