@@ -37,8 +37,8 @@ class PostsController < ApplicationController
 
   def create
     type = params[:post].delete(:type)
-    post = current_user.posts.build(params[:post])
-    post.type = type
+    post = Post.constantize(type).new(params[:post])
+    post.user = current_user
     if post.save
       redirect_to post_path(post)
     else
