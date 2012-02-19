@@ -16,6 +16,14 @@ class Post < ActiveRecord::Base
   attr_accessible :content, :title, :preview, :body
   
   class << self
+    def constantize(type)
+      if ['Post::Community', 'Post::Article', 'Post::Question'].include?(type)
+        type.constantize
+      else
+        raise "unknown type \"#{type}\""
+      end
+    end
+    
     def search(query)
       query.strip!
       case query[0]
