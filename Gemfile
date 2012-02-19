@@ -4,7 +4,6 @@ gem 'rails', '3.2.1'
 
 gem 'state_machine'
 gem 'jquery-rails'
-gem 'simple_form'
 gem 'heroku'
 gem 'thin'
 gem 'airbrake'
@@ -12,6 +11,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'redcarpet'
+gem 'redis'
 
 group :test, :development do
   gem 'factory_girl_rails'

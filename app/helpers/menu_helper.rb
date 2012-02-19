@@ -35,9 +35,9 @@ module MenuHelper
 protected
   
   def categories_items
-    { :articles  => articles_path,
-      :questions => questions_path,
-      :community => community_index_path }.map do |name, link|
+    { :articles  => articles_posts_path,
+      :questions => questions_posts_path,
+      :community => community_posts_path }.map do |name, link|
       link_to_unless_current name, link
     end
   end

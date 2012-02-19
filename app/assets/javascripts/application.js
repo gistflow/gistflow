@@ -18,4 +18,17 @@
 $(function(){
   $('textarea').autosize()
   $('a[href=#]').click(function(){ return false })
+    
+  $('a.replaceable').live('ajax:success', function(e, data){
+    $(this).replaceWith(data.new_link)
+  })
+  
+  $('form#instant_form input:submit').click(function(){
+    var new_input = $('<input>').attr({
+      type: 'hidden',
+      value: $(this).data('post-type'),
+      name: 'post[type]'
+    })
+    $(this).parents('form:first').append(new_input)
+  })
 })

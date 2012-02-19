@@ -140,6 +140,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.0)
+    redis (2.2.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.8.0)
@@ -162,9 +163,6 @@ GEM
       sass (>= 3.1.10)
       tilt (~> 1.3)
     sequel (3.20.0)
-    simple_form (1.5.2)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
     sinatra (1.0)
       rack (>= 1.0)
     sprockets (2.1.2)
@@ -218,9 +216,9 @@ DEPENDENCIES
   pg
   rails (= 3.2.1)
   redcarpet
+  redis
   rspec-rails
   sass-rails (~> 3.2.3)
-  simple_form
   sqlite3
   state_machine
   taps

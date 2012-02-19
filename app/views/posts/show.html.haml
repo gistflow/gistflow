@@ -3,8 +3,8 @@
   .body= @presenter.body
   - if user_signed_in?
     .notice.button-group.minor-group
-      = link_to_memorize @presenter
-      = link_to_like @presenter
+      = link_to_memorize @presenter.post
+      = link_to_like @presenter.post
     .clear
 
 =caption 'Comments'
