@@ -19,7 +19,8 @@ Gistflow::Application.routes.draw do
   end
   
   resources :users, :only => :show do
-    resources :kits, :only => [:index, :create]
+    resources :kits, :only => :index
+    resources :user_kits, :only => [:create, :destroy]
   end
   resources :tags, :only => :show
   resources :notifications, :only => :index

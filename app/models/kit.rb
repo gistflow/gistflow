@@ -1,8 +1,9 @@
 class Kit < ActiveRecord::Base
-  GROUPS = { 0 => :Languages, 1 => :Frameworks, 2 => :Topics }
+  GROUPS = [:Languages, :Frameworks, :Topics]
   
   has_and_belongs_to_many :tags
-  has_and_belongs_to_many :users
+  has_many :user_kits
+  has_many :users, :through => :user_kits
   
   validates :name, :presence => true
   

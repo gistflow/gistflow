@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304144029) do
+ActiveRecord::Schema.define(:version => 20120304144030) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -137,6 +137,14 @@ ActiveRecord::Schema.define(:version => 20120304144029) do
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
+  create_table "user_kits", :force => true do |t|
+    t.integer "user_id"
+    t.integer "kit_id"
+  end
+
+  add_index "user_kits", ["user_id", "kit_id"], :name => "index_user_kits_on_user_id_and_kit_id", :unique => true
+  add_index "user_kits", ["user_id"], :name => "index_user_kits_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string    "username"
     t.string    "name"
@@ -147,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20120304144029) do
     t.timestamp "created_at"
   end
 
-  create_table "users_kits", :id => false, :force => true do |t|
+  create_table "users_kits", :force => true do |t|
     t.integer "user_id"
     t.integer "kit_id"
   end

@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   include Models::Likable
   include Models::Memorizable
   
-  has_and_belongs_to_many :kits
+  has_many :user_kits
+  has_many :kits, :through => :user_kits
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
   has_many :likes
@@ -13,6 +14,10 @@ class User < ActiveRecord::Base
   
   validates :username, :name, :presence => true
   validates :username, :uniqueness => true
+  
+  def to_param
+    username
+  end
   
   def create_cookie_secret
     account_cookies.create! do |cookie|
