@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203211609) do
+ActiveRecord::Schema.define(:version => 20120304144029) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -60,6 +60,24 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
     t.integer "github_id"
   end
 
+  create_table "kits", :force => true do |t|
+    t.string  "name"
+    t.integer "position",       :default => 0
+    t.integer "group_position"
+    t.integer "tags_count",     :default => 0
+  end
+
+  add_index "kits", ["group_position", "position"], :name => "index_kits_on_group_position_and_position", :unique => true
+
+  create_table "kits_tags", :id => false, :force => true do |t|
+    t.integer "kit_id"
+    t.integer "tag_id"
+  end
+
+  add_index "kits_tags", ["kit_id", "tag_id"], :name => "index_kits_tags_on_kit_id_and_tag_id", :unique => true
+  add_index "kits_tags", ["kit_id"], :name => "index_kits_tags_on_kit_id"
+  add_index "kits_tags", ["tag_id"], :name => "index_kits_tags_on_tag_id"
+
   create_table "languages", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -75,6 +93,17 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
   end
 
   add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
 
   create_table "posts", :force => true do |t|
     t.integer   "comments_count", :default => 0
@@ -94,6 +123,13 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
 
   add_index "posts_tags", ["post_id", "tag_id"], :name => "index_posts_tags_on_post_id_and_tag_id", :unique => true
 
+  create_table "subscriptions", :force => true do |t|
+    t.integer "user_id"
+    t.integer "tag_id"
+  end
+
+  add_index "subscriptions", ["tag_id", "user_id"], :name => "index_subscriptions_on_tag_id_and_user_id", :unique => true
+
   create_table "tags", :force => true do |t|
     t.string  "name"
     t.integer "posts_count", :default => 0
@@ -110,5 +146,13 @@ ActiveRecord::Schema.define(:version => 20120203211609) do
     t.string    "gravatar_id"
     t.timestamp "created_at"
   end
+
+  create_table "users_kits", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "kit_id"
+  end
+
+  add_index "users_kits", ["user_id", "kit_id"], :name => "index_users_kits_on_user_id_and_kit_id", :unique => true
+  add_index "users_kits", ["user_id"], :name => "index_users_kits_on_user_id"
 
 end

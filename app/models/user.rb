@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include Models::Likable
   include Models::Memorizable
   
+  has_and_belongs_to_many :kits
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
   has_many :likes

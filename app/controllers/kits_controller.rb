@@ -1,5 +1,5 @@
 class KitsController < ApplicationController
   def index
-    @kits = Kit.sorted
+    @kits = Kit.sorted.group_by(&:group_position)
   end
 end
