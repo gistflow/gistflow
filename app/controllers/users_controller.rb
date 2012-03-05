@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   def create
     account = Account::Github.find_or_create_by_omniauth(omniauth)
     self.current_user = account.user
-    redirect_to root_path
+    if current_user.newbie?
+      redirect_to user_tags_path(current_user)
+    else
+      redirect_to root_path
+    end
   end
   
   def show

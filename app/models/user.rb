@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
   validates :username, :name, :presence => true
   validates :username, :uniqueness => true
   
+  def to_options
+    username
+  end
+  
+  def newbie?
+    tags.count < 3
+  end
+  
   def create_cookie_secret
     account_cookies.create! do |cookie|
       cookie.generate_secret!

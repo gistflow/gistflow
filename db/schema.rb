@@ -39,29 +39,12 @@ ActiveRecord::Schema.define(:version => 20120210114457) do
     t.datetime "updated_at",                     :null => false
   end
 
-  create_table "favorite_posts_lovers", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
-  add_index "favorite_posts_lovers", ["post_id", "user_id"], :name => "index_favorite_posts_lovers_on_post_id_and_user_id", :unique => true
-
   create_table "gists", :force => true do |t|
     t.integer "user_id"
     t.integer "source_id"
     t.string  "source_type"
     t.integer "github_id"
   end
-
-  create_table "likes", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "likable_id"
-    t.string   "likable_type"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"

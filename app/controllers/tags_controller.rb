@@ -1,4 +1,10 @@
 class TagsController < ApplicationController
+  def index
+    @subscriptions = Tag.popular.map do |tag|
+      current_user.subscriptions.find_or_initialize_by_tag_id(tag.id)
+    end
+  end
+  
   def show
     @tag = Tag.find_by_name(params[:id])
     if @tag
