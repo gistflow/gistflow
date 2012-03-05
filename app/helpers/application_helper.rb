@@ -21,10 +21,10 @@ module ApplicationHelper
   
   def link_to_memorize(post)
     if current_user.memorized? post
-      link_to 'Forgot', forgot_post_path(post), 
+      link_to 'Forgot', { :action => :forgot, :id => post.id }, 
         :method => :delete, :remote => true, :class => 'button replaceable'
     else
-      link_to 'Memorize', memorize_post_path(post),
+      link_to 'Memorize', { :action => :memorize, :id => post.id },
         :method => :post, :remote => true, :class => 'button replaceable'
     end
   end
@@ -34,7 +34,7 @@ module ApplicationHelper
       link_to "#{post.likes_count} Likes", '#',
         :class => 'button icon like disabled'
     else
-      link_to "Like", like_post_path(post),
+      link_to "Like", { :action => :like, :id => post.id },
         :class => 'button icon like replaceable', :method => :post, :remote => true
     end
   end

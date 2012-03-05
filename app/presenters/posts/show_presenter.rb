@@ -67,11 +67,11 @@ protected
   def type_path
     case post.class.to_s
     when 'Post::Article' then
-      articles_posts_path
+      post_articles_path
     when 'Post::Question' then
-      questions_posts_path
+      post_questions_path
     when 'Post::Gossip' then
-      gossip_posts_path
+      post_gossips_path
     end
   end
 

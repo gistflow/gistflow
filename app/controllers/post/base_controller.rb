@@ -1,33 +1,34 @@
-class Posts::BaseController < ApplicationController
+class Post::BaseController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
 
   # include Controllers::Tipable
   
   def index
-    @posts = Post.where(:type => params[:type])
-      .includes(:user).page(params[:page])
-    @gossip = current_user.gossips.build
+    @posts = model.includes(:user).page(params[:page])
     render 'posts/index'
   end
 
   def show
     @presenter = Posts::ShowPresenter.new(post)
+    render 'posts/show'
   end
 
   def new
     post = model.new
     @presenter = Posts::FormPresenter.new(post)
+    render 'posts/new'
   end
 
   def edit
     @presenter = Posts::FormPresenter.new(post)
+    render 'posts/edit'
   end
 
   def create
     post = model.new(post_params)
     post.user = current_user
     if post.save
-      redirect_to post
+      redirect_to :action => :index
     else
       @presenter = Posts::FormPresenter.new(post)
       render 'posts/new'
@@ -37,10 +38,10 @@ class Posts::BaseController < ApplicationController
   def update
     post = current_user.posts.find(params[:id])
     if post.update_attributes(params[:post])
-      redirect_to post_path(post)
+      redirect_to :action => :show, :id => post.id
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :edit
+      render 'posts/edit'
     end
   end
 
@@ -80,7 +81,7 @@ class Posts::BaseController < ApplicationController
 protected  
   
   def post
-    Post.find(params[:id])
+    model.find(params[:id])
   end
 
   def render_memorize_link
@@ -93,6 +94,6 @@ protected
   end
   
   def post_params
-    params["pots_#{model.name.underscore.gsub('/','_')}"]
+    params["#{model.name.underscore.gsub('/','_')}"]
   end
 end

@@ -7,21 +7,13 @@
     .hint Some text here
   
   .form-item
-    = f.label :body
-    = f.text_area :body, :size => '40x12'
+    = f.label :content
+    = f.text_area :content, :size => '40x12'
     .hint Render in the post page
-  
-  .form-item
-    = f.label :preview
-    = f.text_area :preview, :size => '40x3'
-    .hint Render in the posts list
   
   %ul.button-group
     - if f.object.new_record?
-      %li.help Post as
-      %li= f.submit 'Article', :class => 'button'
-      %li= f.submit 'Question', :class => 'button'
-      %li= f.submit 'Gossip', :class => 'button'
+      %li= f.submit 'Post', :class => 'button'
     - else
       %li= f.submit 'Save', :class => 'button'
 

@@ -3,7 +3,7 @@ Gistflow::Application.routes.draw do
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
 
-  namespace :posts do
+  namespace :post, :path => "posts" do
     resources :articles, :questions, :gossips do
       member do
         post :like
@@ -23,5 +23,5 @@ Gistflow::Application.routes.draw do
   resources :notifications, :only => :index
   resources :gists, :only => [:show, :index]
   
-  root to: 'posts/articles#index'
+  root to: 'post/articles#index'
 end

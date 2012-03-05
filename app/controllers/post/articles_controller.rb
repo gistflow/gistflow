@@ -1,4 +1,4 @@
-class Posts::ArticlesController < Posts::BaseController
+class Post::ArticlesController < Post::BaseController
   
   
   private

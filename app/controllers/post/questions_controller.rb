@@ -1,4 +1,4 @@
-class Posts::QuestionsController < Posts::BaseController
+class Post::QuestionsController < Post::BaseController
   
   
   private
