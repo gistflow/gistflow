@@ -10,7 +10,6 @@ Gistflow::Application.routes.draw do
       delete :forgot
     end
     collection do
-      post :search
       get :articles
       get :questions
       get :community
@@ -18,6 +17,7 @@ Gistflow::Application.routes.draw do
     resources :comments, :only => :create
   end
   
+  resource :search, :only => :create
   resources :tags, :only => :show
   resources :users, :only => :show do
     resources :tags, :only => :index

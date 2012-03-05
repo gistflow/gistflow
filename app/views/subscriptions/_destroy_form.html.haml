@@ -1,2 +1,2 @@
-= simple_form_for(subscription, :url => subscription_path(subscription), :method => :delete) do |f|
-  = f.button :submit, 'Unsubscribe', :class => 'btn big'
+= form_for [current_user, subscription], :method => :delete do |f|
+  = f.submit 'Unsubscribe', :class => 'button big'

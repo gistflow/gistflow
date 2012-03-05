@@ -23,18 +23,6 @@ class Post < ActiveRecord::Base
         raise "unknown type \"#{type}\""
       end
     end
-    
-    def search(query)
-      query.strip!
-      case query[0]
-      when '#' then
-        tagged_with query[1..-1]
-      when '@' then
-        joins(:user).where(:users => { :username => query[1..-1] }).uniq
-      else
-        where "content like :q", :q => "%#{query}%"
-      end
-    end
   end
   
   def title=(text)
