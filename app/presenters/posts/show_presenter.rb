@@ -18,8 +18,7 @@ class Posts::ShowPresenter
     @preview ||= begin
       content = (parsed_preview || parsed_title)
       raw = Replaceable.new(content)
-      raw.replace_tags!
-      raw.replace_usernames!
+      raw.replace_tags!.replace_usernames!
       raw.content.html_safe
     end
   end
@@ -28,9 +27,10 @@ class Posts::ShowPresenter
     @body ||= (Markdown.markdown begin
       content = (parsed_body || parsed_preview || parsed_title)
       raw = Replaceable.new(content)
-      raw.replace_tags!
-      raw.replace_gists!
-      raw.replace_usernames!
+      # IMPORTANT
+      # replace_gists use CGI::escapeHTML, so it should be called first
+      # letting tags and usernames been replaced with links properly
+      raw.replace_gists!.replace_tags!.replace_usernames!
       raw.content.html_safe
     end)
   end

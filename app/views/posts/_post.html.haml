@@ -11,9 +11,9 @@
       - if user_signed_in?
         = link_to_memorize presenter.post
         = link_to_like presenter.post
-      = link_to "Comments (#{presenter.comments_count})", post_path(presenter.post), :class => 'button icon comment'
+      = link_to "Comments (#{presenter.comments_count})", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button icon comment'
     .button-group.minor-group
       - if current_user == post.user
-        = link_to "Edit", { :action => :edit, :id => post.id }, :class => 'button icon edit'
-      = link_to "Show", { :action => :show, :id => post.id }, :class => 'button primary'
+        = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
+      = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
   .clear

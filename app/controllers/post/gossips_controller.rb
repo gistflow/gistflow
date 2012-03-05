@@ -1,7 +1,7 @@
 class Post::GossipsController < Post::BaseController
   
   def index
-    @gossip = current_user.gossips.build
+    @gossip = current_user.gossips.build if current_user
     super
   end
   

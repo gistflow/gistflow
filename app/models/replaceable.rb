@@ -13,6 +13,7 @@ class Replaceable
     content.gsub!(/\{gist:(\d+)\}/) do
       content_tag(:div, "", :class => "gistable", :"data-gist-at" => $1)
     end
+    self
   end
   
   def replace_usernames!
@@ -23,7 +24,8 @@ class Replaceable
       else
         word
       end
-    end.join(' ')
+    end.join(' ').html_safe
+    self
   end
   
   def replace_tags!

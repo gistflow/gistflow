@@ -6,10 +6,10 @@ class CommentsController < ApplicationController
     comment = post.comments.build(params[:comment])
     comment.user = current_user
     if comment.save
-      redirect_to post_path(post)
+      redirect_to :action => :show, :id => post.id
     else
       @presenter = Posts::ShowPresenter.new(post)
-      render :'posts/show'
+      render 'posts/show'
     end
   end
 end

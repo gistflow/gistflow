@@ -21,11 +21,18 @@ module ApplicationHelper
   
   def link_to_memorize(post)
     if current_user.memorized? post
-      link_to 'Forgot', { :action => :forgot, :id => post.id }, 
+      link_to 'Forgot', { 
+          :controller => post.controller, 
+          :action => :forgot, 
+          :id => post.id 
+        }, 
         :method => :delete, :remote => true, :class => 'button replaceable'
     else
-      link_to 'Memorize', { :action => :memorize, :id => post.id },
-        :method => :post, :remote => true, :class => 'button replaceable'
+      link_to 'Memorize', { 
+          :controller => post.controller, 
+          :action => :memorize, 
+          :id => post.id 
+        }, :method => :post, :remote => true, :class => 'button replaceable'
     end
   end
   

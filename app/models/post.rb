@@ -44,6 +44,9 @@ class Post < ActiveRecord::Base
     "#{content[0..30].strip}.."
   end
   
+  def controller
+    self.class.name.underscore.pluralize
+  end
 protected
   
   def build_content

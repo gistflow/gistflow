@@ -77,7 +77,6 @@ class Post::BaseController < ApplicationController
     redirect_to root_path(:q => params[:q].strip)
   end
   
-  
 protected  
   
   def post
