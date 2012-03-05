@@ -1,4 +1,5 @@
-.caption= @presenter.post.new_record? ? "New post" : "Edit post"
+.caption
+  = @presenter.post.new_record? ? "New" : "Edit"
 = form_for @presenter.post do |f|
   .form-item
     = f.label :title
@@ -20,7 +21,7 @@
       %li.help Post as
       %li= f.submit 'Article', :class => 'button'
       %li= f.submit 'Question', :class => 'button'
-      %li= f.submit 'Community', :class => 'button'
+      %li= f.submit 'Gossip', :class => 'button'
     - else
       %li= f.submit 'Save', :class => 'button'
 

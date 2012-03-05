@@ -76,4 +76,8 @@ module ApplicationHelper
     partial = subscription.new_record? ? 'form' : 'destroy_form'
     render :partial => "subscriptions/#{partial}", :locals => locals
   end
+  
+  def current_type
+    params[:controller].split('/').last.singularize
+  end
 end

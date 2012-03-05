@@ -1,14 +1,12 @@
 - if user_signed_in?
-  .caption New message
-  = form_for current_user.posts.build, :html => { :id => 'instant_form' } do |f|
-    = hidden_field_tag :source, params[:type] || 'root'
-    .form-item.no-margin
-      = f.text_area :content, :size => '40x2', :id => 'post_body'
-    %ul.left
-      %li= link_to 'Advanced form', new_post_path
-    %ul.button-group
-      %li.help Post as
-      %li= f.submit 'Article', :class => 'button', 'data-post-type' => 'Post::Article'
-      %li= f.submit 'Question', :class => 'button', 'data-post-type' => 'Post::Question'
-      %li= f.submit 'Community', :class => 'button', 'data-post-type' => 'Post::Community'
-    .clear
+  - if current_type == 'gossip'
+    .caption New message
+    = form_for new_post, :html => { :id => 'instant_form' } do |f|
+      .form-item.no-margin
+        = f.text_area :content, :size => '40x2', :id => 'post_body'
+      %ul.button-group
+        %li= f.submit 'Post', :class => 'button'
+      .clear
+  - else
+    %button.button
+      = link_to "New #{current_type}", send("new_posts_#{current_type}_path")

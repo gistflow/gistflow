@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
   
   class << self
     def constantize(type)
-      if ['Post::Community', 'Post::Article', 'Post::Question'].include?(type)
+      if ['Post::Gossip', 'Post::Article', 'Post::Question'].include?(type)
         type.constantize
       else
         raise "unknown type \"#{type}\""

@@ -70,8 +70,8 @@ protected
       articles_posts_path
     when 'Post::Question' then
       questions_posts_path
-    when 'Post::Community' then
-      community_posts_path
+    when 'Post::Gossip' then
+      gossip_posts_path
     end
   end
 

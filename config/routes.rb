@@ -2,19 +2,16 @@ Gistflow::Application.routes.draw do
   match '/auth/:provider/callback' => 'users#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
-  
-  resources :posts do
-    member do
-      post :like
-      post :memorize
-      delete :forgot
+
+  namespace :posts do
+    resources :articles, :questions, :gossips do
+      member do
+        post :like
+        post :memorize
+        delete :forgot
+      end
+      resources :comments, :only => :create
     end
-    collection do
-      get :articles
-      get :questions
-      get :community
-    end
-    resources :comments, :only => :create
   end
   
   resource :search, :only => :create
@@ -26,5 +23,5 @@ Gistflow::Application.routes.draw do
   resources :notifications, :only => :index
   resources :gists, :only => [:show, :index]
   
-  root to: 'posts#index'
+  root to: 'posts/articles#index'
 end

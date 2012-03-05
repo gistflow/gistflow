@@ -1,25 +1,13 @@
-class PostsController < ApplicationController
+class Posts::BaseController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
 
   # include Controllers::Tipable
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
-  end
-  
-  def articles
-    @posts = Post::Article.includes(:user).page(params[:page])
-    render :index
-  end
-  
-  def questions
-    @posts = Post::Question.includes(:user).page(params[:page])
-    render :index
-  end
-  
-  def community
-    @posts = Post::Community.includes(:user).page(params[:page])
-    render :index
+    @posts = Post.where(:type => params[:type])
+      .includes(:user).page(params[:page])
+    @gossip = current_user.gossips.build
+    render 'posts/index'
   end
 
   def show
@@ -27,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    post = current_user.posts.build
+    post = model.new
     @presenter = Posts::FormPresenter.new(post)
   end
 
@@ -36,14 +24,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    type = params[:post].delete(:type)
-    post = Post.constantize(type).new(params[:post])
+    post = model.new(post_params)
     post.user = current_user
     if post.save
-      redirect_to post_path(post)
+      redirect_to post
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :new
+      render 'posts/new'
     end
   end
 
@@ -90,7 +77,7 @@ class PostsController < ApplicationController
   end
   
   
-protected
+protected  
   
   def post
     Post.find(params[:id])
@@ -103,5 +90,9 @@ protected
         render :json => { :new_link => new_link }
       end
     end
+  end
+  
+  def post_params
+    params["pots_#{model.name.underscore.gsub('/','_')}"]
   end
 end
