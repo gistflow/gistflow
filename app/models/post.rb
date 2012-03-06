@@ -53,6 +53,6 @@ protected
   end
   
   def content_parts
-    @content_parts ||= content.split('<cut>', 2)
+    @content_parts ||= content.to_s.split('<cut>', 2)
   end
 end
