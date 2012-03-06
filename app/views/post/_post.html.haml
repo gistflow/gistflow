@@ -1,6 +1,6 @@
 - presenter = Posts::ShowPresenter.new(post)
 .list-item
-  .title= presenter.title
+  .title= link_to presenter.title, post
   .avatar= avatar_image(post.user)
   .preview
     = presenter.preview

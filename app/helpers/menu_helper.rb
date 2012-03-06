@@ -33,6 +33,7 @@ module MenuHelper
   end
   
   def posts_menu
+    return unless user_signed_in?
     capture_haml do
       haml_tag :ul, :class => 'posts-menu' do
         post_menu_items.each_with_index do |item, index|

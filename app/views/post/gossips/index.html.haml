@@ -1,2 +1,2 @@
-= render :partial => 'post/instant_form', :locals => { :new_post => @gossip }
+= render :partial => 'post/instant_form', :locals => { :new_post => @gossip } if user_signed_in?
 = render :partial => 'post/index', :locals => { :posts => @posts }

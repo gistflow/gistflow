@@ -1,6 +1,6 @@
 class Post::BaseController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
-
+  before_filter :authenticate!, :except => [:show, :index]
   # include Controllers::Tipable
   
   def index
@@ -71,10 +71,6 @@ class Post::BaseController < ApplicationController
     @post = post
     current_user.forgot @post
     render_memorize_link
-  end
-  
-  def search
-    redirect_to root_path(:q => params[:q].strip)
   end
   
 protected  

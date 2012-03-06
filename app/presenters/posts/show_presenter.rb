@@ -6,6 +6,8 @@ class Posts::ShowPresenter
   include ActionView::Helpers::DateHelper
   include Rails.application.routes.url_helpers
   
+  delegate :user, :likes_count, :comments_count, :to => :post
+  
   def initialize(post)
     @post = post
   end
@@ -35,26 +37,14 @@ class Posts::ShowPresenter
   
   def title
     u = link_to user.username, user_path(:id => user.username), :class => 'username'
-    t = link_to type, type_path
+    t = link_to type.pluralize, type_path
     w = time_ago_in_words(post.created_at)
     
     @post.title || "#{u} wrote in #{t} #{w} ago".html_safe
   end
   
-  def user
-    post.user
-  end
-  
   def type
     post.type.split('::').last.downcase
-  end
-  
-  def likes_count
-    post.likes_count
-  end
-  
-  def comments_count
-    post.comments_count
   end
   
   def comments
