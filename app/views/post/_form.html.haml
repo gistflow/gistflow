@@ -1,5 +1,6 @@
 .caption
   = @presenter.post.new_record? ? "New" : "Edit"
+  = @presenter.post.short_class_name
 = form_for @presenter.post do |f|
   .form-item
     = f.label :title
