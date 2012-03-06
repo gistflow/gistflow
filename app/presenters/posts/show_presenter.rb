@@ -18,13 +18,13 @@ class Posts::ShowPresenter
     @preview ||= begin
       raw = Replaceable.new(post.preview)
       raw.replace_tags!.replace_usernames!
-      raw.content.html_safe
+      raw.body.html_safe
     end
   end
   
   def body
     @body ||= (Markdown.markdown begin
-      raw = Replaceable.new(post.content)
+      raw = Replaceable.new(post.body)
       # IMPORTANT
       # replace_gists use CGI::escapeHTML, so it should be called first
       # letting tags and usernames been replaced with links properly
