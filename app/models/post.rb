@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   has_many :notifications, :as => :notifiable
   has_many :comments
   
-  default_scope :order => 'created_at desc'
+  default_scope :order => 'id desc'
   
   validates :content, :user, :presence => true
   

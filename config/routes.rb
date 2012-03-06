@@ -23,5 +23,5 @@ Gistflow::Application.routes.draw do
   resources :notifications, :only => :index
   resources :gists, :only => [:show, :index]
   
-  root to: 'post/articles#index'
+  root to: 'post/home#index'
 end
