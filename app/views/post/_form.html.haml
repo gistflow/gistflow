@@ -10,6 +10,7 @@
   .form-item
     = f.label :content
     = f.text_area :content, :size => '40x12'
+    .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It shows on the post list
   
   %ul.button-group
     - if f.object.new_record?
