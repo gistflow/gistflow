@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
   end
   
   def body
-    content.to_s.gsub('<cut>', '')
+    content.to_s.gsub('<cut>', "\r\n")
   end
   
 protected
