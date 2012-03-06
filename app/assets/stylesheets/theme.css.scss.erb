@@ -106,11 +106,27 @@ header {
 	}
 }
 
+ul.posts-menu {
+  padding-bottom: 10px;
+  li {
+    display: inline-block;
+    a {
+      text-transform: lowercase;
+    }
+    span {
+      color: $layout;
+    }
+  }
+}
+
 .caption {
 	color: #bbb;
 	font-weight: bold;
 	text-transform: uppercase;
 	line-height: 36px;
+	&.highlight {
+	  color: $link;
+	}
 }
 
 footer {

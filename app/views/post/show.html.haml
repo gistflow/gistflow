@@ -10,7 +10,7 @@
 =caption 'Comments'
 
 - if user_signed_in?
-  = form_for @presenter.post.comments.build, :url => post_comments_path(@presenter.post) do |f|
+  = form_for [@presenter.post, Comment.new] do |f|
     .form-item.no-margin
       = f.text_area :content, :size => '40x2', :id => 'post_body'
     %ul.left
@@ -20,4 +20,4 @@
       %li= f.submit 'Comment', :class => 'button'
     .clear
 
-= render @presenter.comments
+= render :partial => 'comments/comment', :collection => @presenter.comments

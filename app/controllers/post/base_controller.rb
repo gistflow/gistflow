@@ -1,59 +1,47 @@
-class PostsController < ApplicationController
+class Post::BaseController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
-
+  before_filter :authenticate!, :except => [:show, :index]
   # include Controllers::Tipable
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
-  end
-  
-  def articles
-    @posts = Post::Article.includes(:user).page(params[:page])
-    render :index
-  end
-  
-  def questions
-    @posts = Post::Question.includes(:user).page(params[:page])
-    render :index
-  end
-  
-  def community
-    @posts = Post::Community.includes(:user).page(params[:page])
-    render :index
+    @posts = model.includes(:user).page(params[:page])
   end
 
   def show
     @presenter = Posts::ShowPresenter.new(post)
+    render 'post/show'
   end
 
   def new
-    post = current_user.posts.build
+    post = model.new
     @presenter = Posts::FormPresenter.new(post)
+    render 'post/new'
   end
 
   def edit
     @presenter = Posts::FormPresenter.new(post)
+    render 'post/edit'
   end
 
-  def create
-    type = params[:post].delete(:type)
-    post = Post.constantize(type).new(params[:post])
+  def create    
+    post = model.new(post_params)
     post.user = current_user
+    
     if post.save
-      redirect_to post_path(post)
+      redirect_to :action => :index
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :new
+      render 'post/new'
     end
   end
 
   def update
     post = current_user.posts.find(params[:id])
     if post.update_attributes(params[:post])
-      redirect_to post_path(post)
+      redirect_to :action => :show, :id => post.id
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :edit
+      render 'post/edit'
     end
   end
 
@@ -85,15 +73,10 @@ class PostsController < ApplicationController
     render_memorize_link
   end
   
-  def search
-    redirect_to root_path(:q => params[:q].strip)
-  end
-  
-  
-protected
+protected  
   
   def post
-    Post.find(params[:id])
+    model.find(params[:id])
   end
 
   def render_memorize_link
@@ -103,5 +86,9 @@ protected
         render :json => { :new_link => new_link }
       end
     end
+  end
+  
+  def post_params
+    params["#{model.name.underscore.gsub('/','_')}"]
   end
 end

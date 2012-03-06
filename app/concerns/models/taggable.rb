@@ -15,7 +15,7 @@ module Models
     end
     
     def assign_tags
-      raw = Replaceable.new(content)
+      raw = Replaceable.new(self.body)
       self.tags = raw.tag_names.map do |name|    
         Tag.find_or_create_by_name(name)
       end

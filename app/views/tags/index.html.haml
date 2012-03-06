@@ -1,0 +1,12 @@
+= caption 'Top tags'
+.subscriptions
+  - @subscriptions.each do |subscription|
+    .subscription
+      - if subscription.new_record?
+        = form_for [current_user, subscription] do |f|
+          = f.hidden_field :tag_id
+          = f.submit subscription.tag.name, :class => 'button'
+      - else
+        = form_for [current_user, subscription], :method => :delete do |f|
+          = f.submit subscription.tag.name, :class => 'button active'
+  .clear

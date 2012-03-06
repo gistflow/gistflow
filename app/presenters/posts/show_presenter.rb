@@ -6,6 +6,8 @@ class Posts::ShowPresenter
   include ActionView::Helpers::DateHelper
   include Rails.application.routes.url_helpers
   
+  delegate :user, :likes_count, :comments_count, :to => :post
+  
   def initialize(post)
     @post = post
   end
@@ -16,46 +18,33 @@ class Posts::ShowPresenter
   
   def preview
     @preview ||= begin
-      content = (parsed_preview || parsed_title)
-      raw = Replaceable.new(content)
-      raw.replace_tags!
-      raw.replace_usernames!
-      raw.content.html_safe
+      raw = Replaceable.new(post.preview)
+      raw.replace_tags!.replace_usernames!
+      raw.body.html_safe
     end
   end
   
   def body
     @body ||= (Markdown.markdown begin
-      content = (parsed_body || parsed_preview || parsed_title)
-      raw = Replaceable.new(content)
-      raw.replace_tags!
-      raw.replace_gists!
-      raw.replace_usernames!
-      raw.content.html_safe
+      raw = Replaceable.new(post.body)
+      # IMPORTANT
+      # replace_gists use CGI::escapeHTML, so it should be called first
+      # letting tags and usernames been replaced with links properly
+      raw.replace_gists!.replace_tags!.replace_usernames!
+      raw.body.html_safe
     end)
   end
   
   def title
     u = link_to user.username, user_path(:id => user.username), :class => 'username'
-    t = link_to type, type_path
+    t = link_to type.pluralize, type_path
     w = time_ago_in_words(post.created_at)
-    "#{u} wrote in #{t} #{w} ago".html_safe
-  end
-  
-  def user
-    post.user
+    
+    @post.title || "#{u} wrote in #{t} #{w} ago".html_safe
   end
   
   def type
     post.type.split('::').last.downcase
-  end
-  
-  def likes_count
-    post.likes_count
-  end
-  
-  def comments_count
-    post.comments_count
   end
   
   def comments
@@ -67,31 +56,11 @@ protected
   def type_path
     case post.class.to_s
     when 'Post::Article' then
-      articles_posts_path
+      post_articles_path
     when 'Post::Question' then
-      questions_posts_path
-    when 'Post::Community' then
-      community_posts_path
+      post_questions_path
+    when 'Post::Gossip' then
+      post_gossips_path
     end
-  end
-
-  def content
-    post.content
-  end
-  
-  def parsed_title
-    @parsed_title ||= content_parts[0]
-  end
-  
-  def parsed_preview
-    @parsed_preview ||= content_parts[1]
-  end
-  
-  def parsed_body
-    @parsed_body ||= content_parts[2]
-  end
-  
-  def content_parts
-    @content_parts ||= content.to_s.gsub("\r", '').split("\n\n", 3)
   end
 end

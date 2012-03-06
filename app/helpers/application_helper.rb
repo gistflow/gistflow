@@ -1,7 +1,9 @@
 module ApplicationHelper
-  def caption(caption)
+  def caption(caption, options = {})
+    classes = [:caption]
+    classes << options[:class] if options[:class]
     capture_haml do
-      haml_tag(:div, { :class => :caption }) do
+      haml_tag(:div, { :class => classes.join(' ') }) do
         haml_concat caption
       end
     end
@@ -21,11 +23,18 @@ module ApplicationHelper
   
   def link_to_memorize(post)
     if current_user.memorized? post
-      link_to 'Forgot', forgot_post_path(post), 
+      link_to 'Forgot', { 
+          :controller => post.controller, 
+          :action => :forgot, 
+          :id => post.id 
+        }, 
         :method => :delete, :remote => true, :class => 'button replaceable'
     else
-      link_to 'Memorize', memorize_post_path(post),
-        :method => :post, :remote => true, :class => 'button replaceable'
+      link_to 'Memorize', { 
+          :controller => post.controller, 
+          :action => :memorize, 
+          :id => post.id 
+        }, :method => :post, :remote => true, :class => 'button replaceable'
     end
   end
   
@@ -34,7 +43,7 @@ module ApplicationHelper
       link_to "#{post.likes_count} Likes", '#',
         :class => 'button icon like disabled'
     else
-      link_to "Like", like_post_path(post),
+      link_to "Like", { :action => :like, :id => post.id },
         :class => 'button icon like replaceable', :method => :post, :remote => true
     end
   end
@@ -75,5 +84,9 @@ module ApplicationHelper
     locals = { :subscription => subscription }
     partial = subscription.new_record? ? 'form' : 'destroy_form'
     render :partial => "subscriptions/#{partial}", :locals => locals
+  end
+  
+  def current_type
+    params[:controller].split('/').last.singularize
   end
 end

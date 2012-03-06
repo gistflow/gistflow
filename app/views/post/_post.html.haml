@@ -1,0 +1,18 @@
+- presenter = Posts::ShowPresenter.new(post)
+.list-item
+  .title= link_to presenter.title, post
+  .avatar= avatar_image(post.user)
+  .preview
+    = presenter.preview
+  .clear
+  .notice
+    .button-group.minor-group
+      - if user_signed_in?
+        = link_to_memorize presenter.post
+        = link_to_like presenter.post
+      = link_to "Comments (#{presenter.comments_count})", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button icon comment'
+    .button-group.minor-group
+      - if current_user == post.user
+        = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
+      = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
+  .clear

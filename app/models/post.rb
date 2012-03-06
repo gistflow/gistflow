@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  attr_accessor :title, :preview, :body
   include Models::Likable
   include Models::Notifiable
   include Models::Taggable
@@ -9,56 +8,51 @@ class Post < ActiveRecord::Base
   has_many :notifications, :as => :notifiable
   has_many :comments
   
-  default_scope :order => 'created_at desc'
+  default_scope :order => 'id desc'
   
-  validates :content, :user, :presence => true
+  validates :user, :presence => true
+  validates :cuts_count, :inclusion => { :in => [0, 1] }
+  validates :preview, :length => 3..160
   
-  attr_accessible :content, :title, :preview, :body
+  attr_accessible :title, :content
   
   class << self
     def constantize(type)
-      if ['Post::Community', 'Post::Article', 'Post::Question'].include?(type)
+      if ['Post::Gossip', 'Post::Article', 'Post::Question'].include?(type)
         type.constantize
       else
         raise "unknown type \"#{type}\""
       end
     end
-    
-    def search(query)
-      query.strip!
-      case query[0]
-      when '#' then
-        tagged_with query[1..-1]
-      when '@' then
-        joins(:user).where(:users => { :username => query[1..-1] }).uniq
-      else
-        where "content like :q", :q => "%#{query}%"
-      end
-    end
   end
   
-  def title=(text)
-    @title = text.strip
-    build_content
-  end
-  
-  def preview=(text)
-    @preview = text.strip
-    build_content
-  end
-  
-  def body=(text)
-    @body = text.strip
-    build_content
+  def short_class_name
+    self.class.name.underscore.split('/').last
   end
   
   def link_name
-    "#{content[0..30].strip}.."
+    "#{body[0..30].strip}.."
+  end
+  
+  def controller
+    self.class.name.underscore.pluralize
+  end
+  
+  def preview
+    content_parts.first.to_s.strip
+  end
+  
+  def body
+    content.to_s.gsub('<cut>', "\r\n")
   end
   
 protected
   
-  def build_content
-    write_attribute :content, [title, preview, body].join("\n\n")
+  def cuts_count
+    content.split('<cut>').size - 1
+  end
+  
+  def content_parts
+    @content_parts ||= content.to_s.split('<cut>', 2)
   end
 end

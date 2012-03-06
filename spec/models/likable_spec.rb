@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Like do
+describe Models::Likable do
   context 'user should be able to like post or comment' do
     before(:each) do
       @user = Factory(:user)
@@ -25,13 +25,13 @@ describe Like do
     it "should be created twice by the same user" do
       post = Factory(:post)
       @user.like(post)
-      @user.like(post).should == false
+      post.liked_by?(@user).should == true
     end
     
     it "should be created twice by the same user" do
       comment = Factory(:comment)
       @user.like(comment)
-      @user.like(comment).should == false
+      comment.liked_by?(@user).should == true
     end 
   end
 end
