@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       @posts = @user.posts.page(params[:page])
       self.sidebar_presenter = SidebarPresenter.new(@user)
     else
+      render 'search/nothing'
     end
   end
   

@@ -1,21 +1,17 @@
 class Search
   attr_reader :page_path
   
+  delegate :url_helpers, :to => :'Rails.application.routes'
+  
   def initialize(query)
     query.strip!
     @page_path = case query[0]
     when '#' then
-      url_helper.tag_path(:id => query[1..-1])
+      url_helpers.tag_path(:id => query[1..-1])
     when '@' then
-      url_helper.user_path(query[1..-1])
+      url_helpers.user_path(query[1..-1])
     else
-      url_helper.root_path(:text => query)
+      url_helpers.root_path(:text => query)
     end
-  end
-  
-protected
-  
-  def url_helper
-    Rails.application.routes.url_helpers
   end
 end

@@ -31,7 +31,7 @@ class Post < ActiveRecord::Base
   end
   
   def link_name
-    "#{content[0..30].strip}.."
+    "#{body[0..30].strip}.."
   end
   
   def controller
