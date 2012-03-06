@@ -27,9 +27,6 @@ class Posts::ShowPresenter
   def body
     @body ||= (Markdown.markdown begin
       raw = Replaceable.new(post.body)
-      # IMPORTANT
-      # replace_gists use CGI::escapeHTML, so it should be called first
-      # letting tags and usernames been replaced with links properly
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.body.html_safe
     end)

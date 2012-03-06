@@ -7,7 +7,7 @@ $(function(){
   }
 
   $("div.gistable").each(function(){
-    var id = $(this).data('gistAt'),
+    var id = $(this).data('gist-id'),
       link = ("/gists/" + id + ".json"),
       element = $(this)
     $.getJSON(link, function(data){
@@ -18,7 +18,7 @@ $(function(){
   
   var box = $("#post_body")
   $("a.importable-gist").live('click', function(){
-    box.val(box.val() + "{gist:" + $(this).data('gistId') + "}" + " #" + $(this).data('gistLang') + " ") 
+    box.val(box.val() + "{gist:" + $(this).data('gist-id') + "}" + " #" + $(this).data('gist-lang') + " ") 
     return false
   })
 })

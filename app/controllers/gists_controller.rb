@@ -1,5 +1,5 @@
 class GistsController < ApplicationController
-  before_filter :authenticate!
+  before_filter :authenticate!, :only => :index
   respond_to :json
   
   def index
