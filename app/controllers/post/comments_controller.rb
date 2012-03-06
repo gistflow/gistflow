@@ -9,7 +9,7 @@ class Post::CommentsController < ApplicationController
       redirect_to :controller => post.controller, :action => :show, :id => post.id
     else
       @presenter = Posts::ShowPresenter.new(post)
-      render 'posts/show'
+      render 'post/show'
     end
   end
 end

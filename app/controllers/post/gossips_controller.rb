@@ -1,8 +1,8 @@
 class Post::GossipsController < Post::BaseController
   
   def index
-    @gossip = current_user.gossips.build if current_user
     super
+    @gossip = current_user.gossips.build if user_signed_in?
   end
   
   private

@@ -5,23 +5,22 @@ class Post::BaseController < ApplicationController
   
   def index
     @posts = model.includes(:user).page(params[:page])
-    render 'posts/index'
   end
 
   def show
     @presenter = Posts::ShowPresenter.new(post)
-    render 'posts/show'
+    render 'post/show'
   end
 
   def new
     post = model.new
     @presenter = Posts::FormPresenter.new(post)
-    render 'posts/new'
+    render 'post/new'
   end
 
   def edit
     @presenter = Posts::FormPresenter.new(post)
-    render 'posts/edit'
+    render 'post/edit'
   end
 
   def create
@@ -31,7 +30,7 @@ class Post::BaseController < ApplicationController
       redirect_to :action => :index
     else
       @presenter = Posts::FormPresenter.new(post)
-      render 'posts/new'
+      render 'post/new'
     end
   end
 
@@ -41,7 +40,7 @@ class Post::BaseController < ApplicationController
       redirect_to :action => :show, :id => post.id
     else
       @presenter = Posts::FormPresenter.new(post)
-      render 'posts/edit'
+      render 'post/edit'
     end
   end
 
