@@ -23,9 +23,10 @@ class Post::BaseController < ApplicationController
     render 'post/edit'
   end
 
-  def create
+  def create    
     post = model.new(post_params)
     post.user = current_user
+    
     if post.save
       redirect_to :action => :index
     else

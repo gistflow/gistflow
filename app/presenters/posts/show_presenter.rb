@@ -16,7 +16,7 @@ class Posts::ShowPresenter
   
   def preview
     @preview ||= begin
-      content = (parsed_preview || parsed_title)
+      content = parsed_preview
       raw = Replaceable.new(content)
       raw.replace_tags!.replace_usernames!
       raw.content.html_safe
@@ -25,13 +25,12 @@ class Posts::ShowPresenter
   
   def body
     @body ||= (Markdown.markdown begin
-      content = (parsed_body || parsed_preview || parsed_title)
-      raw = Replaceable.new(content)
+      raw = Replaceable.new(@post.body)
       # IMPORTANT
       # replace_gists use CGI::escapeHTML, so it should be called first
       # letting tags and usernames been replaced with links properly
       raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.content.html_safe
+      raw.body.html_safe
     end)
   end
   
@@ -39,7 +38,8 @@ class Posts::ShowPresenter
     u = link_to user.username, user_path(:id => user.username), :class => 'username'
     t = link_to type, type_path
     w = time_ago_in_words(post.created_at)
-    "#{u} wrote in #{t} #{w} ago".html_safe
+    
+    @post.title || "#{u} wrote in #{t} #{w} ago".html_safe
   end
   
   def user
@@ -73,25 +73,5 @@ protected
     when 'Post::Gossip' then
       post_gossips_path
     end
-  end
-
-  def content
-    post.content
-  end
-  
-  def parsed_title
-    @parsed_title ||= content_parts[0]
-  end
-  
-  def parsed_preview
-    @parsed_preview ||= content_parts[1]
-  end
-  
-  def parsed_body
-    @parsed_body ||= content_parts[2]
-  end
-  
-  def content_parts
-    @content_parts ||= content.to_s.gsub("\r", '').split("\n\n", 3)
   end
 end

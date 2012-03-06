@@ -2,23 +2,23 @@ class Replaceable
   TAG = /^\W*\#([\w]+)/
   
   include ActionView::Helpers::UrlHelper
-  attr_accessor :content
+  attr_accessor :body
   
-  def initialize(content)
-    self.content = content
+  def initialize(body)
+    self.body = body
   end
   
   def replace_gists!
-    self.content = CGI::escapeHTML(self.content)
-    content.gsub!(/\{gist:(\d+)\}/) do
-      content_tag(:div, "", :class => "gistable", :"data-gist-at" => $1)
+    self.body = CGI::escapeHTML(self.body)
+    self.body.gsub!(/\{gist:(\d+)\}/) do
+      body_tag(:div, "", :class => "gistable", :"data-gist-at" => $1)
     end
     self
   end
   
   def replace_usernames!
-    usernames = Parser::Mention.new(self.content).usernames
-    self.content = content.split(/ /).map do |word|
+    usernames = Parser::Mention.new(self.body).usernames
+    self.body = self.body.split(/ /).map do |word|
       if username = word.scan(/^\W*@([\w-]+)/).flatten.first and usernames.include?(username)
         link_to("@#{username}", "/users/#{username}").html_safe
       else
@@ -29,7 +29,7 @@ class Replaceable
   end
   
   def replace_tags!
-    self.content = self.content.split(/ /).map do |word|
+    self.body = self.body.split(/ /).map do |word|
       if tag = word.scan(TAG).flatten.first and Tag.where(:name => tag).exists?
         link_to("##{tag}", "/tags/#{tag}").html_safe
       else
@@ -41,7 +41,7 @@ class Replaceable
   
   def tag_names
     tag_names = []
-    self.content.split(/ /).each do |word|
+    self.body.split(/ /).each do |word|
       if tag = word.scan(TAG).flatten.first
         tag_names << tag 
       end

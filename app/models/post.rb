@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  attr_accessor :title, :preview, :body
   include Models::Likable
   include Models::Notifiable
   include Models::Taggable
@@ -11,9 +10,9 @@ class Post < ActiveRecord::Base
   
   default_scope :order => 'id desc'
   
-  validates :content, :user, :presence => true
+  validates :body, :user, :presence => true
   
-  attr_accessible :content, :title, :preview, :body
+  attr_accessible :title, :body
   
   class << self
     def constantize(type)
@@ -29,31 +28,11 @@ class Post < ActiveRecord::Base
     end
   end
   
-  def title=(text)
-    @title = text.strip
-    build_content
-  end
-  
-  def preview=(text)
-    @preview = text.strip
-    build_content
-  end
-  
-  def body=(text)
-    @body = text.strip
-    build_content
-  end
-  
   def link_name
     "#{content[0..30].strip}.."
   end
   
   def controller
     self.class.name.underscore.pluralize
-  end
-protected
-  
-  def build_content
-    write_attribute :content, [title, preview, body].join("\n\n")
   end
 end

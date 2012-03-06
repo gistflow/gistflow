@@ -7,7 +7,7 @@ module Models
     end
     
     def link_to_post
-      title = self.content[0..40]
+      title = self.title
       post = self.class.name == "Comment" ? self.post : self
 
       controller = post.class.name.split('::').last.pluralize.downcase
@@ -17,7 +17,7 @@ module Models
     end
 
     def create_notifications
-      user_ids = Parser::Mention.new(self.content).user_ids
+      user_ids = Parser::Mention.new(self.body).user_ids
       user_ids.delete(self.user.id)
 
       user_ids.each do |user_id|

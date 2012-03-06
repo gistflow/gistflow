@@ -60,7 +60,8 @@ ActiveRecord::Schema.define(:version => 20120210114457) do
   create_table "posts", :force => true do |t|
     t.integer  "comments_count", :default => 0
     t.integer  "likes_count",    :default => 0
-    t.text     "content"
+    t.string   "title"
+    t.text     "body"
     t.integer  "state_id"
     t.integer  "user_id"
     t.string   "type"
