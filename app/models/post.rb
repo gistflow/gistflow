@@ -10,7 +10,9 @@ class Post < ActiveRecord::Base
   
   default_scope :order => 'id desc'
   
-  validates :body, :user, :presence => true
+  validates :user, :presence => true
+  validates :cuts_count, :inclusion => { :in => [0, 1] }
+  validates :preview, :length => 3..160
   
   attr_accessible :title, :body
   
@@ -34,5 +36,23 @@ class Post < ActiveRecord::Base
   
   def controller
     self.class.name.underscore.pluralize
+  end
+  
+  def preview
+    content_parts[1].strip
+  end
+  
+  def body
+    content.gsub('<cut>', '')
+  end
+  
+protected
+  
+  def cuts_count
+    content.split('<cut>').size - 1
+  end
+  
+  def content_parts
+    @content_parts ||= content.split('<cut>', 2)
   end
 end
