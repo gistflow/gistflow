@@ -10,9 +10,11 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_by_username(params[:id])
-    @posts = @user.posts.page(params[:page])
-    self.sidebar_presenter = SidebarPresenter.new(@user)
+    if @user = User.find_by_username(params[:id])
+      @posts = @user.posts.page(params[:page])
+      self.sidebar_presenter = SidebarPresenter.new(@user)
+    else
+    end
   end
   
 protected

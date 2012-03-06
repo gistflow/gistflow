@@ -39,7 +39,7 @@ class Post < ActiveRecord::Base
   end
   
   def preview
-    content_parts.first.strip
+    content_parts.first.to_s.strip
   end
   
   def body
