@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :comments_count, :default => 0
       t.integer :likes_count, :default => 0
       t.string :title
-      t.text :body
+      t.text :content
       t.integer :state_id
       t.belongs_to :user
       t.string :type
