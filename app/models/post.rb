@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   validates :cuts_count, :inclusion => { :in => [0, 1] }
   validates :preview, :length => 3..160
   
-  attr_accessible :title, :body
+  attr_accessible :title, :content
   
   class << self
     def constantize(type)
@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
   end
   
   def body
-    content.gsub('<cut>', '')
+    content.to_s.gsub('<cut>', '')
   end
   
 protected

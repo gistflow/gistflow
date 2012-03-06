@@ -1,11 +1,10 @@
 - presenter = Posts::ShowPresenter.new(post)
 .list-item
-  - cache presenter.cache_key do
-    .title= presenter.title
-    .avatar= avatar_image(post.user)
-    .preview
-      = presenter.body
-    .clear
+  .title= presenter.title
+  .avatar= avatar_image(post.user)
+  .preview
+    = presenter.body
+  .clear
   .notice
     .button-group.minor-group
       - if user_signed_in?
