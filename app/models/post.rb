@@ -23,6 +23,10 @@ class Post < ActiveRecord::Base
         raise "unknown type \"#{type}\""
       end
     end
+    
+    def short_name
+      self.class.name.underscore.split('/').last
+    end
   end
   
   def title=(text)

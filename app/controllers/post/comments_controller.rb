@@ -1,12 +1,12 @@
-class CommentsController < ApplicationController
+class Post::CommentsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:create]
   
-  def create
-    post = Post.find(params[:post_id])
+  def create  
+    post = Post.find(params[params.keys.select{ |k| k =~ /_id$/ }.first])
     comment = post.comments.build(params[:comment])
     comment.user = current_user
     if comment.save
-      redirect_to :action => :show, :id => post.id
+      redirect_to :controller => post.controller, :action => :show, :id => post.id
     else
       @presenter = Posts::ShowPresenter.new(post)
       render 'posts/show'

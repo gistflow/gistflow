@@ -10,7 +10,7 @@ Gistflow::Application.routes.draw do
         post :memorize
         delete :forgot
       end
-      resources :comments, :only => :create
+      resources :comments, :only => :create, :controller => :comments
     end
   end
   
