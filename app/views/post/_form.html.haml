@@ -13,8 +13,6 @@
   
   %ul.button-group
     - if f.object.new_record?
-      %li= f.submit 'Post', :class => 'button'
-    - else
-      %li= f.submit 'Save', :class => 'button'
+      %li= f.submit 'Commit', :class => 'button'
 
   .clear
