@@ -17,18 +17,18 @@ class Posts::ShowPresenter
   end
   
   def preview
-    @preview ||= begin
+    @preview ||= (Markdown.markdown begin
       raw = Replaceable.new(post.preview)
       raw.replace_tags!.replace_usernames!
       raw.body.html_safe
-    end
+    end)
   end
   
   def body
     @body ||= (Markdown.markdown begin
       raw = Replaceable.new(post.body)
       raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.body.html_safe
+      raw.body
     end)
   end
   
