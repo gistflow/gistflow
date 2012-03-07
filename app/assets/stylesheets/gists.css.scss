@@ -14,7 +14,6 @@
     margin-bottom: 1em;
     background-color: #F7F7F9;
     border: 1px solid #E1E1E8;
-    color: #BEBEC5;
     line-height: 15px;
     text-shadow: 0 1px 0 white;
     
@@ -30,6 +29,7 @@
         margin: 0 !important;
         border: none !important;
         padding: .25em .5em .5em .5em !important;
+        font-size: 12px;
         
         .gist-highlight {
           background: transparent !important;
@@ -52,17 +52,13 @@
   
   .gist-meta {
     overflow: hidden;
-    font-size: 85%;
+    font-size: 11px;
     padding: .5em;
-    color: #666;
+    color: #333;
     background-color: #eaeaea;
     
     a {
-      color: #369;
-      
-      &:visited {
-        color: #737;
-      }
+      color: #0069D6;
     }
   }
 }
