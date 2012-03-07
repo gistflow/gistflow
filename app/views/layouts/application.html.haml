@@ -9,7 +9,8 @@
     .wrap
       %header=  render 'shared/header'
       = render_flash
-      #main= yield
+      #main
+        = yield
       #sidebar= render 'shared/sidebar'
       .clear
     %footer
