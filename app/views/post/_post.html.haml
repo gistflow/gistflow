@@ -2,8 +2,8 @@
 .list-item
   .title= link_to presenter.title, post
   .avatar= avatar_image(post.user)
-  .preview
-    = presenter.preview
+  .preview.markdown
+    ~ presenter.preview
   .clear
   .notice
     .button-group.minor-group

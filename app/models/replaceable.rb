@@ -5,7 +5,7 @@ class Replaceable
   attr_accessor :body
   
   def initialize(body)
-    self.body = CGI::escapeHTML(body).html_safe
+    self.body = body
   end
   
   def replace_gists!

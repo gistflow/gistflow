@@ -42,17 +42,20 @@
     margin-left: 2em;
   }
   
+  code {
+    border: 1px solid #E1E1E8;
+    font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
+    padding: 0px 5px 1px;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+    background-color: #F7F7F9;
+    border: 1px solid #E1E1E8;
+  }
   pre {
     white-space: pre;
     code {
       display: block;
-      border: 1px solid #E1E1E8;
-      font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
       padding: .25em .5em .5em .5em;
-      line-height: 1.2em;
-      margin-bottom: 1em;
-      background-color: #F7F7F9;
-      border: 1px solid #E1E1E8;
     }
   }
 }
