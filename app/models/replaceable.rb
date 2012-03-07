@@ -2,10 +2,16 @@ class Replaceable
   TAG = /^\W*\#([\w]+)/
   
   include ActionView::Helpers::UrlHelper
-  attr_accessor :body
+  include ERB::Util
+  
+  attr_writer :body
   
   def initialize(body)
-    self.body = body
+    self.body = h(body)
+  end
+  
+  def body
+    @body.to_s.gsub('&quot;', '"')
   end
   
   def replace_gists!
@@ -18,27 +24,25 @@ class Replaceable
   end
   
   def replace_usernames!
-    # need fixes
-    # usernames = Parser::Mention.new(body).usernames
-    # self.body = body.split(' ').map do |word|
-    #   if username = word.scan(/^\W*@([\w-]+)/).flatten.first and usernames.include?(username)
-    #     link_to("@#{username}", "/users/#{username}").html_safe
-    #   else
-    #     word
-    #   end
-    # end.join(' ')
+    usernames = Parser::Mention.new(body).usernames
+    self.body = body.gsub(/(^|\W)@(\w+)/) do |match|
+      if username = match[/@(\w+)/, 1] and usernames.include?(username)
+        link_to("@#{username}", "/users/#{username}").html_safe
+      else
+        match
+      end
+    end
     self
   end
   
   def replace_tags!
-    # need fixes
-    # self.body = body.split(' ').map do |word|
-    #   if tag = word.scan(TAG).flatten.first and Tag.where(:name => tag).exists?
-    #     link_to("##{tag}", "/tags/#{tag}")
-    #   else
-    #     word
-    #   end
-    # end.join(' ').html_safe
+    self.body = body.gsub(/#(\w+)/) do |match|
+      if tag = match[/#(\w+)/, 1] and Tag.where(:name => tag).exists?
+        link_to("##{tag}", "/tags/#{tag}")
+      else
+        word
+      end
+    end
     self
   end
   
