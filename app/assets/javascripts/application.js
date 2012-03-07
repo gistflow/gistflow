@@ -13,10 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require auto_resize
+//= require jquery.tabby
 //= require_tree .
+
+
 
 $(function(){
   $('textarea').autosize()
+  $('textarea').tabby({tabString: '  '})
   $('a[href=#]').click(function(){ return false })
     
   $('a.replaceable').live('ajax:success', function(e, data){

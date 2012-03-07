@@ -37,8 +37,8 @@ class Post::BaseController < ApplicationController
 
   def update
     post = current_user.posts.find(params[:id])
-    if post.update_attributes(params[:post])
-      redirect_to :action => :show, :id => post.id
+    if post.update_attributes(post_params)
+      redirect_to post
     else
       @presenter = Posts::FormPresenter.new(post)
       render 'post/edit'

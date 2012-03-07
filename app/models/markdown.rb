@@ -7,7 +7,7 @@ module Markdown
       :gh_blockcode,
       :no_intra_emphasis,
       :lax_html_blocks,
-      :autolink,
+      :autolink
     ]
     RedcarpetCompat.new(text, :fenced_code, :gh_blockcode).to_html.html_safe
   end
