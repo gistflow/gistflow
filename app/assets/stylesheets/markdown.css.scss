@@ -44,7 +44,7 @@
   
   code {
     border: 1px solid #E1E1E8;
-    font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
+    font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
     padding: 0px 5px 1px;
     line-height: 1.2em;
     margin-bottom: 1em;
@@ -55,7 +55,7 @@
     white-space: pre;
     code {
       display: block;
-      padding: .25em .5em .5em .5em;
+      padding: .25em .5em .3em .5em;
     }
   }
 }
