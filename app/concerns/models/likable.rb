@@ -13,7 +13,7 @@ module Models
     def like(record)
       $redis.sadd record.redis_key, id
     end
-
+    
     def redis_key
       "likes:#{id}:#{self.class.model_name}"
     end
