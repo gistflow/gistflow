@@ -15,7 +15,7 @@ module Models
     end
     
     def remembrance
-      Post.find($redis.smembers redis_key).sort_by(&:id)
+      Post.where(:id => ($redis.smembers redis_key)).sort_by(&:id)
     end
     
   protected
