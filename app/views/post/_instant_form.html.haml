@@ -3,6 +3,7 @@
   .form-item.no-margin
     = f.text_area :content, :size => '40x2', :id => 'post_body'
   .left= link_to 'Advanced form', :action => :new
-  %ul.button-group
-    %li= f.submit 'Commit', :class => 'button'
+  .actions
+    .button-group
+      = f.submit 'Commit', :class => 'button'
   .clear

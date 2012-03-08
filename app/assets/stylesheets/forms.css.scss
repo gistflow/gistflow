@@ -1,11 +1,15 @@
 form {
   .form-item {
+    position: relative;
     margin-bottom: 14px;
     &.no-margin {
       margin: 0;
     }
-    .hint {
+    div.hint {
       color: #999;
+      position: absolute;
+      bottom: 10px;
+      left: 4px;
     }
     input, textarea {
     	border-radius: 3px;
@@ -22,15 +26,19 @@ form {
     input[type=text], textarea {
       width: 570px;
     }
+    
+    textarea.hint {
+      padding-bottom: 34px;
+    }
   }
   
 	margin-bottom: 10px;
 	
-	.actions .button {
+	.actions {
 		float: right;
 	}
-	ul {
-		float: right;
+	.button-group {
+	  float: left;
 		.help {
 			padding: 4px 10px 0 2px;
 			font-size: 12px;

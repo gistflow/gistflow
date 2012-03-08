@@ -6,10 +6,14 @@
     = f.text_field :title, :placeholder => 'Title'
   
   .form-item
-    = f.text_area :content, :size => '40x12', :placeholder => 'Body'
+    = f.text_area :content, :size => '40x12', :placeholder => 'Body', :class => 'hint'
     .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It shows on the post list
   
-  %ul.button-group
-    %li= f.submit 'Commit', :class => 'button'
-
+  .actions
+    - if @presenter.post.persisted?
+      .button-group
+        = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger'
+    .button-group
+      = f.submit 'Commit', :class => 'button'
   .clear
+

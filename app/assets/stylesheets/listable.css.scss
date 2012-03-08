@@ -19,6 +19,9 @@
   .notice {
     margin-left: 5px;
     float: right;
+    .button-group {
+      float: left;
+    }
     a.button.disabled {
       background-color: whiteSmoke;
       color: #4b4b4b;
