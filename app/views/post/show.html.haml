@@ -18,8 +18,9 @@
     %ul.left
       = f.check_box :question
       = f.label :question, 'Is it a Question?'
-    %ul.button-group
-      %li= f.submit 'Comment', :class => 'button'
+    .actions
+      .button-group
+        = f.submit 'Comment', :class => 'button'
     .clear
 
 = render :partial => 'comments/comment', :collection => @presenter.comments
