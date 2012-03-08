@@ -34,11 +34,11 @@ form {
   
 	margin-bottom: 10px;
 	
-	.actions .button {
+	.actions {
 		float: right;
 	}
-	ul {
-		float: right;
+	.button-group {
+	  float: left;
 		.help {
 			padding: 4px 10px 0 2px;
 			font-size: 12px;
