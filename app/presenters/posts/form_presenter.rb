@@ -1,6 +1,11 @@
 class Posts::FormPresenter
   attr_reader :post
   
+  def title
+    [ (post.new_record? ? "New" : "Edit"),
+      post.short_class_name ].join(' ')
+  end
+  
   def initialize(post)
     @post = post
   end
