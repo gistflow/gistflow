@@ -2,7 +2,7 @@
 .list-item
   .title= link_to presenter.title, post
   .avatar
-    = link_to presenter.user do
+    = link_to user_path(:id => presenter.user.username) do
       = avatar_image(presenter.user)
   .preview.markdown
     ~ presenter.preview
