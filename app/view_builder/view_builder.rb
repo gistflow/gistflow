@@ -18,6 +18,8 @@ class ViewBuilder
   end
   
   def wrap(options = {}, &block)
+    return unless show?
+    
     content = capture(&block)
     classes = ['block', wrap_class]
     classes << 'highlight' if highlight?
@@ -32,5 +34,9 @@ protected
   
   def highlight?
     false
+  end
+  
+  def show?
+    true
   end
 end

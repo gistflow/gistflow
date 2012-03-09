@@ -48,4 +48,7 @@ protected
     link_to(title, url).concat(" on Github")
   end
   
+  def show?
+    params[:controller] != 'users'
+  end
 end

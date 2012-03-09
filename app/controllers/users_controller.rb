@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def show
     if @user = User.find_by_username(params[:id])
       @posts = @user.posts.page(params[:page])
-      self.sidebar_presenter = SidebarPresenter.new(@user)
     else
       render 'search/nothing'
     end
