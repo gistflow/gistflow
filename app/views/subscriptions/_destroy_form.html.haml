@@ -1,5 +1,0 @@
-= form_for subscription, :url => user_subscription_path(:user_id => subscription.user.username, :id => subscription), :method => :delete, :class => 'subscription' do |f|
-  .alert.alert-info
-    = "You already subscribed to #{subscription.tag.name}. You may"
-    = f.submit 'Unsubscribe', :class => 'button danger pill'
-    to it.

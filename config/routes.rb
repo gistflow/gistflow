@@ -18,9 +18,11 @@ Gistflow::Application.routes.draw do
   resource :search, :only => :create
   resources :tags, :only => :show
   resources :users, :only => :show do
-    resources :tags, :only => :index
-    resources :subscriptions, :only => [:create, :destroy]
     resources :gists, :only => :index
+  end
+  
+  namespace :account do
+    resources :subscriptions, :only => [:index, :create, :destroy]
   end
   resources :notifications, :only => :index
   resources :gists, :only => :show
