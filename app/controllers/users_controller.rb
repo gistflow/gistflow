@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     account = Account::Github.find_or_create_by_omniauth(omniauth)
     self.current_user = account.user
     if current_user.newbie?
-      redirect_to user_tags_path(current_user)
+      redirect_to account_subscriptions_path
     else
       redirect_to root_path
     end

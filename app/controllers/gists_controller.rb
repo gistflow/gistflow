@@ -3,7 +3,6 @@ class GistsController < ApplicationController
   respond_to :json
   
   def index
-    @gists = current_user.github_gists
     options = {
       :partial => 'sidebar.html.haml',
       :layout => false,

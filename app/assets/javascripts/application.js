@@ -25,5 +25,10 @@ $(function(){
     
   $('a.replaceable').live('ajax:success', function(e, data){
     $(this).replaceWith(data.new_link)
+    if ($(this).hasClass('remembrance')){
+      $.getJSON('/account/remembrance.json', function(data){
+        $('div#sidebar .block.remembrance').html(data.div)
+      })
+    }
   })
 })
