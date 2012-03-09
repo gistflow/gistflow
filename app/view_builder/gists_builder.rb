@@ -21,7 +21,7 @@ protected
   end
 
   def wrap_data_url
-    url_helpers.user_gists_path(user, :format => :json) if user
+    url_helpers.account_gists_path(:format => :json) if user
   end
 
   def list_of_gists

@@ -1,4 +1,5 @@
 class RemembrancesController < ApplicationController
+  before_filter :authenticate!, :only => :index
   respond_to :json
   
   def show
