@@ -1,0 +1,37 @@
+.user {
+  ul.profile {
+    float: left;
+    margin-left: 10px;
+    padding-top: 10px;
+    li {
+      margin-bottom: 5px;
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+  .username {
+    float: left;
+    color: #666;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 70px;
+    margin-left: 10px;
+  }
+  .avatar {
+    float: left;
+    padding: 1px;
+    border: 1px solid #BFBFBF;
+    line-height: 1px;
+  }
+  dl {
+    padding: 10px 0 0;
+    dt {
+      color: #999;
+      width: 80px;
+      float: left;
+    }
+    dd {
+      color: #666;
+    }
+  }
+}

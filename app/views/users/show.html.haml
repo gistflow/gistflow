@@ -1,3 +1,13 @@
-= user_page_title(@user)
+.user
+  .avatar= avatar_image(@user, 66)
+  .username= @user.username
+  .clear
+  
+  %dl
+    - @user.contacts.each do |field, value|
+      %dt{ :class => field }= field
+      %dd= value
+
+= caption 'Posts', :highlight => true
 = render :partial => 'post/post', :collection => @posts
 = paginate @posts
