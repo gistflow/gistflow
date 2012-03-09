@@ -1,7 +1,8 @@
 module ApplicationHelper
   def caption(caption, options = {})
     classes = [:caption]
-    classes << options[:class] if options[:class]
+    classes << 'highlight' if options[:highlight]
+    
     capture_haml do
       haml_tag(:div, { :class => classes.join(' ') }) do
         haml_concat caption

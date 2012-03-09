@@ -1,8 +1,4 @@
-- if user_signed_in?
-  = caption 'Remembrance'
-  %ul
-    - sidebar_presenter.posts.each do |post|
-      %li
-        = link_to post.user.username, user_path(:id => post.user.username)
-        = post.link_name
-        = link_to 'show', { :action => :show, :id => post.id }
+- builder = RemembranceBuilder.new(current_user, params)
+= builder.wrap do
+  = builder.title
+  = builder.posts

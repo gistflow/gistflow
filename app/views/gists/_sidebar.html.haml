@@ -1,9 +1,4 @@
-- if user_signed_in? || sidebar_presenter.gists.any?
-  = caption 'Gists'
-  - klass = sidebar_presenter.user == current_user ? 'current-user' : ''
-  #gists{ :class => klass }
-    - if sidebar_presenter.gists.any?
-      - locals = { :gists => sidebar_presenter.gists }
-      = render :partial => 'gists/list', :locals => locals
-    - else
-      = link_to_github_user sidebar_presenter.user
+- builder = GistsBuilder.new(current_user, params, :load_gists => load_gists)
+= builder.wrap do
+  = builder.title
+  = builder.gists

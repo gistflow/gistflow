@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     username
   end
   
+  def to_s
+    username
+  end
+  
   def newbie?
     tags.count < 3
   end
@@ -30,7 +34,7 @@ class User < ActiveRecord::Base
     end.secret
   end
   
-  def github_gists
+  def github_gists(use_cache = true)
     Github::User.new(username).gists
   end
   

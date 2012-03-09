@@ -40,7 +40,7 @@ class Replaceable
       if tag = match[/#(\w+)/, 1] and Tag.where(:name => tag).exists?
         link_to("##{tag}", "/tags/#{tag}")
       else
-        word
+        match
       end
     end
     self

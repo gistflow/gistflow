@@ -13,15 +13,17 @@ Gistflow::Application.routes.draw do
       resources :comments, :only => :create, :controller => :comments
     end
   end
+  resources :posts, :only => :show
   
   resource :search, :only => :create
   resources :tags, :only => :show
   resources :users, :only => :show do
     resources :tags, :only => :index
     resources :subscriptions, :only => [:create, :destroy]
+    resources :gists, :only => :index
   end
   resources :notifications, :only => :index
-  resources :gists, :only => [:show, :index]
+  resources :gists, :only => :show
   
   root to: 'post/home#index'
 end

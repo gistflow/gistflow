@@ -1,6 +1,6 @@
 class Tip
   TIP_MESSAGES = [
-    'Tip1',
+    'Tip about gists',
     'Tip2'
   ]
   
@@ -8,5 +8,9 @@ class Tip
     def random
       TIP_MESSAGES[rand TIP_MESSAGES.size]
     end
+  end
+  
+  def initialize(place)
+    
   end
 end
