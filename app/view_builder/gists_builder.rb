@@ -1,5 +1,5 @@
 class GistsBuilder < ViewBuilder
-  delegate :github_gists, :username, :to => :user
+  delegate :github_gists, :to => :user
   
   def wrap(options = {}, &block)
     options[:'data-url'] ||= wrap_data_url
@@ -49,6 +49,6 @@ protected
   end
   
   def show?
-    params[:controller] != 'users'
+    user and params[:controller] != 'users'
   end
 end

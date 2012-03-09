@@ -21,4 +21,8 @@ protected
   def wrap_class
     'remembrance'
   end
+  
+  def show?
+    user
+  end
 end

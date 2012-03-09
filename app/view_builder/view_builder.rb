@@ -7,6 +7,7 @@ class ViewBuilder
   include Haml::Helpers
   
   delegate :url_helpers, :to => 'Rails.application.routes'
+  delegate :username, :to => :user
   
   def initialize(user, params, options = {})
     @user, @params, @options = user, params, options
