@@ -21,7 +21,7 @@ Gistflow::Application.routes.draw do
     resources :gists, :only => :index
   end
   
-  resource :account, :only => :nil do
+  namespace :account do
     resources :subscriptions, :only => [:index, :create, :destroy]
   end
   resources :notifications, :only => :index
