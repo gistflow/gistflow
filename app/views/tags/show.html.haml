@@ -1,8 +1,4 @@
-.caption
-  = @tag.name
-  %span.hint
-    = pluralize @tag.posts_count, "post"
-  - if @subscription
-    = subscription_form(@subscription)
+= caption @tag, :highlight => true
+= subscription_form(@subscription) if @subscription
 = render :partial => 'post/post', :collection => @posts
 = paginate @posts
