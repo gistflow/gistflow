@@ -1,4 +1,4 @@
-- if sidebar_presenter.show_user
-  = caption sidebar_presenter.user.username
-  
-  
+- builder = UserBuilder.new(@user, params, :self => @user == current_user)
+= builder.wrap do
+  = builder.title
+  = builder.link_to_github

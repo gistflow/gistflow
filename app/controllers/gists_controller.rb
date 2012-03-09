@@ -4,7 +4,12 @@ class GistsController < ApplicationController
   
   def index
     @gists = current_user.github_gists
-    respond_with div: render_to_string('index.html.haml', layout: false)
+    options = {
+      :partial => 'sidebar.html.haml',
+      :layout => false,
+      :locals => { :load_gists => true }
+    }
+    respond_with div: render_to_string(options)
   end
   
   def show

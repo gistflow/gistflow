@@ -1,5 +1,4 @@
-= render 'shared/search_form'
+= render 'search/sidebar'
 = render 'users/sidebar'
-= render 'gists/sidebar'
+= render :partial => 'gists/sidebar', :locals => { :load_gists => false }
 = render 'post/sidebar'
-= render 'tags/sidebar'

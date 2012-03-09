@@ -1,22 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  helper_method :user_signed_in?, :current_user
+  
 protected
-  
-  helper_method :recent_posts, :user_signed_in?, :current_user,
-    :sidebar_presenter
-  
-  def sidebar_presenter
-    @sidebar_presenter ||= SidebarPresenter.new(current_user)
-  end
-  
-  def sidebar_presenter=(sidebar)
-    @sidebar_presenter = sidebar
-  end
-
-  def recent_posts
-    Post.limit(5)
-  end
   
   def authenticate!
     unless user_signed_in?

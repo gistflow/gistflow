@@ -1,7 +1,7 @@
 $(function(){
-  var gists = $("#gists.current-user")
+  var gists = $('#sidebar div.block.gists')
   if (gists) {
-    $.getJSON("/gists.json", function(data){
+    $.getJSON(gists.data('url'), function(data){
       gists.html(data.div)
     })
   }

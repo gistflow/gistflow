@@ -31,7 +31,8 @@ class Post < ActiveRecord::Base
   end
   
   def link_name
-    "#{body[0..30].strip}.."
+    ln = title.blank? ? preview : title
+    ln[0..30].strip
   end
   
   def controller
