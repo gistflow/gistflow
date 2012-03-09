@@ -7,6 +7,9 @@
     - @user.contacts.each do |field, value|
       %dt{ :class => field }= field
       %dd= value
+- if @user == current_user
+  = caption 'Subscriptions', :highlight => true
+  = link_to 'Manage', account_subscriptions_path 
 
 = caption 'Posts', :highlight => true
 = render :partial => 'post/post', :collection => @posts
