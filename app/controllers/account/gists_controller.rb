@@ -1,11 +1,12 @@
-class RemembrancesController < ApplicationController
+class Account::GistsController < ApplicationController
   before_filter :authenticate!, :only => :index
   respond_to :json
   
-  def show
+  def index
     options = {
       :partial => 'sidebar.html.haml',
-      :layout => false
+      :layout => false,
+      :locals => { :load_gists => true }
     }
     respond_with div: render_to_string(options)
   end
