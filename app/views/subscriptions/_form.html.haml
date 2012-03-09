@@ -1,3 +1,6 @@
-= form_for [current_user, subscription]  do |f|
+= form_for subscription, :url => user_subscriptions_path(:user_id => subscription.user.username) do |f|
   = f.hidden_field :tag_id
-  = f.submit 'Subscribe', :class => 'button big'
+  .alert.alert-info
+    For read the posts with this tag in your stream you may  
+    = f.submit 'Subscribe', :class => 'button pill'
+    to it.

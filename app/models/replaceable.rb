@@ -38,7 +38,7 @@ class Replaceable
   def replace_tags!
     self.body = body.gsub(/(^|\W)#(\w+)/) do |match|
       if tag = match[/#(\w+)/, 1] and Tag.where(:name => tag).exists?
-        link_to("##{tag}", "/tags/#{tag}")
+        link_to("##{tag}", "/tags/#{tag}").concat(" ")
       else
         match
       end

@@ -5,4 +5,8 @@ class Tag < ActiveRecord::Base
   scope :popular, (lambda do |limit = 100|
     order('posts_count desc').limit(limit)
   end)
+  
+  def to_s
+    name
+  end
 end
