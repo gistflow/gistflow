@@ -29,13 +29,13 @@ module ApplicationHelper
           :action => :forgot, 
           :id => post.id 
         }, 
-        :method => :delete, :remote => true, :class => 'button replaceable'
+        :method => :delete, :remote => true, :class => 'button replaceable remembrance'
     else
       link_to 'Memorize', { 
           :controller => post.controller, 
           :action => :memorize, 
           :id => post.id 
-        }, :method => :post, :remote => true, :class => 'button replaceable'
+        }, :method => :post, :remote => true, :class => 'button replaceable remembrance'
     end
   end
   

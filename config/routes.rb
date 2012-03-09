@@ -23,6 +23,7 @@ Gistflow::Application.routes.draw do
   
   namespace :account do
     resources :subscriptions, :only => [:index, :create, :destroy]
+    resource :remembrance, :only => :show
   end
   resources :notifications, :only => :index
   resources :gists, :only => :show
