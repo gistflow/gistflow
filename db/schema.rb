@@ -30,27 +30,13 @@ ActiveRecord::Schema.define(:version => 20120309150204) do
   add_index "account_githubs", ["token"], :name => "index_account_githubs_on_token", :unique => true
 
   create_table "comments", :force => true do |t|
-    t.boolean   "question",    :default => false
-    t.text      "content"
-    t.integer   "user_id"
-    t.integer   "post_id"
-    t.integer   "likes_count", :default => 0
-    t.timestamp "created_at",                     :null => false
-    t.timestamp "updated_at",                     :null => false
-  end
-
-  create_table "favorite_posts_lovers", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
-  add_index "favorite_posts_lovers", ["post_id", "user_id"], :name => "index_favorite_posts_lovers_on_post_id_and_user_id", :unique => true
-
-  create_table "frameworks", :force => true do |t|
-    t.string    "name"
-    t.integer   "language_id"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.boolean  "question",    :default => false
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "likes_count", :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "gists", :force => true do |t|
@@ -60,43 +46,27 @@ ActiveRecord::Schema.define(:version => 20120309150204) do
     t.integer "github_id"
   end
 
-  create_table "languages", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-  end
-
-  create_table "likes", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "likable_id"
-    t.string    "likable_type"
-    t.timestamp "created_at",   :null => false
-    t.timestamp "updated_at",   :null => false
-  end
-
-  add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
-
   create_table "notifications", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "notifiable_id"
-    t.string    "notifiable_type"
-    t.boolean   "read",            :default => false
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
 
   create_table "posts", :force => true do |t|
-    t.integer   "comments_count", :default => 0
-    t.integer   "likes_count",    :default => 0
-    t.string    "title"
-    t.text      "content"
-    t.integer   "state_id"
-    t.integer   "user_id"
-    t.string    "type"
-    t.timestamp "created_at",                    :null => false
-    t.timestamp "updated_at",                    :null => false
+    t.integer  "comments_count", :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.string   "title"
+    t.text     "content"
+    t.integer  "state_id"
+    t.integer  "user_id"
+    t.string   "type"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "posts_tags", :id => false, :force => true do |t|
@@ -121,14 +91,14 @@ ActiveRecord::Schema.define(:version => 20120309150204) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string    "username"
-    t.string    "name"
-    t.string    "email"
-    t.string    "home_page"
-    t.string    "github_page"
-    t.string    "gravatar_id"
-    t.timestamp "created_at"
-    t.string    "company"
+    t.string   "username"
+    t.string   "name"
+    t.string   "email"
+    t.string   "home_page"
+    t.string   "github_page"
+    t.string   "gravatar_id"
+    t.datetime "created_at"
+    t.string   "company"
   end
 
 end
