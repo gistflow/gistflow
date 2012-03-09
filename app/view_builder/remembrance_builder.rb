@@ -23,6 +23,6 @@ protected
   end
   
   def show?
-    user
+    user and user.remembrance.any?
   end
 end
