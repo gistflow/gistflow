@@ -36,7 +36,7 @@ class Replaceable
   end
   
   def replace_tags!
-    self.body = body.gsub(/#(\w+)/) do |match|
+    self.body = body.gsub(/(^|\W)#(\w+)/) do |match|
       if tag = match[/#(\w+)/, 1] and Tag.where(:name => tag).exists?
         link_to("##{tag}", "/tags/#{tag}")
       else
@@ -47,10 +47,8 @@ class Replaceable
   end
   
   def tag_names
-    tag_names = []
-    body.split(' ').each do |word|
-      tag_names << tag if tag = word.scan(TAG).flatten.first
-    end
-    tag_names.uniq
+    body.gsub(/(^|\W)#(\w+)/).map do |match|
+      match[/#(\w+)/, 1]
+    end.uniq.compact
   end
 end
