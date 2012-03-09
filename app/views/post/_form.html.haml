@@ -3,15 +3,18 @@
   .form-item
     = f.text_field :title, :placeholder => 'Title'
   
-  .form-item
+  .form-item.no-margin
     = f.text_area :content, :size => '40x12', :placeholder => 'Body', :class => 'hint', :id => 'post_body'
     .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It shows on the post list
   
+  .left
+    This text will be parsed by 
+    = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
   .actions
     - if @presenter.post.persisted?
       .button-group
         = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger'
     .button-group
-      = f.submit 'Commit', :class => 'button'
+      = f.submit 'Commit', :class => 'button primary'
   .clear
 
