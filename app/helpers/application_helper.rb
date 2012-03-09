@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def avatar_image(user, size = 26)
-    image_tag user.gravatar(size), :size => '26x26'
+    image_tag user.gravatar(size), :size => [size, size].join('x')
   end
   
   def credits
@@ -55,13 +55,6 @@ module ApplicationHelper
     end
   end
   
-  def user_page_title(user)
-    name = current_user == user ? "Your" : "#{user.username}'s"
-    capture_haml do
-      caption_haml "#{name} posts"
-    end
-  end
-    
   def link_to_notifiable(notification)
     username = notification.notifiable.user.username
     user_link = link_to(
