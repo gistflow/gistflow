@@ -1,6 +1,4 @@
-.caption
-  = @presenter.post.new_record? ? "New" : "Edit"
-  = @presenter.post.short_class_name
+= caption @presenter.title, :highlight => true
 = form_for @presenter.post do |f|
   .form-item
     = f.text_field :title, :placeholder => 'Title'
