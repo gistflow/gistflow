@@ -50,7 +50,13 @@ class Post < ActiveRecord::Base
 protected
   
   def cuts_count
-    content.split('<cut>').size - 1
+    if content.blank?
+      0
+    elsif content == '<cut>'
+      1
+    else
+      content.split('<cut>').size - 1
+    end
   end
   
   def content_parts

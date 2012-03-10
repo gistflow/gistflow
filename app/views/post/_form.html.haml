@@ -1,5 +1,10 @@
 = caption @presenter.title, :highlight => true
+
 = form_for @presenter.post do |f|
+  - if @presenter.post.errors.any?
+    %ul.errors
+      - @presenter.post.errors.full_messages.each do |message|
+        %li= message
   .form-item
     = f.text_field :title, :placeholder => 'Title'
   
