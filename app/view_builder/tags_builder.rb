@@ -22,4 +22,8 @@ protected
   def wrap_class
     'sidebar_tags'
   end
+  
+  def show?
+    user
+  end
 end

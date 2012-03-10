@@ -44,8 +44,14 @@ module ApplicationHelper
       link_to "#{post.likes_count} Likes", '#',
         :class => 'button icon like disabled'
     else
-      link_to "Like", { :action => :like, :id => post.id },
-        :class => 'button icon like replaceable', :method => :post, :remote => true
+      link_to "Like", { 
+        :controller => post.controller, 
+        :action => :like, 
+        :id => post.id 
+        }, 
+        :class => 'button icon like replaceable', 
+        :method => :post, 
+        :remote => true
     end
   end
     
