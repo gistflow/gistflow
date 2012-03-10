@@ -1,13 +1,15 @@
 module Models
   module Notifiable
     extend ActiveSupport::Concern
+    include ActionView::Helpers::UrlHelper
     
     included do
       after_create :create_notifications
     end
     
     def link_to_post
-      title = self.title
+      # REFACTOR this to just self.title
+      title = self.title || 'gossip'
       post = self.class.name == "Comment" ? self.post : self
 
       controller = post.class.name.split('::').last.pluralize.downcase
