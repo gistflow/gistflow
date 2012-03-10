@@ -10,7 +10,7 @@ module Models
       end)
     
       after_save :assign_tags
-      after_create :increment_tags_counter_cache
+      after_save :increment_tags_counter_cache
       before_destroy :decrement_tags_counter_cache
     end
     
@@ -21,6 +21,7 @@ module Models
       end
     end
 
+    # FIX this to update counter, not increment
     def increment_tags_counter_cache
       update_posts_counts
     end

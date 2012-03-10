@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   validates :username, :name, :presence => true
   validates :username, :uniqueness => true
   
+  after_create :send_welcome_email
+  
   def to_options
     username
   end
@@ -61,4 +63,9 @@ class User < ActiveRecord::Base
   def mark_notifications_read
     notifications.unread.update_all(:read => true)
   end
+  
+  private
+    def send_welcome_email
+      UserMailer.welcome_email(id).deliver
+    end
 end
