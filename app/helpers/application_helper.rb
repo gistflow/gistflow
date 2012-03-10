@@ -56,13 +56,22 @@ module ApplicationHelper
   end
   
   def link_to_notifiable(notification)
-    username = notification.notifiable.user.username
+    post = notification.notifiable.post
+        
+    username = post.user.username
     user_link = link_to(
       username, 
       user_path(:id => username), 
       :class => 'username'
     )
-    record_link = notification.notifiable.link_to_post
+    
+    # IDEA may be we need #tags in page so link to notifiable lead to
+    # exact comment or post
+    record_link = link_to post.title || 'gossip', {
+      controller: post.controller,
+      action: :show,
+      id: post.id
+    }
     
     time = time_ago_in_words(notification.created_at)
     

@@ -7,15 +7,8 @@ module Models
       after_create :create_notifications
     end
     
-    def link_to_post
-      # REFACTOR this to just self.title
-      title = self.title || 'gossip'
+    def post
       post = self.class.name == "Comment" ? self.post : self
-
-      controller = post.class.name.split('::').last.pluralize.downcase
-      controller = "posts" if post.class.name == "Post::Gossip"
-
-      link_to title, "#{controller}/#{self.id}"
     end
 
     def create_notifications
