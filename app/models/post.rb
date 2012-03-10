@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   
   validates :user, :presence => true
   validates :cuts_count, :inclusion => { :in => [0, 1] }
-  validates :preview, :length => 3..160
+  validates :preview, :length => 3..500
   
   attr_accessible :title, :content
   

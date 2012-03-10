@@ -9,7 +9,7 @@ module Models
         joins(:tags).where(:tags => { :name => names }).uniq
       end)
     
-      after_create :assign_tags
+      after_save :assign_tags
       after_create :increment_tags_counter_cache
       before_destroy :decrement_tags_counter_cache
     end

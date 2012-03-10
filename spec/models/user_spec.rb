@@ -19,17 +19,17 @@ describe User do
     let(:post) { Factory(:post) }
     
     before(:each) do
-      user.favorite_posts << post
+      user.memorize post
     end
     
-    it{ user.favorite_posts.should == [post] }
-    it{ post.lovers.should == [user] }
+    it{ user.remembrance.should == [post] }
+    it{ post.liked_by?(user).should == true }
   end
   
   describe '#mark_notifications_read' do
     user = Factory(:user)
-    post = Factory(:post, :content => "#{Faker::Lorem.paragraph} @#{user.username}}")
-    comment = Factory(:comment, :content => "#{Faker::Lorem.paragraph} @#{user.username}}")
+    post = Factory(:post, :content => "#{Faker::Lorem.words(5)} @#{user.username}}")
+    comment = Factory(:comment, :content => "#{Faker::Lorem.words(5)} @#{user.username}}")
     
     before(:each) do
       user.mark_notifications_read
