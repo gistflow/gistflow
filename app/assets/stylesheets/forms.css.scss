@@ -32,6 +32,13 @@ form {
     }
   }
   
+  ul.errors {
+    background-color: whiteSmoke;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: rgb(204, 102, 102);
+  }
+  
 	margin-bottom: 10px;
 	
 	.actions {

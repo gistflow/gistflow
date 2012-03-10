@@ -1,5 +1,8 @@
 class Account::SubscriptionsController < ApplicationController
+  before_filter :authenticate!, :only => :index
+  
   def index
+    flash.now[:info] = 
     @subscriptions = Tag.popular.map do |tag|
       current_user.subscriptions.find_or_initialize_by_tag_id(tag.id)
     end

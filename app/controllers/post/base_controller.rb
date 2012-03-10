@@ -1,7 +1,6 @@
 class Post::BaseController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
-  # include Controllers::Tipable
   
   def index
     @posts = model.includes(:user).page(params[:page])
