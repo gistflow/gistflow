@@ -100,4 +100,12 @@ module ApplicationHelper
   def current_type
     params[:controller].split('/').last.singularize
   end
+  
+  def javascript_enabled?
+    capture_haml do
+      haml_tag(:noscript) do
+        haml_tag(:img, :src => asset_path("no_js.jpg", :id => "no_js"))
+      end
+    end
+  end
 end
