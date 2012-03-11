@@ -2,7 +2,7 @@ Gistflow::Application.routes.draw do
   match '/auth/:provider/callback' => 'users#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
-
+  
   namespace :post, :path => "posts" do
     resources :articles, :questions, :gossips do
       member do
@@ -28,4 +28,5 @@ Gistflow::Application.routes.draw do
   resources :gists, :only => :show
   
   root to: 'post/home#index'
+  match '*a', :to => 'errors#not_found'
 end

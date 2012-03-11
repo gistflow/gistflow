@@ -2,8 +2,25 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :user_signed_in?, :current_user
+
+  rescue_from StandardError, :with => :handle_exceptions
   
 protected
+  def handle_exceptions(exception)
+    case exception
+      when ActiveRecord::RecordNotFound then render_not_found 
+      when ActionController::RoutingError then render_not_found 
+      else render_error
+    end
+  end
+
+  def render_not_found
+    render 'errors/not_found', :layout => 'blank'
+  end
+  
+  def render_error
+    render 'errors/five_hundred', :layout => 'blank'
+  end
   
   def authenticate!
     unless user_signed_in?

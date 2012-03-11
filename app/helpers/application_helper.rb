@@ -113,8 +113,14 @@ module ApplicationHelper
   def javascript_enabled?
     capture_haml do
       haml_tag(:noscript) do
-        haml_tag(:img, :src => asset_path("no_js.jpg", :id => "no_js"))
+        haml_tag(:img, :src => asset_path("no_js.jpg"))
       end
+    end
+  end
+  
+  def render_error(image_path, message)
+    content_tag(:div, { :class => 'error' }) do
+      [image_tag(image_path), content_tag(:h1, message)].join.html_safe
     end
   end
 end
