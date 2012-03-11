@@ -40,7 +40,7 @@ protected
   end
   
   def highlight?
-    params[:action] == 'new'
+    %(new create edit update).include?(params[:action])
   end
 
   def link_to_gists
@@ -49,6 +49,9 @@ protected
   end
   
   def show?
-    user and params[:controller] != 'users'
+    user and (options[:load_gists] || begin
+      %(new create edit update).include?(params[:action]) ||
+        params[:controller] == 'post/gossips'
+    end)
   end
 end

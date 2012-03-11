@@ -10,7 +10,7 @@ class UserBuilder < ViewBuilder
 protected
   
   def show?
-    params[:controller] == 'users'
+    user and params[:controller] == 'users'
   end
   
   def highlight?
