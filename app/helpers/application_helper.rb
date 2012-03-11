@@ -62,7 +62,9 @@ module ApplicationHelper
   end
   
   def link_to_notifiable(notification)
-    post = notification.notifiable.post
+    notifiable = notification.notifiable
+
+    post = notifiable.is_a?(Comment) ? notifiable.post : notifiable
         
     username = post.user.username
     user_link = link_to(

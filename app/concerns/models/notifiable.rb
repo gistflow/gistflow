@@ -6,10 +6,6 @@ module Models
     included do
       after_create :create_notifications
     end
-    
-    def post
-      post = self.class.name == "Comment" ? self.post : self
-    end
 
     def create_notifications
       user_ids = Parser::Mention.new(self.body).user_ids
