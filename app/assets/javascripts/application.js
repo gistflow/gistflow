@@ -21,6 +21,11 @@
 $(function(){
   $('textarea').autosize()
   $('textarea').tabby({tabString: '  '})
+  $('textarea').keydown(function (e) {
+   if ((e.ctrlKey || e.metaKey) && e.keyCode == 13) {
+     $(this).parents('form:first').submit()
+   }
+  });
   $('a[href=#]').click(function(){ return false })
     
   $('a.replaceable').live('ajax:success', function(e, data){

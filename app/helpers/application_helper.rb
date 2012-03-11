@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def commit_title(commit = 'Commit')
+    commit << ' ' << (mac? ? '&#x2318;' : '&#x2303;') << '&#x21A9;'
+    commit.html_safe
+  end
+  
+  def mac?
+    request.env['HTTP_USER_AGENT'].to_s =~ /Macintosh/
+  end
+  
   def caption(caption, options = {})
     classes = [:caption]
     classes << 'highlight' if options[:highlight]

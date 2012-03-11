@@ -20,7 +20,7 @@
       = f.label :question, 'Is it a Question?'
     .actions
       .button-group
-        = f.submit 'Comment', :class => 'button'
+        = f.submit commit_title('Comment'), :class => 'button'
     .clear
 
 = render :partial => 'comments/comment', :collection => @presenter.comments
