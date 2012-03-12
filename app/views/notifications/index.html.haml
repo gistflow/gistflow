@@ -1,6 +1,6 @@
-.caption Notifications
+- title 'Notifications'
 - if @notifications.any?
   = render :partial => 'notification', :collection => @notifications
+  = paginate @notifications
 - else
   Seems like no one mentioned you yet.
-= paginate @notifications

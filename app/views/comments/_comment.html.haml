@@ -1,8 +1,8 @@
 - presenter = Comments::ShowPresenter.new(comment)
-.list-item.comment
-  .title= presenter.title
-  .avatar
-    = link_to user_path(:id => presenter.user.username) do
-      = avatar_image(presenter.user)
-  .content= presenter.content
-  .clear
+%article
+  %header
+    %h1= presenter.title
+    .avatar
+      = link_to user_path(:id => presenter.user.username) do
+        = avatar_image(presenter.user)
+  .group.markdown= presenter.content

@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def title(title)
+    content_for(:title, title)
+  end
+  
   def commit_title(commit = 'Commit')
     commit << ' ' << (mac? ? '&#x2318;' : '&#x2303;') << '&#x21A9;'
     commit.html_safe
@@ -113,7 +117,7 @@ module ApplicationHelper
   def javascript_enabled?
     capture_haml do
       haml_tag(:noscript) do
-        haml_tag(:img, :src => asset_path("no_js.jpg", :id => "no_js"))
+        concat(image_tag asset_path("no_js.jpg"), :alt => 'You have not JS')
       end
     end
   end

@@ -14,17 +14,18 @@ class ViewBuilder
     init_haml_helpers
   end
   
-  def title(title)
-    content_tag(:div, title, :class => :caption)
-  end
-  
   def wrap(options = {}, &block)
     return unless show?
     
     content = capture(&block)
-    classes = ['block', wrap_class]
+    classes = [wrap_class]
     classes << 'highlight' if highlight?
-    content_tag :div, content, { :class => classes }.reverse_merge(options)
+    
+    content_tag(:section, { :class => classes }.reverse_merge(options)) do
+      content_tag(:header) do
+        content_tag :h1, title
+      end << content
+    end
   end
   
 protected

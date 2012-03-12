@@ -1,0 +1,7 @@
+- if user_signed_in?
+  %nav.posts
+    - menu = []
+    - menu << link_to('New Article', new_post_article_path)
+    - menu << link_to('New Question', new_post_question_path)
+    - menu << link_to('New Gossip', post_gossips_path)
+    = ul(menu)

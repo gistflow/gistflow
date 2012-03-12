@@ -1,13 +1,13 @@
 - presenter = Posts::ShowPresenter.new(post)
-.list-item
-  .title= link_to presenter.title, post
-  .avatar
-    = link_to user_path(:id => presenter.user.username) do
-      = avatar_image(presenter.user)
-  .preview.markdown
+%article
+  %header
+    %h1= presenter.title
+    .avatar
+      = link_to user_path(:id => presenter.user.username) do
+        = avatar_image(presenter.user)
+  .preview.markdown.group
     ~ presenter.preview
-  .clear
-  .notice
+  %footer.notice.group
     .button-group.minor-group
       - if user_signed_in?
         = link_to_memorize presenter.post
@@ -17,4 +17,3 @@
       - if current_user == post.user
         = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
       = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
-  .clear

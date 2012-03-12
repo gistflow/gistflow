@@ -1,5 +1,6 @@
 class SearchBuilder < ViewBuilder
+protected
   def title
-    super('search')
+    'Search'
   end
 end

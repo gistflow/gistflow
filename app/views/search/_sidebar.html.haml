@@ -1,6 +1,5 @@
 - builder = SearchBuilder.new(current_user, params)
 = builder.wrap(:id => 'search') do
-  = builder.title
   = form_tag search_path do
     = search_field_tag :q, params[:q], :placeholder => "#tag, @name or text", :id => nil
     %span.submit &#x21A9;

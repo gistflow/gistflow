@@ -6,15 +6,15 @@ class GistsBuilder < ViewBuilder
     super(options, &block)
   end
   
-  def title
-    super 'Your Gists'
-  end
-  
   def gists
     options[:load_gists] ? list_of_gists : link_to_gists
   end
   
 protected
+
+  def title
+    'Your Gists'
+  end
   
   def wrap_class
     'gists'

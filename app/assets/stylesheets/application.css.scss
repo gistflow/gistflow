@@ -15,4 +15,7 @@
  *= require_tree .
 */
 
-.clear { clear: both; }
+.group {
+  after: '';
+  clear: both;
+}

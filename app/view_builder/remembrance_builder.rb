@@ -1,8 +1,4 @@
 class RemembranceBuilder < ViewBuilder
-  def title
-    super('Remembrance')
-  end
-  
   def posts
     content_tag(:ul) do
       user.remembrance.map do |post|
@@ -17,6 +13,10 @@ class RemembranceBuilder < ViewBuilder
   end
   
 protected
+  
+  def title
+    'Remembrance'
+  end
   
   def wrap_class
     'remembrance'

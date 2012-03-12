@@ -1,5 +1,5 @@
-= caption 'Top tags'
-.subscriptions
+- title 'Top tags'
+.subscriptions.group
   - @subscriptions.each do |subscription|
     .subscription
       - if subscription.new_record?
@@ -9,4 +9,3 @@
       - else
         = form_for [:account, subscription], :method => :delete do |f|
           = f.submit subscription.tag.name, :class => 'button active'
-  .clear

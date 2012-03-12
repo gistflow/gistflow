@@ -1,5 +1,3 @@
-- if user_signed_in?
-  = posts_menu
-- else
-  = caption 'Stream'
+- title 'Flow'
+= render :partial => 'menu/posts'  
 = render :partial => 'post/index', :locals => { :posts => @posts }

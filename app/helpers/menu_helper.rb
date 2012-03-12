@@ -1,4 +1,12 @@
 module MenuHelper
+  def ul(array)
+    content_tag(:ul) do
+      array.each do |element|
+        concat(content_tag :li, element)
+      end
+    end
+  end
+  
   def login_url
     if Rails.env.development?
       login_path
@@ -21,39 +29,10 @@ module MenuHelper
     capture_haml do
       haml_tag :ul, :class => 'authentication' do
         authentication_items.each_with_index do |item, index|
-          haml_tag :li do
-            haml_concat item
-            if authentication_items.size != index.next
-              haml_tag(:span) { haml_concat '|' }
-            end
-          end
+          haml_tag :li, item
         end
       end
     end
-  end
-  
-  def posts_menu
-    return unless user_signed_in?
-    capture_haml do
-      haml_tag :ul, :class => 'posts-menu' do
-        post_menu_items.each_with_index do |item, index|
-          haml_tag :li do
-            haml_concat item
-            if post_menu_items.size != index.next
-              haml_tag(:span) { haml_concat '|' }
-            end
-          end
-        end
-      end
-    end
-  end
-  
-protected
-
-  def post_menu_items
-    [ link_to('New Article', new_post_article_path),
-      link_to('New Question', new_post_question_path),
-      link_to('New Gossip', post_gossips_path) ]
   end
   
   def categories_items
