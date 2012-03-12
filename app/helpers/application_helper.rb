@@ -75,7 +75,7 @@ module ApplicationHelper
 
     post = notifiable.is_a?(Comment) ? notifiable.post : notifiable
         
-    username = post.user.username
+    username = notifiable.user.username
     user_link = link_to(
       username, 
       user_path(:id => username), 
