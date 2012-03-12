@@ -13,7 +13,7 @@ class Post::BaseController < ApplicationController
 
   def new
     post = model.new
-    flash[:info] = "<strong>Click on the gist's id on the sidebar</strong> to paste it to the body of the post"
+    flash[:info] = "Add your gists to the post by click on gist id."
     @presenter = Posts::FormPresenter.new(post)
     render 'post/new'
   end
