@@ -9,12 +9,12 @@
     = f.text_field :title, :placeholder => 'Title'
   
   .form-item.no-margin
-    = f.text_area :content, :size => '40x12', :placeholder => 'Body', :class => 'hint', :id => 'post_body'
-    .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It shows on the post list
+    = f.text_area :content, :size => '40x12', :placeholder => 'Preview <cut> Body', :class => 'hint', :id => 'post_body'
+    .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It is displayed on the index page.
   
   .left
     This text will be parsed by 
-    = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
+    = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight', :target => '_blank'
   .actions
     - if @presenter.post.persisted?
       .button-group
