@@ -83,5 +83,34 @@ describe Account::Github do
       it { user.github_page.should == 'https://github.com/releu' }
       it { user.gravatar_id.should == '757fb0d5ec7560b6f25f5bd98eadc020' }
     end
+    
+    context 'minimum data' do
+      let(:min_auth) do
+        min_auth = auth.dup
+        min_auth['info'] = {
+          "nickname" => "releu",
+          "email"    => nil,
+          "name"     => nil,
+          "urls"     => { 
+            "GitHub" => nil,
+            "Blog"   => nil
+          }
+        }
+        min_auth
+      end
+      let(:account) { Account::Github.find_or_create_by_omniauth(min_auth) }
+      let(:user) { account.user }
+      
+      it { account.should be_persisted }
+      it { account.token.should == 'foobar' }
+      it { account.github_id.should == 348907 }
+      it { user.should be_persisted }
+      it { user.username.should == 'releu' }
+      it { user.email.should be_nil }
+      it { user.name.should == 'releu' }
+      it { user.home_page.should be_nil }
+      it { user.github_page.should be_nil }
+      it { user.gravatar_id.should == '757fb0d5ec7560b6f25f5bd98eadc020' }
+    end
   end
 end
