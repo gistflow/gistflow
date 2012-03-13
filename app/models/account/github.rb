@@ -15,7 +15,7 @@ class Account::Github < ActiveRecord::Base
         
           user.username    = info['nickname']
           user.email       = info['email']
-          user.name        = info['name']
+          user.name        = info['name'].blank? ? info['nickname'] : info['name']
           user.company     = info['company']
           user.github_page = urls['GitHub']
           user.home_page   = urls['Blog']
