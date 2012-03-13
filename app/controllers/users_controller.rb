@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def create
-    Rails.logger.info "[omni] #{omniauth.inspect}"
     account = Account::Github.find_or_create_by_omniauth(omniauth)
     self.current_user = account.user
     if current_user.newbie?
@@ -8,10 +7,6 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
-  rescue => e
-    Rails.logger.info "[omni][error] #{e}"
-    Rails.logger.info "[omni][error] #{e.backtrace.join("\n")}"
-    raise e
   end
   
   def show
