@@ -39,7 +39,8 @@ class Post < ActiveRecord::Base
     end
     
     def index
-      @@index ||= $indextank.indexes(index_name)
+      # @@index ||= $indextank.indexes(index_name)
+      @@index ||= IndexTank::Client.new(ENV['SEARCHIFY_API_URL'])
     end
     
   protected
