@@ -40,6 +40,7 @@ class Post < ActiveRecord::Base
     
     def index
       # @@index ||= $indextank.indexes(index_name)
+      Rails.logger.info "[SEARCHIFY] #{ENV['SEARCHIFY_API_URL'].inspect}"
       @@index ||= IndexTank::Client.new(ENV['SEARCHIFY_API_URL'])
     end
     
