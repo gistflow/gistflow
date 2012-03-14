@@ -12,6 +12,7 @@ gem 'kaminari'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'redcarpet'
 gem 'redis'
+gem 'indextank'
 
 group :test, :development do
   gem 'factory_girl_rails'
