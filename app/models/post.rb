@@ -24,6 +24,17 @@ class Post < ActiveRecord::Base
         raise "unknown type \"#{type}\""
       end
     end
+    
+    def search(text)
+      doc_ids = index.search(text)['results'].map do |doc|
+        doc['docid']
+      end
+      find(docid)
+    end
+    
+    def index
+      @@index ||= $indextank.indexes('postsx')
+    end
   end
   
   def short_class_name
