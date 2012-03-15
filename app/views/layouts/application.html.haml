@@ -11,11 +11,13 @@
     .wrap.group
       %header.main.group
         %h1= link_to_unless_current 'Gistflow', root_path
-        %nav.user= authentication_menu
+        %nav.user= ul(authentication_items)
         %nav.categories= ul(categories_items)
-        = render_flash
+      = render_flash
       %section.main
         %header
+          - if post_items.any?
+            %nav.posts= ul(post_items) 
           %h1= yield(:title)
         = yield
       %section.sidebar

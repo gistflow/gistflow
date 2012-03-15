@@ -1,3 +1,5 @@
+@import "configuration";
+
 .group:before, .group:after {
   content: "";
   display: table;
@@ -6,7 +8,17 @@
   clear: both;
 }
 
-
 body {
   font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #404040;
+  background: white;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+  
+  &:hover {
+    color: #0E4C89;
+  }
 }

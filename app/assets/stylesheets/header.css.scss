@@ -2,6 +2,8 @@
 
 header.main {
   position: relative;
+  border-bottom: 1px solid $gray;
+  padding-bottom: 0;
   
   h1 {
     font-size: 30px;
@@ -68,19 +70,7 @@ header.main {
       li {
         display: inline-block;
         line-height: 19px;
-        &:after {
-          content: '';
-          margin: 0 5px 0 9px;
-          display: inline-block;
-          width: 1px;
-          height: 13px;
-          background: $layout;
-          position: relative;
-          top: 3px;
-        }
-        &:last-child:after {
-          display: none;
-        }
+        @include li-separator
       }
       
       a {

@@ -1,2 +1,27 @@
 $layout: #bfbfbf;
 $gray: #ddd;
+$link: #0069D6;
+
+@mixin caption {
+  color: #ddd;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 36px;
+  text-shadow: -1px -1px 0 #fff;
+}
+
+@mixin li-separator {
+  &:after {
+    content: '';
+    margin: 0 5px;
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: $layout;
+    position: relative;
+    top: 3px;
+  }
+  &:last-child:after {
+    display: none;
+  }
+}

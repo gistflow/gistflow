@@ -25,6 +25,16 @@ module MenuHelper
     end
   end
   
+  def post_items
+    if user_signed_in?
+      [ link_to('New Article', new_post_article_path),
+        link_to('New Question', new_post_question_path),
+        link_to('New Gossip', post_gossips_path) ]
+    else
+      []
+    end
+  end
+  
   def categories_items
     { :articles  => post_articles_path,
       :questions => post_questions_path,

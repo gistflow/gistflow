@@ -1,0 +1,37 @@
+@import "configuration";
+
+article.post {
+  header {
+    h1 {
+      font-size: 15px;
+      line-height: 28px;
+    }
+  }
+  
+  .avatar {
+    float: left;
+    
+    a {
+      float: left;
+      padding: 1px;
+      border: 1px solid $layout;
+      line-height: 0;
+    }
+  }
+  
+  .preview {
+    margin-left: 40px;
+    
+    img {
+      max-height: 100px;
+      max-width: 540px;
+      background: $gray;
+      margin: 5px 10px 0 0;
+    }
+  }
+  
+  footer {
+    margin-top: 5px;
+    float: right;
+  }
+}

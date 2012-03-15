@@ -1,10 +1,10 @@
 - presenter = Posts::ShowPresenter.new(post)
-%article
+%article.post.group
   %header
     %h1= presenter.title
-    .avatar
-      = link_to user_path(:id => presenter.user.username) do
-        = avatar_image(presenter.user)
+  .avatar
+    = link_to user_path(:id => presenter.user.username) do
+      = avatar_image(presenter.user)
   .preview.markdown.group
     ~ presenter.preview
   %footer.notice.group

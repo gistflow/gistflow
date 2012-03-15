@@ -1,3 +1,5 @@
+@import "configuration";
+
 .wrap {
   margin: 0 auto;
   width: 960px;
@@ -15,4 +17,8 @@ section.main {
 section.sidebar {
   width: 340px;
   float: right;
+  
+  h1 {
+    @include caption;
+  }
 }
