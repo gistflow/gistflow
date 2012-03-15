@@ -15,16 +15,6 @@ module MenuHelper
     end
   end
   
-  def categories_menu
-    capture_haml do
-      categories_items.each do |item|
-        haml_tag :small do
-          haml_concat item
-        end
-      end
-    end
-  end
-  
   def authentication_menu
     capture_haml do
       haml_tag :ul, :class => 'authentication' do

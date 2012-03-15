@@ -1,0 +1,95 @@
+@import "configuration";
+
+header.main {
+  position: relative;
+  
+  h1 {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 3px 0 12px;
+    float: left;
+  }
+  
+  nav.categories {
+    float: left;
+    height: 35px;
+    width: 280px;
+    position: relative;
+    font-size: 18px;
+    line-height: 18px;
+    
+    ul {
+      position: absolute;
+      bottom: 4px;
+      left: 10px;
+    }
+    
+    li {
+      display: inline-block;
+      margin-right: 8px;
+      
+      a {
+        color: $layout;
+        text-decoration: none;
+        
+        &:hover {
+          color: #888;
+        }
+      }
+    }
+  }
+  
+  nav.user {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 35px;
+    width: 280px;
+    overflow: hidden;
+    
+    ul {
+      padding: 7px 14px;
+      border: 1px solid $gray;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      box-shadow: inset 0 1px 0 white;
+      background-color: whiteSmoke;
+      background-image: -webkit-linear-gradient(top, white, whiteSmoke);
+      background-image: -o-linear-gradient(top, white, whiteSmoke);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, whiteSmoke));
+      background-image: -ms-linear-gradient(top, white, whiteSmoke);
+      background-image: -moz-linear-gradient(top, white, whiteSmoke);
+      background-image: linear-gradient(top, white, whiteSmoke);
+      float: right;
+      text-align: right;
+      
+      li {
+        display: inline-block;
+        line-height: 19px;
+        &:after {
+          content: '';
+          margin: 0 5px 0 9px;
+          display: inline-block;
+          width: 1px;
+          height: 13px;
+          background: $layout;
+          position: relative;
+          top: 3px;
+        }
+        &:last-child:after {
+          display: none;
+        }
+      }
+      
+      a {
+        text-decoration: none;
+        
+        &.username {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

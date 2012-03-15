@@ -1,4 +1,12 @@
-.group {
-  after: '';
+.group:before, .group:after {
+  content: "";
+  display: table;
+}
+.group:after {
   clear: both;
+}
+
+
+body {
+  font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -1,0 +1,18 @@
+.wrap {
+  margin: 0 auto;
+  width: 960px;
+}
+
+header.main, section.main, section.sidebar {
+  padding: 10px;
+}
+
+section.main {
+  width: 580px;
+  float: left;
+}
+
+section.sidebar {
+  width: 340px;
+  float: right;
+}
