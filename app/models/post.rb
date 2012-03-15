@@ -35,7 +35,7 @@ class Post < ActiveRecord::Base
       doc_ids = index.search(query)['results'].map do |doc|
         doc['docid']
       end
-      find(doc_ids)
+      where(:id => doc_ids)
     end
     
     def index

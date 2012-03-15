@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   
   helper_method :user_signed_in?, :current_user
 
-  rescue_from StandardError, :with => :handle_exceptions
+  # rescue_from StandardError, :with => :handle_exceptions
   
 protected
+  
   def handle_exceptions(exception)
     case exception
       when ActiveRecord::RecordNotFound then render_not_found 

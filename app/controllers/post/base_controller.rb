@@ -3,11 +3,7 @@ class Post::BaseController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
   
   def index
-    if params[:text]
-      @posts = Post.includes(:user).search(params[:text])
-    else
-      @posts = model.includes(:user).page(params[:page])
-    end
+    @posts = model.includes(:user).page(params[:page])
   end
 
   def show
