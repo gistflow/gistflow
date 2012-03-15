@@ -1,0 +1,21 @@
+@import "configuration";
+
+section.main {
+  padding-top: 5px;
+  
+  > header {
+    h1 {
+      @include caption;
+      font-size: 20px;
+    }
+    
+    nav.posts {
+      text-transform: lowercase;
+      
+      li {
+        display: inline-block;
+        @include li-separator;
+      }
+    }
+  }
+}
