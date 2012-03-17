@@ -1,21 +1,21 @@
-= caption @tag, :highlight => true
+- title @tag
 - if @subscription
   - if @subscription.new_record?
     = form_for [:account, @subscription] do |f|
       = f.hidden_field :tag_id
       .alert.alert-info
-        = "For read the posts with"
-        strong="## @subscription.tag
-        = "tag in your stream you may"
+        = "For read the posts with "
+        strong="##{@subscription.tag}"
+        = "tag in your stream you may "
         = f.submit 'Subscribe', :class => 'button pill'
-        = "to it."
+        = " to it."
   - else
     = form_for [:account, @subscription], :method => :delete do |f|
       .alert.alert-info
-        = "You already subscribed to"
-        strong= "## @subscription.tag
-        = ". You may"
+        = "You already subscribed to "
+        strong= "##{@subscription.tag}"
+        = ". You may "
         = f.submit 'Unsubscribe', :class => 'button danger pill'
-        = "to it."
-= render :partial => 'post/post', :collection => @posts
+        = " to it."
+= render :partial => 'post/index', :locals => { :posts => @posts }
 = paginate @posts

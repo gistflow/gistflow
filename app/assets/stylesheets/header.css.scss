@@ -10,6 +10,7 @@ header.main {
     font-weight: bold;
     padding: 3px 0 12px;
     float: left;
+    width: 160px;
   }
   
   .hr {
@@ -26,47 +27,21 @@ header.main {
     }
   }
   
-  nav.categories {
-    float: left;
-    height: 35px;
-    width: 280px;
-    position: relative;
-    font-size: 18px;
-    line-height: 18px;
-    
-    ul {
-      position: absolute;
-      bottom: 4px;
-      left: 10px;
-    }
-    
-    li {
-      display: inline-block;
-      margin-right: 8px;
-      
-      a {
-        color: $layout;
-        text-decoration: none;
-        
-        &:hover {
-          color: #888;
-        }
-      }
-    }
-  }
-  
   div.search {
-    position: absolute;
-    right: 10px;
-    top: 60px;
+    float: left;
+    padding-top: 8px;
     width: 340px;
     color: $layout;
     
-    input {
-      font-size: 15px;
-    }
     input[type='search'] {
       width: 200px;
+      -webkit-appearance: none;
+      font-size: 12px;
+      border: 1px solid $gray;
+      padding: 3px;
+    }
+    input[type='search']:focus {
+      border-color: $layout;
     }
     input[type='submit'] {
       background: none;
@@ -74,16 +49,17 @@ header.main {
       border: 0;
       color: $layout;
       width: 20px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
     }
   }
   
   nav.user {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    float: right;
     height: 35px;
     width: 280px;
-    overflow: hidden;
     
     ul {
       padding: 7px 14px;

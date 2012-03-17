@@ -1,15 +1,13 @@
-article
+article.post
   header
-    h1= @presenter.title
+    h1 = @presenter.title
   div class="body markdown"
     = @presenter.body
-  
-  - if user_signed_in?
     footer
       div class="notice button-group minor-group group"
-        = link_to_memorize @presenter.post
+        = link_to_memorize @presenter.post if user_signed_in?
         = link_to_like @presenter.post
-        - if current_user == @presenter.user
+        - if user_signed_in? and current_user == @presenter.user
           div class="button-group minor-group"
             = link_to "Edit", { :controller => @presenter.post.controller, :action => :edit, :id => @presenter.post.id }, :class => 'button icon edit'
 

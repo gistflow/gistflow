@@ -12,25 +12,25 @@ html
       header class="main"
         div class="group hr"
           h1 = link_to_unless_current 'Gistflow', root_path
+          = render 'search/form'
           nav class="user" = ul(authentication_items)
-          div class="search"
-            = form_tag search_path do
-              / label Search
-              = search_field_tag :q, params[:q], :placeholder => "#tag, @name or text", :id => nil
-              = submit_tag '&#x21A9;'.html_safe
-          nav class="categories" = ul(categories_items)
         = render_flash
-        - if post_items.any?
+        - if user_signed_in?
           nav class="posts" = ul(post_items)
       section class="main"
-        header
-          h1 = yield(:title)
+        - if content_for?(:title)
+          header
+            h1 = yield(:title)
         = yield
       section class="sidebar"
-        = render 'search/sidebar'
+        = render 'post/filter'
         = render 'users/sidebar'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
         = render 'account/remembrances/sidebar'
         = render 'account/tags/sidebar'
-    footer
-      div class="wrap" = credits
+    footer class="main"
+      div class="wrap"
+        p= credits << '.'
+        p
+          | If you have any ideas, comments or suggestions please 
+          = (link_to 'contact us', 'https://github.com/gist-flow/gistflow/issues') << '.'
