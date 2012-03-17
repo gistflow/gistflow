@@ -3,10 +3,10 @@
   .username= @user.username
   .clear
   
-  %dl
+  dl
     - @user.contacts.each do |field, value|
-      %dt{ :class => field }= field
-      %dd= value
+      dt  class=(field )
+      dd= value
 - if @user == current_user
   = caption 'Settings', :highlight => true
   = link_to 'Manage subscriptions', account_subscriptions_path, :class => 'button'

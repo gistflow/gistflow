@@ -1,13 +1,13 @@
 - presenter = Posts::ShowPresenter.new(post)
-%article.post.group
-  %header
-    %h1= presenter.title
+article.post.group
+  header
+    h1= presenter.title
   .avatar
     = link_to user_path(:id => presenter.user.username) do
       = avatar_image(presenter.user)
   .preview.markdown.group
-    ~ presenter.preview
-  %footer.notice.group
+    = presenter.preview
+  footer.notice.group
     .button-group.minor-group
       - if user_signed_in?
         = link_to_memorize presenter.post

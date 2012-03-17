@@ -4,14 +4,12 @@ class ViewBuilder
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Context
-  include Haml::Helpers
   
   delegate :url_helpers, :to => 'Rails.application.routes'
   delegate :username, :to => :user
   
   def initialize(user, params, options = {})
     @user, @params, @options = user, params, options
-    init_haml_helpers
   end
   
   def wrap(options = {}, &block)

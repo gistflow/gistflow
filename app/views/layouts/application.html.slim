@@ -1,30 +1,30 @@
-!!!
-%html
-  %head
-    %meta{ charset: 'UTF-8' }
+doctype html
+html
+  head
+    meta charset='UTF-8' 
     = stylesheet_link_tag    'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-    %title= "Gistflow::#{yield(:title)}"
-  %body
+    title= "Gistflow::#{yield(:title)}"
+  body
     = raw javascript_enabled?
     .wrap.group
-      %header.main.group
-        %h1= link_to_unless_current 'Gistflow', root_path
-        %nav.user= ul(authentication_items)
-        %nav.categories= ul(categories_items)
+      header.main.group
+        h1 = link_to_unless_current 'Gistflow', root_path
+        nav.user= ul(authentication_items)
+        nav.categories= ul(categories_items)
       = render_flash
-      %section.main
-        %header
+      section.main
+        header
           - if post_items.any?
-            %nav.posts= ul(post_items) 
-          %h1= yield(:title)
+            nav.posts= ul(post_items)
+          h1= yield(:title)
         = yield
-      %section.sidebar
+      section.sidebar
         = render 'search/sidebar'
         = render 'users/sidebar'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
         = render 'account/remembrances/sidebar'
         = render 'account/tags/sidebar'
-    %footer
+    footer
       .wrap= credits

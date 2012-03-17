@@ -16,10 +16,8 @@ module ApplicationHelper
     classes = [:caption]
     classes << 'highlight' if options[:highlight]
     
-    capture_haml do
-      haml_tag(:div, { :class => classes.join(' ') }) do
-        haml_concat caption
-      end
+    content_tag :div, :class => classes.join(' ') do
+      concat caption
     end
   end
   
@@ -67,12 +65,6 @@ module ApplicationHelper
         :remote => true
     end
   end
-    
-  def caption_haml(title)
-    haml_tag :div, :class => 'caption' do
-      haml_concat title
-    end
-  end
   
   def link_to_notifiable(notification)
     notifiable = notification.notifiable
@@ -115,10 +107,8 @@ module ApplicationHelper
   end
   
   def javascript_enabled?
-    capture_haml do
-      haml_tag(:noscript) do
-        concat(image_tag asset_path("no_js.jpg"), :alt => 'You have not JS')
-      end
+    content_tag(:noscript) do
+      concat(image_tag asset_path("no_js.jpg"), :alt => 'You have not JS')
     end
   end
 end

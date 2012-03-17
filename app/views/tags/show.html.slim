@@ -5,7 +5,7 @@
       = f.hidden_field :tag_id
       .alert.alert-info
         = "For read the posts with"
-        %strong="##{@subscription.tag}"
+        strong="## @subscription.tag
         = "tag in your stream you may"
         = f.submit 'Subscribe', :class => 'button pill'
         = "to it."
@@ -13,7 +13,7 @@
     = form_for [:account, @subscription], :method => :delete do |f|
       .alert.alert-info
         = "You already subscribed to"
-        %strong= "##{@subscription.tag}"
+        strong= "## @subscription.tag
         = ". You may"
         = f.submit 'Unsubscribe', :class => 'button danger pill'
         = "to it."
