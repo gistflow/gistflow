@@ -1,4 +1,20 @@
 module ApplicationHelper
+  def link_to_gist(gist)
+    options = {
+      :class => :'importable-gist',
+      :'data-gist-id' => gist.id,
+      :'data-gist-lang' => gist.lang
+    }
+    (link_to gist.id, options) << ' ' << gist.description
+  end
+  
+  def link_to_gists(user)
+    un = user.username
+    title, url = "#{un}'s gists", "https://gist.github.com/#{un}"
+    (link_to title, url) << " on Github"
+  end
+  
+  
   def title(title)
     content_for(:title, title)
   end

@@ -8,19 +8,19 @@ class Post::BaseController < ApplicationController
 
   def show
     @presenter = Posts::ShowPresenter.new(post)
-    render 'post/show'
+    render :'post/show'
   end
 
   def new
     post = model.new
     flash[:info] = "<strong>Click on the gist's id on the sidebar</strong> to paste it to the body of the post"
     @presenter = Posts::FormPresenter.new(post)
-    render 'post/new'
+    render :'post/form'
   end
 
   def edit
     @presenter = Posts::FormPresenter.new(post)
-    render 'post/edit'
+    render :'post/form'
   end
 
   def create    
@@ -31,7 +31,7 @@ class Post::BaseController < ApplicationController
       redirect_to :action => :index
     else
       @presenter = Posts::FormPresenter.new(post)
-      render 'post/new'
+      render :'post/form'
     end
   end
 
@@ -41,7 +41,7 @@ class Post::BaseController < ApplicationController
       redirect_to post
     else
       @presenter = Posts::FormPresenter.new(post)
-      render 'post/edit'
+      render :'post/form'
     end
   end
 

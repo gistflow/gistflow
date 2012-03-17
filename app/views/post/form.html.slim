@@ -1,25 +1,20 @@
 - title @presenter.title
-
 = form_for @presenter.post do |f|
   - if @presenter.post.errors.any?
-    ul.errors
+    ul class="errors"
       - @presenter.post.errors.full_messages.each do |message|
         li= message
-  .form-item
+  fieldset
     = f.text_field :title, :placeholder => 'Title'
-  
-  .form-item.no-margin
-    = f.text_area :content, :size => '40x12', :placeholder => 'Body', :class => 'hint', :id => 'post_body'
-    .hint Use <code>&lt;cut&gt;</code> tag to cut preview. It shows on the post list
-  
-  .left
+  fieldset
+    = f.text_area :content, :size => '40x12', :placeholder => "Preview\n<cut>\nBody", :class => 'hint', :id => 'post_body'
+  div class="left"
     | This text will be parsed by
     = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
-  .actions
+  div class="actions group"
     - if @presenter.post.persisted?
-      .button-group
+      div class="button-group"
         = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger'
-    .button-group
+    div class="button-group"
       = f.submit commit_title, :class => 'button'
-  .clear
 

@@ -1,8 +1,8 @@
 - if user_signed_in?
   = form_for new_post, :html => { :id => 'instant_form' } do |f|
-    .form-item.no-margin
+    fieldset
       = f.text_area :content, :size => '40x2', :id => 'post_body'
-    .left= link_to 'Advanced form', :action => :new
+    div class="left" = link_to 'Advanced form', :action => :new
     .actions
       .button-group
         = f.submit commit_title, :class => 'button'

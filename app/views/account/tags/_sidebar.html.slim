@@ -1,3 +1,14 @@
-- builder = TagsBuilder.new(current_user, params)
-= builder.wrap do
-  = builder.tags
+section class="tags"
+  header
+    h1 Tags
+  - if user_signed_in?
+    - if current_user.tags.any?
+      ul
+        - current_user.tags.each do |tag|
+          li = link_to tag, tag
+    footer
+      p = link_to 'subscriptions', account_subscriptions_path
+  - else
+    ul
+      - Tag.popular.each do |tag|
+        li = link_to tag, tag

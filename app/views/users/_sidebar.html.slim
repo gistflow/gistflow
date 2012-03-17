@@ -1,3 +1,6 @@
-- builder = UserBuilder.new(@user, params, :self => @user == current_user)
-= builder.wrap do
-  = builder.link_to_github
+- if @user
+  section class="user"
+    header
+      h1 User
+  
+    p = link_to @user

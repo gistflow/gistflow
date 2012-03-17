@@ -7,6 +7,7 @@ module FlashHelper
         concat message
       end
     end
+    nil
   end
 
 protected

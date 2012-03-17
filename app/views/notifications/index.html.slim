@@ -1,6 +1,10 @@
 - title 'Notifications'
+
 - if @notifications.any?
   = render :partial => 'notification', :collection => @notifications
+  ul
+    - @notifications.each do |notification|
+      li link_to_notifiable(notification)
   = paginate @notifications
 - else
-  | Seems like no one mentioned you yet.
+  p Seems like no one mentioned you yet.

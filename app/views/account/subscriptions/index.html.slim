@@ -1,7 +1,7 @@
 - title 'Top tags'
-.subscriptions.group
+ul class="subscriptions group"
   - @subscriptions.each do |subscription|
-    .subscription
+    li class="subscription"
       - if subscription.new_record?
         = form_for [:account, subscription] do |f|
           = f.hidden_field :tag_id

@@ -2,7 +2,6 @@
 
 header.main {
   position: relative;
-  border-bottom: 1px solid $gray;
   padding-bottom: 0;
   
   h1 {
@@ -11,6 +10,20 @@ header.main {
     font-weight: bold;
     padding: 3px 0 12px;
     float: left;
+  }
+  
+  .hr {
+    border-bottom: 1px solid $gray;
+    margin-bottom: 5px;
+  }
+  
+  nav.posts {
+    text-transform: lowercase;
+    
+    li {
+      display: inline-block;
+      @include li-separator;
+    }
   }
   
   nav.categories {
@@ -39,6 +52,28 @@ header.main {
           color: #888;
         }
       }
+    }
+  }
+  
+  div.search {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    width: 340px;
+    color: $layout;
+    
+    input {
+      font-size: 15px;
+    }
+    input[type='search'] {
+      width: 200px;
+    }
+    input[type='submit'] {
+      background: none;
+      padding: 0;
+      border: 0;
+      color: $layout;
+      width: 20px;
     }
   }
   

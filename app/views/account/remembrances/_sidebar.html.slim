@@ -1,3 +1,7 @@
-- builder = RemembranceBuilder.new(current_user, params)
-= builder.wrap do
-  = builder.posts
+- return unless user_signed_in? and current_user.remembrance.any?
+section class="remembrance"
+  header
+    h1 Remembrance
+  ul
+    - current_user.remembrance.each do |post|
+      li == "#{link_to post.user, post.user} #{post.link_name} #{link_to 'show', post}"
