@@ -1,8 +1,8 @@
-= form_for new_post, :html => { :id => 'instant_form' } do |f|
+= form_for new_post, :html => { :id => 'instant' } do |f|
   fieldset
-    = f.text_area :content, :size => '40x2', :id => 'post_body'
-  div class="left" = link_to 'Advanced form', :action => :new
-  .actions
-    .button-group
-      = f.submit commit_title, :class => 'button'
-  .clear
+    = f.text_area :content, :size => '40x2', :id => 'post_content'
+  div class="actions group"
+    div class="left gray" = link_to 'Advanced form', :action => :new
+    div class="button-groups"
+      div class="button-group"
+        = f.submit commit_title, :class => 'button'

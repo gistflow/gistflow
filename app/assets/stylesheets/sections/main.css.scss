@@ -8,4 +8,58 @@ section.main {
       @include caption;
     }
   }
+  
+  form {
+    input[type="text"], textarea {
+      width: 570px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      color: #666;
+      border: 1px solid $layout;
+      font-size: 13px;
+      line-height: 18px;
+      padding: 4px;
+      
+      &:focus {
+        border-color: $charcoal;
+      }
+    }
+    
+    fieldset {
+      margin-bottom: 5px;
+    }
+    
+    .actions {
+      .left {
+        float: left;
+        width: 340px;
+        
+        &.gray {
+          a {
+            color: $layout;
+          
+            &:hover {
+              color: $charcoal;
+            }
+          }
+        }
+      }
+      .button-groups {
+        float: right;
+      }
+    }
+  }
+  
+  form#instant {
+    fieldset {
+      margin-bottom: 0;
+    }
+    textarea {
+      height: 36px;
+    }
+  }
 }
