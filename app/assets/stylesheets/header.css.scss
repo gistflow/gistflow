@@ -53,6 +53,10 @@ header.main {
       font-size: 14px;
       line-height: 22px;
       cursor: pointer;
+      
+      &:hover {
+        color: $charcoal;
+      }
     }
   }
   

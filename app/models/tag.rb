@@ -10,6 +10,10 @@ class Tag < ActiveRecord::Base
     name
   end
   
+  def with_sign
+    '#' << name.to_s
+  end
+  
   def to_param
     name
   end

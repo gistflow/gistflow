@@ -1,10 +1,15 @@
 @import "configuration";
 
 article.post {
-  header {
-    h1 {
-      font-size: 15px;
-      line-height: 28px;
+  header h1 {
+    font-size: 15px;
+    line-height: 28px;
+  }
+  
+  &.detail {
+    header h1 {
+      font-size: 22px;
+      line-height: 36px;
     }
   }
   

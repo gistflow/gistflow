@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :user_signed_in?, :current_user
+  helper_method :user_signed_in?, :current_user, :sidebar_tags
   
 protected
   
@@ -29,5 +29,9 @@ protected
       session[:user_id] = nil
       cookies.delete(:secret)
     end
+  end
+  
+  def sidebar_tags
+    user_signed_in? ? current_user.tags : Tag.popular
   end
 end

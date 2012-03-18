@@ -2,6 +2,4 @@
 section class="remembrance"
   header
     h1 Remembrance
-  ul
-    - current_user.remembrance.each do |post|
-      li == "#{link_to post.user, post.user} #{post.link_name} #{link_to 'show', post}"
+  = ul(current_user.remembrance.map { |p| "#{link_to p.user, p.user} #{p.link_name} #{link_to 'show', p}".html_safe })

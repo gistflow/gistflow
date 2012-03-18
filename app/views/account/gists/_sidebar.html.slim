@@ -3,8 +3,6 @@ section class="gists"
   header
     h1 Gists
   - if load_gists
-    ul
-      - current_user.github_gists.each do |gist|
-        li = link_to_gist(gist)
+    = ul(current_user.github_gists.map { |g| link_to_gist(g) })
   - else
     p = link_to_gists(current_user)
