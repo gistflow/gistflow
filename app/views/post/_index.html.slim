@@ -8,15 +8,15 @@
         = avatar_image(presenter.user, 26, post.avatar_type)
     div class="preview markdown group"
       = presenter.preview
-    footer class="notice group"
-      div class="button-group minor-group"
-        - if user_signed_in?
-          = link_to_memorize presenter.post
-          = link_to_like presenter.post
-        = link_to "Comments (#{presenter.comments_count})", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button icon comment'
-      div class="button-group minor-group"
-        - if current_user == post.user
-          = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
-        = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
-
+    footer class="group actions"
+      div class="button-groups"
+        div class="button-group minor-group"
+          - if user_signed_in?
+            = link_to_memorize presenter.post
+            = link_to_like presenter.post
+          = link_to "Comments (#{presenter.comments_count})", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button icon comment'
+        div class="button-group minor-group"
+          - if current_user == post.user
+            = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
+          = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
 = paginate posts
