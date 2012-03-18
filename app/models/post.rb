@@ -70,6 +70,10 @@ class Post < ActiveRecord::Base
     content.to_s.gsub('<cut>', "\r\n")
   end
   
+  def avatar_type
+    :user
+  end
+  
 protected
   
   def cuts_count

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    self.current_user = User.last
+    self.current_user = User.find_by_email('releu@me.com') || User.last
     redirect_to root_path
   end
   

@@ -1,0 +1,28 @@
+@import "configuration";
+
+.group:before, .group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+body {
+  font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #404040;
+  background: #fff;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+  
+  &:hover {
+    color: #0E4C89;
+  }
+}

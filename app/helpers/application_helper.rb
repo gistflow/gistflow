@@ -1,4 +1,24 @@
 module ApplicationHelper
+  def link_to_gist(gist)
+    options = {
+      :class => :'importable-gist',
+      :'data-gist-id' => gist.id,
+      :'data-gist-lang' => gist.lang
+    }
+    (link_to gist.id, '#', options) << ' ' << gist.description
+  end
+  
+  def link_to_gists(user)
+    un = user.username
+    title, url = "#{un}'s gists", "https://gist.github.com/#{un}"
+    (link_to title, url) << " on Github"
+  end
+  
+  
+  def title(title)
+    content_for(:title, title)
+  end
+  
   def commit_title(commit = 'Commit')
     commit << ' ' << (mac? ? '&#x2318;' : '&#x2303;') << '&#x21A9;'
     commit.html_safe
@@ -8,19 +28,13 @@ module ApplicationHelper
     request.env['HTTP_USER_AGENT'].to_s =~ /Macintosh/
   end
   
-  def caption(caption, options = {})
-    classes = [:caption]
-    classes << 'highlight' if options[:highlight]
-    
-    capture_haml do
-      haml_tag(:div, { :class => classes.join(' ') }) do
-        haml_concat caption
-      end
+  def avatar_image(user, size = 26, type = :user)
+    url = case type
+    when :user then user.gravatar(size)
+    when :article then asset_path('article.png')
+    when :question then asset_path('question.png')
     end
-  end
-  
-  def avatar_image(user, size = 26)
-    image_tag user.gravatar(size), :size => [size, size].join('x')
+    image_tag url, :size => [size, size].join('x')
   end
   
   def credits
@@ -61,12 +75,6 @@ module ApplicationHelper
         :class => 'button icon like replaceable', 
         :method => :post, 
         :remote => true
-    end
-  end
-    
-  def caption_haml(title)
-    haml_tag :div, :class => 'caption' do
-      haml_concat title
     end
   end
   
@@ -111,10 +119,8 @@ module ApplicationHelper
   end
   
   def javascript_enabled?
-    capture_haml do
-      haml_tag(:noscript) do
-        haml_tag(:img, :src => asset_path("no_js.jpg"))
-      end
+    content_tag(:noscript) do
+      concat(image_tag asset_path("no_js.jpg"), :alt => 'You have not JS')
     end
   end
   

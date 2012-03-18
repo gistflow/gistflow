@@ -4,7 +4,7 @@ class Account::GistsController < ApplicationController
   
   def index
     options = {
-      :partial => 'sidebar.html.haml',
+      :partial => 'sidebar.html.slim',
       :layout => false,
       :locals => { :load_gists => true }
     }

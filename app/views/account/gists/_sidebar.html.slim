@@ -1,0 +1,8 @@
+- return unless user_signed_in?
+section class="gists"
+  header
+    h1 Gists
+  - if load_gists
+    = ul(current_user.github_gists.map { |g| link_to_gist(g) })
+  - else
+    p = link_to_gists(current_user)

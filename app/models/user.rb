@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   after_create :send_welcome_email
   
-  def to_options
+  def to_param
     username
   end
   

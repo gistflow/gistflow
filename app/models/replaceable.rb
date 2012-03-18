@@ -17,9 +17,9 @@ class Replaceable
   end
   
   def replace_gists!
-    self.body = body.gsub(/\{gist:(\d+)\}/) do |match|
+    self.body = body.gsub(/gist:(\d+)/) do |match|
       id = match[/(\d+)/, 1]
-      link = link_to "gist-#{id}", "https://gist.github.com/#{id}"
+      link = link_to "gist:#{id}", "https://gist.github.com/#{id}"
       if options[:preview]
         link.html_safe.wrap_with_spaces
       else

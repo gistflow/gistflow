@@ -1,0 +1,100 @@
+@import "configuration";
+
+header.main {
+  position: relative;
+  padding-bottom: 0;
+  
+  h1 {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 3px 0 12px;
+    float: left;
+    width: 160px;
+  }
+  
+  .hr {
+    border-bottom: 1px solid $gray;
+    margin-bottom: 5px;
+  }
+  
+  nav.posts {
+    text-transform: lowercase;
+    
+    li {
+      display: inline-block;
+      @include li-separator;
+    }
+  }
+  
+  div.search {
+    float: left;
+    padding-top: 8px;
+    width: 340px;
+    color: $layout;
+    
+    input[type='search'] {
+      width: 200px;
+      -webkit-appearance: none;
+      font-size: 12px;
+      border: 1px solid $gray;
+      padding: 3px;
+    }
+    input[type='search']:focus {
+      border-color: $layout;
+    }
+    input[type='submit'] {
+      background: none;
+      padding: 0;
+      border: 0;
+      color: $layout;
+      width: 20px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
+      
+      &:hover {
+        color: $charcoal;
+      }
+    }
+  }
+  
+  nav.user {
+    float: right;
+    height: 35px;
+    width: 280px;
+    
+    ul {
+      padding: 7px 14px;
+      border: 1px solid $gray;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      box-shadow: inset 0 1px 0 white;
+      background-color: whiteSmoke;
+      background-image: -webkit-linear-gradient(top, white, whiteSmoke);
+      background-image: -o-linear-gradient(top, white, whiteSmoke);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, whiteSmoke));
+      background-image: -ms-linear-gradient(top, white, whiteSmoke);
+      background-image: -moz-linear-gradient(top, white, whiteSmoke);
+      background-image: linear-gradient(top, white, whiteSmoke);
+      float: right;
+      text-align: right;
+      
+      li {
+        display: inline-block;
+        line-height: 19px;
+        @include li-separator
+      }
+      
+      a {
+        text-decoration: none;
+        
+        &.username {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
