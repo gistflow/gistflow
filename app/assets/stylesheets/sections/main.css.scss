@@ -52,14 +52,21 @@ section.main {
         float: right;
       }
     }
+    
+    &#instant {
+      fieldset {
+        margin-bottom: 0;
+      }
+      textarea {
+        height: 36px;
+      }
+    }
   }
   
-  form#instant {
-    fieldset {
-      margin-bottom: 0;
-    }
-    textarea {
-      height: 36px;
+  ul.subscriptions {
+    li {
+      display: inline-block;
+      margin: 0 10px 5px 0;
     }
   }
 }

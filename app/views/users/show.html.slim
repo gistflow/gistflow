@@ -1,16 +1,14 @@
-.user
-  .avatar= avatar_image(@user, 66)
-  .username= @user.username
-  .clear
+- title "#{@user}'s posts"
+- content_for(:sidebar) do
+  section class="user"
+    header
+      h1 = @user
+    div class="user group"
+      div class="avatar" = avatar_image(@user, 66)
+      dl
+        - @user.contacts.each do |field, value|
+          dt(class=field)
+          dd= value
   
-  dl
-    - @user.contacts.each do |field, value|
-      dt  class=(field )
-      dd= value
-- if @user == current_user
-  = caption 'Settings', :highlight => true
-  = link_to 'Manage subscriptions', account_subscriptions_path, :class => 'button'
+= render :partial => 'post/index', :locals => { :posts => @posts }
 
-= caption 'Posts', :highlight => true
-= render :partial => 'post/post', :collection => @posts
-= paginate @posts

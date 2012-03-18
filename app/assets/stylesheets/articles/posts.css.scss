@@ -5,6 +5,7 @@ article.post {
     font-size: 15px;
     line-height: 28px;
   }
+  margin-bottom: 5px;
   
   &.detail {
     header h1 {
@@ -17,10 +18,7 @@ article.post {
     float: left;
     
     a {
-      float: left;
-      padding: 1px;
-      border: 1px solid $layout;
-      line-height: 0;
+      @include frame;
     }
   }
   

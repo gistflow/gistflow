@@ -23,6 +23,7 @@ html
             h1 = yield(:title)
         = yield
       section class="sidebar"
+        = yield(:sidebar)
         = render 'post/filter'
         = render 'users/sidebar'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }

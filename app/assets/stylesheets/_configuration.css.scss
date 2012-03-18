@@ -26,3 +26,10 @@ $charcoal: #aaa;
     display: none;
   }
 }
+
+@mixin frame {
+  float: left;
+  padding: 1px;
+  border: 1px solid $layout;
+  line-height: 0;
+}

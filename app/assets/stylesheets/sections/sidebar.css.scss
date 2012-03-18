@@ -1,3 +1,15 @@
+@import "configuration";
+
 section.sidebar {
   padding-top: 0;
+  
+  section.user {
+    .avatar {
+      @include frame;
+    }
+    
+    dl {
+      margin-left: 80px;
+    }
+  }
 }
