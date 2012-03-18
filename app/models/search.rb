@@ -11,7 +11,7 @@ class Search
     when '@' then
       url_helpers.user_path(query[1..-1])
     else
-      url_helpers.search_path(:query => query)
+      url_helpers.show_search_path(:query => query)
     end
   end
 end

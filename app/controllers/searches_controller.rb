@@ -5,6 +5,7 @@ class SearchesController < ApplicationController
   end
   
   def show
-    Post.includes(:user).search(params[:query])
+    @posts = Post.includes(:user).search(params[:query]).page(params[:page])
+    render :'search/show'
   end
 end
