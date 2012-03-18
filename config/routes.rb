@@ -16,6 +16,7 @@ Gistflow::Application.routes.draw do
   resources :posts, :only => :show
   
   resource :search, :only => :create
+  get 'search/:query' => 'search#show'
   resources :tags, :only => :show
   resources :users, :only => :show
   
