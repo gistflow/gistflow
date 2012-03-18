@@ -33,26 +33,6 @@ section.main {
       margin-bottom: 5px;
     }
     
-    .actions {
-      .left {
-        float: left;
-        width: 340px;
-        
-        &.gray {
-          a {
-            color: $layout;
-          
-            &:hover {
-              color: $charcoal;
-            }
-          }
-        }
-      }
-      .button-groups {
-        float: right;
-      }
-    }
-    
     &#instant {
       fieldset {
         margin-bottom: 0;
@@ -60,6 +40,26 @@ section.main {
       textarea {
         height: 36px;
       }
+    }
+  }
+  
+  .actions {
+    .left {
+      float: left;
+      width: 280px;
+      
+      &.gray {
+        a {
+          color: $layout;
+        
+          &:hover {
+            color: $charcoal;
+          }
+        }
+      }
+    }
+    .button-groups {
+      float: right;
     }
   }
   

@@ -28,17 +28,13 @@ module ApplicationHelper
     request.env['HTTP_USER_AGENT'].to_s =~ /Macintosh/
   end
   
-  def caption(caption, options = {})
-    classes = [:caption]
-    classes << 'highlight' if options[:highlight]
-    
-    content_tag :div, :class => classes.join(' ') do
-      concat caption
+  def avatar_image(user, size = 26, type = :user)
+    url = case type
+    when :user then user.gravatar(size)
+    when :article then asset_path('article.png')
+    when :question then asset_path('question.png')
     end
-  end
-  
-  def avatar_image(user, size = 26)
-    image_tag user.gravatar(size), :size => [size, size].join('x')
+    image_tag url, :size => [size, size].join('x')
   end
   
   def credits

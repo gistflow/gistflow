@@ -3,13 +3,14 @@ article class="post detail"
     h1 = @presenter.title
   div class="body markdown"
     = @presenter.body
-    footer
+  footer class="group actions"
+    div class="button-groups"
       div class="notice button-group minor-group group"
         = link_to_memorize @presenter.post if user_signed_in?
         = link_to_like @presenter.post
-        - if user_signed_in? and current_user == @presenter.user
-          div class="button-group minor-group"
-            = link_to "Edit", { :controller => @presenter.post.controller, :action => :edit, :id => @presenter.post.id }, :class => 'button icon edit'
+      - if user_signed_in? and current_user == @presenter.user
+        div class="button-group minor-group"
+          = link_to "Edit", { :controller => @presenter.post.controller, :action => :edit, :id => @presenter.post.id }, :class => 'button icon edit'
 
 section class="comments"
   header
@@ -18,10 +19,11 @@ section class="comments"
     = form_for [@presenter.post, Comment.new] do |f|
       fieldset
         = f.text_area :content, :size => '40x2', :id => 'post_body'
-      div class="left"
-        = f.check_box :question
-        = f.label :question, 'Is it a Question?'
       div class="actions group"
-        div class="button-group"
-          = f.submit commit_title('Comment'), :class => 'button'
+        div class="left"
+          = f.check_box :question
+          = f.label :question, 'Is it a Question?'
+        div class="button-groups"
+          div class="button-group"
+            = f.submit commit_title('Comment'), :class => 'button'
   = render :partial => 'comments/comment', :collection => @presenter.comments

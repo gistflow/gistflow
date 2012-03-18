@@ -4,8 +4,8 @@
     header
       h1 = presenter.title
     div class="avatar"
-      = link_to user_path(:id => presenter.user.username) do
-        = avatar_image(presenter.user)
+      = link_to presenter.user do
+        = avatar_image(presenter.user, 26, post.avatar_type)
     div class="preview markdown group"
       = presenter.preview
     footer class="notice group"
