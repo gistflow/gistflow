@@ -11,9 +11,8 @@
     footer class="group actions"
       div class="button-groups"
         div class="button-group minor-group"
-          - if user_signed_in?
-            = link_to_memorize presenter.post
-            = link_to_like presenter.post
+          = link_to_memorize presenter.post if user_signed_in?
+          = link_to_like presenter.post
           = link_to "Comments (#{presenter.comments_count})", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button icon comment'
         div class="button-group minor-group"
           - if current_user == post.user

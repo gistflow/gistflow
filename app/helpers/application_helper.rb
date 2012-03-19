@@ -63,7 +63,7 @@ module ApplicationHelper
   end
   
   def link_to_like(post)
-    if current_user == post.user or post.liked_by? current_user
+    if !user_signed_in? or current_user == post.user or post.liked_by? current_user
       link_to "#{post.likes_count} Likes", '#',
         :class => 'button icon like disabled'
     else

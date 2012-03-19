@@ -26,4 +26,7 @@ section class="comments"
         div class="button-groups"
           div class="button-group"
             = f.submit commit_title('Comment'), :class => 'button'
-  = render :partial => 'comments/comment', :collection => @presenter.comments
+  - if @presenter.comments.any?
+    = render :partial => 'comments/comment', :collection => @presenter.comments
+  - else
+    p No comments yet
