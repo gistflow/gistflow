@@ -60,7 +60,7 @@ describe Account::Github do
     context 'account persisted' do
       let(:account) { Factory(:account_github) }
       before do
-        auth['credentials']['token'] = account.token
+        auth['uid'] = account.github_id
       end
       
       it 'should find account' do

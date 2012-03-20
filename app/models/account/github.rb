@@ -7,7 +7,7 @@ class Account::Github < ActiveRecord::Base
   def self.find_or_create_by_omniauth(omniauth)
     token = omniauth['credentials']['token']
     ActiveRecord::Base.transaction do
-      find_by_token(token) || create! do |account|
+      find_by_github_id(omniauth['uid']) || create! do |account|
         account.token     = token
         account.github_id = omniauth['uid']
         account.build_user do |user|
