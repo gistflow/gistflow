@@ -8,4 +8,8 @@ class SearchesController < ApplicationController
     @posts = Post.includes(:user).search(params[:query]).page(params[:page])
     render :'search/show'
   end
+  
+  def empty
+    render :'search/empty'
+  end
 end

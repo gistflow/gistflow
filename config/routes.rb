@@ -16,6 +16,7 @@ Gistflow::Application.routes.draw do
   resources :posts, :only => :show
   
   resource :search, :only => :create
+  get '/empty_search' => 'searches#empty', :as => 'nil_search'
   get '/search/:query' => 'searches#show', :as => 'show_search'
   resources :tags, :only => :show
   resources :users, :only => :show
