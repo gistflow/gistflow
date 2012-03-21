@@ -58,6 +58,10 @@ class Post < ActiveRecord::Base
     ln[0..30].strip
   end
   
+  def category
+    self.class.name.split('::').last
+  end
+  
   def controller
     self.class.name.underscore.pluralize
   end
@@ -68,10 +72,6 @@ class Post < ActiveRecord::Base
   
   def body
     content.to_s.gsub('<cut>', "\r\n")
-  end
-  
-  def avatar_type
-    :user
   end
   
 protected
