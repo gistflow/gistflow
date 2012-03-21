@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
   
 protected
   
-  def notify_batman
+  def notify_batman(exception)
     notify_airbrake(exception) if Rails.env.production?
     render 'errors/five_hundred', :layout => 'error'
   end
   
-  def record_not_found
+  def record_not_found(exception)
     render 'errors/not_found', :layout => 'error'
   end
   
