@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    title Gistflow
+  body class="error-page"
+    = yield

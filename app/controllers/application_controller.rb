@@ -1,25 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  # rescue_from StandardError, :with => :handle_exceptions
+  rescue_from StandardError, :with => :handle_exceptions
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
 protected
   
   def handle_exceptions(exception)
-    case exception
-      when ActiveRecord::RecordNotFound then render_not_found 
-      when ActionController::RoutingError then render_not_found 
-      else render_error
+    notify_airbrake(exception) if Rails.env.production?
+    raise exception.backtrace.join("\n")
+    template = case exception
+    when ActiveRecord::RecordNotFound, ActionController::RoutingError then
+      'errors/not_found'
+    else
+      'errors/five_hundred'
     end
-  end
-
-  def render_not_found
-    render 'errors/not_found', :layout => 'blank'
-  end
-  
-  def render_error
-    render 'errors/five_hundred', :layout => 'blank'
+    
+    render template, :layout => 'error'
   end
   
   def authenticate!
