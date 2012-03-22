@@ -1,7 +1,3 @@
-section class='error'
-  header
-    = image_tag 'batman.jpg'
-    h1 An error occurred.
-    h2 We have received a message about and will solve it soon.
-  footer
-    p == "Go to #{link_to 'http://gistflow.com', root_path}"
+- content_for(:img) { image_tag 'batman.jpg', size: '620x414' }
+- content_for(:title) { 'An error occurred.' }
+h2 We have received a message about and will solve it soon.

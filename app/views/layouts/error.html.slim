@@ -7,4 +7,10 @@ html
     = csrf_meta_tags
     title Gistflow
   body class="error-page"
-    = yield
+    section class="error"
+      header
+        = yield(:img)
+        h1 = yield(:title)
+      = yield
+      footer
+        p == "Return to the #{link_to 'http://gistflow.com', root_path}"

@@ -1,6 +1,2 @@
-section class='error'
-  header
-    = image_tag 'escher.jpg'
-    h1 Seems like you are on a wrong way.
-  footer
-    p == "Go to #{link_to 'http://gistflow.com', root_path}"
+- content_for(:img) { image_tag 'escher.jpg', size: '620x478' }
+- content_for(:title) { 'Seems like you are on a wrong way.' }
