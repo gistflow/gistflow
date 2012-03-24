@@ -10,7 +10,9 @@ article.post {
       font-weight: bold;
     }
   }
-  margin-bottom: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed $layout;
   
   &.detail {
     header h1 {

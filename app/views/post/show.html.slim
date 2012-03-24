@@ -1,6 +1,6 @@
 article class="post detail"
   header
-    h1 = @presenter.title
+    h1 = @presenter.detail_title
   div class="body markdown"
     = @presenter.body
   footer class="group actions"
@@ -12,7 +12,7 @@ article class="post detail"
         div class="button-group minor-group"
           = link_to "Edit", { :controller => @presenter.post.controller, :action => :edit, :id => @presenter.post.id }, :class => 'button icon edit'
 
-section class="comments"
+section class="comments" id="comments"
   header
     h1 Comments
   - if user_signed_in?

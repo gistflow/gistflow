@@ -1,19 +1,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  rescue_from Exception, :with => :notify_batman
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Exception, with: :notify_batman
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
 protected
   
   def notify_batman(exception)
-    notify_airbrake(exception) if Rails.env.production?
-    render 'errors/five_hundred', :layout => 'error'
+    if Rails.env.production?
+      notify_airbrake(exception)
+      render 'errors/five_hundred', :layout => 'error'
+    else
+      raise exception
+    end
   end
   
   def record_not_found(exception)
-    render 'errors/not_found', :layout => 'error'
+    if Rails.env.production?
+      render 'errors/not_found', :layout => 'error'
+    else
+      raise exception
+    end
   end
   
   def authenticate!

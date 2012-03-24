@@ -45,6 +45,10 @@ class Posts::ShowPresenter
     end
   end
   
+  def detail_title
+    link_to post.title, post
+  end
+  
   def type
     post.type.split('::').last.downcase
   end
