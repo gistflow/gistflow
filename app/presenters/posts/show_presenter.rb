@@ -38,15 +38,23 @@ class Posts::ShowPresenter
       t = link_to post.title, post
       "#{t} #{c}".html_safe
     else
-      u = link_to user.username, user_path(:id => user.username), :class => 'username'
-      t = link_to type.pluralize, type_path
-      w = time_ago_in_words(post.created_at)
-      "#{u} wrote in #{t} #{w} ago".html_safe
+      simple_title
     end
   end
   
+  def simple_title
+    u = link_to user.username, user_path(:id => user.username), :class => 'username'
+    t = link_to type.pluralize, type_path
+    w = time_ago_in_words(post.created_at)
+    "#{u} wrote in #{t} #{w} ago".html_safe
+  end
+  
   def detail_title
-    link_to post.title, post
+    if post.title?
+      link_to post.title, post
+    else
+      simple_title
+    end
   end
   
   def type

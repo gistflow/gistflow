@@ -29,14 +29,18 @@ article.post {
     }
   }
   
+  .markdown img {
+    max-width: 580px;
+    margin: 5px 0;
+  }
+  
   .preview {
     margin-left: 40px;
-    
     img {
-      max-height: 160px;
       max-width: 540px;
-      background: $gray;
       margin: 5px 10px 0 0;
+      background: $gray;
+      max-height: 160px;
     }
   }
   
