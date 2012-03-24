@@ -1,0 +1,8 @@
+@import "configuration";
+
+.button.disabled {
+  background: whiteSmoke !important;
+  &:active, &:hover, &:focus, &.active {
+    color: $base;
+  }
+}

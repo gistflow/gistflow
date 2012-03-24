@@ -34,9 +34,9 @@ class Posts::ShowPresenter
   
   def title
     if post.title?
-      c = link_to post.category.pluralize, post_articles_path, :class => 'type'
+      c = link_to post.category, post_articles_path, :class => 'label'
       t = link_to post.title, post
-      "#{c} :: #{t}".html_safe
+      "#{t} #{c}".html_safe
     else
       u = link_to user.username, user_path(:id => user.username), :class => 'username'
       t = link_to type.pluralize, type_path
