@@ -2,6 +2,7 @@ doctype html
 html
   head
     meta charset='UTF-8' 
+    meta name='description' content='Gists-based blog for developers'
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -24,7 +25,7 @@ html
         = yield
       section class="sidebar"
         = yield(:sidebar)
-        = render 'post/filter'
+        = render :partial => 'general/about'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
         = render 'account/remembrances/sidebar'
         = render 'account/tags/sidebar'

@@ -3,6 +3,10 @@
 section.sidebar {
   padding-top: 0;
   
+  section {
+    margin-bottom: 10px;
+  }
+  
   section.user {
     .avatar {
       @include frame;
