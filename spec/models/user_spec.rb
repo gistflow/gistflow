@@ -1,6 +1,21 @@
 require 'spec_helper'
 
 describe User do
+  describe '#intested_posts' do
+    before do
+      @user = FactoryGirl.create(:user)
+      @tag = FactoryGirl.create(:tag)
+      @other_post = FactoryGirl.create(:post)
+      @subscription = FactoryGirl.create(:subscription, :user => @user, :tag => @tag)
+      @intrested_post = FactoryGirl.create(:post)
+      @intrested_post.tags << @tag
+    end
+    
+    it 'should find all intrested posts' do
+      @user.intrested_posts.should == [@intrested_post]
+    end
+  end
+
   describe 'admin factory' do
     subject { FactoryGirl.create(:admin) }
     it { should be_admin }

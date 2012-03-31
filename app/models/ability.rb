@@ -15,6 +15,7 @@ class Ability
       cannot :like, :posts, :user_id => user.id
       can :destroy, :sessions
       can :index, [:'account/gists', :'account/notifications']
+      can [:index, :create, :destroy], :'account/subscriptions'
       can [:edit, :update, :destroy], :posts, :user_id => user.id
     end
   end

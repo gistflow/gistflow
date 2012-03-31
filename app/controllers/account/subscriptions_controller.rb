@@ -14,7 +14,7 @@ class Account::SubscriptionsController < ApplicationController
   end
   
   def destroy
-    current_user.subscriptions.destroy(params[:id])
+    current_user.subscriptions.find(params[:id]).destroy
     redirect_to :back
   end
 end

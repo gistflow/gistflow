@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
-  before_filter :authenticate!, :except => [:show, :index]
+  before_filter :authenticate!, :except => :show
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
+    @posts = current_user.intrested_posts.page(params[:page])
   end
 
   def show

@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
   
   after_create :send_welcome_email
   
+  def intrested_posts
+    Post.joins(:tags => { :subscriptions => :user }).
+      where(:users => { :id => id }).uniq
+  end
+  
   def to_param
     username
   end

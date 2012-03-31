@@ -24,8 +24,22 @@ describe Ability do
     it { should be_able_to(:memorize, :posts) }
     it { should be_able_to(:destroy, :sessions) }
     it { should be_able_to(:forgot, :posts) }
+    it { should be_able_to(:index, :'account/subscriptions') }
+    it { should be_able_to(:create, :'account/subscriptions') }
     it { should be_able_to(:index, :'account/gists') }
     it { should be_able_to(:index, :'account/notifications') }
+    
+    describe 'working with subscriptions' do
+      context 'alian subscription' do
+        let(:subscription) { FactoryGirl.create(:subscription) }
+        it { should_not be_able_to(:destroy, subscription) }
+      end
+      
+      context 'self subscriptions' do
+        let(:subscription) { FactoryGirl.create(:subscription, :user => user)}
+        it { should be_able_to(:destroy, :subscription) }
+      end
+    end
     
     describe 'working with posts' do
       context 'alian post' do
