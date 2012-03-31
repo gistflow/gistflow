@@ -64,8 +64,13 @@ class User < ActiveRecord::Base
     notifications.unread.update_all(:read => true)
   end
   
-  private
-    def send_welcome_email
-      UserMailer.welcome_email(id).deliver if email
-    end
+  def admin?
+    username? && Rails.config.admins.include?(username)
+  end
+  
+private
+  
+  def send_welcome_email
+    UserMailer.welcome_email(id).deliver if email
+  end
 end
