@@ -33,7 +33,7 @@ module ApplicationHelper
   end
   
   def link_to_memorize(post)
-    base_url, base_options = { controller: post.controller, id: post.id },
+    base_url, base_options = { controller: :posts, id: post.id },
       { remote: true, class: 'button replaceable remembrance' }
     
     title, url, options = if current_user.memorized? post
@@ -46,12 +46,7 @@ module ApplicationHelper
   end
   
   def link_to_comments(post)
-    link_to "Comments (#{post.comments_count})", {
-      controller: post.controller,
-      action:     :show,
-      id:         post.id,
-      anchor:     'comments'
-    }, class: 'button icon comment'
+    link_to "Comments (#{post.comments_count})", post, class: 'button icon comment'
   end
   
   def link_to_like(post)
@@ -59,11 +54,7 @@ module ApplicationHelper
       content_tag :span, "#{post.likes_count} Likes",
         class: 'button icon like disabled'
     else
-      link_to "Like", { 
-        controller: post.controller, 
-        action:     :like, 
-        id:         post.id 
-      }, {
+      link_to "Like", like_post_path(post), {
         class: 'button icon like replaceable',
         method: :post,
         remote: true
@@ -97,10 +88,6 @@ module ApplicationHelper
     locals = { subscription: subscription }
     partial = subscription.new_record? ? 'form' : 'destroy_form'
     render partial: "subscriptions/#{partial}", locals: locals
-  end
-  
-  def current_type
-    params[:controller].split('/').last.singularize
   end
   
   def javascript_enabled?

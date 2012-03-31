@@ -10,7 +10,7 @@ article class="post detail"
         = link_to_like @presenter.post
       - if user_signed_in? and current_user == @presenter.user
         div class="button-group minor-group"
-          = link_to "Edit", { :controller => @presenter.post.controller, :action => :edit, :id => @presenter.post.id }, :class => 'button icon edit'
+          = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
 
 section class="comments" id="comments"
   header

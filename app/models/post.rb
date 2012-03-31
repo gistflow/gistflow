@@ -45,10 +45,6 @@ class Post < ActiveRecord::Base
     end
   end
   
-  def short_class_name
-    self.class.name.underscore.split('/').last
-  end
-  
   def link_name
     ln = title.blank? ? preview : title
     ln[0..30].strip
@@ -56,10 +52,6 @@ class Post < ActiveRecord::Base
   
   def category
     self.class.name.split('::').last
-  end
-  
-  def controller
-    self.class.name.underscore.pluralize
   end
   
   def preview

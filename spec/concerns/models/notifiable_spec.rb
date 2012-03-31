@@ -16,7 +16,7 @@ describe Models::Notifiable do
   describe 'when @user is mentioned in comment' do
     before(:each) do
       @user = FactoryGirl.create(:user)
-      @comment = FactoryGirl.create(:comment, :body => "#{Faker::Lorem.paragraph} @#{@user.username}} ")
+      @comment = FactoryGirl.create(:comment, :content => "#{Faker::Lorem.paragraph} @#{@user.username}} ")
     end
     
     it "should be created for @user" do

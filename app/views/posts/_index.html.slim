@@ -16,6 +16,6 @@
           = link_to_comments presenter.post
         div class="button-group minor-group"
           - if current_user == post.user
-            = link_to "Edit", { :controller => post.controller, :action => :edit, :id => post.id }, :class => 'button icon edit'
-          = link_to "Show", { :controller => post.controller, :action => :show, :id => post.id }, :class => 'button primary'
+            = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
+          = link_to "Show", post, :class => 'button primary'
 = paginate posts

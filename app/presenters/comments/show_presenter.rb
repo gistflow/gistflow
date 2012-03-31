@@ -1,5 +1,5 @@
 class Comments::ShowPresenter
-  attr_reader :controller, :comment
+  attr_reader :comment, :controller
   
   extend ActiveModel::Naming
   include ActionView::Helpers::UrlHelper

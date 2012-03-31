@@ -1,5 +1,5 @@
 class Posts::ShowPresenter
-  attr_reader :controller, :post
+  attr_reader :post, :controller
   
   extend ActiveModel::Naming
   include ActionView::Helpers::UrlHelper
@@ -35,7 +35,6 @@ class Posts::ShowPresenter
   def title
     if post.title?
       t = link_to post.title, post
-      "#{t}".html_safe
     else
       simple_title
     end
