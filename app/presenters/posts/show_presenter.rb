@@ -34,9 +34,8 @@ class Posts::ShowPresenter
   
   def title
     if post.title?
-      c = link_to post.category, post_path(post), :class => 'label'
       t = link_to post.title, post
-      "#{t} #{c}".html_safe
+      "#{t}".html_safe
     else
       simple_title
     end
