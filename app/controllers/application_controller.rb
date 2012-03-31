@@ -26,9 +26,9 @@ protected
   end
   
   def authenticate!
-    # unless user_signed_in?
-    #   redirect_to root_path, :alert => 'You should be logged in.'
-    # end
+    unless user_signed_in?
+      redirect_to root_path, :alert => 'You should be logged in.'
+    end
   end
   
   def user_signed_in?
