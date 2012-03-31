@@ -8,7 +8,7 @@ You are always welcome to contribute or create issue. Checkout [issues page](htt
 
 ## Contributors
 
-* [Sergey Tolubaev](https://github.com/makaroni4) (releu)
+* [Jan Bernacki](https://github.com/makaroni4) (releu)
 * [Anatoli Makarevich](https://github.com/releu) (makaroni4)
 
 ## License
