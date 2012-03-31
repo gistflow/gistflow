@@ -233,7 +233,7 @@ DEPENDENCIES
   redcarpet
   redis
   rspec-rails
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.2.5)
   slim
   sqlite3
   state_machine
