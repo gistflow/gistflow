@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   validates :cuts_count, :inclusion => { :in => [0, 1] }
   validates :preview, :length => 3..500
   
-  attr_accessible :title, :content
+  attr_accessible :title, :content, :question
   
   if Rails.env.production?
     after_create  :create_indextank_document

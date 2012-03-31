@@ -25,14 +25,6 @@ module MenuHelper
     end
   end
   
-  def post_items
-    if user_signed_in?
-      [link_to('New Post', new_post_path)]
-    else
-      []
-    end
-  end
-  
   def categories_items
     { :Articles  => post_articles_path,
       :Questions => post_questions_path,

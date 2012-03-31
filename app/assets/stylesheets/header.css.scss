@@ -19,12 +19,10 @@ header.main {
   }
   
   nav.posts {
+    position: absolute;
     text-transform: lowercase;
-    
-    li {
-      display: inline-block;
-      @include li-separator;
-    }
+    right: 370px;
+    top: 65px;
   }
   
   div.search {

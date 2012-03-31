@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120331095446) do
+ActiveRecord::Schema.define(:version => 20120331104448) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120331095446) do
     t.integer  "user_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.boolean  "question"
   end
 
   create_table "posts_tags", :id => false, :force => true do |t|

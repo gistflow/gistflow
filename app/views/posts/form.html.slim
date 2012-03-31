@@ -8,6 +8,9 @@
     = f.text_field :title, :placeholder => 'Title'
   fieldset
     = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut>Body", :class => 'hint', :id => 'post_content'
+  fieldset
+    = f.check_box :question
+    = f.label :question, 'Is it a Question?'
   div class="actions group"
     div class="left"
       | This text will be parsed by 

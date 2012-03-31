@@ -16,8 +16,9 @@ html
           = render 'search/form'
           nav class="user" = ul(authentication_items)
         = render_flash
-        - if user_signed_in?
-          nav class="posts" = ul(post_items)
+        - if show_new_post_link?
+          nav class="posts" 
+            = link_to('New Post', new_post_path, :class => 'button add icon')
       section class="main"
         - if content_for?(:title)
           header
