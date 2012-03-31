@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  enable_authorization
   protect_from_forgery
   
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found

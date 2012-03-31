@@ -13,6 +13,7 @@ gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'redcarpet'
 gem 'redis'
 gem 'indextank'
+gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 
 group :test, :development do
   gem 'factory_girl_rails'

@@ -6,6 +6,13 @@ GIT
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
 
+GIT
+  remote: git://github.com/ryanb/cancan.git
+  revision: c94de4ab1805d2e080ebd658051c59d0ec5147ce
+  branch: 2.0
+  specs:
+    cancan (2.0.0.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -209,6 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  cancan!
   coffee-rails (~> 3.2.1)
   dalli
   database_cleaner
