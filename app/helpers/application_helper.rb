@@ -32,14 +32,6 @@ module ApplicationHelper
     image_tag user.gravatar(size), size: [size, size].join('x')
   end
   
-  def credits
-    creators = %w(releu makaroni4).shuffle.map do |u|
-      link_to "@#{u}", "https://github.com/#{u}"
-    end
-    
-    "Created by #{creators.first} and #{creators.last}".html_safe
-  end
-  
   def link_to_memorize(post)
     base_url, base_options = { controller: post.controller, id: post.id },
       { remote: true, class: 'button replaceable remembrance' }

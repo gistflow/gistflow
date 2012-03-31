@@ -32,10 +32,10 @@ html
         = render 'account/tags/sidebar'
     footer class="main"
       div class="wrap"
-        p= credits << '.'
         p
           | If you have any ideas, comments or suggestions please 
           = (link_to 'create issue', 'https://github.com/gist-flow/gistflow/issues')
           |  or 
           = link_to 'email us', 'mailto:info@gistflow.com'
           | .
+        = render :partial => 'shared/cc'
