@@ -14,6 +14,7 @@ describe Ability do
     it { should be_able_to(:show, :tags) }
     it { should be_able_to(:show, :searches) }
     it { should be_able_to(:create, :searches) }
+    it { should be_able_to(:create, :users) }
   end
   
   context 'Authorized user' do

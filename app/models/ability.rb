@@ -8,6 +8,7 @@ class Ability
     can :index, :home
     can :show, [:users, :posts, :tags]
     can [:show, :create], :searches
+    can :create, :users
     
     if user
       can(:access, :all) and return if user.admin?
