@@ -5,12 +5,16 @@ header.main {
   padding-bottom: 0;
   
   h1 {
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 34px;
+    line-height: 34px;
     font-weight: bold;
-    padding: 3px 0 12px;
+    padding: 3px 0 6px;
     float: left;
     width: 160px;
+    font-family: 'Palatino', Georgia, sans-serif;
+    text-transform: lowercase;
+    position: relative;
+    bottom: 2px;
   }
   
   .hr {
@@ -30,6 +34,8 @@ header.main {
     padding-top: 8px;
     width: 340px;
     color: $layout;
+    position: relative;
+    bottom: 1px;
     
     input[type='search'] {
       width: 200px;
