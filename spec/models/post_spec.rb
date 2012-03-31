@@ -12,7 +12,7 @@ describe Post do
       $indextank.indexes('postsx_dev').delete rescue IndexTank::NonExistentIndex
       $indextank.indexes('postsx_dev').add :public => false
       begin
-        @post = Factory(:post, title: 'foo', content: 'bar bar bar')
+        @post = FactoryGirl.create(:post, title: 'foo', content: 'bar bar bar')
       rescue IndexTank::IndexInitializing
         retry
         sleep 0.5

@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    username? && Rails.config.admins.include?(username)
+    username? && Rails.application.config.admins.include?(username)
   end
   
 private

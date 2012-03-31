@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Taggable do
   describe "#assign_tags" do
     before(:each) do
-      @post = Factory(:post_with_tag)
+      @post = FactoryGirl.create(:post_with_tag)
     end
     
     it {@post.tags.map(&:name).should == ["tag_1"]}
@@ -14,7 +14,7 @@ describe Taggable do
   
   describe "#update_posts_counts" do
     before(:each) do
-      @post = Factory(:post_with_tag)
+      @post = FactoryGirl.create(:post_with_tag)
     end
     
     it "should increment posts_count for each tag" do

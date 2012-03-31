@@ -58,7 +58,7 @@ describe Account::Github do
     it { Account::Github.should respond_to(:find_or_create_by_omniauth) }
     
     context 'account persisted' do
-      let(:account) { Factory(:account_github) }
+      let(:account) { FactoryGirl.create(:account_github) }
       before do
         auth['uid'] = account.github_id
       end
