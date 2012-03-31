@@ -51,7 +51,7 @@ module MenuHelper
       
       items << link_to(
         "notifications#{unread_notifications_block}".html_safe,     
-        notifications_path
+        account_notifications_path
       )
       items << link_to('logout', logout_path)
     else

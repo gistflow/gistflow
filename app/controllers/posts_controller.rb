@@ -7,49 +7,60 @@ class PostsController < ApplicationController
   end
 
   def show
-    @presenter = Posts::ShowPresenter.new(post)
+    @post = Post.find(params[:id])
+    @presenter = Posts::ShowPresenter.new(@post)
   end
 
   def new
-    post = Post.new
+    @post = Post.new
+    @presenter = Posts::FormPresenter.new(@post)
     flash[:info] = "Add your gists to the post by click on gist id."
-    @presenter = Posts::FormPresenter.new(post)
     render :form
   end
 
   def edit
-    @presenter = Posts::FormPresenter.new(post)
+    @post = Post.find(params[:id])
+    authorize! :edit, @post
+    
+    @presenter = Posts::FormPresenter.new(@post)
     render :form
   end
 
   def create    
-    post = Post.new(post_params)
-    post.user = current_user
+    @post = current_user.posts.build(params[:post])
     
-    if post.save
-      redirect_to post_path(post)
+    if @post.save
+      redirect_to @post
     else
-      @presenter = Posts::FormPresenter.new(post)
+      @presenter = Posts::FormPresenter.new(@post)
       render :form
     end
   end
 
   def update
-    post = current_user.posts.find(params[:id])
-    if post.update_attributes(post_params)
-      redirect_to post
+    @post = Post.find(params[:id])
+    authorize! :update, @post
+    
+    if @post.update_attributes(params[:post])
+      redirect_to @post
     else
-      @presenter = Posts::FormPresenter.new(post)
+      @presenter = Posts::FormPresenter.new(@post)
+      render :form
     end
   end
 
   def destroy
-    current_user.posts.find(params[:id]).destroy
+    @post = Post.find(params[:id])
+    authorize! :destroy, @post
+    
+    @post.destroy
     redirect_to root_path
   end
   
   def like
-    @post = post
+    @post = Post.find(params[:id])
+    authorize! :like, @post
+    
     current_user.like @post
     respond_to do |format|
       format.json do
@@ -60,22 +71,22 @@ class PostsController < ApplicationController
   end
   
   def memorize
-    @post = post
+    @post = Post.find(params[:id])
+    authorize! :memorize, @post
+    
     current_user.memorize @post
     render_memorize_link
   end
   
   def forgot
-    @post = post
+    @post = Post.find(params[:id])
+    authorize! :forgot, @post
+    
     current_user.forgot @post
     render_memorize_link
   end
   
-protected  
-  
-  def post
-    Post.find(params[:id])
-  end
+protected
 
   def render_memorize_link
     respond_to do |format|
@@ -84,9 +95,5 @@ protected
         render :json => { :new_link => new_link }
       end
     end
-  end
-  
-  def post_params
-    params["#{Post.name.underscore.gsub('/','_')}"]
   end
 end

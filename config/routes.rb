@@ -22,8 +22,8 @@ Gistflow::Application.routes.draw do
     resources :subscriptions, :only => [:index, :create, :destroy]
     resource :remembrance, :only => :show
     resources :gists, :only => :index
+    resources :notifications, :only => :index
   end
-  resources :notifications, :only => :index
   resources :gists, :only => :show
   
   root to: 'home#index'

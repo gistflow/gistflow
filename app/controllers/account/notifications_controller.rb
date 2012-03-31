@@ -1,4 +1,4 @@
-class NotificationsController < ApplicationController
+class Account::NotificationsController < ApplicationController
   before_filter :mark_notifications_read
   
   def index
