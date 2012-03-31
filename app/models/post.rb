@@ -11,23 +11,19 @@ class Post < ActiveRecord::Base
   default_scope :order => 'id desc'
   
   validates :user, :presence => true
+  validates :title, :presence => true
   validates :cuts_count, :inclusion => { :in => [0, 1] }
   validates :preview, :length => 3..500
   
   attr_accessible :title, :content
   
-  after_create  :create_indextank_document
-  after_update  :update_indextank_document
-  after_destroy :destroy_indextank_document
+  if Rails.env.production?
+    after_create  :create_indextank_document
+    after_update  :update_indextank_document
+    after_destroy :destroy_indextank_document
+  end
   
   class << self
-    def constantize(type)
-      if ['Post::Gossip', 'Post::Article', 'Post::Question'].include?(type)
-        type.constantize
-      else
-        raise "unknown type \"#{type}\""
-      end
-    end
     
     def search(text)
       text.strip!

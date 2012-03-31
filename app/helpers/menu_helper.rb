@@ -27,9 +27,7 @@ module MenuHelper
   
   def post_items
     if user_signed_in?
-      [ link_to('New Article', new_post_article_path),
-        link_to('New Question', new_post_question_path),
-        link_to('New Gossip', post_gossips_path) ]
+      [link_to('New Post', new_post_path)]
     else
       []
     end

@@ -1,4 +1,4 @@
-class Post::CommentsController < ApplicationController
+class CommentsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:create]
   
   def create  

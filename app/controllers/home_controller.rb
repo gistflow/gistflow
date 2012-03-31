@@ -1,4 +1,4 @@
-class Post::HomeController < Post::BaseController
+class HomeController < PostsController
   def index
     if params[:text]
       @posts = Post.includes(:user).search(params[:text]).page(params[:page])

@@ -1,6 +1,0 @@
-- if user_signed_in?
-  - title 'New gossip'
-  = render :partial => 'post/instant_form', :locals => { :new_post => @gossip }
-- else
-  - title 'Gossips'
-= render :partial => 'post/index', :locals => { :posts => @posts }

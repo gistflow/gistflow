@@ -34,7 +34,7 @@ class Posts::ShowPresenter
   
   def title
     if post.title?
-      c = link_to post.category, post_articles_path, :class => 'label'
+      c = link_to post.category, post_path(post), :class => 'label'
       t = link_to post.title, post
       "#{t} #{c}".html_safe
     else
@@ -44,7 +44,7 @@ class Posts::ShowPresenter
   
   def simple_title
     u = link_to user.username, user_path(:id => user.username), :class => 'username'
-    t = link_to type.pluralize, type_path
+    t = link_to "post", post
     w = time_ago_in_words(post.created_at)
     "#{u} wrote in #{t} #{w} ago".html_safe
   end
@@ -57,24 +57,7 @@ class Posts::ShowPresenter
     end
   end
   
-  def type
-    post.type.split('::').last.downcase
-  end
-  
   def comments
     post.comments.to_a.select(&:persisted?)
-  end
-  
-protected
-
-  def type_path
-    case post.class.to_s
-    when 'Post::Article' then
-      post_articles_path
-    when 'Post::Question' then
-      post_questions_path
-    when 'Post::Gossip' then
-      post_gossips_path
-    end
   end
 end

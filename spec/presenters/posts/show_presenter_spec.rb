@@ -17,15 +17,5 @@ describe Posts::ShowPresenter do
       it { presenter.preview.should include('preview')  }
       it { presenter.body.should include('preview')  }
     end
-
-    context 'context with only title' do
-      let(:post) { Factory(:gossip) }
-      let(:presenter) { Posts::ShowPresenter.new(post) }
-      
-      it "should display title with username wrote" do
-        presenter.title.should include("#{post.user.username}")
-        presenter.title.should include("wrote")
-      end
-    end
   end
 end

@@ -1,37 +1,36 @@
-class Post::BaseController < ApplicationController
+class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
   
   def index
-    @posts = model.includes(:user).page(params[:page])
+    @posts = Post.includes(:user).page(params[:page])
   end
 
   def show
     @presenter = Posts::ShowPresenter.new(post)
-    render :'post/show'
   end
 
   def new
-    post = model.new
+    post = Post.new
     flash[:info] = "Add your gists to the post by click on gist id."
     @presenter = Posts::FormPresenter.new(post)
-    render :'post/form'
+    render :form
   end
 
   def edit
     @presenter = Posts::FormPresenter.new(post)
-    render :'post/form'
+    render :form
   end
 
   def create    
-    post = model.new(post_params)
+    post = Post.new(post_params)
     post.user = current_user
     
     if post.save
-      redirect_to :action => :index
+      redirect_to post_path(post)
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :'post/form'
+      render :form
     end
   end
 
@@ -41,7 +40,6 @@ class Post::BaseController < ApplicationController
       redirect_to post
     else
       @presenter = Posts::FormPresenter.new(post)
-      render :'post/form'
     end
   end
 
@@ -76,7 +74,7 @@ class Post::BaseController < ApplicationController
 protected  
   
   def post
-    model.find(params[:id])
+    Post.find(params[:id])
   end
 
   def render_memorize_link
@@ -89,6 +87,6 @@ protected
   end
   
   def post_params
-    params["#{model.name.underscore.gsub('/','_')}"]
+    params["#{Post.name.underscore.gsub('/','_')}"]
   end
 end
