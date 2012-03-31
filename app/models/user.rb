@@ -4,9 +4,6 @@ class User < ActiveRecord::Base
   
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
-  has_many :articles, :class_name => 'Post::Article'
-  has_many :questions, :class_name => 'Post::Question'
-  has_many :gossips, :class_name => 'Post::Gossip'
   has_many :likes
   has_many :comments
   has_many :notifications

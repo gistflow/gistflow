@@ -24,15 +24,7 @@ module MenuHelper
       end
     end
   end
-  
-  def categories_items
-    { :Articles  => post_articles_path,
-      :Questions => post_questions_path,
-      :Gossips => post_gossips_path }.map do |name, link|
-      link_to_unless_current name, link
-    end
-  end
-  
+    
   def authentication_items
     items = []
     if user_signed_in?

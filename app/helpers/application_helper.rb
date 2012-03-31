@@ -81,11 +81,7 @@ module ApplicationHelper
     
     # IDEA may be we need #tags in page so link to notifiable lead to
     # exact comment or post
-    record_link = link_to post.title || 'gossip', {
-      controller: post.controller,
-      action:     :show,
-      id:         post.id
-    }
+    record_link = link_to post.title, post
     
     time = time_ago_in_words(notification.created_at)
     
