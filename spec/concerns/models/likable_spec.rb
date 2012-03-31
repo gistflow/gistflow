@@ -6,12 +6,12 @@ describe Models::Likable do
       @user = FactoryGirl.create(:user)
     end
     
-    it "should not be created be post owner" do
+    it "should not be created by post owner" do
       post = FactoryGirl.create(:post, :user => @user)
-      @user.like(post).should == false
+      @user.reload.like(post).should == false
     end
     
-    it "should not be created be post owner" do
+    it "should not be created by post owner" do
       comment = FactoryGirl.create(:comment, :user => @user)
       @user.reload.like(comment).should == false
     end

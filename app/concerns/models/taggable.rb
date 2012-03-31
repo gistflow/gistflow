@@ -9,8 +9,7 @@ module Models
         joins(:tags).where(:tags => { :name => names }).uniq
       end)
     
-      after_save :assign_tags
-      after_save :increment_tags_counter_cache
+      after_save :assign_tags, :subscribe_author, :increment_tags_counter_cache
       before_destroy :decrement_tags_counter_cache
     end
     
@@ -18,6 +17,13 @@ module Models
       raw = Replaceable.new(self.body)
       self.tags = raw.tag_names.map do |name|    
         Tag.find_or_create_by_name(name)
+      end
+    end
+    
+    def subscribe_author
+      user = self.user
+      (self.tags - self.user.tags).each do |tag|
+        user.subscribe tag
       end
     end
 

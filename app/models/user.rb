@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     username? && Rails.application.config.admins.include?(username)
   end
   
+  def subscribe tag
+    Subscription.find_or_create_by_user_id_and_tag_id(self.id, tag.id)
+  end
+  
 private
   
   def send_welcome_email
