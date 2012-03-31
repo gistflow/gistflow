@@ -18,15 +18,15 @@ header.main {
   }
   
   .hr {
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid #aaa;
     margin-bottom: 5px;
   }
   
   nav.posts {
     position: absolute;
-    text-transform: lowercase;
+    text-transform: none;
     right: 370px;
-    top: 65px;
+    top: 64px;
   }
   
   div.search {

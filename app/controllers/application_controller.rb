@@ -36,7 +36,8 @@ protected
   end
   
   def show_new_post_link?
-    user_signed_in? && ['home', 'posts'].include?(params[:controller])
+    user_signed_in? && ['home', 'posts'].include?(params[:controller]) && 
+      params[:action] == 'index'
   end
   
   def current_user

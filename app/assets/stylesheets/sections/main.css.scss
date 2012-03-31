@@ -29,6 +29,10 @@ section.main {
       }
     }
     
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    
     fieldset {
       margin-bottom: 5px;
     }
@@ -44,6 +48,8 @@ section.main {
   }
   
   .actions {
+    margin-top: 20px;
+    
     .left {
       float: left;
       width: 280px;
