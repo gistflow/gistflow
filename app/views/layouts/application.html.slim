@@ -7,6 +7,7 @@ html
     = javascript_include_tag 'application'
     = csrf_meta_tags
     title = "Gistflow::#{yield(:title)}"
+    = render :partial => 'shared/google_analytics'
   body
     = raw javascript_enabled?
     div class="wrap group"
@@ -38,4 +39,4 @@ html
           |  or 
           = link_to 'email us', 'mailto:info@gistflow.com'
           | .
-        = render :partial => 'shared/cc'
+        = render :partial => 'shared/creative_commons'
