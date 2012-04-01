@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
   def create
-    Rails.logger.info Account::Github.all.inspect
-    Rails.logger.info User.all.inspect
-    Rails.logger.info omniauth.inspect
     account = Account::Github.find_or_create_by_omniauth(omniauth)
     self.current_user = account.user
     if current_user.newbie?
