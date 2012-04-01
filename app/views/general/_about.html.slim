@@ -2,9 +2,19 @@
 section class="about"
   header
     h1 About
-  h2 Gistflow - social learning
+  h2
+    | Gistflow is a 
+    strong social learning 
+    | service.
   ul
-    li Write posts with your github gists 
-    li Ask questions
-    li Mention @users
-    li Subscribe for #tags
+    li
+      | Write 
+      strong a post 
+      | with your 
+      strong GitHub gist
+    li
+      | Explain or 
+      strong ask a question 
+      | about it.
+  p
+    = link_to 'Sign in through GitHub', login_url, :class => 'login'

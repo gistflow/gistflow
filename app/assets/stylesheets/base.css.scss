@@ -8,6 +8,10 @@
   clear: both;
 }
 
+strong, b {
+  font-weight: bold;
+}
+
 input:focus, textarea:focus {
   outline: none;
 }
