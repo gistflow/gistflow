@@ -7,7 +7,7 @@ describe Post do
     end
   end
   
-  describe 'indextank callbacks' do
+  describe 'indextank callbacks', :remote => true do
     before do
       $indextank.indexes('postsx_dev').delete rescue IndexTank::NonExistentIndex
       $indextank.indexes('postsx_dev').add :public => false
