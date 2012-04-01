@@ -77,6 +77,6 @@ class User < ActiveRecord::Base
 private
   
   def send_welcome_email
-    UserMailer.welcome_email(id).deliver if email
+    UserMailer.welcome_email(id).deliver if email?
   end
 end
