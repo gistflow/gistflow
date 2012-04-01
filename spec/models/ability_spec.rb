@@ -12,6 +12,7 @@ describe Ability do
     it { should be_able_to(:show, :users) }
     it { should be_able_to(:show, :posts) }
     it { should be_able_to(:show, :tags) }
+    it { should be_able_to(:show, :gists) }
     it { should be_able_to(:show, :searches) }
     it { should be_able_to(:create, :searches) }
     it { should be_able_to(:create, :users) }
@@ -25,6 +26,7 @@ describe Ability do
     it { should be_able_to(:memorize, :posts) }
     it { should be_able_to(:destroy, :sessions) }
     it { should be_able_to(:forgot, :posts) }
+    it { should be_able_to(:create, :comments) }
     it { should be_able_to(:index, :'account/subscriptions') }
     it { should be_able_to(:create, :'account/subscriptions') }
     it { should be_able_to(:index, :'account/gists') }
