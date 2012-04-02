@@ -26,6 +26,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rake', '0.9.2.2'
 end
 
 group :production do

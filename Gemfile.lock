@@ -230,6 +230,7 @@ DEPENDENCIES
   omniauth-github!
   pg
   rails (= 3.2.3)
+  rake (= 0.9.2.2)
   redcarpet
   redis
   rspec-rails
