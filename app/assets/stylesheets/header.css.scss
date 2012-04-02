@@ -15,10 +15,15 @@ header.main {
     text-transform: lowercase;
     position: relative;
     bottom: 2px;
+    color: #565656;
+    
+    a {
+      color: #666666;
+    }
   }
   
   .hr {
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid $layout;
     margin-bottom: 5px;
   }
   
