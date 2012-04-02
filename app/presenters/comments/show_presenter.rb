@@ -21,10 +21,10 @@ class Comments::ShowPresenter
   end
   
   def content
-    @content ||= begin
+    @content ||= (Markdown.markdown begin
       raw = Replaceable.new(comment.content)
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.body.html_safe
-    end
+    end)
   end
 end
