@@ -5,7 +5,10 @@ module ApplicationHelper
       :'data-gist-id'   => gist.id,
       :'data-gist-lang' => gist.lang
     }
-    (link_to gist.id, '#', options) << ' ' << gist.description
+    [ link_to(gist.id, '#', options),
+      gist.description,
+      link_to('edit', "https://gist.github.com/gists/#{gist.id}/edit")
+    ].join(' ').html_safe
   end
   
   def link_to_gists(user)
