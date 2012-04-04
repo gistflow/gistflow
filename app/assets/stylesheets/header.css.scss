@@ -48,6 +48,7 @@ header.main {
       font-size: 12px;
       border: 1px solid $gray;
       padding: 3px;
+      background-color: rbga(255, 255, 255, 0.66);
     }
     input[type='search']:focus {
       border-color: $layout;
