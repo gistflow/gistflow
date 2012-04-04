@@ -20,7 +20,12 @@ article.comment {
     }
   }
   
-  margin-bottom: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted $layout;
+  &:last-child {
+    border-bottom: 0;
+  }
   
   .avatar {
     float: left;

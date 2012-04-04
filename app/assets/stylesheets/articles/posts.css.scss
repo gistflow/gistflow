@@ -8,13 +8,17 @@ article.post {
   }
   padding-bottom: 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid $layout;
+  border-bottom: 1px solid $gray;
   
   &.detail {
     header h1 {
       font-size: 20px;
       line-height: 36px;
     }
+  }
+  
+  &:last-child {
+    border-bottom: 0;
   }
   
   .avatar {
