@@ -4,6 +4,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  background: image_url('bg/groovepaper.png');
+}
+
 body > .wrap {
   min-height: 100%;
 }
