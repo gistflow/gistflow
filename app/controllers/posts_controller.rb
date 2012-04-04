@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => :show
+  before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
   
   def index
     @posts = current_user.intrested_posts.page(params[:page])
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @presenter = Posts::FormPresenter.new(@post)
+    
     flash[:info] = "Add your gists to the post by click on gist id."
     render :form
   end

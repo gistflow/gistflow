@@ -1,10 +1,11 @@
 module ApplicationHelper
   def link_to_gist(gist)
     options = {
-      :class            => :'importable-gist',
+      :class            => [:'importable-gist'],
       :'data-gist-id'   => gist.id,
       :'data-gist-lang' => gist.lang
     }
+    options[:class] << :disabled unless form_present?
     [ link_to(gist.id, '#', options),
       gist.description,
       link_to('edit', "https://gist.github.com/gists/#{gist.id}/edit")
