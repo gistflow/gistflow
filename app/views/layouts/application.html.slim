@@ -35,8 +35,8 @@ html
       div class="wrap"
         p
           | If you have any ideas, comments or suggestions please 
-          = (link_to 'create issue', 'https://github.com/gist-flow/gistflow/issues')
+          = (link_to 'create issue', 'https://github.com/gistflow/gistflow/issues')
           |  or 
-          = link_to 'email us', 'mailto:info@gistflow.com'
+          = mail_to 'email us', 'mailto:info@gistflow.com'
           | .
         = render :partial => 'shared/creative_commons'
