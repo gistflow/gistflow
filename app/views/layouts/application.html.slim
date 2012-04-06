@@ -37,6 +37,6 @@ html
           | If you have any ideas, comments or suggestions please 
           = (link_to 'create issue', 'https://github.com/gistflow/gistflow/issues')
           |  or 
-          = mail_to 'email us', 'mailto:info@gistflow.com'
+          = mail_to 'info@gistflow.com', 'email us', :encode => :hex
           | .
         = render :partial => 'shared/creative_commons'
