@@ -11,7 +11,7 @@ module MenuHelper
     if Rails.env.development?
       login_path
     else
-      'https://github.com/login/oauth/authorize?client_id=83dfd929d47091e3902d'
+      "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_KEY']}"
     end
   end
   
