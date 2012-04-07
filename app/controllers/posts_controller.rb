@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
-  before_filter :authenticate!, :except => :show
+  before_filter :authenticate!, :except => [:show, :index]
   before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
   
   def index
-    @posts = current_user.intrested_posts.page(params[:page])
+    if user_signed_in?
+      @posts = current_user.intrested_posts.page(params[:page])
+    else
+      @posts = Post.includes(:user).page(params[:page])
+    end
   end
 
   def show

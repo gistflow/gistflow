@@ -5,7 +5,7 @@ class Ability
     # simple authorization like self.current_user = User.first
     can :create, :sessions if development?
     
-    can :index, :home
+    can :index, :posts
     can :show, [:users, :posts, :tags, :gists]
     can [:show, :create], :searches
     can :create, :users

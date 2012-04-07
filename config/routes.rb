@@ -26,6 +26,6 @@ Gistflow::Application.routes.draw do
   end
   resources :gists, :only => :show
   
-  root to: 'home#index'
+  root to: 'posts#index'
   match '*a', :to => 'errors#not_found'
 end
