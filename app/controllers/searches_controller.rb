@@ -6,6 +6,7 @@ class SearchesController < ApplicationController
   
   def show
     @posts = Post.includes(:user).search(params[:query]).page(params[:page])
+    flash[:info] = 'You can search by #tag or @username'
     render :'search/show'
   end
   

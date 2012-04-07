@@ -2,6 +2,7 @@
 section class="gists"
   header
     h1 Gists
+  p = link_to 'new gist', 'https://gist.github.com/gists/new', { target: 'blank' }
   - if load_gists
     = ul(current_user.github_gists.map { |g| link_to_gist(g) })
   - else
