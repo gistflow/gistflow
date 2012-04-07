@@ -14,13 +14,14 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @presenter = Posts::ShowPresenter.new(@post)
+    @comment = @post.comments.build if can? :create, :comments
   end
 
   def new
     @post = Post.new
     @presenter = Posts::FormPresenter.new(@post)
     
-    flash[:info] = "Add your gists to the post by click on gist id."
+    flash[:info] = "Add your gists to the post by click on add."
     render :form
   end
 

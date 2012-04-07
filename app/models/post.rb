@@ -6,8 +6,6 @@ class Post < ActiveRecord::Base
   
   belongs_to :user
   has_many :comments
-  has_many :notifications, :as => :notifiable
-  has_many :comments
   
   default_scope :order => 'id desc'
   

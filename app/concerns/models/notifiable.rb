@@ -5,6 +5,7 @@ module Models
     
     included do
       after_create :create_notifications
+      has_many :notifications, :as => :notifiable, :dependent => :destroy
     end
 
     def create_notifications
