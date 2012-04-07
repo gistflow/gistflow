@@ -8,6 +8,7 @@ describe Ability do
   context 'Unauthorized user' do
     let(:user) { nil }
     
+    it { should be_able_to(:show, :sitemap) }
     it { should be_able_to(:show, :users) }
     it { should be_able_to(:show, :posts) }
     it { should be_able_to(:index, :posts) }
