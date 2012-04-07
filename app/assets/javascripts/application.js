@@ -32,7 +32,7 @@ $(function(){
     $(this).replaceWith(data.new_link)
     if ($(this).hasClass('remembrance')){
       $.getJSON('/account/remembrance.json', function(data){
-        $('div#sidebar .block.remembrance').html(data.div)
+        $('section.remembrance').replaceWith(data.div)
       })
     }
   })
