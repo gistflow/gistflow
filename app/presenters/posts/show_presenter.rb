@@ -33,26 +33,7 @@ class Posts::ShowPresenter
   end
   
   def title
-    if post.title?
-      t = link_to post.title, post
-    else
-      simple_title
-    end
-  end
-  
-  def simple_title
-    u = link_to user.username, user_path(:id => user.username), :class => 'username'
-    t = link_to "post", post
-    w = time_ago_in_words(post.created_at)
-    "#{u} wrote in #{t} #{w} ago".html_safe
-  end
-  
-  def detail_title
-    if post.title?
-      link_to post.title, post
-    else
-      simple_title
-    end
+    "#{link_to(post.title, post)} <span>by #{link_to user, user}</span>".html_safe
   end
   
   def comments
