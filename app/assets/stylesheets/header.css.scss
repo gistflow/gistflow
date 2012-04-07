@@ -76,7 +76,7 @@ header.main {
     width: 280px;
     
     ul {
-      padding: 7px 14px;
+      padding: 5px 14px;
       border: 1px solid $gray;
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
@@ -100,6 +100,16 @@ header.main {
       
       a {
         text-decoration: none;
+        padding: 2px 0;
+        display: inline-block;
+        
+        &.login {
+          background-image: url("github-icons.png");
+          padding-left: 20px;
+          background-position: 0 5px;
+          background-repeat: no-repeat;
+          font-weight: bold;
+        }
         
         &.username {
           font-weight: bold;

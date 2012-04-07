@@ -41,7 +41,7 @@ module ApplicationHelper
       { remote: true, class: 'button replaceable remembrance' }
     
     title, url, options = if current_user.memorized? post
-      ['Forgot', { action: :forgot }, { method: :delete }]
+      ['Forget', { action: :forgot }, { method: :delete }]
     else
       ['Memorize', { action: :memorize }, { method: :post }]
     end
@@ -55,7 +55,8 @@ module ApplicationHelper
   
   def link_to_like(post)
     if !user_signed_in? or current_user == post.user or post.liked_by? current_user
-      content_tag :span, "#{post.likes_count} Likes",
+      title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
+      content_tag :span, title,
         class: 'button icon like disabled'
     else
       link_to "Like", like_post_path(post), {
