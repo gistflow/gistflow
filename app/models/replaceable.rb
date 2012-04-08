@@ -1,5 +1,5 @@
 class Replaceable
-  BASE_REGEXP = '(^|\W){0,1}%s(\s|\.|,|:|;|\?|!|\(|\)|$)'
+  BASE_REGEXP = '(^|\W){1}%s(\b|\.|,|:|;|\?|!|\(|\)|$){1}'
   
   include ActionView::Helpers::UrlHelper
   include ERB::Util
