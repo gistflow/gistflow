@@ -39,8 +39,14 @@ class Replaceable
     self
   end
   
-  def tag_names
+  def tagnames
     body.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
+      match[1]
+    end.uniq
+  end
+  
+  def usernames
+    body.scan(Regexp.new(BASE_REGEXP % '@(\w+)')).map do |match|
       match[1]
     end.uniq
   end
