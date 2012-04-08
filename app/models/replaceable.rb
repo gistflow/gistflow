@@ -13,7 +13,7 @@ class Replaceable
   end
   
   def body
-    @body.to_s.gsub('&quot;', '"')
+    @body.to_s.gsub('&quot;', '"').gsub('&gt;', '>')
   end
   
   def replace_gists!

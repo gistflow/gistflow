@@ -1,3 +1,5 @@
+@import "configuration";
+
 .markdown {
   font-size: 14px;
   
@@ -40,8 +42,9 @@
   }
   ul, ol {
     margin-left: 2em;
+    margin-bottom: 10px;
+    font-size: 12px;
   }
-  
   code {
     border: 1px solid #E1E1E8;
     font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
@@ -58,5 +61,11 @@
       display: block;
       padding: .25em .5em .3em .5em;
     }
+  }
+  blockquote {
+    border-left: 2px solid $gray;
+    background: rgba(0, 0, 0, 0.03);
+    font-size: 12px;
+    padding: 5px 5px 5px 8px;
   }
 }

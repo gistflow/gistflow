@@ -3,9 +3,11 @@ module Models
     extend ActiveSupport::Concern
     
     included do
-      after_create  :create_indextank_document
-      after_update  :update_indextank_document
-      after_destroy :destroy_indextank_document
+      if Rails.env.production?
+        after_create  :create_indextank_document
+        after_update  :update_indextank_document
+        after_destroy :destroy_indextank_document
+      end
     end
     
     module ClassMethods
