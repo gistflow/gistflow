@@ -1,0 +1,7 @@
+- title 'Notifications'
+
+- if @notifications.any?
+  = ul(@notifications.map { |n| link_to_notifiable(n) })
+  = paginate @notifications
+- else
+  p Seems like no one mentioned you yet.

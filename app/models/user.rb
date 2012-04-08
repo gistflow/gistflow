@@ -4,9 +4,6 @@ class User < ActiveRecord::Base
   
   has_many :account_cookies, :class_name => 'Account::Cookie'
   has_many :posts
-  has_many :articles, :class_name => 'Post::Article'
-  has_many :questions, :class_name => 'Post::Question'
-  has_many :gossips, :class_name => 'Post::Gossip'
   has_many :likes
   has_many :comments
   has_many :notifications
@@ -16,7 +13,14 @@ class User < ActiveRecord::Base
   validates :username, :name, :presence => true
   validates :username, :uniqueness => true
   
-  def to_options
+  after_create :send_welcome_email
+  
+  def intrested_posts
+    Post.joins(:tags => { :subscriptions => :user }).
+      where(:users => { :id => id }).uniq
+  end
+  
+  def to_param
     username
   end
   
@@ -60,5 +64,19 @@ class User < ActiveRecord::Base
     
   def mark_notifications_read
     notifications.unread.update_all(:read => true)
+  end
+  
+  def admin?
+    username? && Rails.application.config.admins.include?(username)
+  end
+  
+  def subscribe tag
+    Subscription.find_or_create_by_user_id_and_tag_id(self.id, tag.id)
+  end
+  
+private
+  
+  def send_welcome_email
+    UserMailer.welcome_email(id).deliver if email?
   end
 end

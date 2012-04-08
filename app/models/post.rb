@@ -2,41 +2,27 @@ class Post < ActiveRecord::Base
   include Models::Likable
   include Models::Notifiable
   include Models::Taggable
+  include Models::Searchable unless Rails.env.test?
   
   belongs_to :user
-  has_many :comments
-  has_many :notifications, :as => :notifiable
   has_many :comments
   
   default_scope :order => 'id desc'
   
   validates :user, :presence => true
+  validates :title, :presence => true
   validates :cuts_count, :inclusion => { :in => [0, 1] }
-  validates :preview, :length => 3..160
+  validates :preview, :length => 3..500
   
-  attr_accessible :title, :content
-  
-  class << self
-    def constantize(type)
-      if ['Post::Gossip', 'Post::Article', 'Post::Question'].include?(type)
-        type.constantize
-      else
-        raise "unknown type \"#{type}\""
-      end
-    end
-  end
-  
-  def short_class_name
-    self.class.name.underscore.split('/').last
-  end
+  attr_accessible :title, :content, :question
   
   def link_name
     ln = title.blank? ? preview : title
     ln[0..30].strip
   end
   
-  def controller
-    self.class.name.underscore.pluralize
+  def category
+    self.class.name.split('::').last
   end
   
   def preview

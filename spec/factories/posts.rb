@@ -1,6 +1,7 @@
 FactoryGirl.define do
-  factory :post, :class => "Post::Article" do
+  factory :post do
     user
+    title { Faker::Lorem.paragraph }
     content { Faker::Lorem.paragraph }
     
     trait :with_gist do
@@ -13,5 +14,5 @@ FactoryGirl.define do
     
     factory :post_with_gist, :traits => [:with_gist]
     factory :post_with_tag, :traits => [:with_tag]
-  end  
+  end
 end

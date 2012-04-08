@@ -3,7 +3,7 @@ class Posts::FormPresenter
   
   def title
     [ (post.new_record? ? "New" : "Edit"),
-      post.short_class_name ].join(' ')
+      'post' ].join(' ')
   end
   
   def initialize(post)

@@ -1,0 +1,21 @@
+@import "configuration";
+
+section.about {
+  h2 {
+    font-size: 16px;
+    line-height: 16px;
+  }
+  li:before {
+    content: "—";
+    margin-right: 5px;
+    color: $charcoal;
+  }
+  
+  h2, ul {
+    margin-bottom: 5px;
+  }
+  
+  a {
+    font-weight: bold;
+  }
+}

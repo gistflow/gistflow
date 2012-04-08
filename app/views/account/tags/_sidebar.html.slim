@@ -1,0 +1,7 @@
+section class="tags"
+  header
+    h1 Tags
+  = ul(sidebar_tags.map { |t| link_to t.with_sign, t })
+  - if user_signed_in?
+    footer
+      nav = link_to 'subscriptions', account_subscriptions_path

@@ -4,7 +4,7 @@ class Account::RemembrancesController < ApplicationController
   
   def show
     options = {
-      :partial => 'sidebar.html.haml',
+      :partial => 'sidebar.html.slim',
       :layout => false
     }
     respond_with div: render_to_string(options)

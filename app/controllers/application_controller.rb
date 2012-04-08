@@ -1,9 +1,43 @@
 class ApplicationController < ActionController::Base
+  enable_authorization
   protect_from_forgery
   
-  helper_method :user_signed_in?, :current_user
+  prepend_before_filter :cleanup_form_present
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Exception, with: :notify_batman
+  helper_method :user_signed_in?, :current_user, :sidebar_tags,
+    :show_new_post_link?, :form_present?
   
 protected
+
+  def cleanup_form_present
+    session[:form_present] = nil unless request.xhr?
+  end
+  
+  def form_present!
+    session[:form_present] = true
+  end
+  
+  def form_present?
+    session[:form_present]
+  end
+  
+  def notify_batman(exception)
+    if Rails.env.production?
+      notify_airbrake(exception)
+      render 'errors/five_hundred', :layout => 'error'
+    else
+      raise exception
+    end
+  end
+  
+  def record_not_found(exception)
+    if Rails.env.production?
+      render 'errors/not_found', :layout => 'error'
+    else
+      raise exception
+    end
+  end
   
   def authenticate!
     unless user_signed_in?
@@ -13,6 +47,11 @@ protected
   
   def user_signed_in?
     !!current_user
+  end
+  
+  def show_new_post_link?
+    user_signed_in? && ['home', 'posts'].include?(params[:controller]) && 
+      params[:action] == 'index'
   end
   
   def current_user
@@ -29,5 +68,9 @@ protected
       session[:user_id] = nil
       cookies.delete(:secret)
     end
+  end
+  
+  def sidebar_tags
+    user_signed_in? ? current_user.tags : Tag.popular
   end
 end

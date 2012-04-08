@@ -368,7 +368,7 @@ http://github.com/necolas/css3-github-buttons
     border: 1px solid #d4d4d4; 
     text-shadow: none;
     background-image: none;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.56);
 }
 
 .button-group.minor-group .button:hover,

@@ -27,6 +27,7 @@
   text-decoration: none;
   border: 1px solid #ddd;
   border-left-width: 0;
+  background-color: rgba(255, 255, 255, 0.66);
 }
 .pagination a:hover, .pagination .active a {
   background-color: #f5f5f5;

@@ -9,8 +9,7 @@ module Models
         joins(:tags).where(:tags => { :name => names }).uniq
       end)
     
-      after_create :assign_tags
-      after_create :increment_tags_counter_cache
+      after_save :assign_tags, :subscribe_author, :increment_tags_counter_cache
       before_destroy :decrement_tags_counter_cache
     end
     
@@ -20,7 +19,15 @@ module Models
         Tag.find_or_create_by_name(name)
       end
     end
+    
+    def subscribe_author
+      user = self.user
+      (self.tags - self.user.tags).each do |tag|
+        user.subscribe tag
+      end
+    end
 
+    # FIX this to update counter, not increment
     def increment_tags_counter_cache
       update_posts_counts
     end

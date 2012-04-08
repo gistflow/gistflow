@@ -15,7 +15,7 @@ module Models
     end
     
     def redis_key
-      "likes:#{id}:#{self.class.model_name}"
+      "likes:#{id}:Post"
     end
   end
 end

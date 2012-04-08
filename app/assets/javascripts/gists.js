@@ -1,8 +1,8 @@
 $(function(){
-  var gists = $('#sidebar div.block.gists')
+  var gists = $('section.gists')
   if (gists) {
-    $.getJSON(gists.data('url'), function(data){
-      gists.html(data.div)
+    $.getJSON('/account/gists.json', function(data){
+      gists.replaceWith(data.div)
     })
   }
 
@@ -16,9 +16,9 @@ $(function(){
     })
   })
   
-  var box = $("#post_body")
+  var box = $("#post_content")
   $("a.importable-gist").live('click', function(){
-    box.val(box.val() + "{gist:" + $(this).data('gist-id') + "}" + " #" + $(this).data('gist-lang') + " ") 
+    box.val(box.val() + "gist:" + $(this).data('gist-id') + " #" + $(this).data('gist-lang') + " ") 
     return false
   })
 })

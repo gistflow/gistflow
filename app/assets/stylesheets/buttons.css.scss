@@ -1,0 +1,8 @@
+@import "configuration";
+
+.button.disabled {
+  background: rgba(245, 245, 245, 0.56) !important;
+  &:active, &:hover, &:focus, &.active {
+    color: $base;
+  }
+}

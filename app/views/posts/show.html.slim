@@ -1,0 +1,32 @@
+article class="post detail"
+  header
+    h1 = @presenter.title
+  div class="body markdown"
+    = @presenter.body
+  footer class="group actions"
+    div class="button-groups"
+      div class="notice button-group minor-group group"
+        = link_to_memorize @presenter.post if user_signed_in?
+        = link_to_like @presenter.post
+      - if can? :edit, @presenter.post
+        div class="button-group minor-group"
+          = link_to "Edit", edit_post_path(@presenter.post), :class => 'button icon edit'
+
+section class="comments" id="comments"
+  header
+    h1 Comments
+  - if can? :create, :comments
+    = form_for [@comment.post, @comment] do |f|
+      fieldset
+        = f.text_area :content, :size => '40x2', :id => 'post_content'
+      div class="actions group"
+        div class="left"
+          = f.check_box :question
+          = f.label :question, 'Is it a Question?'
+        div class="button-groups"
+          div class="button-group"
+            = f.submit commit_title('Comment'), :class => 'button'
+  - if @presenter.comments.any?
+    = render :partial => 'comments/comment', :collection => @presenter.comments
+  - else
+    p No comments yet

@@ -1,33 +1,29 @@
 class Replaceable
-  TAG = /^\W*\#([\w]+)/
+  BASE_REGEXP = '(^|\W){0,1}%s(\s|\.|,|:|;|\?|!|\(|\)|$)'
   
   include ActionView::Helpers::UrlHelper
   include ERB::Util
   
-  attr_writer :body
+  attr_accessor :body
+  alias to_s body
   
   def initialize(body)
-    self.body = h(body)
+    self.body = body
   end
-  
-  def body
-    @body.to_s.gsub('&quot;', '"')
-  end
-  
+    
   def replace_gists!
-    self.body = body.gsub(/\{gist:(\d+)\}/) do |match|
-      id = match[/(\d+)/, 1]
-      link = link_to "gist #{id}", "https://gist.github.com/#{id}"
-      content_tag(:div, link, :class => :gistable, :'data-gist-id' => id)
+    regexp = Regexp.new(BASE_REGEXP % 'gist:(\d+)')
+    self.body.gsub!(regexp) do |match|
+      "#{$1}[gist:#{$2}](https://gist.github.com/#{$2})#{$3}"
     end
     self
   end
   
   def replace_usernames!
-    usernames = Parser::Mention.new(body).usernames
-    self.body = body.gsub(/(^|\W)@(\w+)/) do |match|
-      if username = match[/@(\w+)/, 1] and usernames.include?(username)
-        link_to("@#{username}", "/users/#{username}").html_safe
+    regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
+    self.body.gsub!(regexp) do |match|
+      if User.where(:username => $2).exists?
+        "#{$1}[@#{$2}](/users/#{$2})#{$3}"
       else
         match
       end
@@ -36,19 +32,16 @@ class Replaceable
   end
   
   def replace_tags!
-    self.body = body.gsub(/(^|\W)#(\w+)/) do |match|
-      if tag = match[/#(\w+)/, 1] and Tag.where(:name => tag).exists?
-        link_to("##{tag}", "/tags/#{tag}").concat(" ")
-      else
-        match
-      end
+    regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
+    self.body.gsub!(regexp) do |match|
+      "#{$1}[##{$2}](/tags/#{$2})#{$3}"
     end
     self
   end
   
   def tag_names
-    body.gsub(/(^|\W)#(\w+)/).map do |match|
-      match[/#(\w+)/, 1]
-    end.uniq.compact
+    body.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
+      match[1]
+    end.uniq
   end
 end

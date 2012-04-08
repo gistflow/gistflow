@@ -21,6 +21,10 @@ module Github
     def self.find(id)
       API.json URI("https://gist.github.com/#{id}.json")
     end
+    
+    def name
+      description.present? ? description : id
+    end
   
   protected
     

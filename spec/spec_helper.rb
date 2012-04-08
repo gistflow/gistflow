@@ -25,6 +25,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
   
+  config.filter_run_excluding :remote => true
   
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
@@ -36,6 +37,8 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    config = YAML.load_file("#{Rails.root}/config/admins.yml")
+    Rails.application.config.admins = config['usernames']
   end
   
   # If true, the base class of anonymous controllers will be inferred

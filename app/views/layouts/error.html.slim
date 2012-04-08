@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    title Gistflow
+    = render :partial => 'shared/google_analytics'
+  body class="error-page"
+    section class="error"
+      header
+        = yield(:img)
+        h1 = yield(:title)
+      = yield
+      footer
+        p == "Return to the #{link_to 'http://gistflow.com', root_path}"

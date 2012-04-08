@@ -1,19 +1,11 @@
 module Models
   module Notifiable
     extend ActiveSupport::Concern
+    include ActionView::Helpers::UrlHelper
     
     included do
       after_create :create_notifications
-    end
-    
-    def link_to_post
-      title = self.title
-      post = self.class.name == "Comment" ? self.post : self
-
-      controller = post.class.name.split('::').last.pluralize.downcase
-      controller = "posts" if post.class.name == "Post::Gossip"
-
-      link_to title, "#{controller}/#{self.id}"
+      has_many :notifications, :as => :notifiable, :dependent => :destroy
     end
 
     def create_notifications
