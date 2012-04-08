@@ -9,15 +9,14 @@ module Models
     end
 
     def create_notifications
-      user_ids = Parser::Mention.new(self.body).user_ids
-      user_ids.delete(self.user.id)
+      usernames = Replaceable.new(body).usernames
+      usernames.delete(user.username)
 
-      user_ids.each do |user_id|
-        Notification.create(
-          :user_id         => user_id,
-          :notifiable_id   => self.id,
-          :notifiable_type => self.class.name
-        )
+      usernames.each do |username|
+        Notification.create! do |n|
+          n.user = User.find_by_username(username)
+          n.notifiable = self
+        end
       end
     end
   end

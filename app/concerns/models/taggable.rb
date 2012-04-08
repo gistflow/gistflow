@@ -14,15 +14,14 @@ module Models
     end
     
     def assign_tags
-      raw = Replaceable.new(self.body)
-      self.tags = raw.tag_names.map do |name|    
+      raw = Replaceable.new(body)
+      self.tags = raw.tagnames.map do |name|    
         Tag.find_or_create_by_name(name)
       end
     end
     
     def subscribe_author
-      user = self.user
-      (self.tags - self.user.tags).each do |tag|
+      (tags - user.tags).each do |tag|
         user.subscribe tag
       end
     end

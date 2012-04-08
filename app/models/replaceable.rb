@@ -1,5 +1,5 @@
 class Replaceable
-  BASE_REGEXP = '(^|\W){0,1}%s(\s|\.|,|:|;|\?|!|\(|\)|$)'
+  BASE_REGEXP = '(^|\W){1}%s(\b|\.|,|:|;|\?|!|\(|\)|$){1}'
   
   include ActionView::Helpers::UrlHelper
   include ERB::Util
@@ -39,8 +39,14 @@ class Replaceable
     self
   end
   
-  def tag_names
+  def tagnames
     body.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
+      match[1]
+    end.uniq
+  end
+  
+  def usernames
+    body.scan(Regexp.new(BASE_REGEXP % '@(\w+)')).map do |match|
       match[1]
     end.uniq
   end

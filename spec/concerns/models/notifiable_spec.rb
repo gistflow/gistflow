@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Models::Notifiable do
   describe 'when @user is mentioned in post' do
-    before(:each) do
+    before do
       @user = FactoryGirl.create(:user)
       @post = FactoryGirl.create(:post, :content => "#{Faker::Lorem.paragraph} @#{@user.username}}")
     end
@@ -14,7 +14,7 @@ describe Models::Notifiable do
   end
   
   describe 'when @user is mentioned in comment' do
-    before(:each) do
+    before do
       @user = FactoryGirl.create(:user)
       @comment = FactoryGirl.create(:comment, :content => "#{Faker::Lorem.paragraph} @#{@user.username}} ")
     end
