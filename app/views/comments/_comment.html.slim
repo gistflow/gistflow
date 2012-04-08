@@ -5,4 +5,4 @@ article class="comment"
     div class="avatar"
       = link_to user_path(:id => presenter.user.username) do
         = avatar_image(presenter.user)
-  div class="markdown group" == presenter.content
+  div class="markdown group" = presenter.content

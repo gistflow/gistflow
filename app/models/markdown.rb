@@ -9,6 +9,6 @@ module Markdown
       :lax_html_blocks,
       :autolink
     ]
-    RedcarpetCompat.new(text, :fenced_code, :gh_blockcode).to_html.html_safe
+    RedcarpetCompat.new(text, *options).to_html.html_safe
   end
 end

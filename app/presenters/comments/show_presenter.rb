@@ -24,7 +24,7 @@ class Comments::ShowPresenter
     @content ||= (Markdown.markdown begin
       raw = Replaceable.new(comment.content)
       raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.body.html_safe
+      raw.body
     end)
   end
 end

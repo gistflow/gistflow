@@ -18,9 +18,9 @@ class Posts::ShowPresenter
   
   def preview
     @preview ||= (Markdown.markdown begin
-      raw = Replaceable.new(post.preview, :preview => true)
+      raw = Replaceable.new(post.preview)
       raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.body.html_safe
+      raw.to_s
     end)
   end
   
@@ -28,7 +28,7 @@ class Posts::ShowPresenter
     @body ||= (Markdown.markdown begin
       raw = Replaceable.new(post.body)
       raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.body
+      raw.to_s
     end)
   end
   
