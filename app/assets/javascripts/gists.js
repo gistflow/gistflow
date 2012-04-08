@@ -6,12 +6,11 @@ $(function(){
     })
   }
 
-  $("div.gistable").each(function(){
-    var id = $(this).data('gist-id'),
+  $("article.post.detail a:contains('gist:')").each(function(){
+    var id = $(this).html().match(/gist:(\d+)/)[1],
       link = ("/gists/" + id + ".json"),
       element = $(this)
     $.getJSON(link, function(data){
-      element.removeClass("loading")
       element.html(data.div)
     })
   })
