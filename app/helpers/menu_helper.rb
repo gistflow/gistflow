@@ -1,6 +1,6 @@
 module MenuHelper
-  def ul(array)
-    content_tag(:ul) do
+  def ul(array, params = {})
+    content_tag(:ul, params) do
       array.each do |element|
         concat(content_tag :li, element)
       end

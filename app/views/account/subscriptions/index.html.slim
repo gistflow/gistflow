@@ -1,11 +1,5 @@
 - title 'Top tags'
 ul class="subscriptions group"
-  - @subscriptions.each do |subscription|
-    li class="subscription"
-      - if subscription.new_record?
-        = form_for [:account, subscription] do |f|
-          = f.hidden_field :tag_id
-          = f.submit subscription.tag.name, :class => 'button tag icon big'
-      - else
-        = form_for [:account, subscription], :method => :delete do |f|
-          = f.submit subscription.tag.name, :class => 'icon tag button active big'
+  = render :partial => 'subscription', :collection => @subscriptions
+    
+      

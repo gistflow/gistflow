@@ -1,0 +1,8 @@
+li class="subscription"
+  - if subscription.new_record?
+    = form_for [:account, subscription], :remote => true do |f|
+      = f.hidden_field :tag_id
+      = f.submit subscription.tag.name, :class => 'button tag icon big'
+  - else
+    = form_for [:account, subscription], :method => :delete, :remote => true do |f|
+      = f.submit subscription.tag.name, :class => 'icon big tag button active'
