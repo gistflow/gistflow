@@ -49,6 +49,10 @@ module ApplicationHelper
     link_to title, base_url.merge!(url), base_options.merge!(options)
   end
   
+  def link_to_tag(tag)
+    link_to tag.with_sign, tag, :id => tag.dom_link_id
+  end
+  
   def link_to_comments(post)
     link_to "Comments (#{post.comments_count})", post, class: 'button icon comment'
   end

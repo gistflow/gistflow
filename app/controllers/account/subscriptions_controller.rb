@@ -9,12 +9,34 @@ class Account::SubscriptionsController < ApplicationController
   end
   
   def create
-    current_user.subscriptions.create(params[:subscription])
-    redirect_to :back
+    @subscription = current_user.subscriptions.create(params[:subscription])
+    @tag = @subscription.tag
+    
+    render_json
   end
   
   def destroy
-    current_user.subscriptions.find(params[:id]).destroy
-    redirect_to :back
+    subscription = current_user.subscriptions.find(params[:id])
+    subscription.destroy
+    
+    @tag = subscription.tag
+    @subscription = current_user.subscriptions.build(:tag => @tag)
+    
+    render_json
+  end
+  
+  protected
+  def render_json
+    respond_to do |format|
+      format.json do
+        new_form = render_to_string(inline: "<%= render :partial => 'subscription.html.slim', :locals => {:subscription => @subscription} %>")
+        tag_block = render_to_string(inline: "<%= content_tag(:li, link_to_tag(@tag)) %>")
+        render :json => { 
+          :new_form => new_form, 
+          :link_id => @tag.dom_link_id, 
+          :tag_block => tag_block
+        }
+      end
+    end
   end
 end

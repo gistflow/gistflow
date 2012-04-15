@@ -1,6 +1,6 @@
 module MenuHelper
-  def ul(array)
-    content_tag(:ul) do
+  def ul(array, params = {})
+    content_tag(:ul, params) do
       array.each do |element|
         concat(content_tag :li, element)
       end
@@ -36,14 +36,14 @@ module MenuHelper
       )
       
       unread_notifications = current_user.notifications.unread
-      unread_notifications_block = content_tag(
-        :span, "+#{unread_notifications.count}", 
-        :class => "unread_notification_counter"
-      ) if unread_notifications.any?
+      if unread_notifications.any?
+        unread_notifications_block = "+#{unread_notifications.count}" 
+      end
       
       items << link_to(
         "notifications#{unread_notifications_block}".html_safe,     
-        account_notifications_path
+        account_notifications_path,
+        :class => "#{'green' if unread_notifications.any?}"
       )
       items << link_to('logout', logout_path)
     else

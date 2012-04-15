@@ -7,6 +7,20 @@ describe Post do
     end
   end
   
+  describe '#tags_size' do
+    subject { build(:post, :content => 'foo #bar baz') }
+    its(:tags_size) { should == 1 }
+  end
+  
+  describe 'validations' do
+    context 'tags count' do
+      subject { build(:post, :content => 'foo bar baz') }
+      
+      it { should be_invalid }
+      it { should have(1).errors_on(:tags_size) }
+    end
+  end
+  
   describe 'indextank callbacks', :remote => true do
     before do
       $indextank.indexes('postsx_dev').delete rescue IndexTank::NonExistentIndex

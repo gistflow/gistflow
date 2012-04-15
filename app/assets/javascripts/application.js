@@ -36,4 +36,14 @@ $(function(){
       })
     }
   })
+  
+  $("li.subscription form").live('ajax:success', function(e, data){
+    $(this).parent().replaceWith(data.new_form);
+    link = $($('ul#subscriptions').find('a#' + data.link_id)[0]);
+    if (link.length > 0) {
+      link.parent().remove();
+    } else {
+      $('ul#subscriptions').append(data.tag_block);
+    }
+  })
 })

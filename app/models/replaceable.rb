@@ -1,9 +1,6 @@
 class Replaceable
   BASE_REGEXP = '(^|\W){1}%s(\b|\.|,|:|;|\?|!|\(|\)|$){1}'
   
-  include ActionView::Helpers::UrlHelper
-  include ERB::Util
-  
   attr_accessor :body
   alias to_s body
   

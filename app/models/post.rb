@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   validates :title, :presence => true
   validates :cuts_count, :inclusion => { :in => [0, 1] }
   validates :preview, :length => 3..500
+  validates :tags_size, :numericality => { :greater_than => 0 }
   
   attr_accessible :title, :content, :question
   
@@ -21,16 +22,17 @@ class Post < ActiveRecord::Base
     ln[0..30].strip
   end
   
-  def category
-    self.class.name.split('::').last
-  end
-  
   def preview
     content_parts.first.to_s.strip
   end
   
   def body
     content.to_s.gsub('<cut>', "\r\n")
+  end
+  
+  def tags_size
+    raw = Replaceable.new(content)
+    raw.tagnames.size
   end
   
 protected
