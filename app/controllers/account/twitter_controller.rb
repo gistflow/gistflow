@@ -1,5 +1,14 @@
 class Account::TwitterController < ApplicationController
+  before_filter :authenticate!
+  
   def create
-    Rails.logger.info request.env['omniauth.auth'].inspect
+    current_user.account_twitters.create!(omniauth)
+    redirect_to root_path
+  end
+  
+protected
+  
+  def omniauth
+    request.env['omniauth.auth']
   end
 end
