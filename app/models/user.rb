@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include Models::Memorizable
   
   has_many :account_cookies, :class_name => 'Account::Cookie'
+  has_many :account_twitters, :class_name => 'Account::Twitter'
   has_many :posts
   has_many :likes
   has_many :comments
