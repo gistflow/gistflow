@@ -14,8 +14,13 @@ class Post < ActiveRecord::Base
   validates :cuts_count, :inclusion => { :in => [0, 1] }
   validates :preview, :length => 3..500
   validates :tags_size, :numericality => { :greater_than => 0 }
+  validates :status, format: { with: /http:\/\/goo.gl\/xxxxxx/ }, 
+    length: { maximum: 140 }, allow_nil: true
   
-  attr_accessible :title, :content, :question
+  attr_accessor :status
+  attr_accessible :title, :content, :question, :status
+  
+  after_create :tweet
   
   def link_name
     ln = title.blank? ? preview : title
@@ -49,5 +54,15 @@ protected
   
   def content_parts
     @content_parts ||= content.to_s.split('<cut>', 2)
+  end
+  
+  def tweet
+    if user.twitter_client? && status.present?
+      url = Googl.shorten("http://github.com/posts/#{id}")
+      status.delete!('http://goo.gl/xxxxxx')
+      status << url.short_url
+      raise status.inspect
+      user.twitter_client.status(status)
+    end
   end
 end

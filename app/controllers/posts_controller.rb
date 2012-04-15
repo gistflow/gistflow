@@ -22,7 +22,6 @@ class PostsController < ApplicationController
     @presenter = Posts::FormPresenter.new(@post)
     
     flash[:info] = "Add your gists to the post by click on add."
-    render :form
   end
 
   def edit
@@ -30,7 +29,6 @@ class PostsController < ApplicationController
     authorize! :edit, @post
     
     @presenter = Posts::FormPresenter.new(@post)
-    render :form
   end
 
   def create    
@@ -40,7 +38,7 @@ class PostsController < ApplicationController
       redirect_to @post
     else
       @presenter = Posts::FormPresenter.new(@post)
-      render :form
+      render :new
     end
   end
 
@@ -52,7 +50,7 @@ class PostsController < ApplicationController
       redirect_to @post
     else
       @presenter = Posts::FormPresenter.new(@post)
-      render :form
+      render :edit
     end
   end
 

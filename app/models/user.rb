@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include Models::Memorizable
   
   has_many :account_cookies, :class_name => 'Account::Cookie'
+  has_one  :account_twitter, :class_name => 'Account::Twitter'
   has_many :posts
   has_many :likes
   has_many :comments
@@ -72,6 +73,19 @@ class User < ActiveRecord::Base
   
   def subscribe tag
     Subscription.find_or_create_by_user_id_and_tag_id(self.id, tag.id)
+  end
+  
+  def twitter_client?
+    !!account_twitter
+  end
+  
+  def twitter_client
+    return unless twitter_client?
+    
+    @twitter_account ||= Twitter::Client.new(
+      oauth_token: account_twitter.token,
+      oauth_token_secret: account_twitter.secret
+    )
   end
   
 private
