@@ -51,12 +51,13 @@ $(function(){
   var status = $("#post_status")
   var tweet_enabler = $("#post_status_toggle")
   var update_twitter_status = function() {
-    if (!status.data('changed') && !tweet_enabler.is(':checked') && status.val()) {
+    if (!status.data('changed') && !tweet_enabler.is(':checked') && content.val()) {
       status.val(content.val().slice(0, 119) + " http://goo.gl/xxxxxx")
     }
   }
   status.change(function(){ $(this).data('changed', true) })
   content.change(function(){ update_twitter_status() })
+  
   update_twitter_status()
   
   $("#post_status_toggle").change(function(){

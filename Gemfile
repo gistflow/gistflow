@@ -16,6 +16,7 @@ gem 'redis'
 gem 'indextank'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'twitter'
+gem 'googl'
 
 group :test, :development do
   gem 'factory_girl_rails'
