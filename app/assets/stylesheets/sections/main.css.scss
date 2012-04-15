@@ -45,6 +45,10 @@ section.main {
         height: 36px;
       }
     }
+    
+    h2 {
+      @include caption;
+    }
   }
   
   .actions {
