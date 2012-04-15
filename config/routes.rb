@@ -1,5 +1,6 @@
 Gistflow::Application.routes.draw do
-  match '/auth/:provider/callback' => 'users#create'
+  match '/auth/github/callback' => 'users#create'
+  match '/auth/twitter/callback' => 'account/twitter#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
   
