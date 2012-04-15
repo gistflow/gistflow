@@ -8,13 +8,13 @@ module Models
       scope :tagged_with, (lambda do |names|
         joins(:tags).where(:tags => { :name => names }).uniq
       end)
-    
+      
       after_save :assign_tags, :subscribe_author, :increment_tags_counter_cache
       before_destroy :decrement_tags_counter_cache
     end
     
     def assign_tags
-      raw = Replaceable.new(body)
+      raw = Replaceable.new(content)
       self.tags = raw.tagnames.map do |name|    
         Tag.find_or_create_by_name(name)
       end
