@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe User do
+  let(:user) { create(:user) }
+  subject { user }
+  
   describe '#intested_posts' do
     before do
       @user = FactoryGirl.create(:user)
@@ -47,14 +50,35 @@ describe User do
   end
   
   describe '#mark_notifications_read' do
-    user = FactoryGirl.create(:user)
-    post = FactoryGirl.create(:post, :content => "#{Faker::Lorem.words(5)} @#{user.username}}")
-    comment = FactoryGirl.create(:comment, :content => "#{Faker::Lorem.words(5)} @#{user.username}}")
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:post) { FactoryGirl.create(:post, :content => "#{Faker::Lorem.words(5)} @#{user.username}} #foo") }
+    let!(:comment) { FactoryGirl.create(:comment, :content => "#{Faker::Lorem.words(5)} @#{user.username}}") }
     
     before(:each) do
       user.mark_notifications_read
     end
     
     it { user.notifications.unread.count.should be_zero }
+  end
+  
+  describe '#twitter_client?', :focus => true do
+    context 'account exists' do
+      let!(:user) { create(:user) }
+      let!(:account_twitter) { create(:account_twitter, user: user) }
+      
+      its(:twitter_client?) { should be_true }
+    end
+    
+    its(:twitter_client?) { should be_false }
+  end
+  
+  describe '#twitter_client', :focus => true do
+    let!(:user) { create(:user) }
+    let!(:account_twitter) { create(:account_twitter, user: user) }
+    subject { user.twitter_client }
+    
+    it { should be_kind_of(Twitter::Client) }
+    its(:oauth_token) { should == account_twitter.token }
+    its(:oauth_token_secret) { should == account_twitter.secret }
   end
 end
