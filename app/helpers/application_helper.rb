@@ -18,9 +18,12 @@ module ApplicationHelper
     (link_to title, url) << " on Github"
   end
   
-  
   def title(title)
     content_for(:title, title)
+  end
+  
+  def window_title(title)
+    content_for(:window_title, title)
   end
   
   def commit_title(commit = 'Commit')
