@@ -78,6 +78,9 @@ GEM
     faraday-stack (0.1.5)
       faraday (>= 0.6, < 0.8)
     ffi (1.0.11)
+    googl (0.5.0)
+      httparty (>= 0.6.1)
+      json (>= 1.4.6)
     guard (1.0.1)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -90,6 +93,9 @@ GEM
       rest-client (~> 1.6.1)
       rubyzip
     hike (1.2.1)
+    httparty (0.8.2)
+      multi_json
+      multi_xml
     i18n (0.6.0)
     indextank (1.0.12)
       faraday-stack
@@ -112,6 +118,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.18)
     multi_json (1.2.0)
+    multi_xml (0.4.2)
     multipart-post (1.1.5)
     netrc (0.7.1)
     oauth (0.4.5)
@@ -234,6 +241,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   faker
+  googl
   guard-rspec
   heroku
   indextank
