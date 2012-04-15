@@ -6,7 +6,7 @@ html
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-    title = "Gistflow::#{yield(:title)}"
+    title = "Gistflow :: #{yield(:title).present? ? yield(:title) : yield(:window_title)}"
     = render :partial => 'shared/google_analytics'
   body
     = raw javascript_enabled?
