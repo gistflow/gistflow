@@ -46,4 +46,31 @@ $(function(){
       $('ul#subscriptions').append(data.tag_block);
     }
   })
+  
+  var preview_button = $("form.new_comment").find('input.preview_button');  
+  var comment_form = $("form.new_comment");
+  var fieldset = comment_form.find('fieldset');
+  
+  preview_button.click(function(e){
+    
+    //e.preventDefault();
+    
+    if(preview_button.attr('value') == 'Write') {
+      comment_form.find('article.comment').replaceWith(fieldset);
+      preview_button.attr('value', 'Preview');
+    } else {
+      //fieldset = comment_form.find('fieldset').clone();
+      preview_button.attr('value', 'Write');
+      //comment_form.submit();
+    }
+    
+  })
+  
+  comment_form.live('ajax:success', function(e, data){
+    if(preview_button.attr('value') == 'Write') {
+      fieldset = comment_form.find('fieldset').clone();
+      $(this).children('fieldset').replaceWith(data.comment);
+    }
+    console.log(fieldset);
+  })
 })

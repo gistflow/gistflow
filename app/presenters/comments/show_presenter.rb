@@ -12,7 +12,7 @@ class Comments::ShowPresenter
   
   def title
     u = link_to user.username, user_path(:id => user.username), :class => 'username'
-    w = time_ago_in_words(comment.created_at)
+    w = time_ago_in_words(comment.created_at || Time.now) # Time.now if it is a preview and record isn't saved yet
     "#{u} commented #{w} ago".html_safe
   end
   
