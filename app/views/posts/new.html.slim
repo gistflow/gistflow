@@ -1,0 +1,13 @@
+- content_for(:form) do
+  section class="twitter"
+    helper
+      h1 Tweet
+    - if current_user.twitter_client?
+      = text_area_tag 'post[status]', nil, role: 'twitter'
+    - else
+      p
+        | You can tweet about your post automatically after 
+        = link_to 'sign in', '/auth/twitter'
+        | .
+
+= render 'form'
