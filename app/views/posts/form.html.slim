@@ -18,6 +18,6 @@
     div class="button-groups"
       - if @presenter.post.persisted?
         div class="button-group"
-          = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger'
+          = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
       div class="button-group"
         = f.submit commit_title, :class => 'button'
