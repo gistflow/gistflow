@@ -5,11 +5,11 @@ class Account::Twitter < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: :twitter_id }
   
   def self.create_by_omniauth(omniauth)
-    omniauth = omniauth.to_hash.to_options
-    find_by_twitter_id(omniauth[:uid]) || create! do |account|
-      account.token      = omniauth[:token]
-      account.secret     = omniauth[:secret]
-      account.twitter_id = omniauth[:uid]
+    omniauth = omniauth.to_hash
+    find_by_twitter_id(omniauth['uid']) || create! do |account|
+      account.token      = omniauth['credentials']['token']
+      account.secret     = omniauth['credentials']['secret']
+      account.twitter_id = omniauth['uid']
       yield(account) if block_given?
     end
   end
