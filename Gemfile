@@ -10,10 +10,12 @@ gem 'airbrake'
 gem 'slim'
 gem 'kaminari'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
+gem 'omniauth-twitter'
 gem 'redcarpet'
 gem 'redis'
 gem 'indextank'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
+gem 'twitter'
 
 group :test, :development do
   gem 'factory_girl_rails'

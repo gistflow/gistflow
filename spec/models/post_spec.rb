@@ -52,4 +52,18 @@ describe Post do
       Post.search('bar').should_not include(@post)
     end
   end
+  
+  describe '#tweet' do
+    let!(:user) { create(:user) }
+    let!(:account_twitter) { create(:account_twitter, user: user) }
+    let!(:status) { 'foo bar' }
+    let!(:post) { build(:post, user: user, status: status) }
+    
+    context 'if twitter account', :focus => true do
+      it 'should tweet after create if status present' do
+        user.twitter_client.should_receive(:status).with(status)
+        post.save
+      end
+    end
+  end
 end
