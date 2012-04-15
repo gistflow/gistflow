@@ -15,7 +15,10 @@ class Post < ActiveRecord::Base
   validates :preview, :length => 3..500
   validates :tags_size, :numericality => { :greater_than => 0 }
   
-  attr_accessible :title, :content, :question
+  attr_accessor :status
+  attr_accessible :title, :content, :question, :status
+  
+  after_create :tweet
   
   def link_name
     ln = title.blank? ? preview : title
@@ -49,5 +52,11 @@ protected
   
   def content_parts
     @content_parts ||= content.to_s.split('<cut>', 2)
+  end
+  
+  def tweet
+    if user.twitter_client? && status.present?
+      user.twitter_client.status(status)
+    end
   end
 end
