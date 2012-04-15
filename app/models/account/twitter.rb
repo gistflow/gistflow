@@ -5,7 +5,7 @@ class Account::Twitter < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: :twitter_id }
   
   def self.create_by_omniauth(omniauth)
-    omniauth = omniauth.to_hash
+    omniauth = omniauth.to_hash.to_options
     find_by_twitter_id(omniauth[:uid]) || create! do |account|
       account.token      = omniauth[:token]
       account.secret     = omniauth[:secret]
