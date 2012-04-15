@@ -2,6 +2,7 @@ class Account::TwitterController < ApplicationController
   before_filter :authenticate!
   
   def create
+    Rails.logger.info omniauth.to_hash
     Account::Twitter.create_by_omniauth(omniauth) do |account|
       account.user = current_user
     end
