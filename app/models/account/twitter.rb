@@ -6,10 +6,10 @@ class Account::Twitter < ActiveRecord::Base
   
   def self.create_by_omniauth(omniauth)
     omniauth = omniauth.to_hash
-    find_by_twitter_id(omniauth[:uid]) || create! do |account|
-      account.token      = omniauth[:token]
-      account.secret     = omniauth[:secret]
-      account.twitter_id = omniauth[:uid]
+    find_by_twitter_id(omniauth['uid']) || create! do |account|
+      account.token      = omniauth['credentials']['token']
+      account.secret     = omniauth['credentials']['secret']
+      account.twitter_id = omniauth['uid']
       yield(account) if block_given?
     end
   end

@@ -58,11 +58,10 @@ protected
   
   def tweet
     if user.twitter_client? && status.present?
-      url = Googl.shorten("http://github.com/posts/#{id}")
-      status.delete!('http://goo.gl/xxxxxx')
+      url = Googl.shorten("http://gistflow.com/posts/#{id}")
+      status.gsub!('http://goo.gl/xxxxxx', '')
       status << url.short_url
-      raise status.inspect
-      user.twitter_client.status(status)
+      user.twitter_client.update(status)
     end
   end
 end
