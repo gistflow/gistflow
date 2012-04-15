@@ -2,7 +2,9 @@ class Account::TwitterController < ApplicationController
   before_filter :authenticate!
   
   def create
-    current_user.account_twitters.create!(omniauth)
+    Account::Twitter.create_by_omniauth(omniauth) do |account|
+      account.user = current_user
+    end
     redirect_to root_path
   end
   

@@ -4,7 +4,7 @@ describe Models::Notifiable do
   describe 'when @user is mentioned in post' do
     before do
       @user = FactoryGirl.create(:user)
-      @post = FactoryGirl.create(:post, :content => "#{Faker::Lorem.paragraph} @#{@user.username}}")
+      @post = FactoryGirl.create(:post, :content => "#{Faker::Lorem.paragraph} @#{@user.username}} #tag")
     end
     
     it "should be created and readed for @user" do

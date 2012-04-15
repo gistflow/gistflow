@@ -1,13 +1,17 @@
 require 'spec_helper'
 
 describe Account::Twitter do
-  describe '.by_omniauth' do
+  describe '.create_by_omniauth' do
     let(:user) { create(:user) }
     let(:omniauth) do
       { token: '111', secret: '222', uid: '333' }
     end
     
-    subject { user.account_twitters.by_omniauth(omniauth) }
+    subject do
+      Account::Twitter.create_by_omniauth(omniauth) do |a|
+        a.user = user
+      end
+    end
     
     it 'should return account' do
       should be_kind_of(Account::Twitter)
