@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   validates :preview, :length => 3..500
   validates :tags_size, :numericality => { :greater_than => 0 }
   validates :status, format: { with: /http:\/\/goo.gl\/xxxxxx/ }, 
-    length: { maximum: 140 }, allow_nil: true
+    length: { maximum: 140 }, :if => :status?
   
   attr_accessor :status
   attr_accessible :title, :content, :question, :status
@@ -38,6 +38,10 @@ class Post < ActiveRecord::Base
   def tags_size
     raw = Replaceable.new(content)
     raw.tagnames.size
+  end
+  
+  def status?
+    status.present?
   end
   
 protected
