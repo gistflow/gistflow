@@ -4,7 +4,7 @@ module ApplicationHelper
       :class            => [:'importable-gist'],
       :'data-gist-id'   => gist.id,
       :'data-gist-lang' => gist.lang,
-      :'data-original-title' => 'Add this gist to the new post in one click!'
+      :'data-original-title' => 'Add gist to new post or comment!'
     }
     g = []
     g << gist.name
