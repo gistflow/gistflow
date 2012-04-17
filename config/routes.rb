@@ -25,6 +25,10 @@ Gistflow::Application.routes.draw do
   resources :tags, :only => :show
   resources :users, :only => :show
   
+  namespace :admin do
+    resources :users, :only => [:index]
+  end
+  
   namespace :account do
     resources :subscriptions, :only => [:index, :create, :destroy]
     resource :remembrance, :only => :show

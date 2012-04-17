@@ -1,0 +1,6 @@
+b
+  | Users count: 
+  = @count
+
+= render :partial => 'user', :locals => { :users => @users, :offset => @offset}
+= paginate @users
