@@ -26,7 +26,7 @@ section class="comments" id="comments"
           = f.label :question, 'Is it a Question?'
         div class="button-groups"
           div class="button-group"
-            = f.submit 'Preview', :class => 'button preview_button'
+            = f.submit 'Preview', :class => 'button preview_button high_button'
             = f.submit commit_title('Comment'), :class => 'button'
   - if @presenter.comments.any?
     = render :partial => 'comments/comment', :collection => @presenter.comments

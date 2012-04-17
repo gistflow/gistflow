@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     
     render_preview and return if params[:commit] == 'Write'
-    if false#@comment.save
+    if @comment.save
       render_create
     else
       render_json_error("We are sorry, but comment couldn't be saved.")
