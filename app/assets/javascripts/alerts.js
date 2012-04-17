@@ -1,5 +1,16 @@
-$(function() {
-  $('div.alert a.close').click(function(){
-    $(this).parents('div.alert:first').remove()
+function flash(message, type_class){  
+  var block = $('div.alert')
+  block.toggleClass(type_class);
+  block.find('span.message').html(message);
+	block.css('top', $(document).scrollTop() + 40);
+	
+	block.fadeIn().delay(2000).fadeOut('slow', function() {
+	  block.toggleClass(type_class);
+	});
+}
+
+$(function(){
+  $('div.alert').children('a.close').click(function(){
+    $(this).parent().hide();
   })
 })

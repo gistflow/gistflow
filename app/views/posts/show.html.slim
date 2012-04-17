@@ -17,8 +17,8 @@ section class="comments" id="comments"
   header
     h1 Comments
   - if can? :create, :comments
-    = form_for [@comment.post, @comment] do |f|
-      fieldset
+    = form_for [@comment.post, @comment], :remote => true do |f|
+      fieldset#new_comment_body
         = f.text_area :content, :size => '40x2', :id => 'post_content'
       div class="actions group"
         div class="left"
@@ -26,8 +26,9 @@ section class="comments" id="comments"
           = f.label :question, 'Is it a Question?'
         div class="button-groups"
           div class="button-group"
+            = f.submit 'Preview', :class => 'button preview_button'
             = f.submit commit_title('Comment'), :class => 'button'
   - if @presenter.comments.any?
     = render :partial => 'comments/comment', :collection => @presenter.comments
   - else
-    p No comments yet
+    p.no_comments No comments yet

@@ -1,0 +1,11 @@
+$flash_width: 300px;
+
+div.alert {
+  display: none;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: $flash_width;
+  margin-left: - $flash_width / 2;
+  text-align: center;
+}

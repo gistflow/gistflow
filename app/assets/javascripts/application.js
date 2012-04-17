@@ -16,8 +16,6 @@
 //= require jquery.tabby
 //= require_tree .
 
-
-
 $(function(){
   $('textarea').autosize()
   $('textarea').tabby({tabString: '  '})
