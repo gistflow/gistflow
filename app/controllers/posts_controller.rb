@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
-  before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
   
   def index
     if user_signed_in?

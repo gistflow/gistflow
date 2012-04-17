@@ -2,7 +2,8 @@ $(function(){
   var gists = $('section.gists')
   if (gists) {
     $.getJSON('/account/gists.json', function(data){
-      gists.replaceWith(data.div)
+      gists.replaceWith(data.div);
+      $('.importable-gist').tooltip({title: 'You can import this gist to new post.'});
     })
   }
 

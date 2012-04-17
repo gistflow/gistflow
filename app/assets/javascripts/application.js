@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require auto_resize
+//= require twitter_tooltips
 //= require jquery.tabby
 //= require_tree .
 

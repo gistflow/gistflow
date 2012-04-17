@@ -3,12 +3,13 @@ module ApplicationHelper
     options = {
       :class            => [:'importable-gist'],
       :'data-gist-id'   => gist.id,
-      :'data-gist-lang' => gist.lang
+      :'data-gist-lang' => gist.lang,
+      :'data-original-title' => 'Add this gist to the new post in one click!'
     }
     g = []
     g << gist.name
     g << link_to('edit', "https://gist.github.com/gists/#{gist.id}/edit", { target: 'blank' })
-    g.unshift link_to('add', '#', options) if form_present?
+    g.unshift link_to('add', '#', options)
     g.join(' ').html_safe
   end
   
