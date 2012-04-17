@@ -1,15 +1,65 @@
 class ApplicationController < ActionController::Base
+  enable_authorization
   protect_from_forgery
-
+  
+  prepend_before_filter :cleanup_form_present
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Exception, with: :notify_batman
+  helper_method :user_signed_in?, :current_user, :sidebar_tags,
+    :show_new_post_link?, :form_present?
+  
 protected
+
+  def cleanup_form_present
+    session[:form_present] = nil unless request.xhr?
+  end
+  
+  def form_present!
+    session[:form_present] = true
+  end
+  
+  def form_present?
+    session[:form_present]
+  end
+  
+  def notify_batman(exception)
+    if Rails.env.production?
+      notify_airbrake(exception)
+      render 'errors/five_hundred', :layout => 'error'
+    else
+      raise exception
+    end
+  end
+  
+  def record_not_found(exception)
+    if Rails.env.production?
+      render 'errors/not_found', :layout => 'error'
+    else
+      raise exception
+    end
+  end
+  
+  def authenticate!
+    unless user_signed_in?
+      redirect_to root_path, :alert => 'You should be logged in.'
+    end
+  end
+  
+  def user_signed_in?
+    !!current_user
+  end
+  
+  def show_new_post_link?
+    user_signed_in? && ['home', 'posts'].include?(params[:controller]) && 
+      params[:action] == 'index'
+  end
   
   def current_user
     @current_user ||= (User.find_by_id(session[:user_id]) || begin
       Account::Cookie.user_by_secret(cookies[:secret])
     end)
   end
-  helper_method :current_user
-  
+
   def current_user=(user)
     if @current_user = user
       session[:user_id] = current_user.id
@@ -19,11 +69,8 @@ protected
       cookies.delete(:secret)
     end
   end
-  helper_method :current_user=
   
-  def user_signed_in?
-    !!current_user
+  def sidebar_tags
+    user_signed_in? ? current_user.tags : Tag.popular
   end
-  helper_method :user_signed_in?
-
 end

@@ -1,0 +1,21 @@
+- return if user_signed_in?
+section class="about"
+  header
+    h1 About
+  h2
+    | Gistflow is a 
+    strong social learning 
+    | service.
+  ul
+    li
+      | Write 
+      strong a post 
+      | with your 
+      strong GitHub gist
+    li
+      | Explain or 
+      strong ask a question 
+      | about it.
+    li Improve your experience!
+  p
+    = link_to 'Sign in through GitHub', login_url, :class => 'login'

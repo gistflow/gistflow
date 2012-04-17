@@ -1,0 +1,24 @@
+@import "configuration";
+
+section.sidebar {
+  padding-top: 0;
+  
+  section {
+    margin-bottom: 10px;
+  }
+  
+  section.user {
+    .avatar {
+      @include frame;
+    }
+    
+    dl {
+      margin-left: 80px;
+    }
+  }
+  
+  nav {
+    font-weight: bold;
+    padding-bottom: 2px;
+  }
+}

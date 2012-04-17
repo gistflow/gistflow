@@ -1,8 +1,0 @@
-= simple_form_for(@presenter.post, :html => { :class => 'form-stacked' }) do |f|
-  %fieldset
-    %legend= @presenter.post.new_record? ? "New post" : "Edit post"
-    = f.error_notification
-    = f.input :title, :input_html => { :class => 'span9' }
-    = f.input :body, :input_html => { :class => 'span9', :size => '40x6' }
-    .actions
-      = f.button :submit, :class => 'primary btn'

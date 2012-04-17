@@ -1,6 +1,6 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :tag do
+    sequence(:name) { |n| "tag_#{n}" }
+    posts_count 0
   end
 end

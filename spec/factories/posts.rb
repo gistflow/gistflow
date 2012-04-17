@@ -1,13 +1,18 @@
 FactoryGirl.define do
   factory :post do
     user
-    title { Faker::Lorem.sentence }
-    body { "#{Faker::Lorem.paragraph}" }
+    title { Faker::Lorem.paragraph }
+    content { Faker::Lorem.paragraph << " #tag " }
     
     trait :with_gist do
-      body { "#{Faker::Lorem.paragraph} {gist:777}" }
+      content { "#{Faker::Lorem.paragraph} {gist:777}" }
+    end
+    
+    trait :with_tag do
+      content { "#tag_1 #{Faker::Lorem.paragraph}" }
     end
     
     factory :post_with_gist, :traits => [:with_gist]
-  end  
+    factory :post_with_tag, :traits => [:with_tag]
+  end
 end

@@ -5,7 +5,7 @@ module Github
     end
     
     def gists
-      Gist.all_for_user(@username)
+      Github::Gist.all(@username)
     end
   end
 end

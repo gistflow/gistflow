@@ -1,13 +1,49 @@
 class User < ActiveRecord::Base
+  include Models::Likable
+  include Models::Memorizable
+  
   has_many :account_cookies, :class_name => 'Account::Cookie'
+  has_one  :account_twitter, :class_name => 'Account::Twitter'
   has_many :posts
-  has_many :comments, :foreign_key => :author_id
-  has_many :answer_comments, :class_name => "Comment", :foreign_key => :consignee_id  
-  has_and_belongs_to_many :favorite_posts, :class_name => "Post", 
-    :join_table => :favorite_posts_lovers
+  has_many :likes
+  has_many :comments
+  has_many :notifications
+  has_many :subscriptions
+  has_many :tags, :through => :subscriptions
   
   validates :username, :name, :presence => true
   validates :username, :uniqueness => true
+  
+  after_create :send_welcome_email
+  
+  def intrested_posts
+    Post.joins(:tags => { :subscriptions => :user }).
+      where(:users => { :id => id }).uniq
+  end
+  
+  def to_param
+    username
+  end
+  
+  def to_s
+    username
+  end
+  
+  def newbie?
+    tags.count < 3
+  end
+  
+  def contacts
+    Hash[begin
+      { 'Name'        => name,
+        'Github Page' => github_page,
+        'Company'     => company,
+        'Email'       => email,
+        'Home page'   => home_page }.find_all do |field, value|
+        value.present?
+      end
+    end]
+  end
   
   def create_cookie_secret
     account_cookies.create! do |cookie|
@@ -15,7 +51,7 @@ class User < ActiveRecord::Base
     end.secret
   end
   
-  def github_gists
+  def github_gists(use_cache = true)
     Github::User.new(username).gists
   end
   
@@ -25,5 +61,36 @@ class User < ActiveRecord::Base
     else
       "http://www.gravatar.com/avatar/?size=#{size}"
     end
+  end
+    
+  def mark_notifications_read
+    notifications.unread.update_all(:read => true)
+  end
+  
+  def admin?
+    username? && Rails.application.config.admins.include?(username)
+  end
+  
+  def subscribe tag
+    Subscription.find_or_create_by_user_id_and_tag_id(self.id, tag.id)
+  end
+  
+  def twitter_client?
+    !!account_twitter
+  end
+  
+  def twitter_client
+    return unless twitter_client?
+    
+    @twitter_account ||= Twitter::Client.new(
+      oauth_token: account_twitter.token,
+      oauth_token_secret: account_twitter.secret
+    )
+  end
+  
+private
+  
+  def send_welcome_email
+    UserMailer.welcome_email(id).deliver if email?
   end
 end

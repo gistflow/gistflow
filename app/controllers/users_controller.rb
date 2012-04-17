@@ -1,11 +1,27 @@
 class UsersController < ApplicationController
   def create
-    Rails.logger.info "[OMNI] #{omniauth.inspect}"
+    Rails.logger.info "[omni] #{omniauth.inspect}"
     account = Account::Github.find_or_create_by_omniauth(omniauth)
     self.current_user = account.user
-    redirect_to root_path
+    if current_user.newbie?
+      redirect_to account_subscriptions_path
+    else
+      redirect_to root_path
+    end
+  rescue => e
+    Rails.logger.info "[omni][error] #{e}"
+    Rails.logger.info "[omni][error] #{e.backtrace.join("\n")}"
+    raise e
   end
-
+  
+  def show
+    if @user = User.find_by_username(params[:id])
+      @posts = @user.posts.page(params[:page])
+    else
+      render 'search/nothing'
+    end
+  end
+  
 protected
 
   def omniauth

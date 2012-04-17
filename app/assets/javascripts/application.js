@@ -12,5 +12,60 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require auto_resize
+//= require jquery.tabby
 //= require_tree .
+
+
+
+$(function(){
+  $('textarea').autosize()
+  $('textarea').tabby({tabString: '  '})
+  $('textarea').keydown(function (e) {
+   if ((e.ctrlKey || e.metaKey) && e.keyCode == 13) {
+     $(this).parents('form:first').submit()
+   }
+  });
+  $('a[href=#]').click(function(){ return false })
+    
+  $('a.replaceable').live('ajax:success', function(e, data){
+    $(this).replaceWith(data.new_link)
+    if ($(this).hasClass('remembrance')){
+      $.getJSON('/account/remembrance.json', function(data){
+        $('section.remembrance').replaceWith(data.div)
+      })
+    }
+  })
+  
+  $("li.subscription form").live('ajax:success', function(e, data){
+    $(this).parent().replaceWith(data.new_form);
+    link = $($('ul#subscriptions').find('a#' + data.link_id)[0]);
+    if (link.length > 0) {
+      link.parent().remove();
+    } else {
+      $('ul#subscriptions').append(data.tag_block);
+    }
+  })
+  
+  var content = $("#post_content")
+  var status = $("#post_status")
+  var tweet_enabler = $("#post_status_toggle")
+  var update_twitter_status = function() {
+    if (!status.data('changed') && !tweet_enabler.is(':checked') && content.val()) {
+      status.val(content.val().slice(0, 119) + " http://goo.gl/xxxxxx")
+    }
+  }
+  status.change(function(){ $(this).data('changed', true) })
+  content.change(function(){ update_twitter_status() })
+  
+  update_twitter_status()
+  
+  $("#post_status_toggle").change(function(){
+    if ($(this).is(':checked')) {
+      status.val('')
+    } else {
+      update_twitter_status()
+    }
+  })
+  
+})

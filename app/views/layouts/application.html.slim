@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    meta name='description' content='Social learning'
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    title = "Gistflow :: #{yield(:title).present? ? yield(:title) : yield(:window_title)}"
+    = render :partial => 'shared/google_analytics'
+  body
+    = raw javascript_enabled?
+    div class="wrap group"
+      header class="main"
+        div class="group hr"
+          h1 = link_to_unless_current 'gist:flow', root_path
+          = render 'search/form'
+          nav class="user" = ul(authentication_items)
+        = render_flash
+        - if show_new_post_link?
+          nav class="posts" 
+            = link_to('New Post', new_post_path, :class => 'button')
+      section class="main"
+        - if content_for?(:title)
+          header
+            h1 = yield(:title)
+        = yield
+      section class="sidebar"
+        = yield(:sidebar)
+        = render :partial => 'general/about'
+        = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
+        = render 'account/remembrances/sidebar'
+        = render 'account/tags/sidebar'
+    footer class="main"
+      div class="wrap"
+        p
+          | If you have any ideas, comments or suggestions please 
+          = (link_to 'create issue', 'https://github.com/gistflow/gistflow/issues')
+          |  or 
+          = mail_to 'info@gistflow.com', 'email us', :encode => :hex
+          | .
+        = render :partial => 'shared/creative_commons'

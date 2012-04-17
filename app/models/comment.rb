@@ -1,6 +1,15 @@
 class Comment < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :post
+  include Models::Likable
+  include Models::Notifiable
   
-  validates :body, :presence => true
+  belongs_to :user
+  belongs_to :post, :counter_cache => true
+  
+  validates :content, :user, :presence => true
+  
+  attr_accessible :content, :question
+  
+  def body
+    content
+  end
 end

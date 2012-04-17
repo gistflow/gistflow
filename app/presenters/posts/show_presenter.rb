@@ -1,23 +1,42 @@
 class Posts::ShowPresenter
-  extend ActiveModel::Naming
+  attr_reader :post, :controller
   
-  attr_reader :post
+  extend ActiveModel::Naming
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::DateHelper
+  include Rails.application.routes.url_helpers
+  
+  delegate :user, :likes_count, :comments_count, :to => :post
   
   def initialize(post)
     @post = post
   end
   
+  def cache_key
+    "post:#{post.id}"
+  end
+  
+  def preview
+    @preview ||= (Markdown.markdown begin
+      raw = Replaceable.new(post.preview)
+      raw.replace_gists!.replace_tags!.replace_usernames!
+      raw.to_s
+    end)
+  end
+  
   def body
-    CGI::escapeHTML(post.body).gsub(/\{gist:(\d+)\}/) do
-      Github::Gist.script_tag($1)
-    end.html_safe
+    @body ||= (Markdown.markdown begin
+      raw = Replaceable.new(post.body)
+      raw.replace_gists!.replace_tags!.replace_usernames!
+      raw.to_s
+    end)
   end
   
   def title
-    post.title[0..50]
+    "#{link_to(post.title, post)} <span>by #{link_to user, user}</span>".html_safe
   end
   
-  def method_missing(method)
-    post.public_send(method) if post.respond_to? method
+  def comments
+    post.comments.to_a.select(&:persisted?)
   end
 end

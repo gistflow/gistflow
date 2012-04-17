@@ -1,0 +1,5 @@
+- return unless user_signed_in? and current_user.remembrance.any?
+section class="remembrance"
+  header
+    h1 Remembrance
+  = ul(current_user.remembrance.map { |p| "#{link_to p.user, p.user} #{p.link_name} #{link_to 'show', p}".html_safe })

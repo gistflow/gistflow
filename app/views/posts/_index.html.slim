@@ -1,0 +1,21 @@
+- posts.each do |post|
+  - presenter = Posts::ShowPresenter.new(post)
+  article class="post group"
+    header
+      h1 = presenter.title
+    div class="avatar"
+      = link_to presenter.user do
+        = avatar_image(presenter.user, 26)
+    div class="preview markdown group"
+      = presenter.preview
+    footer class="group actions"
+      div class="button-groups"
+        div class="button-group minor-group"
+          = link_to_memorize presenter.post if user_signed_in?
+          = link_to_like presenter.post
+          = link_to_comments presenter.post
+        div class="button-group minor-group"
+          - if can? :edit, post
+            = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
+          = link_to "Show", post, :class => 'button primary'
+= paginate posts

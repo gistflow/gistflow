@@ -1,0 +1,4 @@
+div class="search"
+  = form_tag search_path do
+    = search_field_tag :q, params[:q], :placeholder => "Search..", :id => nil
+    = submit_tag '&#x21A9;'.html_safe

@@ -1,6 +1,0 @@
-.post.detail
-  %h2= @presenter.title
-  .body= @presenter.body
-- content_for(:sidebar) do
-  - if current_user == @presenter.post.user
-    = link_to 'Edit', edit_post_path(@presenter.post), :class => 'btn'

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Account::Cookie do
   describe '#user_by_secret' do
     context 'cookie account exists' do
-      let(:cookie) { Factory(:cookie) }
+      let(:cookie) { FactoryGirl.create(:cookie) }
       
       it 'should return user' do
         Account::Cookie.user_by_secret(cookie.secret).should == cookie.user

@@ -3,29 +3,67 @@ require 'spec_helper'
 describe Post do
   describe "#creating posts that includes gists" do
     context 'check that gist tag is parsed properly' do
-      let(:post) { Factory(:post_with_gist) }
-      it { Posts::ShowPresenter.new(post).body.include?(Github::Gist.script_tag(777)).should == true }
+      
     end
   end
   
-  describe 'converting content to title and body' do
-    let(:post) { Post.new }
-    let(:content) do
-      "tratatata aopskdoa skpoda {gist:1023} skpodak pokas opka psk" + 
-      " oksaok {gist:10232} asokdopa skopadk opaskopd kpaosk dopkaspo k" + 
-      "aposkdopask opkdaspo kpdokasp okdpokas pokdaskdpo kaspokd poksapd k" +
-      "aposkdjoas dojs oijodijasoij oiajs oijsaoj oajsi aokdoa kas dkpask" + 
-      "paoskd poaksop kdapsok dpokaspok dpoaskpo dksaopk pokas"
+  describe '#tags_size' do
+    subject { build(:post, :content => 'foo #bar baz') }
+    its(:tags_size) { should == 1 }
+  end
+  
+  describe 'validations' do
+    context 'tags count' do
+      subject { build(:post, :content => 'foo bar baz') }
+      
+      it { should be_invalid }
+      it { should have(1).errors_on(:tags_size) }
+    end
+  end
+  
+  describe 'indextank callbacks', :remote => true do
+    before do
+      $indextank.indexes('postsx_dev').delete rescue IndexTank::NonExistentIndex
+      $indextank.indexes('postsx_dev').add :public => false
+      begin
+        @post = FactoryGirl.create(:post, title: 'foo', content: 'bar bar bar')
+      rescue IndexTank::IndexInitializing
+        retry
+        sleep 0.5
+      end
     end
     
-    it 'should set body as content' do
-      post.content = content
-      post.body.should == content
+    it 'should create a document on indextank' do
+      Post.search('foo').should include(@post)
+      Post.search('bar').should include(@post)
     end
     
-    it 'should set title as first 255 symbols of content without gists' do
-      post.content = content
-      post.title.should == 'tratatata aopskdoa skpodaskpodak pokas opka psk oksaokasokdopa skopadk opaskopd kpaosk dopkaspo kaposkdopask opkdaspo kpdokasp okdpokas pokdaskdpo kaspokd poksapd kaposkdjoas dojs oijodijasoij oiajs oijsaoj oajsi aokdoa kas dkpaskpaoskd poaksop kdapsok dpo'
+    it 'should update a document on indextank' do
+      @post.update_attributes(title: 'baz', content: 'qux')
+      Post.search('foo').should_not include(@post)
+      Post.search('bar').should_not include(@post)
+      Post.search('baz').should include(@post)
+      Post.search('qux').should include(@post)
+    end
+    
+    it 'should destroy a document on indextank' do
+      @post.destroy
+      Post.search('foo').should_not include(@post)
+      Post.search('bar').should_not include(@post)
+    end
+  end
+  
+  describe '#tweet' do
+    let!(:user) { create(:user) }
+    let!(:account_twitter) { create(:account_twitter, user: user) }
+    let!(:status) { 'foo bar' }
+    let!(:post) { build(:post, user: user, status: status) }
+    
+    context 'if twitter account', :focus => true do
+      it 'should tweet after create if status present' do
+        user.twitter_client.should_receive(:status).with(status)
+        post.save
+      end
     end
   end
 end
