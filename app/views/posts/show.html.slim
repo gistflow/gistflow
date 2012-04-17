@@ -31,4 +31,4 @@ section class="comments" id="comments"
   - if @presenter.comments.any?
     = render :partial => 'comments/comment', :collection => @presenter.comments
   - else
-    p No comments yet
+    p.no_comments No comments yet

@@ -73,4 +73,8 @@ protected
   def sidebar_tags
     user_signed_in? ? current_user.tags : Tag.popular
   end
+  
+  def render_json_error(message)
+    render :json => { :message => message }, :status => :error
+  end
 end

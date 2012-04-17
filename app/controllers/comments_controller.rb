@@ -6,15 +6,11 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(params[:comment])
     @comment.user = current_user
     
-    #raise params.to_s
-    
-    render_preview and return if params[:commit] == 'Preview'
-
-    if @comment.save
-      render_create# @post
+    render_preview and return if params[:commit] == 'Write'
+    if false#@comment.save
+      render_create
     else
-      @presenter = Posts::ShowPresenter.new(@post)
-      render 'posts/show'
+      render_json_error("We are sorry, but comment couldn't be saved.")
     end
   end
   
@@ -33,5 +29,4 @@ class CommentsController < ApplicationController
       :action => action
     }
   end
-  
 end
