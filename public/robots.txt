@@ -1,8 +1,6 @@
 # http://www.robotstxt.org/wc/norobots.html
 
 User-Agent: *
-Disallow: /tags
-Disallow: /users
 Disallow: /account
 Disallow: /login
 Disallow: /logout

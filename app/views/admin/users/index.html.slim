@@ -1,6 +1,22 @@
 b
   | Users count: 
-  = @count
-
-= render :partial => 'user', :locals => { :users => @users, :offset => @offset}
+  = @users.total_count
+table.users
+  tr
+    th
+    th
+    th Created_at
+    th Username
+    th Posts
+    th Comments
+  - @users.each do |u|
+    tr
+      td = u.id
+      td
+        = link_to u do
+          = avatar_image(u)
+      td = distance_of_time_in_words u.created_at, Time.now
+      td = link_to u.username, "http://github.com/#{u.username}", :target => 'blank'
+      td = u.posts.count
+      td = u.comments.count
 = paginate @users
