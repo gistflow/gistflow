@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Searchable unless Rails.env.test?
   
-  belongs_to :user
+  belongs_to :user, :inverse_of => :posts
   has_many :comments
   
   default_scope :order => 'id desc'

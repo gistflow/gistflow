@@ -15,8 +15,10 @@ module Models
     
     def assign_tags
       raw = Replaceable.new(content)
-      self.tags = raw.tagnames.map do |name|    
-        Tag.find_or_create_by_name(name)
+      self.tags = raw.tagnames.map do |name|
+        Tag.find_by_name(name) || Tag.create! do |t|
+          t.name = name
+        end
       end
     end
     

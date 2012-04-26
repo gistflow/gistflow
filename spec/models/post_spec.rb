@@ -59,7 +59,7 @@ describe Post do
     let!(:status) { 'foo bar' }
     let!(:post) { build(:post, user: user, status: status) }
     
-    context 'if twitter account', :focus => true do
+    context 'if twitter account', :focus => true, :remote => true do
       it 'should tweet after create if status present' do
         user.twitter_client.should_receive(:status).with(status)
         post.save

@@ -4,10 +4,10 @@ describe Account::Twitter do
   describe '.create_by_omniauth' do
     let(:user) { create(:user) }
     let(:omniauth) do
-      { 'token'       => '111',
+      { 'uid'    => '333',
         'credentials' => {
-          'secret' => '222',
-          'uid'    => '333'
+          'token'  => '111',
+          'secret' => '222'
         }
       }
     end
