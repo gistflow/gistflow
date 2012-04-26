@@ -41,7 +41,7 @@ class Replaceable
   
   def tagnames
     body.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
-      match[1]
+      match[1].gsub(/[\-_]/, '').downcase
     end.uniq
   end
   
