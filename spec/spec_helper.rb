@@ -11,7 +11,10 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.filter_run_excluding :remote => true
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
-  config.before(:each) { DatabaseCleaner.start }
+  config.before(:each) do
+    $redis.flushall
+    DatabaseCleaner.start
+  end
   config.after(:each) do
     DatabaseCleaner.clean
     config = YAML.load_file("#{Rails.root}/config/admins.yml")

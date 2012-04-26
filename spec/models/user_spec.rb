@@ -41,12 +41,10 @@ describe User do
     let(:user) { FactoryGirl.create(:user) }
     let(:post) { FactoryGirl.create(:post) }
     
-    before(:each) do
-      user.memorize post
-    end
+    before { user.memorize post }
     
-    it{ user.remembrance.should == [post] }
-    it{ post.liked_by?(user).should be_true }
+    its(:remembrance) { should == [post] }
+    it { user.memorized?(post).should be_true }
   end
   
   describe '#mark_notifications_read' do

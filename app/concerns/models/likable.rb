@@ -11,7 +11,11 @@ module Models
     end
     
     def like(record)
-      $redis.sadd record.redis_key, id
+      if record.user != self
+        $redis.sadd(record.redis_key, id)
+      else
+        false
+      end
     end
     
     def redis_key
