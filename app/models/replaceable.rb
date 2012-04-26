@@ -19,8 +19,9 @@ class Replaceable
   def replace_usernames!
     regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
     self.body.gsub!(regexp) do |match|
-      if User.where(:username => $2).exists?
-        "#{$1}[@#{$2}](/users/#{$2})#{$3}"
+      username = $2.downcase
+      if User.where(:username => username).exists?
+        "#{$1}[@#{$2}](/users/#{username})#{$3}"
       else
         match
       end
@@ -31,7 +32,9 @@ class Replaceable
   def replace_tags!
     regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
     self.body.gsub!(regexp) do |match|
-      "#{$1}[##{$2}](/tags/#{$2})#{$3}"
+      before, raw, after = $1, $2, $3
+      tagname = raw.gsub(/[\-_]/, '').downcase
+      "#{before}[##{raw}](/tags/#{tagname})#{after}"
     end
     self
   end
