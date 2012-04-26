@@ -4,8 +4,8 @@ include ActionView::Helpers::UrlHelper
 
 describe Models::Taggable do
   describe "#subscribe_author" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:post) { FactoryGirl.create(:post_with_tag, :user => user) }
+    let(:user) { create(:user) }
+    let(:post) { build(:post_with_tag, :user => user) }
     
     it 'should subscribe author for tags in the post' do
       Tag.destroy_all
@@ -13,7 +13,6 @@ describe Models::Taggable do
       
       user.subscriptions.should be_empty
       post.save
-      
       user.subscriptions.reload.map(&:tag).flatten.should == post.reload.tags
     end
   end
