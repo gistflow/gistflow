@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
+  before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
   
   def index
     if user_signed_in?
@@ -17,7 +18,11 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    content = ""
+    content << "gist:#{params[:gist_id]}" if params[:gist_id]
+    content << " ##{params[:gist_lang]}" if params[:gist_lang]
+    
+    @post = Post.new(:content => content)
     @presenter = Posts::FormPresenter.new(@post)
     
     flash[:info] = "Add your gists to the post by click on add."
@@ -90,8 +95,7 @@ class PostsController < ApplicationController
     render_memorize_link
   end
   
-protected
-
+protected  
   def render_memorize_link
     respond_to do |format|
       format.json do

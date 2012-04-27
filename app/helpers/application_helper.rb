@@ -9,7 +9,15 @@ module ApplicationHelper
     g = []
     g << gist.name
     g << link_to('edit', "https://gist.github.com/gists/#{gist.id}/edit", { target: 'blank' })
-    g.unshift link_to('add', '#', options)
+    
+    g.unshift link_to(
+      'add', 
+      form_present? ? '#' : new_post_url(
+        :gist_id   => gist.id, 
+        :gist_lang => gist.lang
+      ),
+      options
+    )
     g.join(' ').html_safe
   end
   
