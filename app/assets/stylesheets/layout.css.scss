@@ -42,5 +42,6 @@ section.sidebar {
 footer.main {
   width: 100%;
   height: 36px;
-  margin-top: -96px;
+  position: relative;
+  top: -96px;
 }
