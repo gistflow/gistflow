@@ -26,8 +26,7 @@ class PostsController < ApplicationController
   def new
     content = ""
     content << "gist:#{params[:gist_id]}" if params[:gist_id]
-    content << " ##{params[:gist_lang]}" if params[:gist_lang]
-    content << " "
+    content << " ##{params[:gist_lang]} " if params[:gist_lang]
     
     @post = Post.new(:content => content)
     @presenter = Posts::FormPresenter.new(@post)

@@ -15,10 +15,14 @@
     div class="left"
       | This text will be parsed by 
       = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
+      | . See 
+      = link_to 'hints', '#', :class => 'hints'
+      |.
     div class="button-groups"
       - if @presenter.post.persisted?
         div class="button-group"
           = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
       div class="button-group"
         = f.submit commit_title, :class => 'button'
+    = render :partial => 'markdown_hints'
   = yield(:form)
