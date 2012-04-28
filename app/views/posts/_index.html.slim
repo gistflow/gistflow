@@ -9,6 +9,7 @@
     div class="preview markdown group"
       = presenter.preview
     footer class="group actions"
+      = presenter.timestamp
       div class="button-groups"
         div class="button-group minor-group"
           = link_to_memorize presenter.post if user_signed_in?

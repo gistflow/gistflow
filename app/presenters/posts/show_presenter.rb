@@ -32,6 +32,10 @@ class Posts::ShowPresenter
     end)
   end
   
+  def timestamp
+    time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
+  end
+  
   def title
     "#{link_to(post.title, post)} <span>by #{link_to user, user}</span>".html_safe
   end
