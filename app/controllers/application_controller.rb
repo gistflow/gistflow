@@ -9,16 +9,21 @@ class ApplicationController < ActionController::Base
     :show_new_post_link?, :form_present?
   
 protected
-  def cleanup_form_present	  	
+  
+  def current_user_newbie?
+    current_user.try(:newbie?)
+  end
+
+  def cleanup_form_present
     session[:form_present] = nil unless request.xhr?
   end
-  	
-  def form_present!  	
+  
+  def form_present!
     session[:form_present] = true	
   end
-  	
+  
   def form_present?
-    session[:form_present]	
+    session[:form_present]
   end
   
   def notify_batman(exception)

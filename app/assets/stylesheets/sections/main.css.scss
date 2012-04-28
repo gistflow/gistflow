@@ -14,6 +14,7 @@ section.main {
   > header {
     h1 {
       @include caption;
+      color: #666;
     }
   }
   
