@@ -24,10 +24,14 @@ section class="comments" id="comments"
         div class="left"
           = f.check_box :question
           = f.label :question, 'Is it a Question?'
+          |  See markdown 
+          = link_to 'hints', '#', :class => 'hints'
+          |.
         div class="button-groups"
           div class="button-group"
             = f.submit 'Preview', :class => 'button preview_button high_button'
             = f.submit commit_title('Comment'), :class => 'button'
+        = render :partial => 'posts/markdown_hints'
   - if @presenter.comments.any?
     = render :partial => 'comments/comment', :collection => @presenter.comments
   - else
