@@ -1,13 +1,12 @@
 # coding: utf-8
 module FlashHelper
   def render_flash
-    flash.each do |type, message|
+    flash.map do |type, message|
       content_tag :div, :class => alert_classes(type) do
         concat(content_tag :a, "×", :class => 'close')
         concat message
       end
-    end
-    nil
+    end.join.html_safe
   end
 
 protected
