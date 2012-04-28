@@ -95,7 +95,7 @@ header.main {
       li {
         display: inline-block;
         line-height: 19px;
-        @include li-separator
+        @include li-separator;
       }
       
       a {
@@ -115,6 +115,23 @@ header.main {
           font-weight: bold;
         }
       }
+    }
+  }
+}
+
+header.title {
+  ul {
+    li {
+      display: inline-block;
+      @include li-separator;
+    }
+  }
+  
+  a {
+    color: #AAA;
+    
+    &:hover {
+      color: #666666;
     }
   }
 }

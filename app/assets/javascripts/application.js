@@ -16,7 +16,6 @@
 //= require twitter_tooltips
 //= require jquery.tabby
 //= require_tree .
-
 $(function(){
   $('textarea').autosize()
   $('textarea').tabby({tabString: '  '})
@@ -66,5 +65,8 @@ $(function(){
       update_twitter_status()
     }
   })
+  
+  $('a.flow_posts').tooltip({title: 'Posts tagged with your subscriptions.'});
+  $('a.all_posts').tooltip({title: 'All posts regardless to subscriptions.'});
   
 })

@@ -12,6 +12,7 @@ class Ability
     can :create, :users
     
     if user
+      can [:all, :flow], :posts
       can(:access, :all) and return if user.admin?
       
       can [:new, :create, :memorize, :forgot, :like], :posts

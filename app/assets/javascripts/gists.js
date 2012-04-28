@@ -26,7 +26,9 @@ $(function(){
   
   var box = $("#post_content")
   $("a.importable-gist").live('click', function(){
-    box.val(box.val() + "gist:" + $(this).data('gist-id') + " #" + $(this).data('gist-lang') + " ") 
-    return false
+    if(box.length > 0) {
+      box.val(box.val() + "gist:" + $(this).data('gist-id') + " #" + $(this).data('gist-lang') + " ")
+      return false;
+    }
   })
 })

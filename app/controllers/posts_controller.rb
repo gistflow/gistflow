@@ -1,13 +1,20 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
+  before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
+  prepend_before_filter :handle_unlogged, :only => [:flow, :all],
+    :unless => :user_signed_in?
+  
   
   def index
-    if user_signed_in?
-      @posts = current_user.intrested_posts.page(params[:page])
-    else
-      @posts = Post.includes(:user).page(params[:page])
-    end
+    @posts = Post.includes(:user).page(params[:page])
+    render :index
+  end
+  alias all index
+  
+  def flow
+    @posts = current_user.intrested_posts.page(params[:page])
+    render :index
   end
 
   def show
@@ -17,7 +24,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    content = ""
+    content << "gist:#{params[:gist_id]}" if params[:gist_id]
+    content << " ##{params[:gist_lang]}" if params[:gist_lang]
+    content << " "
+    
+    @post = Post.new(:content => content)
     @presenter = Posts::FormPresenter.new(@post)
     
     flash[:info] = "Add your gists to the post by click on add."
@@ -90,8 +102,7 @@ class PostsController < ApplicationController
     render_memorize_link
   end
   
-protected
-
+protected  
   def render_memorize_link
     respond_to do |format|
       format.json do
@@ -99,5 +110,9 @@ protected
         render :json => { :new_link => new_link }
       end
     end
+  end
+  
+  def handle_unlogged
+    redirect_to root_path, :notice => "Ooops"
   end
 end

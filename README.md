@@ -1,4 +1,4 @@
-## [Gistflow](http://gistflow.com) - social learning. [![Build Status](https://secure.travis-ci.org/gist-flow/gistflow.png)](http://travis-ci.org/gist-flow/gistflow)
+## [Gistflow](http://gistflow.com) - social learning. [![Build Status](https://secure.travis-ci.org/gistflow/gistflow.png)](http://travis-ci.org/gist-flow/gistflow)
 
 Micro-blog platform for developers inspired by [Gist.github.com](http://gist.github.com) and [Twitter](http://twitter.com).
 

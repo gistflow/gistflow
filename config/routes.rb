@@ -3,13 +3,14 @@ Gistflow::Application.routes.draw do
   match '/auth/twitter/callback' => 'account/twitter#create'
   match '/login' => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
+  match '/flow' => 'posts#flow'
+  match '/all' => 'posts#all'
   
   get :sitemap, :to => 'sitemap#show', :as => :xml
   
   resources :posts do
     member do
-      post :like
-      post :memorize
+      post :like, :memorize
       delete :forgot
     end
     resources :comments, :only => :create, :controller => :comments do
