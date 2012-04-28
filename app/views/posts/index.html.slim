@@ -1,6 +1,6 @@
 == content_for :title do
-  ul
-    li= link_to 'Flow', posts_url(:flow => true)
+  ul    
+    li= link_to 'Flow', posts_url(:flow => true), :class => 'flow_posts'
     li= ' | '
-    li= link_to 'All', posts_url
+    li= link_to 'All', posts_url, :class => 'all_posts'
 = render :partial => 'index', :locals => { :posts => @posts }
