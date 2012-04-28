@@ -2,9 +2,9 @@ class PostsController < ApplicationController
   cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
   before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
+  before_filter :handle_index, :only => :index
   prepend_before_filter :handle_unlogged, :only => [:flow, :all],
     :unless => :user_signed_in?
-  
   
   def index
     @posts = Post.includes(:user).page(params[:page])
@@ -14,7 +14,6 @@ class PostsController < ApplicationController
   
   def flow
     @posts = current_user.intrested_posts.page(params[:page])
-    render :index
   end
 
   def show
@@ -101,7 +100,8 @@ class PostsController < ApplicationController
     render_memorize_link
   end
   
-protected  
+protected
+  
   def render_memorize_link
     respond_to do |format|
       format.json do
@@ -112,6 +112,10 @@ protected
   end
   
   def handle_unlogged
-    redirect_to root_path, :notice => "Ooops"
+    redirect_to root_path, :notice => "Sign up to create your own flow!"
+  end
+  
+  def handle_index
+    redirect_to flow_path if user_signed_in?
   end
 end

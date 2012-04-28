@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def all_posts_page?
+    ['/', '/all'].include? request.fullpath
+  end
+  
   def link_to_gist(gist)
     options = {
       :class            => [:'importable-gist'],
