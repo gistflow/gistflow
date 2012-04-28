@@ -64,5 +64,12 @@ article.post {
   
   footer {
     margin-top: 5px;
+    
+    time {
+      float: left;
+      padding: 4px 0;
+      font-size: 12px;
+      color: $charcoal;
+    }
   }
 }

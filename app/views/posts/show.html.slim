@@ -5,6 +5,7 @@ article class="post detail"
   div class="body markdown"
     = @presenter.body
   footer class="group actions"
+    = @presenter.timestamp
     div class="button-groups"
       div class="notice button-group minor-group group"
         = link_to_memorize @presenter.post if user_signed_in?
