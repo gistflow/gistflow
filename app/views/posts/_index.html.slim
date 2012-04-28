@@ -1,6 +1,6 @@
 - posts.each do |post|
   - presenter = Posts::ShowPresenter.new(post)
-  article class="post group"
+  article class="post group" rel="#{post_url(post)}"
     header
       h1 = presenter.title
     div class="avatar"
