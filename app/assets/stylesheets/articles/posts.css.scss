@@ -67,8 +67,10 @@ article.post {
     
     time {
       float: left;
-      padding: 4px 0;
       font-size: 12px;
+      line-height: 25px;
+      position: relative;
+      top: 1px;
       color: $charcoal;
     }
   }
