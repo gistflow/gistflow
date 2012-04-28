@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_filter :form_present!, :only => [:new, :edit, :create, :update, :show]
   
   def index
-    if user_signed_in?
+    if user_signed_in? && params[:flow]
       @posts = current_user.intrested_posts.page(params[:page])
     else
       @posts = Post.includes(:user).page(params[:page])

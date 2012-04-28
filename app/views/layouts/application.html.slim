@@ -22,7 +22,7 @@ html
             = link_to('New Post', new_post_path, :class => 'button')
       section class="main"
         - if content_for?(:title)
-          header
+          header.title
             h1 = yield(:title)
         = yield
       section class="sidebar"

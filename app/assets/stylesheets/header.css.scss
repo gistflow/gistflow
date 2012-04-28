@@ -118,3 +118,19 @@ header.main {
     }
   }
 }
+
+header.title {
+  ul {
+    li {
+      display: inline;
+    }
+  }
+  
+  a {
+    color: #AAA;
+    
+    &:hover {
+      color: #666666;
+    }
+  }
+}
