@@ -95,7 +95,7 @@ header.main {
       li {
         display: inline-block;
         line-height: 19px;
-        @include li-separator
+        @include li-separator;
       }
       
       a {
@@ -122,7 +122,8 @@ header.main {
 header.title {
   ul {
     li {
-      display: inline;
+      display: inline-block;
+      @include li-separator;
     }
   }
   
