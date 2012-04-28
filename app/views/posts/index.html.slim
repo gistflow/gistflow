@@ -1,5 +1,1 @@
-== content_for :title do
-  ul    
-    li= link_to 'Flow', flow_url, :class => 'flow_posts'
-    li= link_to 'All', all_url, :class => 'all_posts'
 = render :partial => 'index', :locals => { :posts => @posts }

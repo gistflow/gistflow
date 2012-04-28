@@ -21,6 +21,10 @@ html
           nav class="posts" 
             = link_to('New Post', new_post_path, :class => 'button')
       section class="main"
+        ul.menu
+          li= link_to_unless_current 'Flow', flow_url, :class => 'flow_posts'
+          li= link_to_unless_current 'All', all_url, :class => 'all_posts'
+        
         - if content_for?(:title)
           header.title
             h1 = yield(:title)
@@ -40,4 +44,3 @@ html
           = mail_to 'info@gistflow.com', 'email us', :encode => :hex
           | .
         = render :partial => 'shared/creative_commons'
-  = render :partial => 'shared/flash'

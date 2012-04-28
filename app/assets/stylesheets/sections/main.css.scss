@@ -3,6 +3,14 @@
 section.main {
   padding-top: 0;
   
+  > ul.menu {
+    li {
+      @include caption;
+      @include li-separator;
+      color: #666;
+    }
+  }
+  
   > header {
     h1 {
       @include caption;
