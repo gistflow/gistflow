@@ -80,8 +80,12 @@ section.main {
     }
     .button-groups {
       float: right;
+      line-height: 0;
+      .button-group {
+        font-size: 13px;
+        line-height: 13px;
+      }
     }
-
   }
   
   ul.subscriptions {
