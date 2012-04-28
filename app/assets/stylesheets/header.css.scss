@@ -118,20 +118,3 @@ header.main {
     }
   }
 }
-
-header.title {
-  ul {
-    li {
-      display: inline-block;
-      @include li-separator;
-    }
-  }
-  
-  a {
-    color: #AAA;
-    
-    &:hover {
-      color: #666666;
-    }
-  }
-}

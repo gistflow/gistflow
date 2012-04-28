@@ -1,1 +1,1 @@
-rvm 1.9.3@gistflow --create
+rvm 1.9.3-head@gistflow --create

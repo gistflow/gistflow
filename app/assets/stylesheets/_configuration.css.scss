@@ -15,6 +15,7 @@ $base: #404040;
 }
 
 @mixin li-separator {
+  display: inline-block;
   &:after {
     content: '';
     margin: 0 5px;

@@ -3,6 +3,14 @@
 section.main {
   padding-top: 0;
   
+  > ul.menu {
+    li {
+      @include caption;
+      @include li-separator;
+      color: #666;
+    }
+  }
+  
   > header {
     h1 {
       @include caption;
@@ -53,7 +61,12 @@ section.main {
   .actions {
     .left {
       float: left;
-      width: 280px;
+      width: 300px;
+      
+      a.hints {
+        border-bottom:1px dashed;
+        text-decoration:none;
+      }
       
       &.gray {
         a {
@@ -68,6 +81,7 @@ section.main {
     .button-groups {
       float: right;
     }
+
   }
   
   ul.subscriptions {
@@ -75,5 +89,15 @@ section.main {
       display: inline-block;
       margin: 0 10px 10px 0;
     }
+  }
+  
+  .markdown_hints {
+    display: none;
+    clear: both;
+    margin-top: 25px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.035);
+    white-space: pre;
+    font-family: monospace;
   }
 }

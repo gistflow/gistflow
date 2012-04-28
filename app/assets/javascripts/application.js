@@ -69,4 +69,8 @@ $(function(){
   $('a.flow_posts').tooltip({title: 'Posts tagged with your subscriptions.'});
   $('a.all_posts').tooltip({title: 'All posts regardless to subscriptions.'});
   
+  
+  $('a.hints').on('click', function(){
+    $('div.markdown_hints').toggle();
+  })
 })
