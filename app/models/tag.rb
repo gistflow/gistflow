@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true, :format => { :with => /[a-z]+/ }
   
   scope :popular, (lambda do |limit = 100|
-    order('posts_count desc').limit(limit)
+    order('taggings_count desc').limit(limit)
   end)
   
   def to_s

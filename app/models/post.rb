@@ -7,15 +7,14 @@ class Post < ActiveRecord::Base
   belongs_to :user, :inverse_of => :posts
   has_many :comments
   
-  default_scope :order => 'id desc'
+  default_scope :order => 'posts.id desc'
   
-  validates :user, :presence => true
-  validates :title, :presence => true
-  validates :cuts_count, :inclusion => { :in => [0, 1] }
-  validates :preview, :length => 3..500
-  validates :tags_size, :numericality => { :greater_than => 0 }
+  validates :user, :title, presence: true
+  validates :cuts_count, inclusion: { in: [0, 1] }
+  validates :preview, length: 3..500
+  validates :tags_size, numericality: { greater_than: 0 }
   validates :status, format: { with: /http:\/\/goo.gl\/xxxxxx/ }, 
-    length: { maximum: 140 }, :if => :status?
+    length: { maximum: 140 }, if: :status?
   
   attr_accessor :status
   attr_accessible :title, :content, :question, :status
