@@ -92,4 +92,36 @@ describe User do
     its(:oauth_token) { should == account_twitter.token }
     its(:oauth_token_secret) { should == account_twitter.secret }
   end
+  
+  describe 'following methods' do
+    let(:follower) { create :user }
+    let(:followed_user) { create :user }
+    
+    context 'following' do 
+      let!(:following) { create :following, :follower => follower, :followed_user => followed_user }
+      
+      describe '#follow?' do
+        it { follower.follow?(followed_user).should == true }
+      end
+      
+      describe '#unfollow!' do
+        before do
+          follower.unfollow! followed_user
+        end
+        
+        it { follower.followed_users.should == [] }
+        it { followed_user.followers.should == [] }
+      end
+    end
+    
+    describe '#follow!' do
+      before do
+        follower.follow! followed_user
+      end
+      
+      it { follower.followed_users.should == [followed_user] }
+      it { followed_user.followers.should == [follower] }
+    end
+  end
+  
 end

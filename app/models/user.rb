@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
     class_name: :'Post',
     source:     :user
   }
+  has_many :tags, :through => :subscriptions
+  has_many :followings, :foreign_key => :follower_id, :dependent => :destroy
+  has_many :reverse_followings, :foreign_key => :followed_user_id, :class_name => 'Following'
+  has_many :followed_users, :through => :followings, :source => :followed_user
+  has_many :followers, :through => :reverse_followings
   
   validates :username, :name, presence: true
   validates :username, uniqueness: true
@@ -101,6 +106,18 @@ class User < ActiveRecord::Base
       oauth_token: account_twitter.token,
       oauth_token_secret: account_twitter.secret
     )
+  end
+  
+  def follow? other_user
+    followings.where(:followed_user_id => other_user.id).exists?
+  end
+
+  def follow! other_user
+    followings.create(:followed_user_id => other_user.id)
+  end
+
+  def unfollow! other_user
+    followed_users.delete other_user
   end
   
 private
