@@ -4,10 +4,10 @@ class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Searchable unless Rails.env.test?
   
-  belongs_to :user, :inverse_of => :posts
+  belongs_to :user, inverse_of: :posts
   has_many :comments
   
-  default_scope :order => 'posts.id desc'
+  default_scope order: 'posts.id desc'
   
   validates :user, :title, presence: true
   validates :cuts_count, inclusion: { in: [0, 1] }
