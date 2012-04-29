@@ -3,7 +3,7 @@ include RSpec::Rails::Matchers::RoutingMatchers
 include ActionView::Helpers::UrlHelper
 
 describe Models::Taggable do
-  describe "#subscribe_author" do
+  describe "#subscribe_user" do
     let(:user) { create(:user) }
     let(:post) { build(:post_with_tag, :user => user) }
     
