@@ -1,0 +1,13 @@
+- content_for(:sidebar) do
+  section class="user"
+    header
+      h1 = user
+    div class="user group"
+      div class="avatar" = avatar_image(user, 66)
+      dl
+        - user.contacts.each do |field, value|
+          dt(class=field)
+          dd= value
+        - if can? :follow, user
+          dt
+            = following_link user

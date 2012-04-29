@@ -28,6 +28,7 @@ Gistflow::Application.routes.draw do
     member do
       delete :unfollow
       post :follow
+      get :following, :followers
     end
   end
   
