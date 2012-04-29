@@ -20,12 +20,16 @@ Gistflow::Application.routes.draw do
     end
   end
   
-  resource :search, only: :create
-  
-  get '/empty_search'  => 'searches#empty', as: 'nil_search'
-  get '/search/:query' => 'searches#show',  as: 'show_search'
-  
-  resources :tags, :users, :gists, only: :show
+  resource :search, :only => :create
+  get '/empty_search' => 'searches#empty', :as => 'nil_search'
+  get '/search/:query' => 'searches#show', :as => 'show_search'
+  resources :tags, :only => :show
+  resources :users, :only => :show do
+    member do
+      delete :unfollow
+      post :follow
+    end
+  end
   
   namespace :admin do
     resources :users, only: :index

@@ -52,4 +52,12 @@ module MenuHelper
     items
   end
   
+  def following_link(user)
+    if current_user.follow? user
+      link_to 'Unfollow', unfollow_user_path(user), :method => :delete, :class => 'button icon user'
+    else
+      link_to 'Follow', follow_user_path(user), :method => :post, :class => 'button icon user'
+    end
+  end
+  
 end

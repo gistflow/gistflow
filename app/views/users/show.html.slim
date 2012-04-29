@@ -9,6 +9,7 @@
         - @user.contacts.each do |field, value|
           dt(class=field)
           dd= value
-  
+        - if can? :follow, @user
+          dt
+            = following_link @user
 = render :partial => 'posts/index', :locals => { :posts => @posts }
-
