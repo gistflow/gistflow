@@ -20,7 +20,7 @@ section class="comments" id="comments"
   - if can? :create, :comments
     = form_for [@comment.post, @comment], :remote => true do |f|
       fieldset#new_comment_body
-        = f.text_area :content, :size => '40x2', :id => 'post_content'
+        = f.text_area :content, :size => '40x2', :id => 'post_content', :class => 'at-username'
       div class="actions group"
         div class="left"
           = f.check_box :question
@@ -37,3 +37,8 @@ section class="comments" id="comments"
     = render :partial => 'comments/comment', :collection => @presenter.comments
   - else
     p.no_comments No comments yet
+
+div class='at-username-container'
+  - @presenter.usernames.each do |username|
+    div href="#" class="username"
+      = username

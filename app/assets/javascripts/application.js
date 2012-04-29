@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require auto_resize
 //= require twitter_tooltips
+//= require areacomplete
 //= require jquery.tabby
 //= require_tree .
 $(function(){
@@ -73,4 +74,6 @@ $(function(){
   $('a.hints').on('click', function(){
     $('div.markdown_hints').toggle();
   })
+  
+  $('textarea.at-username').atUsername();
 })
