@@ -3,11 +3,22 @@
 section.main {
   padding-top: 0;
   
-  > ul.menu {
-    li {
-      @include caption;
-      @include li-separator;
-      color: #666;
+  > div.menu {
+    ul.menu {
+      float: left;
+      width: 300px;
+      li {
+        @include caption;
+        @include li-separator;
+        color: #666;
+      }
+    }
+    
+    nav.submenu {
+      float: right;
+      text-transform: none;
+      position: relative;
+      top: 5px;
     }
   }
   

@@ -17,16 +17,17 @@ html
           = render 'search/form'
           nav class="user" = ul(authentication_items)
         = render_flash
-        - if user_signed_in?
-          nav class="posts" 
-            = link_to('New Post', new_post_path, :class => 'button')
       section class="main"
-        ul.menu
-          li= link_to_unless_current 'Flow', flow_url, :class => 'flow_posts', :rel => :nofollow
-          li= link_to_unless all_posts_page?, 'All', all_url, :class => 'all_posts'
+        div class="menu group"
+          - if content_for?(:menu)
+            ul.menu
+              = yield(:menu)
+          - if content_for?(:submenu)
+            nav class="submenu"
+              = yield(:submenu)
         
         - if content_for?(:title)
-          header.title
+          header class="title"
             h1 = yield(:title)
         = yield
       section class="sidebar"
