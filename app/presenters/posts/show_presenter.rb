@@ -41,6 +41,10 @@ class Posts::ShowPresenter
   end
   
   def comments
-    post.comments.to_a.select(&:persisted?)
+    post.comments.includes(:user).to_a.select(&:persisted?)
+  end
+  
+  def usernames
+    [*comments.map{ |c| c.user.username }, post.user.username].uniq.sort
   end
 end
