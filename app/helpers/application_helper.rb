@@ -16,7 +16,7 @@ module ApplicationHelper
     
     g.unshift link_to(
       'add', 
-      form_present? ? '#' : new_post_url(
+      new_post_url(
         :gist_id   => gist.id, 
         :gist_lang => gist.lang
       ),
