@@ -3,42 +3,33 @@ module Models
     extend ActiveSupport::Concern
     
     included do
-      has_and_belongs_to_many :tags
+      has_many :taggings, as: :taggable
+      has_many :tags, through: :taggings
     
       scope :tagged_with, (lambda do |names|
-        joins(:tags).where(:tags => { :name => names }).uniq
+        joins(:tags).where(tags: { name: names }).uniq
       end)
       
-      after_save :assign_tags, :subscribe_author, :increment_tags_counter_cache
-      before_destroy :decrement_tags_counter_cache
+      after_save :assign_tags, :subscribe_user
+      
     end
     
-    def assign_tags
-      raw = Replaceable.new(content)
-      self.tags = raw.tagnames.map do |name|
-        Tag.find_by_name(name) || Tag.create! do |t|
-          t.name = name
+    module InstanceMethods
+    protected
+      
+      def assign_tags
+        self.tags = Replaceable.new(content).tagnames.map do |name|
+          Tag.where(name: name).first_or_create!
         end
       end
-    end
-    
-    def subscribe_author
-      (tags - user.tags).each do |tag|
-        user.subscribe tag
+
+      def subscribe_user
+        (tags - user.tags).each do |tag|
+          user.subscriptions.create! do |subsctiption|
+            subsctiption.tag = tag
+          end rescue ActiveRecord::RecordNotUnique
+        end
       end
-    end
-
-    # FIX this to update counter, not increment
-    def increment_tags_counter_cache
-      update_posts_counts
-    end
-
-    def decrement_tags_counter_cache
-      update_posts_counts(-1)
-    end
-
-    def update_posts_counts(by = 1)
-      tags.update_all("posts_count = posts_count + #{by}")
     end
   end
 end
