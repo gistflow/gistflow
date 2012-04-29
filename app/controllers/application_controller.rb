@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   prepend_before_filter :cleanup_form_present
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Exception, with: :notify_batman
-  helper_method :user_signed_in?, :current_user, :sidebar_tags,
-    :show_new_post_link?, :form_present?
+  helper_method :user_signed_in?, :current_user, :sidebar_tags
   
 protected
   
@@ -51,11 +50,6 @@ protected
   
   def user_signed_in?
     !!current_user
-  end
-  
-  def show_new_post_link?
-    user_signed_in? && ['home', 'posts'].include?(params[:controller]) && 
-      params[:action] == 'index'
   end
   
   def current_user

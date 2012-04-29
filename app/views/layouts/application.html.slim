@@ -17,7 +17,7 @@ html
           = render 'search/form'
           nav class="user" = ul(authentication_items)
         = render_flash
-        - if show_new_post_link?
+        - if user_signed_in?
           nav class="posts" 
             = link_to('New Post', new_post_path, :class => 'button')
       section class="main"
