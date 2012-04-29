@@ -12,16 +12,8 @@ class Posts::ShowPresenter
     @post = post
   end
   
-  def cache_key
-    "post:#{post.id}"
-  end
-  
   def preview
-    @preview ||= (Markdown.markdown begin
-      raw = Replaceable.new(post.preview)
-      raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
+    post.formatted_preview
   end
   
   def body

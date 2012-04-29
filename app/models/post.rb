@@ -20,6 +20,8 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :question, :status
   
   after_create :tweet
+  after_save :cache
+  after_destroy :clear_cache
   
   def link_name
     ln = title.blank? ? preview : title
@@ -41,6 +43,15 @@ class Post < ActiveRecord::Base
   
   def status?
     status.present?
+  end
+  
+  def formatted_preview(reload = false)
+    @formatted_preview = nil if reload
+    @formatted_preview ||= Markdown.markdown begin
+      raw = Replaceable.new(preview)
+      raw.replace_gists!.replace_tags!.replace_usernames!
+      raw.to_s
+    end
   end
   
 protected
@@ -66,5 +77,17 @@ protected
       status << url.short_url
       user.twitter_client.update(status)
     end
+  end
+  
+  def cache
+    $redis.set cache_key(:preview), formatted_preview
+  end
+  
+  def clear_cache
+    $redis.del cache_key
+  end
+  
+  def cache_key(*paths)
+    [:posts, id, paths].flatten.compact.join(':')
   end
 end
