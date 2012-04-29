@@ -1,8 +1,16 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :posts
   has_many :subscriptions
+  has_many :taggings
+  has_many :posts, {
+    through: :taggings, source: :tag,
+    conditions: { taggings: { taggable_type: 'Post' } }
+  }
+  has_many :comments, {
+    through: :taggings, source: :tag,
+    conditions: { taggings: { taggable_type: 'Comment' } }
+  }
   
-  validates :name, :presence => true, :format => { :with => /[a-z]+/ }
+  validates :name, presence: true, format: { with: /[a-z]+/ }
   
   scope :popular, (lambda do |limit = 100|
     order('taggings_count desc').limit(limit)
