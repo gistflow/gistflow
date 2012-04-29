@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  cache_sweeper :post_sweeper, :only => [:like, :memorize, :forgot]
   before_filter :authenticate!, :except => [:show, :index]
   before_filter :handle_index, :only => :index
   prepend_before_filter :handle_unlogged, :only => [:flow, :all],
@@ -12,7 +11,7 @@ class PostsController < ApplicationController
   alias all index
   
   def flow
-    @posts = current_user.intrested_posts.page(params[:page])
+    @posts = current_user.intrested_posts.includes(:user).page(params[:page])
   end
 
   def show

@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe Post do
-  describe "#creating posts that includes gists" do
-    context 'check that gist tag is parsed properly' do
-      
+  let(:post) { create(:post) }
+  subject { post }
+  
+  describe 'cache' do
+    let!(:post) { create(:post) }
+    
+    it 'should cache preview' do
+      $redis.get("posts:#{post.id}:preview").should == post.formatted_preview
     end
   end
   
