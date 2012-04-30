@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
     
   def mark_notifications_read
-    notifications.unread.update_all(:read => true)
+    notifications.unread.update_all read: true
   end
   
   def admin?
