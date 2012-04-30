@@ -1,0 +1,19 @@
+@import "configuration";
+
+section.notifications {
+  table {
+    
+    td {
+      font-size: 14px;
+      padding: 0 0 5px 0;
+      a {
+        font-weight: bold;
+      }
+      &.time {
+        color: #666;
+        padding-right: 10px;
+        
+      }
+    }
+  }
+}

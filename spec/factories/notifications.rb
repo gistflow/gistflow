@@ -7,7 +7,7 @@ FactoryGirl.define do
     end
     
     factory :mention_notification, class: 'Notification::Mention' do
-      association :notifiable, factory: :post
+      association :notifiable, factory: :comment
     end
   end
 end

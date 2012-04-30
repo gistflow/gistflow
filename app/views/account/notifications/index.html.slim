@@ -1,7 +1,13 @@
 - title 'Notifications'
 
 - if @notifications.any?
-  = ul(@notifications.map { |n| link_to_notifiable(n) })
-  = paginate @notifications
+  section class="notifications"
+    table
+      - @notifications.each do |notification|
+        tr
+          td.time = notification.created_at.to_formatted_s(:short)
+          td.message = notification.message
+      
+    = paginate @notifications
 - else
   p Seems like no one mentioned you yet.
