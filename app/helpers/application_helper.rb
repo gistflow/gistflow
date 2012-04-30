@@ -71,7 +71,7 @@ module ApplicationHelper
       link_to 'Unobserve', account_observing_path(observing),
         remote: true, method: :delete, class: %w(button observable)
     else
-      observing = current_user.observings.build do |observing|
+      observing = Observing.new do |observing|
         observing.post = post
       end
       form = form_for [:account, observing], remote: true, html: { id: nil } do |f|

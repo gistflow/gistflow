@@ -36,12 +36,16 @@ $(function(){
     }
   })
   
-  $(document).on('click', 'a.observable.new', function(){
-    $(this).parents('div.button-group').find('form.new_observing').submit()
-    return false
-  })
+  var setup_observable_links = function(){
+    $('a.observable.new').on('click', function(){
+      $(this).parents('div.button-group').find('form.new_observing').submit()
+      return false
+    })
+  }
+  setup_observable_links()
   $('a.observable[data-method="delete"]').live('ajax:success', function(e, data){
     $(this).replaceWith(data.new_link)
+    setup_observable_links()
   })
   
   $('form.new_observing').live('ajax:success', function(e, data){
