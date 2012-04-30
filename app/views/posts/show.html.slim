@@ -9,6 +9,7 @@ article class="post detail"
     div class="button-groups"
       div class="notice button-group minor-group group"
         = link_to_memorize @presenter.post if user_signed_in?
+        = link_to_observe @presenter.post if user_signed_in?
         = link_to_like @presenter.post
       - if can? :edit, @presenter.post
         div class="button-group minor-group"

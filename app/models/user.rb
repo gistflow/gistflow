@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
   
   def observe?(post)
-    observing_posts.include? post
+    observings.map(&:post_id).include? post.id
   end
   
   def to_param
