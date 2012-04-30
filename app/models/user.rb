@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
   
   def follow? other_user
-    followings.where(:followed_user_id => other_user.id).exists?
+    followed_users.include? other_user
   end
 
   def follow! other_user
