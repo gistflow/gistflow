@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430111422) do
+ActiveRecord::Schema.define(:version => 20120430171252) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20120430111422) do
     t.boolean  "read",            :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.string   "type"
   end
 
   add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20120430111422) do
     t.string   "gravatar_id"
     t.datetime "created_at"
     t.string   "company"
+    t.integer  "notifications_count", :default => 0
   end
 
 end
