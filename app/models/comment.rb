@@ -10,7 +10,16 @@ class Comment < ActiveRecord::Base
   
   attr_accessible :content, :question
   
+  after_create :observe_post_to_author
+  
   def body
     content
+  end
+  
+protected
+  
+  def observe_post_to_author
+    user.observe(post)
+    true
   end
 end

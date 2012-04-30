@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429100822) do
+ActiveRecord::Schema.define(:version => 20120430111422) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -95,6 +95,15 @@ ActiveRecord::Schema.define(:version => 20120429100822) do
   end
 
   add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
+
+  create_table "observings", :force => true do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "observings", ["post_id", "user_id"], :name => "index_observings_on_post_id_and_user_id", :unique => true
+  add_index "observings", ["post_id"], :name => "index_observings_on_post_id"
+  add_index "observings", ["user_id"], :name => "index_observings_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.integer   "comments_count", :default => 0

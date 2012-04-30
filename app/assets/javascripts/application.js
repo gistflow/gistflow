@@ -36,6 +36,20 @@ $(function(){
     }
   })
   
+  $(document).on('click', 'a.observable.new', function(){
+    $(this).parents('div.button-group').find('form.new_observing').submit()
+    return false
+  })
+  $('a.observable[data-method="delete"]').live('ajax:success', function(e, data){
+    $(this).replaceWith(data.new_link)
+  })
+  
+  $('form.new_observing').live('ajax:success', function(e, data){
+    var container = $(this).parents('div.button-group')
+    container.find('a.observable').replaceWith(data.new_link)
+    $(this).remove()
+  })
+  
   $("li.subscription form").live('ajax:success', function(e, data){
     $(this).parent().replaceWith(data.new_form);
     link = $($('ul#subscriptions').find('a#' + data.link_id)[0]);

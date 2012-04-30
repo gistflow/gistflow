@@ -2,23 +2,38 @@ class User < ActiveRecord::Base
   include Models::Likable
   include Models::Memorizable
   
-  has_many :account_cookies, :class_name => 'Account::Cookie'
-  has_one  :account_twitter, :class_name => 'Account::Twitter'
+  has_many :account_cookies, class_name: :'Account::Cookie'
+  has_one  :account_twitter, class_name: :'Account::Twitter'
   has_many :posts
   has_many :likes
   has_many :comments
   has_many :notifications
   has_many :subscriptions
-  has_many :tags, :through => :subscriptions
+  has_many :tags, through: :subscriptions
+  has_many :observings
+  has_many :observing_posts, {
+    through:    :observings,
+    class_name: :'Post',
+    source:     :user
+  }
   
-  validates :username, :name, :presence => true
-  validates :username, :uniqueness => true
+  validates :username, :name, presence: true
+  validates :username, uniqueness: true
   
   after_create :send_welcome_email
   
   def intrested_posts
-    Post.joins(:tags => { :subscriptions => :user }).
-      where(:users => { :id => id }).uniq
+    Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
+  end
+  
+  def observe(post)
+    observings.first_or_create! do |observing|
+      observing.post = post
+    end
+  end
+  
+  def observe?(post)
+    observing_posts.include? post
   end
   
   def to_param
