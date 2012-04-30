@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   include Models::Likable
   include Models::Taggable
+  include Models::Mentionable
   
   belongs_to :user
   belongs_to :post, counter_cache: true

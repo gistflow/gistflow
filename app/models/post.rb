@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   include Models::Likable
   include Models::Taggable
+  include Models::Mentionable
   include Models::Searchable unless Rails.env.test?
   
   default_scope order: 'posts.id desc'
