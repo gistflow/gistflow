@@ -3,7 +3,7 @@ namespace :fixes do
     Post.all.each(&:save)
   end
   
-  task :clean_old_notifications: :environment do
+  task clean_old_notifications: :environment do
     Notification.where(type: nil).delete_all
   end
 end
