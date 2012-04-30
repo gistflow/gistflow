@@ -1,7 +1,7 @@
 - title "#{@user}'s followers"
 = render :partial => 'sidebar', :locals => { :user => @user }
 
-- if @users.any?
-  = render :partial => 'user', :collection => @users
+- if @users.exists?
+  = render :partial => 'users', :locals => { :users => @users }
 - else
   p.no_followers No followers yet.

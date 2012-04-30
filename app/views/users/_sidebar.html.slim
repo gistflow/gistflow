@@ -8,6 +8,6 @@
         - user.contacts.each do |field, value|
           dt(class=field)
           dd= value
-        - if can? :follow, user
-          dt
-            = following_link user
+        dd= followers_link user
+        dd= followed_users_link user
+        dd= following_link user

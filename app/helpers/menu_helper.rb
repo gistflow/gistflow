@@ -54,10 +54,19 @@ module MenuHelper
   
   def following_link(user)
     if current_user.follow? user
-      link_to 'Unfollow', unfollow_user_path(user), :method => :delete, :class => 'button icon user'
+      link = link_to 'Unfollow', unfollow_user_path(user), :method => :delete, :class => 'button icon user'
     else
-      link_to 'Follow', follow_user_path(user), :method => :post, :class => 'button icon user'
+      link = link_to 'Follow', follow_user_path(user), :method => :post, :class => 'button icon user'
     end
+    
+    link if user_signed_in? && user != current_user
   end
   
+  def followers_link user
+    link_to "Followers #{user.followers.count}", followers_user_path(user)
+  end
+  
+  def followed_users_link user
+    link_to "Following #{user.followed_users.count}", following_user_path(user)
+  end
 end

@@ -1,0 +1,27 @@
+div.user {
+  clear: both;
+  div.info {
+    float: left;
+    margin-bottom: 20px;
+    span.username {
+      margin-left: 5px;
+      margin-top: 5px;
+      vertical-align: top;
+      font-weight: bold;
+    }
+    
+    p.name {
+      margin-top: -35px;
+      margin-left: 53px;
+    }
+  }
+  
+  div.following {
+    float: right;
+    margin-bottom: 30px;
+  }
+}
+
+.pagination {
+  clear: both;
+}

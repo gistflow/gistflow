@@ -121,6 +121,9 @@ describe User do
       
       it { follower.followed_users.should == [followed_user] }
       it { followed_user.followers.should == [follower] }
+      it 'should raise error if try to follow yourself' do
+        follower.follow!(follower).should == false
+      end
     end
   end
   

@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
   end
 
   def follow! other_user
-    followings.create(:followed_user_id => other_user.id)
+    followings.build(:followed_user_id => other_user.id).save
   end
 
   def unfollow! other_user

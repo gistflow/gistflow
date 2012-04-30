@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if current_user.follow! @user
       redirect_to :back, :notice => "You started following #{@user.username}."
     else
-      redirect_to :back, :error => "Something went wrong. Sorry about that."
+      redirect_to :back, :alert => "Something went wrong. Sorry about that."
     end
   end
   
@@ -41,11 +41,11 @@ class UsersController < ApplicationController
   end
   
   def following
-    @users = @user.followed_users
+    @users = @user.followed_users.page(params[:page])
   end
   
   def followers
-    @users = @user.followers
+    @users = @user.followers.page(params[:page])
   end
   
 protected

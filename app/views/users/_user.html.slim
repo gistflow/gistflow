@@ -1,7 +1,8 @@
-article class="user"
-  header
-    h1= user.username
-    div class="avatar"
-      = link_to user_path(:id => user.username) do
-        = avatar_image(user, 26)
-      = following_link user
+div class="user"
+  div class="avatar info"
+    = link_to user_path(:id => user.username) do
+      = avatar_image(user, 48)
+      span.username= "@#{user.username}"
+    p.name= user.name
+  div class="following"
+    = following_link user
