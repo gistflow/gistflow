@@ -24,22 +24,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def follow
-    if current_user.follow! @user
-      redirect_to :back, :notice => "You started following #{@user.username}."
-    else
-      redirect_to :back, :alert => "Something went wrong. Sorry about that."
-    end
-  end
-  
-  def unfollow
-    if current_user.unfollow! @user
-      redirect_to :back, :notice => "You stopped following #{@user.username}."
-    else
-      redirect_to :back, :error => "Something went wrong. Sorry about that."
-    end
-  end
-  
   def following
     @users = @user.followed_users.page(params[:page])
   end

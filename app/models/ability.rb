@@ -9,11 +9,10 @@ class Ability
     can :index, :posts
     can :show, [:users, :posts, :tags, :gists]
     can [:show, :create], :searches
-    can [:create], :users
+    can :create, :users
     
     if user
       can(:access, :all) and return if user.admin?
-      
       can [:follow, :unfollow, :following, :followers], :users
       can [:all, :flow], :posts
       can [:new, :create, :memorize, :forgot, :like], :posts

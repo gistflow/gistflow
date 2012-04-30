@@ -1,0 +1,9 @@
+- if current_user.follow? user
+  - following = current_user.followings.find_by_followed_user_id(user.id)
+  = form_for [:account, following], :method => :delete do |f|
+    = f.submit 'Unfollow', :class => 'button icon user'
+- else
+  - following = current_user.followings.build(:followed_user_id => user.id)
+  = form_for [:account, following] do |f|
+    = f.hidden_field :followed_user_id
+    = f.submit 'Follow', :class => 'button icon user'

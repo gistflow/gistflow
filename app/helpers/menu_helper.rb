@@ -52,14 +52,9 @@ module MenuHelper
     items
   end
   
-  def following_link(user)
-    if current_user.follow? user
-      link = link_to 'Unfollow', unfollow_user_path(user), :method => :delete, :class => 'button icon user'
-    else
-      link = link_to 'Follow', follow_user_path(user), :method => :post, :class => 'button icon user'
-    end
-    
-    link if user_signed_in? && user != current_user
+  def following_form user
+    form = render partial: "account/followings/form", locals: { user: user }
+    form if user_signed_in? && user != current_user
   end
   
   def followers_link user

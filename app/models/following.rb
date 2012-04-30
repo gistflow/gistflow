@@ -4,7 +4,7 @@ class Following < ActiveRecord::Base
   belongs_to :follower, class_name: 'User'
   belongs_to :followed_user, class_name: 'User'
   
-  validates :follower_id, :followed_user_id, presence: true
+  validates :follower, :followed_user, presence: true
   validates :follower_id, :uniqueness => { :scope => [:followed_user_id] }
   validate :self_following
   
