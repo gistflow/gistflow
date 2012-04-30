@@ -4,16 +4,17 @@ class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Searchable unless Rails.env.test?
   
+  default_scope order: 'posts.id desc'
+  
   belongs_to :user, inverse_of: :posts
   has_many :comments
-  
-  default_scope order: 'posts.id desc'
+  has_many :observings
   
   validates :user, :title, presence: true
   validates :cuts_count, inclusion: { in: [0, 1] }
   validates :preview, length: 3..500
   validates :tags_size, numericality: { greater_than: 0 }
-  validates :status, format: { with: /http:\/\/goo.gl\/xxxxxx/ }, 
+  validates :status, format: { with: %r{http://goo.gl/xxxxxx} }, 
     length: { maximum: 140 }, if: :status?
   
   attr_accessor :status
@@ -21,6 +22,7 @@ class Post < ActiveRecord::Base
   
   after_create :tweet
   after_save :cache
+  after_create :setup_observing_for_author
   after_destroy :clear_cache
   
   def link_name
@@ -89,5 +91,10 @@ protected
   
   def cache_key(*paths)
     [:posts, id, paths].flatten.compact.join(':')
+  end
+  
+  def setup_observing_for_author
+    user.observe(self)
+    true
   end
 end

@@ -93,6 +93,11 @@ section.main {
     .button-groups {
       float: right;
       line-height: 0;
+      
+      form {
+        display: none;
+      }
+      
       .button-group {
         font-size: 13px;
         line-height: 13px;

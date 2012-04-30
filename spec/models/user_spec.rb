@@ -18,6 +18,19 @@ describe User do
       @user.intrested_posts.should == [@intrested_post]
     end
   end
+  
+  describe '#observe?' do
+    let!(:user)          { create(:user) }
+    let!(:observed_post) { create(:post) }
+    let!(:other_post)    { create(:post) }
+    before do
+      create(:observing, post: observed_post, user: user)
+    end
+    subject { user }
+    
+    it { user.observe?(observed_post).should be_true }
+    it { user.observe?(other_post).should be_false }
+  end
 
   describe 'admin factory' do
     subject { FactoryGirl.create(:admin) }

@@ -19,6 +19,7 @@
       div class="button-groups"
         div class="button-group minor-group"
           = link_to_memorize presenter.post if user_signed_in?
+          = link_to_observe presenter.post if user_signed_in?
           = link_to_like presenter.post
           = link_to_comments presenter.post
         div class="button-group minor-group"

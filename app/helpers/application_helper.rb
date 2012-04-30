@@ -65,6 +65,22 @@ module ApplicationHelper
     link_to title, base_url.merge!(url), base_options.merge!(options)
   end
   
+  def link_to_observe(post)
+    if current_user.observe?(post)
+      observing = current_user.observings.find { |o| o.post_id == post.id }
+      link_to 'Unobserve', account_observing_path(observing),
+        remote: true, method: :delete, class: %w(button observable)
+    else
+      observing = current_user.observings.build do |observing|
+        observing.post = post
+      end
+      form = form_for [:account, observing], remote: true, html: { id: nil } do |f|
+        f.hidden_field :post_id
+      end
+      form + link_to('Observe', '#', class: %w(button observable new))
+    end
+  end
+  
   def link_to_tag(tag)
     link_to tag.with_sign, tag, :id => tag.dom_link_id
   end

@@ -12,6 +12,14 @@ describe Post do
     end
   end
   
+  describe 'observe post for author after create' do
+    let(:post) { build(:post) }
+    it do
+      post.user.should_receive(:observe).with(post).and_return(true)
+      post.save
+    end
+  end
+  
   describe '#tags_size' do
     subject { build(:post, :content => 'foo #bar baz') }
     its(:tags_size) { should == 1 }
