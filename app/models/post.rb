@@ -49,11 +49,11 @@ class Post < ActiveRecord::Base
   
   def formatted_preview(reload = false)
     @formatted_preview = nil if reload
-    @formatted_preview ||= Markdown.markdown begin
+    @formatted_preview ||= cached_preview || Markdown.markdown(begin
       raw = Replaceable.new(preview)
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.to_s
-    end
+    end)
   end
   
 protected
@@ -79,6 +79,10 @@ protected
       status << url.short_url
       user.twitter_client.update(status)
     end
+  end
+  
+  def cached_preview
+    $redis.get cache_key(:preview)
   end
   
   def cache
