@@ -103,23 +103,6 @@ module ApplicationHelper
     end
   end
   
-  def link_to_notifiable(notification)
-    notifiable = notification.notifiable
-    post = notifiable.is_a?(Comment) ? notifiable.post : notifiable
-    
-    username = notifiable.user.username
-    user_link = link_to(username, user_path(:id => username),
-      class: 'username')
-    
-    # IDEA may be we need #tags in page so link to notifiable lead to
-    # exact comment or post
-    record_link = link_to post.title, post
-    
-    time = time_ago_in_words(notification.created_at)
-    
-    "#{user_link} mentioned you in #{record_link} #{time} ago".html_safe
-  end
-  
   def link_to_github_user(user)
     link = "http://github.com/#{user.username}"
     link_to link, link, target: "_blank"

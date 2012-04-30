@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   include Models::Likable
-  include Models::Notifiable
   include Models::Taggable
+  include Models::Mentionable
   include Models::Searchable unless Rails.env.test?
   
   default_scope order: 'posts.id desc'
@@ -9,6 +9,11 @@ class Post < ActiveRecord::Base
   belongs_to :user, inverse_of: :posts
   has_many :comments
   has_many :observings
+  has_many :notifications, {
+    as:         :notifiable,
+    dependent:  :destroy,
+    class_name: 'Notification::Post'
+  }
   
   validates :user, :title, presence: true
   validates :cuts_count, inclusion: { in: [0, 1] }
