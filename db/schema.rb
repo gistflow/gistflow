@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430171252) do
+ActiveRecord::Schema.define(:version => 20120430200525) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -86,16 +86,16 @@ ActiveRecord::Schema.define(:version => 20120430171252) do
   add_index "likes", ["user_id", "likable_id", "likable_type"], :name => "index_likes_on_user_id_and_likable_id_and_likable_type", :unique => true
 
   create_table "notifications", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "notifiable_id"
-    t.string   "notifiable_type"
-    t.boolean  "read",            :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "type"
+    t.integer   "user_id"
+    t.integer   "notifiable_id"
+    t.string    "notifiable_type"
+    t.boolean   "read",            :default => false
+    t.timestamp "created_at",                         :null => false
+    t.timestamp "updated_at",                         :null => false
+    t.string    "type"
   end
 
-  add_index "notifications", ["user_id", "notifiable_id", "notifiable_type"], :name => "notifications_users_notifiables", :unique => true
+  add_index "notifications", ["user_id", "notifiable_id", "notifiable_type", "type"], :name => "notifications_users_notifiables", :unique => true
 
   create_table "observings", :force => true do |t|
     t.integer "post_id"
@@ -143,15 +143,14 @@ ActiveRecord::Schema.define(:version => 20120430171252) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "name"
-    t.string   "email"
-    t.string   "home_page"
-    t.string   "github_page"
-    t.string   "gravatar_id"
-    t.datetime "created_at"
-    t.string   "company"
-    t.integer  "notifications_count", :default => 0
+    t.string    "username"
+    t.string    "name"
+    t.string    "email"
+    t.string    "home_page"
+    t.string    "github_page"
+    t.string    "gravatar_id"
+    t.timestamp "created_at"
+    t.string    "company"
   end
 
 end
