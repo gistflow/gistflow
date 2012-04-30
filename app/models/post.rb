@@ -54,6 +54,7 @@ class Post < ActiveRecord::Base
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.to_s
     end)
+    @formatted_preview.to_s.html_safe
   end
   
 protected
