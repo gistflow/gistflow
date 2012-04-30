@@ -53,16 +53,23 @@ class Post < ActiveRecord::Base
   end
   
   def formatted_preview(reload = false)
-    @formatted_preview = nil if reload
-    @formatted_preview ||= cached_preview || Markdown.markdown(begin
-      raw = Replaceable.new(preview)
-      raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
+    if reload
+      @formatted_preview = raw_formatted
+    else
+      @formatted_preview ||= cached_preview || raw_formatted
+    end
     @formatted_preview.to_s.html_safe
   end
   
 protected
+  
+  def raw_formatted
+    Markdown.markdown begin
+      raw = Replaceable.new(preview)
+      raw.replace_gists!.replace_tags!.replace_usernames!
+      raw.to_s
+    end
+  end
   
   def cuts_count
     if content.blank?
@@ -92,7 +99,7 @@ protected
   end
   
   def cache
-    $redis.set cache_key(:preview), formatted_preview
+    $redis.set cache_key(:preview), formatted_preview(true)
   end
   
   def clear_cache

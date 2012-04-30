@@ -27,9 +27,7 @@ class User < ActiveRecord::Base
   end
   
   def observe(post)
-    observings.first_or_create! do |observing|
-      observing.post = post
-    end
+    observings.where(post_id: post.id).first_or_create!
   end
   
   def observe?(post)
