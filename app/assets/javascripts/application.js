@@ -95,4 +95,6 @@ $(function(){
   })
   
   $('textarea.at-username').atUsername();
+  
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 })

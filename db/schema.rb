@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(:version => 20120430200525) do
 
   add_index "favorite_posts_lovers", ["post_id", "user_id"], :name => "index_favorite_posts_lovers_on_post_id_and_user_id", :unique => true
 
+  create_table "followings", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
+  add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
+  add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
+
   create_table "frameworks", :force => true do |t|
     t.string    "name"
     t.integer   "language_id"
@@ -151,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20120430200525) do
     t.string    "gravatar_id"
     t.timestamp "created_at"
     t.string    "company"
+    t.integer   "followers_count",      :default => 0
+    t.integer   "followed_users_count", :default => 0
   end
 
 end
