@@ -15,6 +15,7 @@
 //= require auto_resize
 //= require twitter_tooltips
 //= require areacomplete
+//= require highlight.pack
 //= require jquery.tabby
 //= require_tree .
 $(function(){
