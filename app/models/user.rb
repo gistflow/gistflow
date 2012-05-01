@@ -120,6 +120,9 @@ class User < ActiveRecord::Base
     followed_users.delete other_user
   end
   
+  def followed_posts
+    Post.from_followed_users self
+  end
 private
   
   def send_welcome_email

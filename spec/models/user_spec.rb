@@ -96,9 +96,11 @@ describe User do
   describe 'following methods' do
     let(:follower) { create :user }
     let(:followed_user) { create :user }
+    let(:followed_user2) { create :user }
     
     context 'following' do 
       let!(:following) { create :following, :follower => follower, :followed_user => followed_user }
+      let!(:following2) { create :following, :follower => follower, :followed_user => followed_user2 }
       
       describe '#follow?' do
         it { follower.follow?(followed_user).should == true }
@@ -109,8 +111,20 @@ describe User do
           follower.unfollow! followed_user
         end
         
-        it { follower.followed_users.should == [] }
+        it { follower.followed_users.should == [followed_user2] }
         it { followed_user.followers.should == [] }
+        it { followed_user2.followers.should == [follower] }
+      end
+      
+      context 'followed posts' do
+        let!(:post) { create :post, :user => followed_user }
+        let!(:post2) { create :post, :user => followed_user2 }
+        
+        describe '#followed_posts' do
+          it 'should return posts by followed users' do     
+            follower.followed_posts.should == [post2, post]
+          end
+        end
       end
     end
     
@@ -126,5 +140,4 @@ describe User do
       end
     end
   end
-  
 end

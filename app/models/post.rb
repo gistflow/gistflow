@@ -30,6 +30,8 @@ class Post < ActiveRecord::Base
   after_create :setup_observing_for_author
   after_destroy :clear_cache
   
+  scope :from_followed_users, lambda { |user| followed_by(user) }
+  
   def link_name
     ln = title.blank? ? preview : title
     ln[0..30].strip
@@ -94,6 +96,7 @@ protected
     end
   end
   
+  
   def cached_preview
     $redis.get cache_key(:preview)
   end
@@ -113,5 +116,11 @@ protected
   def setup_observing_for_author
     user.observe(self)
     true
+  end
+  
+  def self.followed_by(user)
+    followed_user_ids = %(SELECT followed_user_id FROM followings
+                          WHERE follower_id = :user_id)
+    where("user_id IN (#{followed_user_ids})", { user_id: user })
   end
 end

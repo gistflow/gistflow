@@ -3,6 +3,10 @@ module ApplicationHelper
     ['/', '/all'].include? request.fullpath
   end
   
+  def feed_posts_page?
+    '/feed' == request.fullpath
+  end
+  
   def link_to_gist(gist)
     options = {
       :class            => [:'importable-gist'],

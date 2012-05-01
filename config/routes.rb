@@ -7,6 +7,7 @@ Gistflow::Application.routes.draw do
   
   match '/flow' => 'posts#flow'
   match '/all'  => 'posts#all'
+  match '/feed' => 'posts#feed'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   
