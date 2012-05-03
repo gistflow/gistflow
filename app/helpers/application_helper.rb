@@ -65,16 +65,15 @@ module ApplicationHelper
   end
   
   def link_to_memorize(post)
-    base_url, base_options = { controller: :posts, id: post.id },
-      { remote: true, class: 'button replaceable remembrance' }
+    base_options = { remote: true, class: 'button replaceable remembrance' }
     
     title, url, options = if current_user.memorized? post
-      ['Forget', { action: :forgot }, { method: :delete }]
+      ['Forget', forgot_post_path(post), { method: :delete }]
     else
-      ['Remember', { action: :memorize }, { method: :post }]
+      ['Remember', memorize_post_path(post), { method: :post }]
     end
     
-    link_to title, base_url.merge!(url), base_options.merge!(options)
+    link_to title, url, base_options.merge!(options)
   end
   
   def link_to_observe(post)
