@@ -20,7 +20,7 @@ $(function(){
       link = ("/gists/" + id + ".json"),
       element = $(this)
     $.getJSON(link, function(data){
-      element.html(data.div)
+      element.replaceWith(data.div)
     })
   })
   
