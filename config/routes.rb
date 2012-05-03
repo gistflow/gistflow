@@ -5,9 +5,10 @@ Gistflow::Application.routes.draw do
   match '/login'  => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
   
-  match '/flow' => 'posts#flow'
-  match '/all'  => 'posts#all'
-  match '/feed' => 'posts#feed'
+  match '/flow'      => 'posts#flow'
+  match '/all'       => 'posts#all'
+  match '/followed'  => 'posts#followed'
+  match '/observed'  => 'posts#observed'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   

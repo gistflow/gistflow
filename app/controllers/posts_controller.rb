@@ -14,8 +14,12 @@ class PostsController < ApplicationController
     @posts = current_user.intrested_posts.includes(:user).page(params[:page])
   end
   
-  def feed
+  def followed
     @posts = current_user.followed_posts.page(params[:page])
+  end
+  
+  def observed
+    @posts = current_user.observing_posts.page(params[:page])
   end
 
   def show

@@ -3,8 +3,12 @@ module ApplicationHelper
     ['/', '/all'].include? request.fullpath
   end
   
-  def feed_posts_page?
-    '/feed' == request.fullpath
+  def followed_posts_page?
+    '/followed' == request.fullpath
+  end
+  
+  def observed_posts_page?
+    '/observed' == request.fullpath
   end
   
   def link_to_gist(gist)

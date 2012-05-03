@@ -88,7 +88,7 @@ $(function(){
   
   $('a.flow_posts').tooltip({title: 'Posts tagged with your subscriptions.'});
   $('a.all_posts').tooltip({title: 'All posts regardless to subscriptions.'});
-  $('a.feed_posts').tooltip({title: 'Posts by users you follow.'});
+  $('a.followed_posts').tooltip({title: 'Posts by users you follow.'});
   
   
   $('a.hints').on('click', function(){
