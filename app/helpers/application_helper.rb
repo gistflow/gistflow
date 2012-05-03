@@ -9,7 +9,8 @@ module ApplicationHelper
   
   def observed_posts_page?
     '/observed' == request.fullpath
-
+  end
+  
   def remembrances_page?
     '/remembrance' == request.fullpath
   end
