@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
   before_filter :handle_index, :only => :index
-  prepend_before_filter :handle_unlogged, :only => [:flow, :all],
+  prepend_before_filter :handle_unlogged, :only => [:flow, :all, :followed, :observed],
     :unless => :user_signed_in?
   
   def index
