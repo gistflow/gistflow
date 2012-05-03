@@ -55,8 +55,9 @@ module MenuHelper
   end
   
   def following_form user
-    form = render partial: "account/followings/form", locals: { user: user }
-    form if user_signed_in? && user != current_user
+    if user_signed_in? && user != current_user
+      render partial: "account/followings/form", locals: { user: user }
+    end
   end
   
   def followers_link user
