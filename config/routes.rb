@@ -21,13 +21,16 @@ Gistflow::Application.routes.draw do
     end
   end
   
-  resource :search, :only => :create
-  get '/empty_search' => 'searches#empty', :as => 'nil_search'
-  get '/search/:query' => 'searches#show', :as => 'show_search'
-  resources :tags, :only => :show
-  resources :users, :only => :show do
+  resource :search, only: :create
+  
+  get '/empty_search'  => 'searches#empty', as: 'nil_search'
+  get '/search/:query' => 'searches#show',  as: 'show_search'
+  
+  resources :tags, :gists, only: :show
+  
+  resources :users, only: :show do
     member do
-      get :following, :followers
+      get :followers, :following
     end
   end
   
@@ -36,11 +39,19 @@ Gistflow::Application.routes.draw do
   end
   
   namespace :account do
+<<<<<<< HEAD
     resources :subscriptions, :only => [:index, :create, :destroy]
     resource :remembrance, :only => :show
     resources :gists, :only => :index
     resources :notifications, :only => :index
     resources :followings, :only => [:create, :destroy]
+=======
+    resource :remembrance, only: :show
+    resources :gists, :notifications, only: :index
+    resources :subscriptions, only: [:index, :create, :destroy]
+    resources :observings, only: [:create, :destroy]
+    resources :followings, only: [:create, :destroy]
+>>>>>>> Added friends feed link
   end
   
   root to: 'posts#index'

@@ -67,13 +67,13 @@ ActiveRecord::Schema.define(:version => 20120430200525) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "notifiable_id"
-    t.string    "notifiable_type"
-    t.boolean   "read",            :default => false
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
-    t.string    "type"
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "type"
   end
 
   add_index "notifications", ["user_id", "notifiable_id", "notifiable_type", "type"], :name => "notifications_users_notifiables", :unique => true
