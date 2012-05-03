@@ -124,16 +124,14 @@ ActiveRecord::Schema.define(:version => 20120430200525) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string    "username"
-    t.string    "name"
-    t.string    "email"
-    t.string    "home_page"
-    t.string    "github_page"
-    t.string    "gravatar_id"
-    t.timestamp "created_at"
-    t.string    "company"
-    t.integer   "followers_count",      :default => 0
-    t.integer   "followed_users_count", :default => 0
+    t.string   "username"
+    t.string   "name"
+    t.string   "email"
+    t.string   "home_page"
+    t.string   "github_page"
+    t.string   "gravatar_id"
+    t.datetime "created_at"
+    t.string   "company"
   end
 
 end
