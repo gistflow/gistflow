@@ -10,7 +10,7 @@ protected
   def message_for_post
     user, post = notifiable.user, notifiable
     link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
-    link_to_post = %{<a href="/posts/#{post.id}" data-title="#{post.title} class="notification_link">post #{post.id}</a>}
+    link_to_post = %{<a href="/posts/#{post.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
     "#{link_to_user} mentioned you in #{link_to_post}"
   end
   
