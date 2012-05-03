@@ -11,11 +11,6 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :tags, through: :subscriptions
   has_many :observings
-  has_many :observing_posts, {
-    through:    :observings,
-    class_name: :'Post',
-    source:     :user
-  }
   has_many :tags, :through => :subscriptions
   has_many :followings, :foreign_key => :follower_id, :dependent => :destroy
   has_many :reverse_followings, :foreign_key => :followed_user_id, :class_name => 'Following'
@@ -29,6 +24,10 @@ class User < ActiveRecord::Base
   
   def intrested_posts
     Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
+  end
+  
+  def observed
+    Post.joins(:observings).where(:observings => { :user_id => id })
   end
   
   def observe(post)

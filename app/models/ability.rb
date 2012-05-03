@@ -13,10 +13,11 @@ class Ability
     
     if user
       can(:access, :all) and return if user.admin?
+      
       can :index, :'account/remembrances'
       can [:following, :followers], :users
-      can [:create, :destroy], :'account/followings'
-      can [:all, :flow, :feed], :posts
+      can [:create, :destroy], [:'account/followings', :'account/observings']
+      can [:all, :flow, :followed, :observed], :posts
       can [:new, :create, :memorize, :forgot, :like], :posts
       cannot :like, :posts, :user_id => user.id
       can :destroy, :sessions
