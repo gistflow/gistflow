@@ -12,7 +12,7 @@ class Account::FollowingsController < ApplicationController
   end
   
   def destroy
-    @following = Following.find(params[:id])
+    @following = current_user.followings.find(params[:id])
     @following.destroy
     
     redirect_to :back, :notice => "You stopped following @#{@following.followed_user.username}."
