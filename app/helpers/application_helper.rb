@@ -2,6 +2,18 @@ module ApplicationHelper
   def all_posts_page?
     ['/', '/all'].include? request.fullpath
   end
+
+  def followed_posts_page?
+    '/followed' == request.fullpath
+  end
+  
+  def observed_posts_page?
+    '/observed' == request.fullpath
+  end
+  
+  def remembrances_page?
+    '/remembrance' == request.fullpath
+  end
   
   def link_to_gist(gist)
     options = {
@@ -59,7 +71,7 @@ module ApplicationHelper
     title, url, options = if current_user.memorized? post
       ['Forget', { action: :forgot }, { method: :delete }]
     else
-      ['Memorize', { action: :memorize }, { method: :post }]
+      ['Remember', { action: :memorize }, { method: :post }]
     end
     
     link_to title, base_url.merge!(url), base_options.merge!(options)

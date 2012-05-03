@@ -1,5 +1,7 @@
 module MenuHelper
   def ul(array, params = {})
+    return if array.empty?
+    
     content_tag(:ul, params) do
       array.each do |element|
         concat(content_tag :li, element)
@@ -52,4 +54,19 @@ module MenuHelper
     items
   end
   
+  def following_form user
+    if user_signed_in? && user != current_user
+      render partial: "account/followings/form", locals: { user: user }
+    end
+  end
+  
+  def followers_link user
+    title = "<b>#{user.followers.count}</b> Followers".html_safe
+    link_to title, followers_user_path(user)
+  end
+  
+  def followed_users_link user
+    title = "<b>#{user.followed_users.count}</b> Following".html_safe
+    link_to title, following_user_path(user)
+  end
 end

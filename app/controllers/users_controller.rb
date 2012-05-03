@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :find_user, :only => [:follow, :unfollow, :following, :followers]
+  
   def create
     Rails.logger.info "[omni] #{omniauth.inspect}"
     account = Account::Github.find_or_create_by_omniauth(omniauth)
@@ -22,7 +24,18 @@ class UsersController < ApplicationController
     end
   end
   
+  def following
+    @users = @user.followed_users.page(params[:page])
+  end
+  
+  def followers
+    @users = @user.followers.page(params[:page])
+  end
+  
 protected
+  def find_user
+    @user = User.find_by_username(params[:id])
+  end
 
   def omniauth
     request.env['omniauth.auth']

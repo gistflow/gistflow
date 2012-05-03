@@ -5,8 +5,11 @@ Gistflow::Application.routes.draw do
   match '/login'  => 'sessions#create' if Rails.env.development?
   match '/logout' => 'sessions#destroy'
   
-  match '/flow' => 'posts#flow'
-  match '/all'  => 'posts#all'
+  match '/flow'      => 'posts#flow'
+  match '/all'       => 'posts#all'
+  match '/followed'  => 'posts#followed'
+  match '/observed'  => 'posts#observed'
+  match '/remembrance' => 'account/remembrances#index'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   
@@ -25,7 +28,13 @@ Gistflow::Application.routes.draw do
   get '/empty_search'  => 'searches#empty', as: 'nil_search'
   get '/search/:query' => 'searches#show',  as: 'show_search'
   
-  resources :tags, :users, :gists, only: :show
+  resources :tags, :gists, only: :show
+  
+  resources :users, only: :show do
+    member do
+      get :followers, :following
+    end
+  end
   
   namespace :admin do
     resources :users, only: :index
@@ -36,6 +45,7 @@ Gistflow::Application.routes.draw do
     resources :gists, :notifications, only: :index
     resources :subscriptions, only: [:index, :create, :destroy]
     resources :observings, only: [:create, :destroy]
+    resources :followings, only: [:create, :destroy]
   end
   
   root to: 'posts#index'

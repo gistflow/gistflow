@@ -15,6 +15,7 @@
 //= require auto_resize
 //= require twitter_tooltips
 //= require areacomplete
+//= require highlight.pack
 //= require jquery.tabby
 //= require_tree .
 $(function(){
@@ -87,6 +88,7 @@ $(function(){
   
   $('a.flow_posts').tooltip({title: 'Posts tagged with your subscriptions.'});
   $('a.all_posts').tooltip({title: 'All posts regardless to subscriptions.'});
+  $('a.followed_posts').tooltip({title: 'Posts by users you follow.'});
   
   
   $('a.hints').on('click', function(){
@@ -94,4 +96,6 @@ $(function(){
   })
   
   $('textarea.at-username').atUsername();
+  
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 })

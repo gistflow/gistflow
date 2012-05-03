@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
     class_name: :'Post',
     source:     :user
   }
+  has_many :tags, :through => :subscriptions
+  has_many :followings, :foreign_key => :follower_id, :dependent => :destroy
+  has_many :reverse_followings, :foreign_key => :followed_user_id, :class_name => 'Following'
+  has_many :followed_users, :through => :followings, :source => :followed_user
+  has_many :followers, :through => :reverse_followings
   
   validates :username, :name, presence: true
   validates :username, uniqueness: true
@@ -101,6 +106,23 @@ class User < ActiveRecord::Base
     )
   end
   
+  def follow? other_user
+    followed_users.include? other_user
+  end
+
+  def follow! other_user
+    followings.build do |following|
+      following.followed_user = other_user
+    end.save
+  end
+
+  def unfollow! other_user
+    followed_users.delete other_user
+  end
+  
+  def followed_posts
+    Post.from_followed_users self
+  end
 private
   
   def send_welcome_email

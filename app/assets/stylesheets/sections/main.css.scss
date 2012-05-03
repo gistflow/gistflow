@@ -121,4 +121,30 @@ section.main {
     white-space: pre;
     font-family: monospace;
   }
+  
+  div.user {
+    margin-bottom: 20px;
+    
+    .avatar {
+      @include frame;
+    }
+    
+    h2 {
+      font-size: 18px;
+      line-height: 18px;
+      margin-bottom: 6px;
+      a {
+        span {
+          color: $charcoal;
+          &:hover {
+            color: #666;
+          }
+        }
+      }
+    }
+    
+    .info {
+      margin-left: 70px;
+    }
+  }
 }
