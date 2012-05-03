@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
   
   def observed
-    @posts = current_user.observing_posts.page(params[:page])
+    @posts = current_user.observed.page(params[:page])
   end
 
   def show
