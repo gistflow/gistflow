@@ -2,14 +2,16 @@
   section class="user"
     header
       h1 = user
-    div class="user group"
-      div class="avatar" = avatar_image(user, 66)
-      dl
-        - user.contacts.each do |field, value|
-          dt(class=field)
-          dd= value
+    div class="user"
+      div class="group"
+        div class="avatar" = avatar_image(user, 66)
+        dl
+          - user.contacts.each do |field, value|
+            dt(class=field)
+            dd= value
+      = following_form user
 
     ul.followers
-      li = following_link user
+      li 
       li = followers_link user
       li = followed_users_link user

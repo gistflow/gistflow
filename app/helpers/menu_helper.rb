@@ -58,10 +58,12 @@ module MenuHelper
   end
   
   def followers_link user
-    link_to "Followers #{user.followers.count}", followers_user_path(user)
+    title = "<b>#{user.followers.count}</b> Followers".html_safe
+    link_to title, followers_user_path(user)
   end
   
   def followed_users_link user
-    link_to "Following #{user.followed_users.count}", following_user_path(user)
+    title = "<b>#{user.followed_users.count}</b> Following".html_safe
+    link_to title, following_user_path(user)
   end
 end

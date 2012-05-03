@@ -10,6 +10,14 @@ section.sidebar {
   section.user {
     .avatar {
       @include frame;
+      margin-bottom: 10px;
+    }
+    div.user {
+      margin-bottom: 10px;
+    }
+    
+    ul.followers {
+      
     }
     
     dl {
