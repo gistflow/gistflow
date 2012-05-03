@@ -9,6 +9,7 @@ Gistflow::Application.routes.draw do
   match '/all'       => 'posts#all'
   match '/followed'  => 'posts#followed'
   match '/observed'  => 'posts#observed'
+  match '/remembrance' => 'account/remembrances#index'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   

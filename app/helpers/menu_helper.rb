@@ -1,5 +1,7 @@
 module MenuHelper
   def ul(array, params = {})
+    return if array.empty?
+    
     content_tag(:ul, params) do
       array.each do |element|
         concat(content_tag :li, element)

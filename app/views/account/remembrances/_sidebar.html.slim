@@ -1,5 +1,6 @@
-- return unless user_signed_in? and current_user.remembrance.any?
+- return unless user_signed_in?
 section class="remembrance"
   header
-    h1 Remembrance
-  = ul(current_user.remembrance.map { |p| "#{link_to p.user, p.user} #{p.link_name} #{link_to 'show', p}".html_safe })
+    h1 
+      = link_to_unless remembrances_page?, 'Remembrance', remembrance_url
+  = ul(current_user.remembrance.map { |p| "#{link_to p.user, p.user} #{p.link_name} #{link_to 'show', p}".html_safe }) || 'Nothing remembered yet.'
