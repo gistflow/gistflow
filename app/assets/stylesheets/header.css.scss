@@ -7,14 +7,10 @@ header.main {
   h1 {
     font-size: 34px;
     line-height: 34px;
-    font-weight: bold;
+    font-weight: 600;
     padding: 3px 0 6px;
     float: left;
     width: 160px;
-    font-family: 'Palatino', Georgia, sans-serif;
-    text-transform: lowercase;
-    position: relative;
-    bottom: 2px;
     color: #565656;
     
     a {
@@ -69,7 +65,7 @@ header.main {
     width: 280px;
     
     ul {
-      padding: 5px 14px;
+      padding: 7px 14px 4px;
       border: 1px solid $gray;
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
