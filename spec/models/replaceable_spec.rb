@@ -52,6 +52,7 @@ describe Replaceable do
     context 'existed user' do
       before do
         FactoryGirl.create(:user, :username => 'username')
+        FactoryGirl.create(:user, :username => 'UserName')
         replaceable.replace_usernames!
       end
       
@@ -68,6 +69,11 @@ describe Replaceable do
       context 'started with @username' do
         let(:replaceable) { Replaceable.new('@username ') }
         it { should == '[@username](/users/username) ' }
+      end
+      
+      context 'camel case' do
+        let(:replaceable) { Replaceable.new('@UserName') }
+        it { should == '[@UserName](/users/UserName)' }
       end
       
       context 'at the end of the line' do
@@ -104,8 +110,8 @@ describe Replaceable do
   end
   
   describe '#usernames' do
-    let(:replaceable) { Replaceable.new('@username1, @username2, @username3') }
+    let(:replaceable) { Replaceable.new('@username1, @username2, @username3, @UserName') }
     subject { replaceable.usernames }
-    it { should == %w(username1 username2 username3) }
+    it { should == %w(username1 username2 username3 UserName) }
   end
 end

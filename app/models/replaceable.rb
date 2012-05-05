@@ -19,7 +19,7 @@ class Replaceable
   def replace_usernames!
     regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
     self.body.gsub!(regexp) do |match|
-      username = $2.downcase
+      username = $2
       if User.where(:username => username).exists?
         "#{$1}[@#{$2}](/users/#{username})#{$3}"
       else
