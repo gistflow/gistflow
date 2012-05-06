@@ -10,6 +10,7 @@ class Ability
     can :show, [:users, :posts, :tags, :gists]
     can [:show, :create], :searches
     can :create, :users
+    can :not_found, :errors
     
     if user
       can(:access, :all) and return if user.admin?
