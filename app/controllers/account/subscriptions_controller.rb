@@ -11,8 +11,8 @@ class Account::SubscriptionsController < ApplicationController
   def create
     @subscription = current_user.subscriptions.create(params[:subscription])
     @tag = @subscription.tag
-  
-    render_json
+    
+    request.xhr? ? render_json : redirect_to(:back)
   end
   
   def destroy
@@ -21,8 +21,8 @@ class Account::SubscriptionsController < ApplicationController
     
     @tag = subscription.tag
     @subscription = current_user.subscriptions.build(:tag => @tag)
-  
-    render_json
+    
+    request.xhr? ? render_json : redirect_to(:back)
   end
   
 protected
@@ -39,7 +39,6 @@ protected
   
   def render_json
     respond_to do |format|
-      format.html { redirect_to :back } # REFACTOR it shouldn't be here
       format.json do
         new_form = render_to_string(inline: "<%= render :partial => 'subscription.html.slim', :locals => {:subscription => @subscription} %>")
         tag_block = render_to_string(inline: "<%= content_tag(:li, link_to_tag(@tag)) %>")
