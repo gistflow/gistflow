@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates :username, :name, presence: true
   validates :username, uniqueness: true
   
-  after_create :send_welcome_email, :assign_settings, :assign_profile
+  after_create :send_welcome_email, :assign_settings
   
   def intrested_posts
     Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
@@ -132,9 +132,5 @@ private
   
   def assign_settings
     create_settings
-  end
-  
-  def assign_profile
-    create_profile
   end
 end

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.name }
     sequence(:username) { |n| "user_#{n}" }
-    sequence(:email) { |n| "user_#{n}@gistflow.com" }
+    association :profile
     
     factory :admin do
       after_create do |user|
