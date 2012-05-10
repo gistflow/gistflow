@@ -8,6 +8,10 @@ describe User do
     user.settings.should be
   end
   
+  it 'should have profile' do
+    user.profile.should be
+  end
+  
   describe '#intested_posts' do
     before do
       @user = FactoryGirl.create(:user)

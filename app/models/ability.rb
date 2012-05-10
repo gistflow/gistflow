@@ -15,6 +15,7 @@ class Ability
     if user
       can(:access, :all) and return if user.admin?
       can [:edit, :update], :'account/settings'
+      can [:edit, :update], :'account/profiles'
       can :index, :'account/remembrances'
       can [:following, :followers], :users
       can [:create, :destroy], [:'account/followings', :'account/observings']
