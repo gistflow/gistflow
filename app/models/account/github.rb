@@ -7,23 +7,20 @@ class Account::Github < ActiveRecord::Base
   def self.find_or_create_by_omniauth(omniauth)
     token = omniauth['credentials']['token']
     ActiveRecord::Base.transaction do
-      account = find_by_github_id(omniauth['uid']) || create! do |account|
+      find_by_github_id(omniauth['uid']) || create! do |account|
         account.token     = token
         account.github_id = omniauth['uid']
         account.build_user do |user|
           info, urls = omniauth['info'], omniauth['info']['urls']
-          extra = omniauth['extra']
         
           user.username    = info['nickname']
+          user.email       = info['email']
           user.name        = info['name'].blank? ? info['nickname'] : info['name']
+          user.company     = omniauth['extra']['raw_info']['company']
+          user.github_page = urls['GitHub']
+          user.home_page   = urls['Blog']
           user.gravatar_id = omniauth['extra']['raw_info']['gravatar_id'] rescue nil
-          user.build_profile do |profile|
-            profile.company     = extra['raw_info']['company']
-            profile.github_page = urls['GitHub']
-            profile.home_page   = urls['Blog']
-            profile.email       = info['email']
-          end
-        end  
+        end
       end
     end
   end

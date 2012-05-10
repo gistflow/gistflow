@@ -98,7 +98,9 @@ describe Account::Github do
             "Blog"   => nil
           }
         }
-        min_auth['extra']['raw_info']['company'] = nil
+        min_auth['extra']['raw_info'] = {
+          "gravatar_id" => '757fb0d5ec7560b6f25f5bd98eadc020'
+        }
         min_auth
       end
       let(:account) { Account::Github.find_or_create_by_omniauth(min_auth) }
