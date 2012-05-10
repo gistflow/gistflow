@@ -55,10 +55,10 @@ class User < ActiveRecord::Base
   def contacts
     Hash[begin
       { 'Name'        => name,
-        'Github Page' => github_page,
-        'Company'     => company,
-        'Email'       => email,
-        'Home page'   => home_page }.find_all do |field, value|
+        'Github Page' => profile.github_page,
+        'Company'     => profile.company,
+        'Email'       => profile.email,
+        'Home page'   => profile.home_page }.find_all do |field, value|
         value.present?
       end
     end]

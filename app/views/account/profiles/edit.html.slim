@@ -1,3 +1,6 @@
+- content_for :menu do
+  = render :partial => 'shared/settings_menu'
+
 = form_for [:account, @profile], :url => account_profile_url, :method => :put do |f|
   - if @profile.errors.any?
     ul class="errors"
