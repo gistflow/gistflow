@@ -4,6 +4,10 @@ describe User do
   let(:user) { create(:user) }
   subject { user }
   
+  it 'should have settings' do
+    user.settings.should be
+  end
+  
   describe '#intested_posts' do
     before do
       @user = FactoryGirl.create(:user)

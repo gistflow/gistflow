@@ -130,6 +130,6 @@ private
   end
   
   def assign_settings
-    User.create_settings
+    create_settings
   end
 end
