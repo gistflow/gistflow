@@ -69,12 +69,7 @@ module ApplicationHelper
       link_to 'Unbookmark', [:account, bookmark],
         remote: true, method: :delete, class: %w(button replaceable)
     else
-      options = {
-        method: :post,
-        remote: true,
-        html:   { class: 'replaceable' }
-      }
-      form_for [:account, post.bookmarks.build], options do |f|
+      replaceable_form_for [:account, post.bookmarks.build] do |f|
         concat(f.hidden_field :post_id)
         concat(f.submit 'Bookmark', class: 'button')
       end
@@ -86,12 +81,7 @@ module ApplicationHelper
       link_to 'Unobserve', [:account, observing],
         remote: true, method: :delete, class: %w(button replaceable)
     else
-      options = {
-        method: :post,
-        remote: true,
-        html:   { class: 'replaceable' }
-      }
-      form_for [:account, post.observings.build], options do |f|
+      replaceable_form_for [:account, post.observings.build] do |f|
         concat(f.hidden_field :post_id)
         concat(f.submit 'Observe', class: 'button')
       end
@@ -103,9 +93,18 @@ module ApplicationHelper
       title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
       link_to title, '#', rel: 'nofollow', class: %w(icon like button replaceable disabled)
     else
-      link_to 'Like', [:account, post.likes.build], 
-        { remote: true, method: :post, class: %w(icon like button replaceable) }
+      replaceable_form_for [:account, post.likes.build] do |f|
+        concat(f.hidden_field :post_id)
+        concat(f.submit 'Like', class: %w(icon like button))
+      end
     end
+  end
+  
+  def replaceable_form_for record, options = {}, &proc
+    options[:remote] = true
+    options[:html] ||= {}
+    options[:html][:class] ||= 'replaceable'
+    form_for(record, options, &proc)
   end
   
   def link_to_tag(tag)
