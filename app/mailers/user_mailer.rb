@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user_id)
     @user = User.find(user_id)
     mail(
-      :to => @user.email, 
+      :to => @user.profile.email, 
       :subject => "We are glad to see you at Gistflow.com, #{@user.username}!"
     )
   end
