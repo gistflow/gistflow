@@ -6,4 +6,8 @@ namespace :fixes do
   task clean_old_notifications: :environment do
     Notification.where(type: nil).delete_all
   end
+  
+  task create_settings: :environment do
+    User.all.each { |u| u.create_settings }
+  end
 end

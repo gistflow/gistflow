@@ -47,6 +47,8 @@ module MenuHelper
         account_notifications_path,
         :class => "#{'green' if unread_notifications.any?}"
       )
+      
+      items << link_to('settings', account_settings_path)
       items << link_to('logout', logout_path)
     else
       items << link_to('login', login_url, :class => 'login')

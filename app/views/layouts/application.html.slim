@@ -20,8 +20,12 @@ html
       section class="main"
         div class="menu group"
           - if content_for?(:menu)
-            ul.menu
-              = yield(:menu)
+            - if user_signed_in?
+              ul.menu
+                = yield(:menu) 
+            - else
+              header
+                h1 Posts
           - if content_for?(:submenu)
             nav class="submenu"
               = yield(:submenu)
