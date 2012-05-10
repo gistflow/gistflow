@@ -1,0 +1,14 @@
+= form_for [:account, @settings], :url => account_settings_url, :method => :put do |f|
+  - if @settings.errors.any?
+    ul class="errors"
+      - @settings.errors.full_messages.each do |message|
+        li= message
+  fieldset
+    | Choose default wall
+    ul
+      - Settings::WALLS.each do |wall|
+        li
+          = f.radio_button :default_wall, wall
+          = f.label :default_wall, wall
+  div class="button-group"
+    = f.submit 'Update settings', :class => 'button'

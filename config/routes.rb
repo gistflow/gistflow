@@ -36,6 +36,7 @@ Gistflow::Application.routes.draw do
     end
   end
   
+  
   namespace :admin do
     resources :users, only: :index
   end
@@ -46,6 +47,8 @@ Gistflow::Application.routes.draw do
     resources :subscriptions, only: [:index, :create, :destroy]
     resources :observings, only: [:create, :destroy]
     resources :followings, only: [:create, :destroy]
+    resource :settings, only: [:edit, :update]
+    get 'settings' => 'settings#edit', as: :settings
   end
   
   root to: 'posts#index'

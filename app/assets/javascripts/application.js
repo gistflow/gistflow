@@ -37,6 +37,8 @@ $(function(){
     }
   })
   
+  $('.alert').fadeIn('fast').delay(2000).fadeOut('fast');	
+  
   var setup_observable_links = function(){
     $('a.observable.new').on('click', function(){
       $(this).parents('div.button-group').find('form.new_observing').submit()

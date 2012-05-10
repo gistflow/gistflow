@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
-  before_filter :handle_index, :only => :index
-  prepend_before_filter :handle_unlogged, :only => [:flow, :all, :followed, :observed],
-    :unless => :user_signed_in?
+  before_filter :choose_wall, :only => :index, :if => :user_signed_in?
   
   def index
     @posts = Post.includes(:user).page(params[:page])
@@ -117,11 +115,7 @@ protected
     end
   end
   
-  def handle_unlogged
-    redirect_to root_path, :notice => "Sign up to create your own flow!"
-  end
-  
-  def handle_index
-    redirect_to flow_path if user_signed_in?
+  def choose_wall
+    redirect_to action: current_user.settings.default_wall.to_sym
   end
 end

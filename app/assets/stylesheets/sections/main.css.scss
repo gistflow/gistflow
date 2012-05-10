@@ -14,6 +14,12 @@ section.main {
       }
     }
     
+    header {
+      h1 {
+        @include caption;
+      }
+    }
+    
     nav.submenu {
       float: right;
       text-transform: none;

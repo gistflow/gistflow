@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :account_cookies, class_name: :'Account::Cookie'
   has_one  :account_twitter, class_name: :'Account::Twitter'
+  has_one  :settings
   has_many :posts
   has_many :likes
   has_many :comments
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
   validates :username, :name, presence: true
   validates :username, uniqueness: true
   
-  after_create :send_welcome_email
+  after_create :send_welcome_email, :assign_settings
   
   def intrested_posts
     Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
@@ -126,5 +127,9 @@ private
   
   def send_welcome_email
     UserMailer.welcome_email(id).deliver if email?
+  end
+  
+  def assign_settings
+    User.create_settings
   end
 end
