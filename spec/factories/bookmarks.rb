@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :like do
+  factory :bookmark do
     user
     post
   end

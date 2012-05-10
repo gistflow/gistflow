@@ -11,7 +11,6 @@ module Models
       end)
       
       after_save :assign_tags, :subscribe_user
-      
     end
     
     module InstanceMethods

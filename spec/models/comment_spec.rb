@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe Comment do
+  let(:comment) { create(:comment) }
   
   describe 'observe post after create' do
-    let(:comment) { build(:comment) }
-    
-    it do
-      comment.user.should_receive(:observe).with(comment.post).and_return(true)
-      comment.save
-    end
+    subject { Observing.where(post_id: comment.post_id, user_id: comment.user_id) }
+    before { comment }
+    it { should be_exists }
   end
   
   describe 'notify observing about new comment' do

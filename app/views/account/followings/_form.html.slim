@@ -1,6 +1,5 @@
-- following = current_user.followings.where(followed_user_id: user.id).first_or_initialize
 - if current_user.follow? user
-  = form_for [:account, following], :method => :delete do |f|
+  = form_for [user, following], :method => :delete do |f|
     = f.submit 'Unfollow', :class => 'button icon user'
 - else
   = form_for [:account, following] do |f|

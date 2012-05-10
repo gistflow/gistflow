@@ -1,20 +1,26 @@
 class Account::FollowingsController < ApplicationController
-  before_filter :authenticate!
+  before_filter :authenticate!, only: [:create, :destroy]
+  
+  def index
+    @user = find_user(params[:user_id])
+    @posts = @user.posts.page(params[:page])
+  end
   
   def create
-    @following = current_user.followings.build(params[:following])
-    
-    if @following.save
-      redirect_to :back, :notice => "You started following @#{@following.followed_user.username}."
-    else
-      redirect_to :back, :alert => "Something went wrong. Sorry about that."
-    end
+    @user = find_user(params[:user_id])
+    @user.followings.create { |following| following.follower = current_user }
+    redirect_to @user
   end
   
   def destroy
-    @following = current_user.followings.find(params[:id])
-    @following.destroy
-    
-    redirect_to :back, :notice => "You stopped following @#{@following.followed_user.username}."
+    @user = find_user(params[:user_id])
+    @user.followings.where(follower_id: current_user.id).destroy_all
+    redirect_to @user
+  end
+  
+protected
+  
+  def find_user(username)
+    User.find_by_username username
   end
 end

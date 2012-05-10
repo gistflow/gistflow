@@ -49,16 +49,6 @@ describe User do
       user.create_cookie_secret.should == user.account_cookies.last.secret
     end
   end
-
-  describe '#favorite posts' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:post) { FactoryGirl.create(:post) }
-    
-    before { user.memorize post }
-    
-    its(:remembrance) { should == [post] }
-    it { user.memorized?(post).should be_true }
-  end
   
   describe '#mark_notifications_read' do
     let!(:user) { FactoryGirl.create(:user) }
@@ -94,50 +84,18 @@ describe User do
   end
   
   describe 'following methods' do
-    let(:follower) { create :user }
-    let(:followed_user) { create :user }
+    let(:follower)       { create :user }
+    let(:followed_user)  { create :user }
     let(:followed_user2) { create :user }
-    
-    context 'following' do 
-      let!(:following) { create :following, :follower => follower, :followed_user => followed_user }
-      let!(:following2) { create :following, :follower => follower, :followed_user => followed_user2 }
-      
-      describe '#follow?' do
-        it { follower.follow?(followed_user).should == true }
-      end
-      
-      describe '#unfollow!' do
-        before do
-          follower.unfollow! followed_user
-        end
-        
-        it { follower.followed_users.should == [followed_user2] }
-        it { followed_user.followers.should == [] }
-        it { followed_user2.followers.should == [follower] }
-      end
-      
-      context 'followed posts' do
-        let!(:post) { create :post, :user => followed_user }
-        let!(:post2) { create :post, :user => followed_user2 }
-        
-        describe '#followed_posts' do
-          it 'should return posts by followed users' do     
-            follower.followed_posts.should == [post2, post]
-          end
-        end
-      end
+    let!(:following) do
+      create :following, follower: follower, followed_user: followed_user
+    end
+    let!(:following2) do
+      create :following, follower: follower, followed_user: followed_user2
     end
     
-    describe '#follow!' do
-      before do
-        follower.follow! followed_user
-      end
-      
-      it { follower.followed_users.should == [followed_user] }
-      it { followed_user.followers.should == [follower] }
-      it 'should raise error if try to follow yourself' do
-        follower.follow!(follower).should == false
-      end
+    describe '#follow?' do
+      it { follower.follow?(followed_user).should == true }
     end
   end
 end

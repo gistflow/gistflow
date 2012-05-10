@@ -4,20 +4,9 @@ describe Post do
   let(:post) { create(:post) }
   subject { post }
   
-  describe 'cache' do
-    let!(:post) { create(:post) }
-    
-    it 'should cache preview' do
-      $redis.get("posts:#{post.id}:preview").should == post.formatted_preview
-    end
-  end
-  
   describe 'observe post for author after create' do
-    let(:post) { build(:post) }
-    it do
-      post.user.should_receive(:observe).with(post).and_return(true)
-      post.save
-    end
+    subject { Observing.where(post_id: post.id, user_id: post.user_id) }
+    it { should be_exists }
   end
   
   describe '#tags_size' do

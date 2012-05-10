@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  include Models::Likable
   include Models::Taggable
   include Models::Mentionable
   
@@ -25,7 +24,9 @@ class Comment < ActiveRecord::Base
 protected
   
   def observe_post_to_author
-    user.observe(post)
+    user.observings.create do |observing|
+      observing.post = post
+    end
     true
   end
   

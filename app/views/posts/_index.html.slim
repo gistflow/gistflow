@@ -12,15 +12,14 @@
     header
       h1 = presenter.title
     div class="avatar"
-      = link_to presenter.user do
-        = avatar_image(presenter.user, 26)
+      = link_to avatar_image(presenter.user, 26), presenter.user
     div class="preview markdown group"
-      = presenter.preview
+      = presenter.post.preview_cache
     footer class="group actions"
       = presenter.timestamp
       div class="button-groups"
         div class="button-group minor-group"
-          = link_to_memorize presenter.post if user_signed_in?
+          = link_to_bookmark presenter.post if user_signed_in?
           = link_to_observe presenter.post if user_signed_in?
           = link_to_like presenter.post
           = link_to_comments presenter.post

@@ -64,31 +64,47 @@ module ApplicationHelper
     image_tag user.gravatar(size), size: [size, size].join('x')
   end
   
-  def link_to_memorize(post)
-    base_options = { remote: true, class: 'button replaceable remembrance' }
-    
-    title, url, options = if current_user.memorized? post
-      ['Forget', forgot_post_path(post), { method: :delete }]
+  def link_to_bookmark(post)
+    if bookmark = current_user.bookmark?(post)
+      link_to 'Unbookmark', [:account, bookmark],
+        remote: true, method: :delete, class: %w(button replaceable)
     else
-      ['Remember', memorize_post_path(post), { method: :post }]
+      options = {
+        method: :post,
+        remote: true,
+        html:   { class: 'replaceable' }
+      }
+      form_for [:account, post.bookmarks.build], options do |f|
+        concat(f.hidden_field :post_id)
+        concat(f.submit 'Bookmark', class: 'button')
+      end
     end
-    
-    link_to title, url, base_options.merge!(options)
   end
   
   def link_to_observe(post)
-    if current_user.observe?(post)
-      observing = current_user.observings.find { |o| o.post_id == post.id }
-      link_to 'Unobserve', account_observing_path(observing),
-        remote: true, method: :delete, class: %w(button observable)
+    if observing = current_user.observe?(post)
+      link_to 'Unobserve', [:account, observing],
+        remote: true, method: :delete, class: %w(button replaceable)
     else
-      observing = Observing.new do |observing|
-        observing.post = post
+      options = {
+        method: :post,
+        remote: true,
+        html:   { class: 'replaceable' }
+      }
+      form_for [:account, post.observings.build], options do |f|
+        concat(f.hidden_field :post_id)
+        concat(f.submit 'Observe', class: 'button')
       end
-      form = form_for [:account, observing], remote: true, html: { id: nil } do |f|
-        f.hidden_field :post_id
-      end
-      form + link_to('Observe', '#', class: %w(button observable new))
+    end
+  end
+  
+  def link_to_like(post)
+    if !user_signed_in? or current_user.like?(post)
+      title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
+      link_to title, '#', rel: 'nofollow', class: %w(icon like button replaceable disabled)
+    else
+      link_to 'Like', [:account, post.likes.build], 
+        { remote: true, method: :post, class: %w(icon like button replaceable) }
     end
   end
   
@@ -100,19 +116,19 @@ module ApplicationHelper
     link_to "Comments (#{post.comments_count})", post, class: 'button icon comment'
   end
   
-  def link_to_like(post)
-    if !user_signed_in? or current_user == post.user or post.liked_by? current_user
-      title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
-      content_tag :span, title,
-        class: 'button icon like disabled'
-    else
-      link_to "Like", like_post_path(post), {
-        class: 'button icon like replaceable',
-        method: :post,
-        remote: true
-      }
-    end
-  end
+  # def link_to_like(post)
+  #   if !user_signed_in? or current_user == post.user or post.liked_by? current_user
+  #     title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
+  #     content_tag :span, title,
+  #       class: 'button icon like disabled'
+  #   else
+  #     link_to "Like", like_post_path(post), {
+  #       class: 'button icon like replaceable',
+  #       method: :post,
+  #       remote: true
+  #     }
+  #   end
+  # end
   
   def link_to_github_user(user)
     link = "http://github.com/#{user.username}"
