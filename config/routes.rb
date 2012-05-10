@@ -48,7 +48,9 @@ Gistflow::Application.routes.draw do
     resources :observings, only: [:create, :destroy]
     resources :followings, only: [:create, :destroy]
     resource :settings, only: [:edit, :update]
+    resource :profile, only: [:edit, :update]
     get 'settings' => 'settings#edit', as: :settings
+    get 'profile' => 'profiles#edit', as: :profile
   end
   
   root to: 'posts#index'

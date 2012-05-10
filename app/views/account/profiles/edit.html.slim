@@ -1,0 +1,16 @@
+= form_for [:account, @profile], :url => account_profile_url, :method => :put do |f|
+  - if @profile.errors.any?
+    ul class="errors"
+      - @profile.errors.full_messages.each do |message|
+        li= message
+  fieldset
+    = f.label :email
+    = f.text_field :email
+  fieldset
+    = f.label :home_page
+    = f.text_field :home_page
+  fieldset
+    = f.label :company
+    = f.text_field :company
+  div class="button-group"
+    = f.submit 'Update profile', :class => 'button'
