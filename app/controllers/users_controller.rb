@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    if @user = User.find_by_username(params[:id])
+    if @user = User.includes(:profile).find_by_username(params[:id])
       @posts = @user.posts.page(params[:page])
     else
       render 'search/nothing'
