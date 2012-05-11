@@ -44,13 +44,9 @@ class User < ActiveRecord::Base
     likes.find { |like| like.post_id == post.id }
   end
   
-  # def observed
-  #   Post.joins(:observings).where(observings: { user_id: id })
-  # end
-  # 
-  # def observe(post)
-  #   observings.where(post_id: post.id).first_or_create!
-  # end
+  def observed
+    Post.joins(:observings).where(observings: { user_id: id })
+  end
   
   def to_param
     username

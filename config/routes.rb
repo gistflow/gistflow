@@ -7,8 +7,8 @@ Gistflow::Application.routes.draw do
   
   match '/flow'      => 'posts#flow'
   match '/all'       => 'posts#all'
-  match '/followed' => 'posts#followed'
-  match '/observed' => 'posts#observed'
+  match '/following' => 'posts#following'
+  match '/observing' => 'posts#observing'
   match '/bookmarks' => 'bookmarks#index'
   
   get :sitemap, to: 'sitemap#show', as: :xml

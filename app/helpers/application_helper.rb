@@ -4,15 +4,11 @@ module ApplicationHelper
   end
 
   def followed_posts_page?
-    '/followed' == request.fullpath
+    '/following' == request.fullpath
   end
   
   def observed_posts_page?
-    '/observed' == request.fullpath
-  end
-  
-  def remembrances_page?
-    '/remembrance' == request.fullpath
+    '/observing' == request.fullpath
   end
   
   def link_to_gist(gist)

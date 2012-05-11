@@ -15,12 +15,12 @@ class PostsController < ApplicationController
       .page(params[:page])
   end
   
-  def followed
+  def following
     @posts = current_user.followed_posts.includes(user: [:likes, :observings]).
       page(params[:page])
   end
   
-  def observed
+  def observing
     @posts = current_user.observed.page(params[:page])
   end
 
