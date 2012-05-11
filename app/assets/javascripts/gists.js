@@ -1,5 +1,5 @@
 $(function(){
-  var gist_template = _.template(' \
+  var inline_gist_template = _.template(' \
     <li> \
       <a href="/posts/new">add</a> \
       <%= description %> \
@@ -12,7 +12,7 @@ $(function(){
     var ul = $('<ul>')
     section.append(ul)
     $.each(gists, function(index, gist){
-      ul.append(gist_template(gist))
+      ul.append(inline_gist_template(gist))
     })
   })
   
@@ -24,12 +24,25 @@ $(function(){
     }
   })
   
+  var detail_gist_template = _.template(' \
+    <div class="gist"> \
+      <pre> \
+        <code class="<%= lang %>"><%= code %></code> \
+      </pre> \
+    </div> \
+  ')
+  
   $("article.post.detail a:contains('gist:')").each(function(){
-    var id = $(this).html().match(/gist:(\d+)/)[1],
-      link = ("/gists/" + id + ".json"),
-      element = $(this)
-    $.getJSON(link, function(data){
-      element.replaceWith(data.div)
+    var id = $(this).html().match(/gist:(\d+)/)[1];
+    var element = $(this);
+    $.getJSON('https://api.github.com/gists/' + id, function(data){
+      _.each(data.files, function(raw, name){
+        var gist = detail_gist_template({ code: raw.content, lang: raw.language.toLowerCase() });
+        element.after(gist);
+      });
+      // remove all rehighlighting
+      $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
+      element.remove();
     })
   })
   
