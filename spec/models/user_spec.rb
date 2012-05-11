@@ -95,7 +95,7 @@ describe User do
     end
     
     describe '#follow?' do
-      it { follower.follow?(followed_user).should == true }
+      it { (!!follower.follow?(followed_user)).should be_true }
     end
   end
 end

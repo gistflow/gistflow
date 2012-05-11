@@ -11,28 +11,6 @@ module ApplicationHelper
     '/observing' == request.fullpath
   end
   
-  def link_to_gist(gist)
-    options = {
-      :class            => [:'importable-gist'],
-      :'data-gist-id'   => gist.id,
-      :'data-gist-lang' => gist.lang,
-      :'data-original-title' => 'Add gist to new post or comment!'
-    }
-    g = []
-    g << gist.name
-    g << link_to('edit', "https://gist.github.com/gists/#{gist.id}/edit", { target: 'blank' })
-    
-    g.unshift link_to(
-      'add', 
-      new_post_url(
-        :gist_id   => gist.id, 
-        :gist_lang => gist.lang
-      ),
-      options
-    )
-    g.join(' ').html_safe
-  end
-  
   def link_to_gists(user)
     un = user.username
     title, url = "#{un}'s gists", "https://gist.github.com/#{un}"

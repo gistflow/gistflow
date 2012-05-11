@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require auto_resize
 //= require twitter_tooltips
 //= require areacomplete

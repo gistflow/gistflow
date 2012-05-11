@@ -1,11 +1,20 @@
 $(function(){
-  var gists = $('section.gists')
-  if (gists) {
-    $.getJSON('/account/gists.json', function(data){
-      gists.replaceWith(data.div);
-      $('.importable-gist').tooltip({title: 'You can import this gist to new post.'});
+  var gist_template = _.template(' \
+    <li> \
+      <a href="/posts/new">add</a> \
+      <%= description %> \
+      <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a> \
+    </li> \
+  ')
+  $.getJSON('https://api.github.com/users/releu/gists', function(gists){
+    var section = $('section.gists')
+    section.find('p').remove()
+    var ul = $('<ul>')
+    section.append(ul)
+    $.each(gists, function(index, gist){
+      ul.append(gist_template(gist))
     })
-  }
+  })
   
   $("article.post a:contains('gist:')").click(function(){
     var article = $(this).parents('article:first')
