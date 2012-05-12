@@ -5,7 +5,7 @@
     div class="user"
       div class="group"
         div class="avatar" = avatar_image(user, 66)
-        = contacts user
+        = render :partial => 'contacts', :locals => { :user => user }
       = following_form user
 
     ul.followers

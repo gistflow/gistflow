@@ -3,14 +3,16 @@ require 'spec_helper'
 describe Notification do
   let(:comment_notification) { create(:comment_notification) }
   let(:mention_notification) { create(:mention_notification) }
+  let(:following_notification) { create(:following_notification) }
   
   it 'should has factories' do
     comment_notification.should be
     mention_notification.should be
+    following_notification.should be
   end
   
   describe 'Notification::Comment#message' do
-    let(:post)    { create(:post ) }
+    let(:post)    { create(:post) }
     let(:comment) { create(:comment, post: post) }
     let(:user)    { create(:user) }
     
@@ -26,9 +28,18 @@ describe Notification do
     end
   end
   
+  describe 'Notification::Following#message' do
+    it 'should have proper message' do
+      user = following_notification.notifiable.follower
+      link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
+      message = "#{link_to_user} started following you."
+      following_notification.message.should == message
+    end
+  end
+  
   describe 'Notification::Mention#message' do
     context 'in comment' do
-      let(:post)    { create(:post ) }
+      let(:post)    { create(:post ) } 
       let(:comment) { create(:comment, post: post) }
       let(:user)    { create(:user) }
       

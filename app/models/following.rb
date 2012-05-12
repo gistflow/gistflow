@@ -8,7 +8,23 @@ class Following < ActiveRecord::Base
   validates :follower_id, :uniqueness => { :scope => [:followed_user_id] }
   validates :follower, exclusion: { in: proc(&:unavailable_users) }
   
+  has_many :notifications, {
+    as:         :notifiable,
+    dependent:  :destroy,
+    class_name: 'Notification::Following'
+  }
+  
+  after_create :notify_followed_user
+  
   def unavailable_users
     [followed_user]
+  end
+  
+protected
+  
+  def notify_followed_user
+    notifications.create! do |notification|
+      notification.user = followed_user
+    end
   end
 end

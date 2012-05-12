@@ -118,4 +118,10 @@ module ApplicationHelper
       concat(image_tag asset_path('no_js.jpg'), alt: 'You have not JS')
     end
   end
+  
+  def link_to_url url, options = {}
+    if !url.blank? && url =~ URI::regexp(%w(http https))
+      link_to url, url, options
+    end
+  end
 end

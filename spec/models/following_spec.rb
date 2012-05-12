@@ -7,6 +7,7 @@ describe Following do
   subject { following }
 
   it { should be_valid }
+  it { subject.notifications.count.should == 1}
   
   describe "accessible attributes" do
     it "should not allow access to follower_id" do
