@@ -1,17 +1,6 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
-//
 //= require jquery
 //= require jquery_ujs
+//= require jquery.set_cursor_position
 //= require underscore
 //= require auto_resize
 //= require twitter_tooltips
@@ -19,59 +8,4 @@
 //= require highlight.pack
 //= require jquery.tabby
 //= require_tree .
-$(function(){
-  $('textarea').autosize()
-  $('textarea').tabby({tabString: '  '})
-  $('textarea').keydown(function (e) {
-   if ((e.ctrlKey || e.metaKey) && e.keyCode == 13) {
-     $(this).parents('form:first').submit()
-   }
-  });
-  $('a[href=#]').click(function(){ return false })
-  
-  $('.alert').fadeIn('fast').delay(2000).fadeOut('fast');
-  
-  $(document).on('ajax:success', '.replaceable', function(e, data){
-    $(this).replaceWith(data.replaceable)
-  });
-  
-  var content = $("#post_content")
-  var status = $("#post_status")
-  var tweet_enabler = $("#post_status_toggle")
-  var update_twitter_status = function() {
-    if (!status.data('changed') && !tweet_enabler.is(':checked') && content.val()) {
-      status.val(content.val().slice(0, 119) + " http://goo.gl/xxxxxx")
-    }
-  }
-  status.change(function(){ $(this).data('changed', true) })
-  content.change(function(){ update_twitter_status() })
-  
-  update_twitter_status()
-  
-  $("#post_status_toggle").change(function(){
-    if ($(this).is(':checked')) {
-      status.val('')
-    } else {
-      update_twitter_status()
-    }
-  })
-  
-  $('a.flow_posts').tooltip({title: 'Posts tagged with your subscriptions.'});
-  $('a.all_posts').tooltip({title: 'All posts regardless to subscriptions.'});
-  $('a.followed_posts').tooltip({title: 'Posts by users you follow.'});
-  $('a.notification_link"').tooltip({title: $(this).data('title')});
-  $('div.search').tooltip(
-    {
-      title: 'Search for text, #tag or @username.',
-      placement: 'bottom'
-    }
-  );
-  
-  $('a.hints').on('click', function(){
-    $('div.markdown_hints').toggle();
-  })
-  
-  $('textarea.at-username').atUsername();
-  
-  $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
-})
+
