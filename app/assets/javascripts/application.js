@@ -32,18 +32,8 @@ $(function(){
   $('.alert').fadeIn('fast').delay(2000).fadeOut('fast');
   
   $(document).on('ajax:success', '.replaceable', function(e, data){
-    $(this).replaceWith(data.new_link)
+    $(this).replaceWith(data.replaceable)
   });
-  
-  $("li.subscription form").live('ajax:success', function(e, data){
-    $(this).parent().replaceWith(data.new_form);
-    link = $($('ul#subscriptions').find('a#' + data.link_id)[0]);
-    if (link.length > 0) {
-      link.parent().remove();
-    } else {
-      $('ul#subscriptions').append(data.tag_block);
-    }
-  })
   
   var content = $("#post_content")
   var status = $("#post_status")

@@ -74,6 +74,19 @@ module ApplicationHelper
     end
   end
   
+  def link_to_subscribe(tag)
+    if subscription = current_user.subscribe?(tag)
+      replaceable_form_for [:account, subscription], :method => :delete do |f|
+        f.submit tag.name, :class => %(icon tag button active)
+      end
+    else
+      replaceable_form_for [:account, tag.subscriptions.build] do |f|
+        concat(f.hidden_field :tag_id)
+        concat(f.submit tag.name, :class => %(icon tag button))
+      end
+    end
+  end
+  
   def replaceable_form_for record, options = {}, &proc
     options[:remote] = true
     options[:html] ||= {}
@@ -88,20 +101,6 @@ module ApplicationHelper
   def link_to_comments(post)
     link_to "Comments (#{post.comments_count})", post, class: 'button icon comment'
   end
-  
-  # def link_to_like(post)
-  #   if !user_signed_in? or current_user == post.user or post.liked_by? current_user
-  #     title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
-  #     content_tag :span, title,
-  #       class: 'button icon like disabled'
-  #   else
-  #     link_to "Like", like_post_path(post), {
-  #       class: 'button icon like replaceable',
-  #       method: :post,
-  #       remote: true
-  #     }
-  #   end
-  # end
   
   def link_to_github_user(user)
     link = "http://github.com/#{user.username}"

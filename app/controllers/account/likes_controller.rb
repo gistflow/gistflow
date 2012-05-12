@@ -6,6 +6,6 @@ class Account::LikesController < ApplicationController
     @like = current_user.likes.create(params[:like])
     @like.post.reload
     link = render_to_string(inline: "<%= link_to_like(@like.post) %>")
-    render json: { new_link: link }
+    render json: { replaceable: link }
   end
 end

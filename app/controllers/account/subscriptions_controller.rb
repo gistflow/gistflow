@@ -3,26 +3,18 @@ class Account::SubscriptionsController < ApplicationController
   before_filter :setup_welcome_info, :if => :current_user_newbie?
   
   def index
-    @subscriptions = Tag.popular.map do |tag|
-      current_user.subscriptions.find_or_initialize_by_tag_id(tag.id)
-    end
+    @tags = Tag.popular
   end
   
   def create
     @subscription = current_user.subscriptions.create(params[:subscription])
-    @tag = @subscription.tag
-    
-    request.xhr? ? render_json : redirect_to(:back)
+    render_link
   end
   
   def destroy
-    subscription = current_user.subscriptions.find(params[:id])
-    subscription.destroy
-    
-    @tag = subscription.tag
-    @subscription = current_user.subscriptions.build(:tag => @tag)
-    
-    request.xhr? ? render_json : redirect_to(:back)
+    @subscription = current_user.subscriptions.find(params[:id])
+    @subscription.destroy
+    render_link
   end
   
 protected
@@ -37,17 +29,8 @@ protected
     }.html_safe
   end
   
-  def render_json
-    respond_to do |format|
-      format.json do
-        new_form = render_to_string(inline: "<%= render :partial => 'subscription.html.slim', :locals => {:subscription => @subscription} %>")
-        tag_block = render_to_string(inline: "<%= content_tag(:li, link_to_tag(@tag)) %>")
-        render :json => { 
-          :new_form => new_form, 
-          :link_id => @tag.dom_link_id, 
-          :tag_block => tag_block
-        }
-      end
-    end
+  def render_link
+    new_form = render_to_string(inline: "<%= link_to_subscribe(@subscription.tag) %>")
+    render :json => { :replaceable => new_form }
   end
 end

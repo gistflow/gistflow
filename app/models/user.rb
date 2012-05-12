@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     likes.find { |like| like.post_id == post.id }
   end
   
+  def subscribe?(tag)
+    subscriptions.find { |subscription| subscription.tag_id == tag.id }
+  end
+  
   def observed
     Post.joins(:observings).where(observings: { user_id: id })
   end

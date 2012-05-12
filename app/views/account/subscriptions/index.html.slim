@@ -1,5 +1,5 @@
 - title 'Subscriptions'
 ul class="subscriptions group"
-  = render :partial => 'subscription', :collection => @subscriptions
-    
-      
+  - @tags.each do |tag|
+    li class="subscription"
+      = link_to_subscribe(tag)

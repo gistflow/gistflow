@@ -73,45 +73,7 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
   
-  def like
-    @post = Post.find(params[:id])
-    authorize! :like, @post
-    
-    current_user.like @post
-    respond_to do |format|
-      format.json do
-        new_link = render_to_string(inline: "<%= link_to_like(@post) %>")
-        render :json => { :new_link => new_link }
-      end
-    end
-  end
-  
-  def memorize
-    @post = Post.find(params[:id])
-    authorize! :bookmark, @post
-    
-    current_user.memorize @post
-    render_memorize_link
-  end
-  
-  def forgot
-    @post = Post.find(params[:id])
-    authorize! :forgot, @post
-    
-    current_user.forgot @post
-    render_memorize_link
-  end
-  
 protected
-  
-  def render_memorize_link
-    respond_to do |format|
-      format.json do
-        new_link = render_to_string(inline: "<%= link_to_memorize(@post) %>")
-        render :json => { :new_link => new_link }
-      end
-    end
-  end
   
   def choose_wall
     redirect_to action: current_user.settings.default_wall.to_sym

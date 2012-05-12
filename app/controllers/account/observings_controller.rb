@@ -20,6 +20,6 @@ protected
   
   def render_link
     link = render_to_string(inline: "<%= link_to_observe(@observing.post) %>")
-    render json: { new_link: link }
+    render json: { replaceable: link }
   end
 end
