@@ -55,20 +55,4 @@ module MenuHelper
     end
     items
   end
-  
-  def following_form user
-    if user_signed_in? && user != current_user
-      render partial: "account/followings/form", locals: { user: user }
-    end
-  end
-  
-  def followers_link user
-    title = "<b>#{user.followers.count}</b> Followers".html_safe
-    link_to_unless cannot?(:follow, user), title, followers_user_path(user)
-  end
-  
-  def followed_users_link user
-    title = "<b>#{user.followed_users.count}</b> Following".html_safe
-    link_to_unless cannot?(:follow, user), title, following_user_path(user)
-  end
 end

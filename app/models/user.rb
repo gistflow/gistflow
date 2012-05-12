@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  include Models::Likable
-  include Models::Memorizable
-  
   has_many :account_cookies, class_name: :'Account::Cookie'
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
@@ -11,13 +8,15 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :notifications
   has_many :subscriptions
+  has_many :likes
+  has_many :bookmarks
+  has_many :bookmarked_posts, through: :bookmarks, class_name: :'Post'
   has_many :tags, through: :subscriptions
   has_many :observings
-  has_many :tags, :through => :subscriptions
-  has_many :followings, :foreign_key => :follower_id, :dependent => :destroy
-  has_many :reverse_followings, :foreign_key => :followed_user_id, :class_name => 'Following'
-  has_many :followed_users, :through => :followings, :source => :followed_user
-  has_many :followers, :through => :reverse_followings
+  has_many :followings, foreign_key: :follower_id, dependent: :destroy
+  has_many :reverse_followings, foreign_key: :followed_user_id, class_name: :'Following'
+  has_many :followed_users, through: :followings, source: :followed_user
+  has_many :followers, through: :reverse_followings
   
   validates :username, :name, presence: true
   validates :username, uniqueness: true
@@ -29,16 +28,24 @@ class User < ActiveRecord::Base
     Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
   end
   
-  def observed
-    Post.joins(:observings).where(:observings => { :user_id => id })
-  end
-  
-  def observe(post)
-    observings.where(post_id: post.id).first_or_create!
+  def bookmark?(post)
+    bookmarks.find { |bookmark| bookmark.post_id == post.id }
   end
   
   def observe?(post)
-    observings.map(&:post_id).include? post.id
+    observings.find { |observing| observing.post_id == post.id }
+  end
+  
+  def follow?(user)
+    followings.find { |following| following.followed_user_id = user.id }
+  end
+  
+  def like?(post)
+    likes.find { |like| like.post_id == post.id }
+  end
+  
+  def observed
+    Post.joins(:observings).where(observings: { user_id: id })
   end
   
   def to_param
@@ -96,23 +103,10 @@ class User < ActiveRecord::Base
     )
   end
   
-  def follow? other_user
-    followed_users.include? other_user
-  end
-
-  def follow! other_user
-    followings.build do |following|
-      following.followed_user = other_user
-    end.save
-  end
-
-  def unfollow! other_user
-    followed_users.delete other_user
+  def followed_posts
+    Post.followed_by(self)
   end
   
-  def followed_posts
-    Post.from_followed_users self
-  end
 private
   
   def assign_settings

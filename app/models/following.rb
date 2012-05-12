@@ -6,10 +6,9 @@ class Following < ActiveRecord::Base
   
   validates :follower, :followed_user, presence: true
   validates :follower_id, :uniqueness => { :scope => [:followed_user_id] }
-  validate :self_following
+  validates :follower, exclusion: { in: proc(&:unavailable_users) }
   
-  protected
-  def self_following 
-    errors.add :follower_id, 'Can not follow yourself' if followed_user_id == follower_id
+  def unavailable_users
+    [followed_user]
   end
 end

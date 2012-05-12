@@ -30,10 +30,6 @@ class Tag < ActiveRecord::Base
     '#' << name.to_s
   end
   
-  def dom_link_id
-    'subscr' << name.to_s
-  end
-  
   def to_param
     name
   end

@@ -3,20 +3,22 @@ class PostsController < ApplicationController
   before_filter :choose_wall, :only => :index, :if => :user_signed_in?
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
+    @posts = Post.includes(user: [:likes, :observings]).page(params[:page])
     render :index
   end
   alias all index
   
   def flow
-    @posts = current_user.intrested_posts.includes(:user).page(params[:page])
+    @posts = current_user.intrested_posts.includes(user: [:likes, :observings])
+      .page(params[:page])
   end
   
-  def followed
-    @posts = current_user.followed_posts.page(params[:page])
+  def following
+    @posts = current_user.followed_posts.includes(user: [:likes, :observings]).
+      page(params[:page])
   end
   
-  def observed
+  def observing
     @posts = current_user.observed.page(params[:page])
   end
 
@@ -90,7 +92,7 @@ class PostsController < ApplicationController
   
   def memorize
     @post = Post.find(params[:id])
-    authorize! :memorize, @post
+    authorize! :bookmark, @post
     
     current_user.memorize @post
     render_memorize_link

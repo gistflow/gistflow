@@ -1,11 +1,20 @@
 $(function(){
-  var gists = $('section.gists')
-  if (gists) {
-    $.getJSON('/account/gists.json', function(data){
-      gists.replaceWith(data.div);
-      $('.importable-gist').tooltip({title: 'You can import this gist to new post.'});
+  var inline_gist_template = _.template(' \
+    <li> \
+      <a href="/posts/new">add</a> \
+      <%= description %> \
+      <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a> \
+    </li> \
+  ')
+  $.getJSON('https://api.github.com/users/releu/gists', function(gists){
+    var section = $('section.gists')
+    section.find('p').remove()
+    var ul = $('<ul>')
+    section.append(ul)
+    $.each(gists, function(index, gist){
+      ul.append(inline_gist_template(gist))
     })
-  }
+  })
   
   $("article.post a:contains('gist:')").click(function(){
     var article = $(this).parents('article:first')
@@ -15,12 +24,25 @@ $(function(){
     }
   })
   
+  var detail_gist_template = _.template(' \
+    <div class="gist"> \
+      <pre> \
+        <code class="<%= lang %>"><%= code %></code> \
+      </pre> \
+    </div> \
+  ')
+  
   $("article.post.detail a:contains('gist:')").each(function(){
-    var id = $(this).html().match(/gist:(\d+)/)[1],
-      link = ("/gists/" + id + ".json"),
-      element = $(this)
-    $.getJSON(link, function(data){
-      element.replaceWith(data.div)
+    var id = $(this).html().match(/gist:(\d+)/)[1];
+    var element = $(this);
+    $.getJSON('https://api.github.com/gists/' + id, function(data){
+      _.each(data.files, function(raw, name){
+        var gist = detail_gist_template({ code: raw.content, lang: raw.language.toLowerCase() });
+        element.after(gist);
+      });
+      // remove all rehighlighting
+      $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
+      element.remove();
     })
   })
   

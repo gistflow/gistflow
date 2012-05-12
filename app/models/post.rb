@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  include Models::Likable
   include Models::Taggable
   include Models::Mentionable
   include Models::Searchable unless Rails.env.test?
@@ -9,10 +8,12 @@ class Post < ActiveRecord::Base
   belongs_to :user, inverse_of: :posts
   has_many :comments
   has_many :observings
+  has_many :bookmarks
+  has_many :likes
   has_many :notifications, {
     as:         :notifiable,
     dependent:  :destroy,
-    class_name: 'Notification::Post'
+    class_name: :'Notification::Post'
   }
   
   validates :user, :title, presence: true
@@ -26,7 +27,6 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :question, :status
   
   after_create :tweet
-  after_save :cache
   after_create :setup_observing_for_author
   after_destroy :clear_cache
   
@@ -54,23 +54,24 @@ class Post < ActiveRecord::Base
     status.present?
   end
   
-  def formatted_preview(reload = false)
-    if reload
-      @formatted_preview = raw_formatted
-    else
-      @formatted_preview ||= cached_preview || raw_formatted
-    end
-    @formatted_preview.to_s.html_safe
+  def preview_cache
+    (read_attribute(:preview_cache) || cache_preview).html_safe
+  end
+  
+  def self.followed_by(user)
+    followed_user_ids = %(SELECT followed_user_id FROM followings
+                           WHERE follower_id = :user_id)
+    where("user_id IN (#{followed_user_ids})", { user_id: user })
   end
   
 protected
   
-  def raw_formatted
-    Markdown.markdown begin
+  def cache_preview
+    write_attribute(:preview_cache, Markdown.markdown(begin
       raw = Replaceable.new(preview)
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.to_s
-    end
+    end))
   end
   
   def cuts_count
@@ -96,31 +97,10 @@ protected
     end
   end
   
-  
-  def cached_preview
-    $redis.get cache_key(:preview)
-  end
-  
-  def cache
-    $redis.set cache_key(:preview), formatted_preview(true)
-  end
-  
-  def clear_cache
-    $redis.del cache_key
-  end
-  
-  def cache_key(*paths)
-    [:posts, id, paths].flatten.compact.join(':')
-  end
-  
   def setup_observing_for_author
-    user.observe(self)
+    user.observings.create do |observing|
+      observing.post = self
+    end
     true
-  end
-  
-  def self.followed_by(user)
-    followed_user_ids = %(SELECT followed_user_id FROM followings
-                          WHERE follower_id = :user_id)
-    where("user_id IN (#{followed_user_ids})", { user_id: user })
   end
 end

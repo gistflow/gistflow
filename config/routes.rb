@@ -7,19 +7,26 @@ Gistflow::Application.routes.draw do
   
   match '/flow'      => 'posts#flow'
   match '/all'       => 'posts#all'
-  match '/followed'  => 'posts#followed'
-  match '/observed'  => 'posts#observed'
-  match '/remembrance' => 'account/remembrances#index'
+  match '/following' => 'posts#following'
+  match '/observing' => 'posts#observing'
+  match '/bookmarks' => 'bookmarks#index'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   
+  namespace :account do
+    resources :followings
+    resources :bookmarks, only: [:create, :destroy]
+    resources :observings, only: [:create, :destroy]
+    resources :subscriptions, only: [:index, :create, :destroy]
+    resources :likes, only: :create
+    resources :notifications, only: :index
+    get settings: 'settings#edit', as: :settings
+    get profile: 'profiles#edit', as: :profile
+  end
+  
   resources :posts do
-    member do
-      post :like, :memorize
-      delete :forgot
-    end
-    resources :comments, only: :create, controller: :comments do
-      get :preview, as: :member
+    resources :comments, only: :create, module: :posts do
+      post :preview
     end
   end
   
@@ -28,11 +35,12 @@ Gistflow::Application.routes.draw do
   get '/empty_search'  => 'searches#empty', as: 'nil_search'
   get '/search/:query' => 'searches#show',  as: 'show_search'
   
-  resources :tags, :gists, only: :show
+  resources :tags, only: :show
   
   resources :users, only: :show do
-    member do
-      get :followers, :following
+    scope module: :users do
+      resources :followers, only: :index
+      resources :followings, only: :index
     end
   end
   
@@ -41,19 +49,6 @@ Gistflow::Application.routes.draw do
     resources :users, only: :index
   end
   
-  namespace :account do
-    resource :remembrance, only: :show
-    resources :gists, :notifications, only: :index
-    resources :subscriptions, only: [:index, :create, :destroy]
-    resources :observings, only: [:create, :destroy]
-    resources :followings, only: [:create, :destroy]
-    resource :settings, only: [:edit, :update]
-    resource :profile, only: [:edit, :update]
-    get 'settings' => 'settings#edit', as: :settings
-    get 'profile' => 'profiles#edit', as: :profile
-  end
-  
   root to: 'posts#index'
-  
   match '*a', to: 'errors#not_found'
 end

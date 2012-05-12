@@ -1,21 +1,25 @@
 class Account::ObservingsController < ApplicationController
-  before_filter :authenticate!, only: :index
+  before_filter :authenticate!
   respond_to :json
   
   def create
-    @observing = current_user.observings.build(params[:observing])
-    if @observing.save
-      new_link = render_to_string(inline: "<%= link_to_observe(@observing.post) %>")
-      render json: { new_link: new_link }
-    else
-      render json: { errors: @observing.errors.full_messages }
-    end
+    @observing = current_user.observings.create(params[:observing])
+    render_link
   end
   
   def destroy
-    @observing = current_user.observings.find(params[:id])
-    @observing.destroy
-    new_link = render_to_string(inline: "<%= link_to_observe(@observing.post) %>")
-    render json: { new_link: new_link }
+    @observing = current_user.observings.find(params[:id]).destroy
+    render_link
+  end
+  
+protected
+  
+  def find_post(id)
+    Post.find(id)
+  end
+  
+  def render_link
+    link = render_to_string(inline: "<%= link_to_observe(@observing.post) %>")
+    render json: { new_link: link }
   end
 end

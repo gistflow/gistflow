@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require auto_resize
 //= require twitter_tooltips
 //= require areacomplete
@@ -27,35 +28,12 @@ $(function(){
    }
   });
   $('a[href=#]').click(function(){ return false })
-    
-  $('a.replaceable').live('ajax:success', function(e, data){
+  
+  $('.alert').fadeIn('fast').delay(2000).fadeOut('fast');
+  
+  $(document).on('ajax:success', '.replaceable', function(e, data){
     $(this).replaceWith(data.new_link)
-    if ($(this).hasClass('remembrance')){
-      $.getJSON('/account/remembrance.json', function(data){
-        $('section.remembrance').replaceWith(data.div)
-      })
-    }
-  })
-  
-  $('.alert').fadeIn('fast').delay(2000).fadeOut('fast');	
-  
-  var setup_observable_links = function(){
-    $('a.observable.new').on('click', function(){
-      $(this).parents('div.button-group').find('form.new_observing').submit()
-      return false
-    })
-  }
-  setup_observable_links()
-  $('a.observable[data-method="delete"]').live('ajax:success', function(e, data){
-    $(this).replaceWith(data.new_link)
-    setup_observable_links()
-  })
-  
-  $('form.new_observing').live('ajax:success', function(e, data){
-    var container = $(this).parents('div.button-group')
-    container.find('a.observable').replaceWith(data.new_link)
-    $(this).remove()
-  })
+  });
   
   $("li.subscription form").live('ajax:success', function(e, data){
     $(this).parent().replaceWith(data.new_form);
@@ -105,5 +83,5 @@ $(function(){
   
   $('textarea.at-username').atUsername();
   
-  $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
 })
