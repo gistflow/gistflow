@@ -1,7 +1,0 @@
-- if current_user.follow? user
-  = form_for [:account, following], :method => :delete do |f|
-    = f.submit 'Unfollow', :class => 'button icon user'
-- else
-  = form_for [:account, following] do |f|
-    = f.hidden_field :followed_user_id
-    = f.submit 'Follow', :class => 'button icon user'

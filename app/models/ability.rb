@@ -18,7 +18,7 @@ class Ability
       can [:edit, :update], :'account/settings'
       can [:edit, :update], :'account/profiles'
       can :index, :'account/remembrances'
-      can [:following, :followers], :users
+      can :index, [:'users/followings', :'users/followers']
       can [:create, :destroy], [:'account/followings', :'account/observings', :'account/bookmarks']
       can :create, :'account/likes'
       can [:show, :update], [:'account/profiles', :'account/settings']

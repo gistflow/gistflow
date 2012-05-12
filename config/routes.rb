@@ -43,7 +43,7 @@ Gistflow::Application.routes.draw do
   resources :users, only: :show do
     scope module: :users do
       resources :followers, only: :index
-      resources :followings, only: :index
+      resources :followings, only: :index, path: '/following'
     end
   end
   

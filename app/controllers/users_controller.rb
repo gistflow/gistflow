@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
   
   def following
-    @users = @user.followed_users.page(params[:page])
+    
   end
   
   def followers
