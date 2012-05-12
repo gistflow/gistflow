@@ -7,22 +7,25 @@
   li = link_to_unless followed_posts_page?, 'Following', following_path, :class => 'followed_posts'
   li = link_to_unless observed_posts_page?, 'Observing', observing_path, :class => 'observed_posts'
 - posts.each do |post|
-  - presenter = Posts::ShowPresenter.new(post)
   article class="post group" rel="#{post_url(post)}"
     header
-      h1 = presenter.title
+      h1
+        = link_to(post.title, post) << ' '
+        span
+          | by 
+          = link_to post.user, post.user
     div class="avatar"
-      = link_to avatar_image(presenter.user, 26), presenter.user
+      = link_to avatar_image(post.user, 26), post.user
     div class="preview markdown group"
-      = presenter.post.preview_cache
+      = post.preview_cache
     footer class="group actions"
-      = presenter.timestamp
+      = time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
       div class="button-groups"
         div class="button-group minor-group"
-          = link_to_bookmark presenter.post if user_signed_in?
-          = link_to_observe presenter.post if user_signed_in?
-          = link_to_like presenter.post
-          = link_to_comments presenter.post
+          = link_to_bookmark post if user_signed_in?
+          = link_to_observe post if user_signed_in?
+          = link_to_like post
+          = link_to_comments post
         div class="button-group minor-group"
           - if can? :edit, post
             = link_to "Edit", edit_post_path(post), :class => 'button icon edit'

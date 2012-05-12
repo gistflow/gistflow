@@ -26,9 +26,6 @@ class User < ActiveRecord::Base
   end
   
   def bookmark?(post)
-    Rails.logger.info bookmarks.inspect
-    Rails.logger.info post.inspect
-    Rails.logger.info bookmarks.find { |bookmark| bookmark.post_id == post.id }.inspect
     bookmarks.find { |bookmark| bookmark.post_id == post.id }
   end
   

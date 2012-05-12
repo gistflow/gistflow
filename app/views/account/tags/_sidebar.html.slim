@@ -1,7 +1,7 @@
 section class="tags"
   header
     h1 Tags
-  = ul(sidebar_tags.map { |t| link_to_tag t }, id: 'subscriptions')
+  = ul(sidebar_tags.map { |t| link_to_tag t })
   - if user_signed_in?
     footer
-      nav = link_to 'Subscribe for more', account_subscriptions_path
+      nav = link_to 'subscribe for more', account_subscriptions_path

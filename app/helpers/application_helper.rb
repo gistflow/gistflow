@@ -82,7 +82,7 @@ module ApplicationHelper
   end
   
   def link_to_tag(tag)
-    link_to tag.with_sign, tag, :id => tag.dom_link_id
+    link_to tag.with_sign, tag
   end
   
   def link_to_comments(post)
