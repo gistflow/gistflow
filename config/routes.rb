@@ -20,8 +20,8 @@ Gistflow::Application.routes.draw do
     resources :subscriptions, only: [:index, :create, :destroy]
     resources :likes, only: :create
     resources :notifications, only: :index
-    get settings: 'settings#edit', as: :settings
-    get profile: 'profiles#edit', as: :profile
+    resource :settings, :only => [:show, :update]
+    resource :profile, :only => [:show, :update]
   end
   
   resources :posts do

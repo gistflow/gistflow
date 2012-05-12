@@ -1,7 +1,7 @@
 class Account::ProfilesController < ApplicationController
   before_filter :authenticate!
   
-  def edit
+  def show
     @profile = current_user.profile
   end
   

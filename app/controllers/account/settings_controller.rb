@@ -1,7 +1,7 @@
 class Account::SettingsController < ApplicationController
   before_filter :authenticate!
   
-  def edit
+  def show
     @settings = current_user.settings
   end
   
