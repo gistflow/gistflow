@@ -1,5 +1,6 @@
 class CreateLikes < ActiveRecord::Migration
   def change
+    drop_table :likes
     create_table :likes do |t|
       t.references :user
       t.references :post
