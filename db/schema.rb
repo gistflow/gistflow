@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509102957) do
+ActiveRecord::Schema.define(:version => 20120512102709) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
