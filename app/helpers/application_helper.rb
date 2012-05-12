@@ -63,7 +63,7 @@ module ApplicationHelper
   end
   
   def link_to_like(post)
-    if !user_signed_in? or current_user.like?(post)
+    if !user_signed_in? or current_user.like?(post) or current_user == post.user
       title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
       link_to title, '#', rel: 'nofollow', class: %w(icon like button replaceable disabled)
     else

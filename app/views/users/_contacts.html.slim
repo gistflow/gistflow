@@ -1,7 +1,7 @@
 - profile = user.profile
-ul
-  li= user.name
-  li= link_to_url "http://github.com/#{user.username}", :target => '_blank'
-  li= link_to_url profile.home_page, :target => '_blank'
-  li= profile.company unless profile.company.blank?
-  = mail_to profile.email, profile.email, :encode => :hex unless profile.email.blank?
+ul.contacts
+  li = user.name
+  li = link_to_url "http://github.com/#{user.username}", :target => '_blank'
+  li = link_to_url profile.home_page, :target => '_blank'
+  li = profile.company if profile.company?
+  li = mail_to profile.email, profile.email, :encode => :hex if profile.email?
