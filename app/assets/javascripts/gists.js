@@ -2,7 +2,7 @@ $(function(){
   var inline_gist_template = _.template(' \
     <li> \
       <a href="/posts/new" class="add" data-id="<%= id %>" data-lang="<%= language %>">add</a> \
-      <%= description %> \
+      <span><%= description %></span> \
       <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a> \
     </li> \
   ')
@@ -10,9 +10,12 @@ $(function(){
     var url = 'https://api.github.com/users/' + window.current_user.username + '/gists'
     $.getJSON(url, function(gists){
       var section = $('section.gists')
-      section.find('p').remove()
+      
       var ul = $('<ul>')
       section.append(ul)
+      
+      section.find('p').remove()
+      
       $.each(gists, function(index, gist){
         languages = _.map(gist.files, function(file, name){
           if (file.language) return '#' + file.language.toLowerCase()
@@ -20,9 +23,15 @@ $(function(){
         languages = _.uniq(languages)
         languages = _.compact(languages)
         gist.language = languages.join(' ')
-        ul.append(inline_gist_template(gist))
+        if (_.isEmpty(gist.description)) {
+          gist.description = gist.id
+        }
+        
+        li = $(inline_gist_template(gist))
+        li.hide().appendTo(ul).delay(3 * index).fadeIn('fast')
       })
-      section.find('a.add').tooltip({title: 'Add gist to new post or comment'});
+      
+      section.find('a.add').tooltip({title: 'Add gist to new post or comment'})
     })
   
     var field_gist = _.template('gist:<%= id %> <%= lang %> ')
