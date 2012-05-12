@@ -69,7 +69,7 @@ module ApplicationHelper
     else
       replaceable_form_for [:account, post.likes.build] do |f|
         concat(f.hidden_field :post_id)
-        concat(f.submit 'Like', class: %w(icon like button))
+        concat(f.button 'Like', class: %w(icon like button))
       end
     end
   end
