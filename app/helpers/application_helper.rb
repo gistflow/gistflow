@@ -87,6 +87,22 @@ module ApplicationHelper
     end
   end
   
+  def link_to_follow(user)
+    if following = current_user.follow?(user)
+      replaceable_form_for [:account, following], :method => :delete do |f|
+        f.submit 'Unfollow', class: 'button'
+      end
+    else
+      following = current_user.followings.build do |following|
+        following.followed_user = user
+      end
+      replaceable_form_for [:account, following] do |f|
+        concat(f.hidden_field :followed_user_id)
+        concat(f.submit 'Follow', class: 'button')
+      end
+    end
+  end
+  
   def replaceable_form_for record, options = {}, &proc
     options[:remote] = true
     options[:html] ||= {}

@@ -14,7 +14,7 @@ Gistflow::Application.routes.draw do
   get :sitemap, to: 'sitemap#show', as: :xml
   
   namespace :account do
-    resources :followings
+    resources :followings, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
     resources :observings, only: [:create, :destroy]
     resources :subscriptions, only: [:index, :create, :destroy]

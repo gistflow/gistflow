@@ -6,7 +6,7 @@
       div class="group"
         div class="avatar" = avatar_image(user, 66)
         = render :partial => 'contacts', :locals => { :user => user }
-      = following_form user
+      = link_to_follow(user) if user_signed_in? && current_user != user
 
     ul.followers
       li 
