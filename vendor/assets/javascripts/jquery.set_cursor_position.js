@@ -11,4 +11,4 @@ $.fn.setCursorPosition = function(pos) {
     }
   });
   return this;
-}
+};

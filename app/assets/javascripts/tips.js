@@ -7,4 +7,4 @@ $(function(){
     title: 'Search for text, #tag or @username.',
     placement: 'bottom'
   })
-})
+});

@@ -15,27 +15,13 @@ article class="post detail"
         div class="button-group minor-group"
           = link_to "Edit", edit_post_path(@presenter.post), :class => 'button icon edit'
 
-section class="comments" id="comments"
+section class="comments"
   header
     h1 Comments
   - if can? :create, :comments
-    = form_for [@comment.post, @comment], :remote => true do |f|
-      fieldset#new_comment_body
-        = f.text_area :content, :size => '40x2', :id => 'post_content', :class => 'at-username'
-      div class="actions group"
-        div class="left"
-          = f.check_box :question
-          = f.label :question, 'Is it a Question?'
-          |  See markdown 
-          = link_to 'hints', '#', :class => 'hints'
-          |.
-        div class="button-groups"
-          div class="button-group"
-            = f.submit 'Preview', :class => 'button preview_button high_button'
-            = f.submit commit_title('Comment'), :class => 'button'
-        = render :partial => 'posts/markdown_hints'
+    = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
   - if @presenter.comments.any?
-    = render :partial => 'comments/comment', :collection => @presenter.comments
+    = render :partial => 'posts/comments/comment', :collection => @presenter.comments
   - else
     p.no_comments No comments yet
 

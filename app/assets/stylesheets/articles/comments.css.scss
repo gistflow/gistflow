@@ -6,6 +6,16 @@ section.comments {
       @include caption;
     }
   }
+  
+  div.preview {
+    background: whiteSmoke;
+    padding: 5px;
+    
+    article.comment {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
 }
 
 article.comment {

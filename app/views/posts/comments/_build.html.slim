@@ -1,0 +1,14 @@
+fieldset
+  = f.text_area :content, :size => '40x2', :id => 'post_content', :class => 'at-username'
+div class="actions group"
+  div class="left"
+    = f.check_box :question
+    = f.label :question, 'Is it a Question?'
+    |  See markdown 
+    = link_to 'hints', '#', :class => 'hints'
+    |.
+  div class="button-groups"
+    div class="button-group"
+      = f.submit 'Preview', class: 'button preview', rel: preview_post_comments_path(f.object.post)
+      = f.submit commit_title('Comment'), class: 'button', rel: post_comments_path(f.object.post)
+  = render :partial => 'posts/markdown_hints'

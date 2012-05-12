@@ -37,4 +37,4 @@ $(function(){
       $(this).val(new_status($(this).val()))
     }
   })
-})
+});

@@ -71,4 +71,4 @@ $(function(){
       element.remove();
     })
   })
-})
+});

@@ -1,8 +1,8 @@
 - presenter = Comments::ShowPresenter.new(comment)
-article class="comment" id="comment-#{comment.id}"
+article class="comment"
   header
     h1= presenter.title
     div class="avatar"
-      = link_to user_path(:id => presenter.user.username) do
+      = link_to user_path(presenter.user) do
         = avatar_image(presenter.user)
   div class="markdown group" = presenter.content

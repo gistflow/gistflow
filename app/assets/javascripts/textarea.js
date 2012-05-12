@@ -7,4 +7,4 @@ $(function(){
    }
   })
   $('textarea.at-username').atUsername();
-})
+});

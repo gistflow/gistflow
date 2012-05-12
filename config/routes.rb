@@ -26,7 +26,10 @@ Gistflow::Application.routes.draw do
   
   resources :posts do
     resources :comments, only: :create, module: :posts do
-      post :preview
+      collection do
+        post :build
+        post :preview
+      end
     end
   end
   
@@ -43,7 +46,6 @@ Gistflow::Application.routes.draw do
       resources :followings, only: :index
     end
   end
-  
   
   namespace :admin do
     resources :users, only: :index
