@@ -9,5 +9,9 @@ FactoryGirl.define do
     factory :mention_notification, class: 'Notification::Mention' do
       association :notifiable, factory: :comment
     end
+    
+    factory :following_notification, class: 'Notification::Following' do
+      association :notifiable, factory: :following
+    end
   end
 end

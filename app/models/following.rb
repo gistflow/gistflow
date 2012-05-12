@@ -8,8 +8,22 @@ class Following < ActiveRecord::Base
   validates :follower_id, :uniqueness => { :scope => [:followed_user_id] }
   validate :self_following
   
+  has_many :notifications, {
+    as:         :notifiable,
+    dependent:  :destroy,
+    class_name: 'Notification::Following'
+  }
+  
+  after_create :notify_followed_user
+  
   protected
   def self_following 
     errors.add :follower_id, 'Can not follow yourself' if followed_user_id == follower_id
+  end
+  
+  def notify_followed_user
+    notifications.create! do |notification|
+      notification.user = followed_user
+    end
   end
 end
