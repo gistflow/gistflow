@@ -11,6 +11,11 @@ namespace :fixes do
     User.all.each { |u| u.create_settings }
   end
   
+  task fix_settings: :environment do
+    Settings.where(:default_wall => 'followed').update_all(:default_wall => 'following')
+    Settings.where(:default_wall => 'observed').update_all(:default_wall => 'observing')
+  end
+  
   task create_profiles: :environment do
     User.all.each do |u| 
       u.create_profile do |p|

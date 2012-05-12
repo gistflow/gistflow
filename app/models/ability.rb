@@ -19,12 +19,15 @@ class Ability
       can [:edit, :update], :'account/profiles'
       can :index, :'account/remembrances'
       can [:following, :followers], :users
-      can [:create, :destroy], [:'account/followings', :'account/observings']
-      can [:all, :flow, :followed, :observed], :posts
+      can [:create, :destroy], [:'account/followings', :'account/observings', :'account/bookmarks']
+      can :create, :'account/observings'
+      can [:show, :update], [:'account/profiles', :'account/settings']
+      can [:all, :flow, :following, :observing], :posts
       can [:new, :create, :memorize, :forgot, :like], :posts
       cannot :like, :posts, :user_id => user.id
       can :destroy, :sessions
       can :create, :comments
+      can [:preview, :build, :create], :'posts/comments'
       can :index, [:'account/gists', :'account/notifications']
       can [:index, :create, :destroy], :'account/subscriptions'
       can [:edit, :update, :destroy], :posts, :user_id => user.id
