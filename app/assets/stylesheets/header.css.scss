@@ -62,10 +62,9 @@ header.main {
   nav.user {
     float: right;
     height: 35px;
-    width: 300px;
+    width: 280px;
     
     ul {
-      font-size: 14px;
       padding: 6px 14px 5px;
       border: 1px solid $gray;
       -moz-border-radius: 3px;
@@ -98,11 +97,11 @@ header.main {
           padding-left: 20px;
           background-position: 0 5px;
           background-repeat: no-repeat;
-          font-weight: bold;
+          font-weight: 600;
         }
         
         &.username {
-          font-weight: bold;
+          font-weight: 600;
         }
       }
     }
