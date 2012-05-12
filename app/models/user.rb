@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :likes
   has_many :bookmarks
-  has_many :bookmarked_posts, through: :bookmarks, class_name: :'Post'
+  has_many :bookmarked_posts, through: :bookmarks, class_name: :'Post', source: :post
   has_many :tags, through: :subscriptions
   has_many :observings
   has_many :followings, foreign_key: :follower_id, dependent: :destroy

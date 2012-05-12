@@ -21,6 +21,10 @@ class PostsController < ApplicationController
   def observing
     @posts = current_user.observed.page(params[:page])
   end
+  
+  def bookmarks
+    @posts = current_user.bookmarked_posts.page(params[:page])
+  end
 
   def show
     @post = Post.find(params[:id])

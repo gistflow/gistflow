@@ -41,7 +41,7 @@ html
         = yield(:sidebar)
         = render :partial => 'general/about'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
-        = render 'account/remembrances/sidebar'
+        = render 'account/bookmarks/sidebar' if user_signed_in?
         = render 'account/tags/sidebar'
     footer class="main"
       div class="wrap"
