@@ -8,12 +8,13 @@ class Ability
     can :show, :sitemap
     can [:index, :all], :posts
     can :show, [:users, :posts, :tags, :gists]
-    can [:show, :create], :searches
+    can [:show, :create, :empty], :searches
     can :create, :users
     can :not_found, :errors
     
     if user
       can(:access, :all) and return if user.admin?
+      can [:create], :'account/twitter'
       can [:edit, :update], :'account/settings'
       can [:edit, :update], :'account/profiles'
       can :index, :'account/remembrances'
