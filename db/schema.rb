@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510224142) do
+ActiveRecord::Schema.define(:version => 20120512102709) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -142,10 +142,9 @@ ActiveRecord::Schema.define(:version => 20120510224142) do
     t.string   "email"
     t.string   "company"
     t.string   "home_page"
-    t.string   "github_page"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "profiles", :force => true do |t|

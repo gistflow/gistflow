@@ -53,18 +53,6 @@ class User < ActiveRecord::Base
     tags.count < 3
   end
   
-  def contacts
-    Hash[begin
-      { 'Name'        => name,
-        'Github Page' => profile.github_page,
-        'Company'     => profile.company,
-        'Email'       => profile.email,
-        'Home page'   => profile.home_page }.find_all do |field, value|
-        value.present?
-      end
-    end]
-  end
-  
   def create_cookie_secret
     account_cookies.create! do |cookie|
       cookie.generate_secret!

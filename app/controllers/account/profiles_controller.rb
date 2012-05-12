@@ -6,12 +6,11 @@ class Account::ProfilesController < ApplicationController
   end
   
   def update
-    if current_user.profile.update_attributes(params[:profile])
-      options = { :notice => 'Profile was updated.' }
+    @profile = current_user.profile
+    if @profile.update_attributes(params[:profile])
+      redirect_to account_profile_path, :notice => 'Profile was updated.'
     else
-      options = { :error => 'Smth went wrong.' }
+      render :edit, :error => 'Smth went wrong.'
     end
-    
-    redirect_to account_profile_path, options
   end
 end
