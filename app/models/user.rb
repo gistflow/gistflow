@@ -123,7 +123,6 @@ private
     create_profile do |p|
       p.company = company
       p.home_page = home_page
-      p.github_page = github_page
       p.email = email
     end
   end
