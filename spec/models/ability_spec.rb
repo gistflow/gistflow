@@ -51,7 +51,6 @@ describe Ability do
     describe 'working with posts' do
       context 'alian post' do
         let(:post) { FactoryGirl.create(:post) }
-        it { should be_able_to(:like, post) }
         it { should_not be_able_to(:edit, post) }
         it { should_not be_able_to(:update, post) }
         it { should_not be_able_to(:destroy, post) }
@@ -59,7 +58,6 @@ describe Ability do
       
       context 'self post' do
         let(:post) { FactoryGirl.create(:post, :user => user) }
-        it { should_not be_able_to(:like, post) }
         it { should be_able_to(:edit, post) }
         it { should be_able_to(:update, post) }
         it { should be_able_to(:destroy, post) }
