@@ -1,7 +1,7 @@
 $(function(){
   var inline_gist_template = _.template(' \
     <li> \
-      <a href="/posts/new">add</a> \
+      <a href="/posts/new" class="add" data-id="<%= id %>" data-lang="<%= language %>">add</a> \
       <%= description %> \
       <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a> \
     </li> \
@@ -12,8 +12,31 @@ $(function(){
     var ul = $('<ul>')
     section.append(ul)
     $.each(gists, function(index, gist){
+      languages = _.map(gist.files, function(file, name){
+        if (file.language)
+          return '#' + file.language.toLowerCase()
+      })
+      languages = _.uniq(languages)
+      languages = _.compact(languages)
+      gist.language = languages.join(' ')
       ul.append(inline_gist_template(gist))
     })
+  })
+  
+  var field_gist = _.template('gist:<%= id %> <%= lang %> ')
+  
+  $(document).on('click', 'section.gists a.add', function(e){
+    e.preventDefault()
+    var content = field_gist({
+      id: $(this).data('id'),
+      lang: $(this).data('lang')
+    })
+    var content_field = $('#post_content')
+    if (content_field.length > 0) {
+       box.val(box.val() + content)
+    } else {
+      document.location = $(this).attr('href') + '?content=' + escape(content)
+    }
   })
   
   $("article.post a:contains('gist:')").click(function(){

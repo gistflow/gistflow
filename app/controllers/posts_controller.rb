@@ -29,11 +29,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    content = ""
-    content << "gist:#{params[:gist_id]}" if params[:gist_id]
-    content << " ##{params[:gist_lang]} " if params[:gist_lang]
-    
-    @post = Post.new(:content => content)
+    @post = Post.new(:content => params[:content])
     @presenter = Posts::FormPresenter.new(@post)
     
     flash[:info] = "Add your gists to the post by click on add."
