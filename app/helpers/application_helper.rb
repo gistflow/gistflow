@@ -77,12 +77,12 @@ module ApplicationHelper
   def link_to_subscribe(tag)
     if subscription = current_user.subscribe?(tag)
       replaceable_form_for [:account, subscription], :method => :delete do |f|
-        f.submit tag.name, :class => %(icon tag button active)
+        f.submit tag.name, :class => %(button active)
       end
     else
       replaceable_form_for [:account, tag.subscriptions.build] do |f|
         concat(f.hidden_field :tag_id)
-        concat(f.submit tag.name, :class => %(icon tag button))
+        concat(f.submit tag.name, :class => %(button))
       end
     end
   end
