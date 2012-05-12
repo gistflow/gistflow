@@ -6,38 +6,41 @@ $(function(){
       <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a> \
     </li> \
   ')
-  $.getJSON('https://api.github.com/users/releu/gists', function(gists){
-    var section = $('section.gists')
-    section.find('p').remove()
-    var ul = $('<ul>')
-    section.append(ul)
-    $.each(gists, function(index, gist){
-      languages = _.map(gist.files, function(file, name){
-        if (file.language)
-          return '#' + file.language.toLowerCase()
+  if (window.current_user) {
+    var url = 'https://api.github.com/users/' + window.current_user.username + '/gists'
+    $.getJSON(url, function(gists){
+      var section = $('section.gists')
+      section.find('p').remove()
+      var ul = $('<ul>')
+      section.append(ul)
+      $.each(gists, function(index, gist){
+        languages = _.map(gist.files, function(file, name){
+          if (file.language) return '#' + file.language.toLowerCase()
+        })
+        languages = _.uniq(languages)
+        languages = _.compact(languages)
+        gist.language = languages.join(' ')
+        ul.append(inline_gist_template(gist))
       })
-      languages = _.uniq(languages)
-      languages = _.compact(languages)
-      gist.language = languages.join(' ')
-      ul.append(inline_gist_template(gist))
+      section.find('a.add').tooltip({title: 'Add gist to new post or comment'});
     })
-  })
   
-  var field_gist = _.template('gist:<%= id %> <%= lang %> ')
+    var field_gist = _.template('gist:<%= id %> <%= lang %> ')
   
-  $(document).on('click', 'section.gists a.add', function(e){
-    e.preventDefault()
-    var content = field_gist({
-      id: $(this).data('id'),
-      lang: $(this).data('lang')
+    $(document).on('click', 'section.gists a.add', function(e){
+      e.preventDefault()
+      var content = field_gist({
+        id: $(this).data('id'),
+        lang: $(this).data('lang')
+      })
+      var content_field = $('#post_content')
+      if (content_field.length > 0) {
+         box.val(box.val() + content)
+      } else {
+        document.location = $(this).attr('href') + '?content=' + escape(content)
+      }
     })
-    var content_field = $('#post_content')
-    if (content_field.length > 0) {
-       box.val(box.val() + content)
-    } else {
-      document.location = $(this).attr('href') + '?content=' + escape(content)
-    }
-  })
+  }
   
   $("article.post a:contains('gist:')").click(function(){
     var article = $(this).parents('article:first')
@@ -67,13 +70,5 @@ $(function(){
       $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
       element.remove();
     })
-  })
-  
-  var box = $("#post_content")
-  $("a.importable-gist").live('click', function(){
-    if(box.length > 0) {
-      box.val(box.val() + "gist:" + $(this).data('gist-id') + " #" + $(this).data('gist-lang') + " ")
-      return false;
-    }
   })
 })

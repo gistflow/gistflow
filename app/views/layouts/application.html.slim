@@ -8,6 +8,9 @@ html
     = csrf_meta_tags
     title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
     = render :partial => 'shared/google_analytics'
+    - if user_signed_in?
+      javascript:
+        window.current_user = { username: "#{current_user.username}" }
   body
     = raw javascript_enabled?
     div class="wrap group"
