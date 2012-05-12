@@ -1,0 +1,7 @@
+- profile = user.profile
+ul
+  li= user.name
+  li= link_to "http://github.com/#{user.username}"
+  li= link_to profile.home_page unless profile.home_page.blank?
+  li= profile.company unless profile.company.blank?
+  = mail_to profile.email, profile.email, :encode => :hex unless profile.email.blank?
