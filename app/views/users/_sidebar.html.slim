@@ -5,10 +5,7 @@
     div class="user"
       div class="group"
         div class="avatar" = avatar_image(user, 66)
-        dl
-          - user.contacts.each do |field, value|
-            dt(class=field)
-            dd= value
+        = contacts user
       = following_form user
 
     ul.followers

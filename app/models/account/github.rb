@@ -17,7 +17,6 @@ class Account::Github < ActiveRecord::Base
           user.email       = info['email']
           user.name        = info['name'].blank? ? info['nickname'] : info['name']
           user.company     = omniauth['extra']['raw_info']['company']
-          user.github_page = urls['GitHub']
           user.home_page   = urls['Blog']
           user.gravatar_id = omniauth['extra']['raw_info']['gravatar_id'] rescue nil
         end
