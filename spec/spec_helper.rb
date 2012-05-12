@@ -12,7 +12,6 @@ RSpec.configure do |config|
   config.filter_run_excluding :remote => true
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) do
-    $redis.flushall
     DatabaseCleaner.start
   end
   config.after(:each) do
