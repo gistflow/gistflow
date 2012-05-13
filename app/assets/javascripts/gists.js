@@ -44,7 +44,7 @@ $(function(){
       })
       var content_field = $('#post_content')
       if (content_field.length > 0) {
-         box.val(box.val() + content)
+         content_field.val(content_field.val() + content)
       } else {
         document.location = $(this).attr('href') + '?content=' + escape(content)
       }
