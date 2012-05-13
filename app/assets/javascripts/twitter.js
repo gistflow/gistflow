@@ -26,7 +26,7 @@ $(function(){
     }
   })
   
-  status.on('keypress blur', function(e, b){
+  status.on('keypress', function(e, b){
     $(this).data('changed', true)
     if (disable.is(':checked')) disable.attr('checked', null)
     if ($(this).val() == '') {
