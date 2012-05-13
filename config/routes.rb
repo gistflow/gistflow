@@ -47,6 +47,8 @@ Gistflow::Application.routes.draw do
     end
   end
   
+  resource :landing, only: :show
+  
   namespace :admin do
     resources :users, only: :index
   end

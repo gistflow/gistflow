@@ -1,14 +1,10 @@
 module ApplicationHelper
-  def all_posts_page?
-    ['/', '/all'].include? request.fullpath
-  end
-
-  def followed_posts_page?
-    '/following' == request.fullpath
+  def auth_path
+    '/auth/github'
   end
   
-  def observed_posts_page?
-    '/observing' == request.fullpath
+  def all_posts_page?
+    ['/', '/all'].include? request.fullpath
   end
   
   def link_to_gists(user)

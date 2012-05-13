@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    meta name='description' content='Social learning'
+    = stylesheet_link_tag 'landing'
+    = csrf_meta_tags
+    title = "Gistflow :: Welcome"
+    = render :partial => 'shared/google_analytics'
+  body
+    = raw javascript_enabled?
+    div class="wrap group"
+      section class="landing"
+        header
+          h1
+            = link_to('Gistflow', root_path) << ' '
+            | :: Good place to share and improve developer skills
+        div class="group"
+          section class="gistflow"
+            header
+              h1 = Gistflow
+              p Social learning
+            div class="statistics group"
+              div class="posts"
+                h2 Posts
+                p = @posts_count
+              div class="tags"
+                h2 Tags
+                p = @tags_count
+              div class="users"
+                h2 Users
+                p = @users_count
+          div class="slider"
+            = image_tag('landing/gists.png')
+            = image_tag('landing/following.png')
+            = image_tag('landing/bookmarks.png')
+        div class="sign-up"
+          = link_to 'Sign up', auth_path

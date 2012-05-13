@@ -12,6 +12,7 @@ class Ability
     can :create, :users
     can :not_found, :errors
     can :index, [:'users/followings', :'users/followers']
+    can :show, :landings
     
     if user
       can(:access, :all) and return if user.admin?
