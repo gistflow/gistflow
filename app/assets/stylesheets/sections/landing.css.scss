@@ -1,16 +1,16 @@
 @import "configuration";
-header.main h1 a { color: $layout }
+
 section.landing {
   padding: 0 10px;
   
   > header {
     h1 {
-      font-size: 30px;
+      font-size: 32px;
       color: #666;
-      line-height: 30px;
+      line-height: 62px;
       padding: 5px 0;
     }
-    margin-bottom: 60px
+    margin-bottom: 80px
   }
   
   div.sign-up {
