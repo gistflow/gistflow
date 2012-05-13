@@ -6,8 +6,12 @@ $(function(){
   $(document).on('ajax:success', 'form#new_comment', function(e, data){
     if (data.comment) {
       $(this).after(data.comment)
+      $('section.comments p.no_comments').remove()
     }
+    var form = $(data.form)
     $(this).replaceWith(data.form)
+    // fix to local
+    $('textarea').autosize().tabby({tabString: '  '})
   })
   
   $(document).on('ajax:error', 'form#new_comment', function(e, data){
