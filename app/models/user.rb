@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
   
   def follow?(user)
-    followings.find { |following| following.followed_user_id = user.id }
+    followings.find { |following| following.followed_user_id == user.id }
   end
   
   def like?(post)
