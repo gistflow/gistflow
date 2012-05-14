@@ -4,4 +4,5 @@ div class="user group"
       = link_to avatar_image(user, 48), user_path(user)
     div class="info"
       h2 = link_to "#{user.name} <span>#{user.username}</span>".html_safe, user_path(user)
-      div class="following" = link_to_follow(user)
+      - if user_signed_in?
+        div class="following" = link_to_follow(user) 

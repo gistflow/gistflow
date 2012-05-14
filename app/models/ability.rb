@@ -11,14 +11,15 @@ class Ability
     can [:show, :create, :empty], :searches
     can :create, :users
     can :not_found, :errors
+    can :index, [:'users/followings', :'users/followers']
     
     if user
       can(:access, :all) and return if user.admin?
+      
       can [:create], :'account/twitter'
       can [:edit, :update], :'account/settings'
       can [:edit, :update], :'account/profiles'
       can :index, :'account/remembrances'
-      can :index, [:'users/followings', :'users/followers']
       can [:create, :destroy], [:'account/followings', :'account/observings', :'account/bookmarks']
       can :create, :'account/likes'
       can [:show, :update], [:'account/profiles', :'account/settings']
