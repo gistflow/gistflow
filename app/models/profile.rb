@@ -4,10 +4,15 @@ class Profile < ActiveRecord::Base
   
   belongs_to :user
   after_create :send_welcome_email
+  before_save :check_email
   
   protected
   
   def send_welcome_email
-    UserMailer.welcome_email(user_id).deliver if email?
+    UserMailer.welcome_email(user_id).deliver if email_valid?
+  end
+  
+  def check_email
+    self.email_valid = !!(self.email =~ EMAIL_FORMAT)
   end
 end

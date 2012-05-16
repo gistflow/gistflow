@@ -10,4 +10,12 @@ class UserMailer < ActionMailer::Base
     )
   end
   
+  def daily_report_email(user_id, notifications)
+    @user = User.find(user_id)
+    @notifications = notifications.group_by(&:notifiable_type)
+    mail(
+      :to => @user.profile.email,
+      :subject => "Gistflow personal daily report."
+    )
+  end
 end
