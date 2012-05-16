@@ -25,7 +25,7 @@ Gistflow::Application.configure do
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -51,12 +51,12 @@ Gistflow::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   ActionMailer::Base.smtp_settings = {
-    :port           => ENV['MAILGUN_SMTP_PORT'], 
-    :address        => ENV['MAILGUN_SMTP_SERVER'],
-    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'yourapp.heroku.com',
     :authentication => :plain,
+    :address        => "smtp.mailgun.org",
+    :port           => 587,
+    :domain         => "redstonelabs.mailgun.org",
+    :user_name      => "postmaster@redstonelabs.mailgun.org",
+    :password       => ENV['MAILGUN_SMTP_PASSWORD']
   }
   ActionMailer::Base.delivery_method = :smtp
 
