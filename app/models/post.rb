@@ -1,7 +1,6 @@
 class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Mentionable
-  include Models::Searchable unless Rails.env.test?
   
   default_scope order: 'posts.id desc'
   
@@ -62,6 +61,10 @@ class Post < ActiveRecord::Base
     followed_user_ids = %(SELECT followed_user_id FROM followings
                            WHERE follower_id = :user_id)
     where("user_id IN (#{followed_user_ids})", { user_id: user })
+  end
+  
+  def self.search(text)
+    where("title like :q or content like :q", q: "%#{text}%")
   end
   
 protected
