@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Profile do
-  let!(:profile) { create(:profile) }
+  let(:profile) { create(:user).profile }
   
   it 'should have factory' do
     profile.should be
