@@ -20,5 +20,6 @@ log/*.log
 tmp/
 config/database.yml
 public/system/**/*
+public/assets
 .idea/
 .DS_Store

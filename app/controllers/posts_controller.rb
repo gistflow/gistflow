@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_filter :choose_wall, :only => :index, :if => :user_signed_in?
   
   def index
-    @posts = Post.includes(user: [:likes, :observings]).page(params[:page])
+    @posts = Post.includes(:user).page(params[:page])
     render :index
   end
   alias all index

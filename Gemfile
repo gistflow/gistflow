@@ -17,6 +17,10 @@ gem 'twitter'
 gem 'googl'
 gem 'sqlite3'
 
+group :production do
+  gem 'god'
+end
+
 group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
