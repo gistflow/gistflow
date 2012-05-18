@@ -5,7 +5,10 @@ $(function(){
   
   $(document).on('ajax:success', 'form#new_comment', function(e, data){
     if (data.comment) {
-      $(this).after(data.comment)
+      var last_comment = $('article.comment').last();
+      var last_element = last_comment.length > 0 ? last_comment : $(this);
+      last_element.after(data.comment);
+      
       $('section.comments p.no_comments').remove()
     }
     var form = $(data.form)
