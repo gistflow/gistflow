@@ -1,27 +1,23 @@
 @import "configuration";
 
 section.landing {
-  padding: 0 10px;
   
   > header {
     h1 {
-      font-size: 32px;
+      font-size: 33px;
+      line-height: 30px;
       color: #666;
-      line-height: 62px;
-      padding: 5px 0;
+      padding: 50px 0;
       text-align: center;
     }
-    margin-bottom: 80px
   }
   
   div.sign-up {
     text-align: center;
-    padding: 60px 0;
+    padding: 60px 0 40px;
     a {
       font-size: 40px;
-      font-height: 40px;
       border: 1px solid $layout;
-      display: inline-block;
       padding: 25px 30px 22px;
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
@@ -34,6 +30,15 @@ section.landing {
       background-image: -ms-linear-gradient(top, white, whiteSmoke);
       background-image: -moz-linear-gradient(top, white, whiteSmoke);
       background-image: linear-gradient(top, white, whiteSmoke);
+      
+      span {
+        background: url(asset-path('octocat.png', image)) no-repeat right center;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        vertical-align: bottom;
+      }
+      
       color: #428EDD;
       
       &:hover {
@@ -45,26 +50,36 @@ section.landing {
     }
   }
   
+  div.description {
+    font-size: 22px;
+    text-align: center;
+    line-height: 30px;
+    padding: 30px 0;
+  }
+  
   section.gistflow {
     width: 480px;
     float: left;
     
     header {
       text-align: center;
-      margin-bottom: 20px;
       
       h1 {
-        font-size: 90px;
-        line-height: 90px;
+        font-size: 85px;
+        line-height: 85px;
         font-weight: 600;
         color: #428EDD;
       }
       
       p {
         font-weight: 600;
-        font-size: 22px;
+        font-size: 27px;
+        line-height: 27px;
+        position: relative;
+        top: -10px;
         color: #666;
       }
+      padding: 50px 0 17px;
     }
     
     div.statistics {
@@ -86,6 +101,39 @@ section.landing {
           font-size: 22px;
         }
         
+      }
+    }
+  }
+  
+  div.slider {
+    float: right;
+    width: 472px;
+    height: 292px;
+    border: 1px solid $gray;
+    padding: 3px;
+    position: relative;
+    img {
+      width: 472px;
+      height: 292px;
+      position: relative;
+      z-index: 1;
+    }
+    nav {
+      ul {
+        position: absolute;
+        z-index: 2;
+        top: 288px;
+        left: 195px;
+        font-size: 50px;
+        line-height: 50px;
+        
+        li {
+          display: inline-block;
+          margin-right: 5px;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
       }
     }
   }
