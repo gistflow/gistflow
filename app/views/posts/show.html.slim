@@ -18,12 +18,13 @@ article class="post detail"
 section class="comments"
   header
     h1 Comments
-  - if can? :create, :comments
-    = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
   - if @presenter.comments.any?
     = render :partial => 'posts/comments/comment', :collection => @presenter.comments
   - else
     p.no_comments No comments yet
+  - if can? :create, :comments
+    h2 New comment
+    = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
 
 div class='at-username-container'
   - @presenter.usernames.each do |username|

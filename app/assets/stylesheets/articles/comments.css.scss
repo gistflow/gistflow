@@ -7,6 +7,10 @@ section.comments {
     }
   }
   
+  h2 {
+    @include caption;
+  }
+  
   div.preview {
     background: whiteSmoke;
     padding: 5px;
