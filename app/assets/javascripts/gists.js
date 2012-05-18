@@ -11,9 +11,12 @@ $(function(){
     $.getJSON(url, function(gists){
       var section = $('section.gists')
       
+      if(gists.length == 0) {
+        return false
+      }
+      
       var ul = $('<ul>')
       section.append(ul)
-      
       section.find('p').remove()
       
       $.each(gists, function(index, gist){
@@ -32,6 +35,8 @@ $(function(){
       })
       
       section.find('a.add').tooltip({title: 'Add gist to new post or comment'})
+      
+      section.show()
     })
   
     var field_gist = _.template('gist:<%= id %> <%= lang %> ')

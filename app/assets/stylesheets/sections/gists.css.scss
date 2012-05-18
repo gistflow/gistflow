@@ -1,6 +1,8 @@
 @import "configuration";
 
 section.gists {
+  display: none;
+  
   a.disabled {
     color: #858585;
     font-weight: 600;
