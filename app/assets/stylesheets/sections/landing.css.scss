@@ -60,6 +60,7 @@ section.landing {
   section.gistflow {
     width: 480px;
     float: left;
+    position: relative;
     
     header {
       text-align: center;
@@ -80,6 +81,12 @@ section.landing {
         color: #666;
       }
       padding: 50px 0 17px;
+    }
+    
+    div.fork-me {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
     
     div.statistics {
