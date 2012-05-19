@@ -4,7 +4,7 @@
 - content_for(:menu) do
   li = link_to_unless_current 'Flow', flow_url, :class => 'flow_posts', :rel => :nofollow
   li = link_to_unless all_posts_page?, 'All', all_url, :class => 'all_posts'
-  li = link_to_unless followed_posts_page?, 'Following', following_path, :class => 'followed_posts'
+  li = link_to_unless_current 'Following', following_path, :class => 'followed_posts'
 - posts.each do |post|
   article class="post group" rel="#{post_url(post)}"
     header
