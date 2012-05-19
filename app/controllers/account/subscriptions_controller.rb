@@ -1,4 +1,6 @@
 class Account::SubscriptionsController < ApplicationController
+  cache_sweeper :subscription_sweeper
+  
   before_filter :authenticate!, :only => :index
   before_filter :setup_welcome_info, :if => :current_user_newbie?
   

@@ -1,4 +1,6 @@
 class Account::BookmarksController < ApplicationController
+  cache_sweeper :bookmark_sweeper
+  
   before_filter :authenticate!
   respond_to :json
   

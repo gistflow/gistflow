@@ -1,8 +1,8 @@
 section class="tags"
   header
     h1 Tags
-  - key = user_signed_in? ? "sidebar:tags:#{current_user.id}" : "sidebar:tags:all"
-  - cache key do
+  - options = user_signed_in? ? ["sidebar:subscriptions:#{current_user.id}"] : ["sidebar:tags:all", expires_in: 1.hour]
+  - cache *options do
     = ul(sidebar_tags.map { |t| link_to_tag t })
   - if user_signed_in?
     footer
