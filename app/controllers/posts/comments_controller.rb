@@ -32,7 +32,7 @@ class Posts::CommentsController < ApplicationController
   end
   
   def edit
-    @comment = current_user.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     authorize! :edit, @comment
     render json: { form: render_form(:edit) }
   end
