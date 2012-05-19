@@ -9,8 +9,8 @@
       = @presenter.timestamp
       div class="button-groups"
         div class="notice button-group minor-group group"
-          = link_to_bookmark @presenter.post if user_signed_in?
-          = link_to_observe @presenter.post if user_signed_in?
+          = link_to_bookmark @presenter.post
+          = link_to_observe @presenter.post
           = link_to_like @presenter.post
         div class="button-group minor-group"
           = link_to "Edit", edit_post_path(@presenter.post), :class => 'button icon edit'

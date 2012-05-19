@@ -24,8 +24,8 @@ javascript:
         = time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
         div class="button-groups"
           div class="button-group minor-group"
-            = link_to_bookmark post if user_signed_in?
-            = link_to_observe post if user_signed_in?
+            = link_to_bookmark post
+            = link_to_observe post
             = link_to_like post
             = link_to_comments post
           div class="button-group minor-group"
