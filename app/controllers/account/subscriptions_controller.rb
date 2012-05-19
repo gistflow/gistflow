@@ -9,18 +9,25 @@ class Account::SubscriptionsController < ApplicationController
   end
   
   def create
-    @subscription = current_user.subscriptions.create(params[:subscription])
-    render_link
+    @tag = find_tag(params[:tag_id])
+    current_user.subscribe(@tag)
+    link = render_to_string(inline: "<%= link_to_unsubscribe(@tag) %>")
+    render :json => { :replaceable => link }
   end
   
   def destroy
-    @subscription = current_user.subscriptions.find(params[:id])
-    @subscription.destroy
-    render_link
+    @tag = find_tag(params[:tag_id])
+    current_user.unsubscribe(@tag)
+    link = render_to_string(inline: "<%= link_to_subscribe(@tag) %>")
+    render :json => { :replaceable => link }
   end
   
 protected
-
+  
+  def find_tag(name)
+    Tag.find_by_name name
+  end
+  
   def setup_welcome_info
     flash.now[:info] = %{
       <strong>#{current_user.username.capitalize}<strong>, welcome to Gistflow
@@ -29,10 +36,5 @@ protected
        other @users. <strong>And first - subscribe for some tags to get 
        articles you are interested in.</strong> Good luck!
     }.html_safe
-  end
-  
-  def render_link
-    new_form = render_to_string(inline: "<%= link_to_subscribe(@subscription.tag) %>")
-    render :json => { :replaceable => new_form }
   end
 end

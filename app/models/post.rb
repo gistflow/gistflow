@@ -31,6 +31,15 @@ class Post < ActiveRecord::Base
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
   
+  # ActiveRecord::Relation extends method
+  def self.to_json_hash(options = nil)
+    hash = {}
+    all.each do |post|
+      hash[post.id] = post.as_json(options)
+    end
+    hash.to_json
+  end
+  
   def cache_key(type)
     "post:#{id}:#{type}"
   end

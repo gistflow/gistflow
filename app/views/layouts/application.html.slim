@@ -10,7 +10,14 @@ html
     = render :partial => 'shared/google_analytics'
     - if user_signed_in?
       javascript:
-        window.current_user = { username: "#{current_user.username}" }
+        window.current_user = {
+          username: "#{current_user.username}",
+          likes: #{current_user.likes.pluck(:post_id).to_json},
+          observings: #{current_user.observings.pluck(:post_id).to_json},
+          bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
+          following: #{current_user.followings.pluck(:followed_user_id).to_json},
+          subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json}
+        }
   body
     = raw javascript_enabled?
     div class="wrap group"

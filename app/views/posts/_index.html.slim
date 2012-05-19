@@ -5,9 +5,11 @@
   li = link_to_unless_current 'Flow', flow_url, :class => 'flow_posts', :rel => :nofollow
   li = link_to_unless all_posts_page?, 'All', all_url, :class => 'all_posts', :rel => :nofollow
   li = link_to_unless_current 'Following', following_path, :class => 'followed_posts', :rel => :nofollow
+javascript:
+  window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
 - posts.each do |post|
   - cache post.cache_key(:preview) do
-    article class="post group" rel="#{post_url(post)}"
+    article class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
       header
         h1
           = link_to(post.title, post) << ' '

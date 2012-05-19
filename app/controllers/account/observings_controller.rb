@@ -3,23 +3,22 @@ class Account::ObservingsController < ApplicationController
   respond_to :json
   
   def create
-    @observing = current_user.observings.create(params[:observing])
-    render_link
+    @post = find_post(params[:post_id])
+    current_user.observe(@post)
+    link = render_to_string(inline: "<%= link_to_unobserve(@post) %>")
+    render json: { replaceable: link }
   end
   
   def destroy
-    @observing = current_user.observings.find(params[:id]).destroy
-    render_link
+    @post = find_post(params[:post_id])
+    current_user.unobserve(@post)
+    link = render_to_string(inline: "<%= link_to_observe(@post) %>")
+    render json: { replaceable: link }
   end
   
 protected
   
   def find_post(id)
     Post.find(id)
-  end
-  
-  def render_link
-    link = render_to_string(inline: "<%= link_to_observe(@observing.post) %>")
-    render json: { replaceable: link }
   end
 end

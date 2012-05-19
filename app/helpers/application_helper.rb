@@ -34,76 +34,59 @@ module ApplicationHelper
     image_tag user.gravatar(size), size: [size, size].join('x')
   end
   
-  def link_to_bookmark(post)
-    if bookmark = current_user.bookmark?(post)
-      link_to 'Unbookmark', [:account, bookmark],
-        remote: true, method: :delete, class: %w(button replaceable)
-    else
-      replaceable_form_for [:account, post.bookmarks.build] do |f|
-        concat(f.hidden_field :post_id)
-        concat(f.submit 'Bookmark', class: 'button')
-      end
-    end
+  def link_to_bookmark(post, name = 'Bookmark', method = :post)
+    classes = %w(button bookmark replaceable)
+    link_to name, account_bookmark_path(post),
+      { class: classes, remote: true, method: method }
   end
   
-  def link_to_observe(post)
-    if observing = current_user.observe?(post)
-      link_to 'Unobserve', [:account, observing],
-        remote: true, method: :delete, class: %w(button replaceable)
-    else
-      replaceable_form_for [:account, post.observings.build] do |f|
-        concat(f.hidden_field :post_id)
-        concat(f.submit 'Observe', class: 'button')
-      end
-    end
+  def link_to_unbookmark(post)
+    link_to_bookmark(post, 'Unbookmark', :delete)
+  end
+  
+  def link_to_observe(post, name = 'Observe', method = :post)
+    classes = %w(button observe replaceable)
+    link_to name, account_observe_path(post),
+      { class: classes, remote: true, method: method }
+  end
+  
+  def link_to_unobserve(post)
+    link_to_observe(post, 'Unobserve', :delete)
   end
   
   def link_to_like(post)
-    if !user_signed_in? or current_user.like?(post) or current_user == post.user
-      title = post.likes_count == 1 ? '1 Like' : "#{post.likes_count} Likes"
-      link_to title, '#', rel: 'nofollow', class: %w(icon like button replaceable disabled)
-    else
-      replaceable_form_for [:account, post.likes.build] do |f|
-        concat(f.hidden_field :post_id)
-        concat(f.button "Like (#{post.likes_count})", class: %w(icon like button))
-      end
-    end
+    classes = %w(icon like button replaceable disabled)
+    link_to 'Like', account_like_path(post), class: classes, remote: true, method: :post
   end
   
-  def link_to_subscribe(tag)
-    if subscription = current_user.subscribe?(tag)
-      replaceable_form_for [:account, subscription], :method => :delete do |f|
-        f.submit tag.name, :class => %(button active)
-      end
-    else
-      replaceable_form_for [:account, tag.subscriptions.build] do |f|
-        concat(f.hidden_field :tag_id)
-        concat(f.submit tag.name, :class => %(button))
-      end
-    end
+  def link_to_liked(post)
+    name = (post.likes_count == 1) ? '1 Like' : "#{post.likes_count} Likes"
+    link_to name, '#', class: 'icon like button replaceable disabled'
   end
   
-  def link_to_follow(user)
-    if following = current_user.follow?(user)
-      replaceable_form_for [:account, following], :method => :delete do |f|
-        f.submit 'Unfollow', class: 'button'
-      end
-    else
-      following = current_user.followings.build do |following|
-        following.followed_user = user
-      end
-      replaceable_form_for [:account, following] do |f|
-        concat(f.hidden_field :followed_user_id)
-        concat(f.submit 'Follow', class: 'button')
-      end
-    end
+  def link_to_subscribe(tag, method = :post, options = {})
+    link_to tag.name, account_subscription_path(tag),
+      { :remote    => true,
+        :method    => method,
+        :class     => 'button subscribe replaceable',
+        :'data-id' => tag.id }.merge(options)
   end
   
-  def replaceable_form_for record, options = {}, &proc
-    options[:remote] = true
-    options[:html] ||= {}
-    options[:html][:class] ||= 'replaceable'
-    form_for(record, options, &proc)
+  def link_to_unsubscribe(tag)
+    options = { class: 'button subscribe replaceable active' }
+    link_to_subscribe(tag, :delete, options)
+  end
+  
+  def link_to_follow(user, name = 'Follow', method = :post)
+    link_to name, account_following_path(user),
+      { :remote    => true,
+        :method    => method,
+        :class     => 'button follow replaceable',
+        :'data-id' => user.id }
+  end
+  
+  def link_to_unfollow(user)
+    link_to_follow user, 'Unfollow', :delete
   end
   
   def link_to_tag(tag)
@@ -111,7 +94,7 @@ module ApplicationHelper
   end
   
   def link_to_comments(post)
-    link_to "Comments (#{post.comments_count})", post, class: 'button icon comment'
+    link_to "Comments", post, class: 'button icon comment'
   end
   
   def link_to_github_user(user)

@@ -12,6 +12,6 @@ class SubscriptionSweeper < ActionController::Caching::Sweeper
 protected
   
   def expire_cache_for subscription
-    expire_fragment "sidebar:subscriptions:#{subscriptions.user_id}"
+    expire_fragment "sidebar:subscriptions:#{subscription.user_id}"
   end
 end

@@ -5,4 +5,8 @@ div class="user group"
     div class="info"
       h2 = link_to "#{user.name} <span>#{user.username}</span>".html_safe, user_path(user)
       - if user_signed_in?
-        div class="following" = link_to_follow(user) 
+        div class="following"
+          - if current_user == user
+            = "This is you!"
+          - else
+            = link_to_follow(user)
