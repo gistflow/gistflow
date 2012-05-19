@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
   attr_accessor :company, :github_page, :home_page, :email
   
   def intrested_posts
-    Post.joins(tags: { subscriptions: :user }).where(users: { id: id }).uniq
+    tag_ids = subscriptions.select(:tag_id).to_sql
+    Post.joins(:taggings).where("taggings.tag_id in(#{tag_ids})").uniq
   end
   
   def bookmark?(post)

@@ -1,7 +1,9 @@
 section class="tags"
   header
     h1 Tags
-  = ul(sidebar_tags.map { |t| link_to_tag t })
+  - key = user_signed_in? ? "sidebar:tags:#{current_user.id}" : "sidebar:tags:all"
+  - cache key do
+    = ul(sidebar_tags.map { |t| link_to_tag t })
   - if user_signed_in?
     footer
       nav = link_to 'subscribe for more', account_subscriptions_path

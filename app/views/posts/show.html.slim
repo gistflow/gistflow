@@ -1,17 +1,17 @@
 - window_title @presenter.post.title
-article class="post detail"
-  header
-    h1 = @presenter.title
-  div class="body markdown"
-    = @presenter.body
-  footer class="group actions"
-    = @presenter.timestamp
-    div class="button-groups"
-      div class="notice button-group minor-group group"
-        = link_to_bookmark @presenter.post if user_signed_in?
-        = link_to_observe @presenter.post if user_signed_in?
-        = link_to_like @presenter.post
-      - if can? :edit, @presenter.post
+- cache "post:#{@presenter.post.id}:detail" do
+  article class="post detail" data-author="#{@presenter.post.user.username}"
+    header
+      h1 = @presenter.title
+    div class="body markdown"
+      = @presenter.body
+    footer class="group actions"
+      = @presenter.timestamp
+      div class="button-groups"
+        div class="notice button-group minor-group group"
+          = link_to_bookmark @presenter.post if user_signed_in?
+          = link_to_observe @presenter.post if user_signed_in?
+          = link_to_like @presenter.post
         div class="button-group minor-group"
           = link_to "Edit", edit_post_path(@presenter.post), :class => 'button icon edit'
 

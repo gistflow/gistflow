@@ -3,30 +3,31 @@
     = link_to('New Post', new_post_path, :class => 'button')
 - content_for(:menu) do
   li = link_to_unless_current 'Flow', flow_url, :class => 'flow_posts', :rel => :nofollow
-  li = link_to_unless all_posts_page?, 'All', all_url, :class => 'all_posts'
-  li = link_to_unless_current 'Following', following_path, :class => 'followed_posts'
+  li = link_to_unless all_posts_page?, 'All', all_url, :class => 'all_posts', :rel => :nofollow
+  li = link_to_unless_current 'Following', following_path, :class => 'followed_posts', :rel => :nofollow
 - posts.each do |post|
-  article class="post group" rel="#{post_url(post)}"
-    header
-      h1
-        = link_to(post.title, post) << ' '
-        span
-          | by 
-          = link_to post.user, post.user
-    div class="avatar"
-      = link_to avatar_image(post.user, 26), post.user
-    div class="preview markdown group"
-      = post.preview_cache
-    footer class="group actions"
-      = time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
-      div class="button-groups"
-        div class="button-group minor-group"
-          = link_to_bookmark post if user_signed_in?
-          = link_to_observe post if user_signed_in?
-          = link_to_like post
-          = link_to_comments post
-        div class="button-group minor-group"
-          - if can? :edit, post
-            = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
-          = link_to "Show", post, :class => 'button primary'
+  - cache post.cache_key(:preview) do
+    article class="post group" rel="#{post_url(post)}"
+      header
+        h1
+          = link_to(post.title, post) << ' '
+          span
+            | by 
+            = link_to post.user, post.user
+      div class="avatar"
+        = link_to avatar_image(post.user, 26), post.user
+      div class="preview markdown group"
+        = post.preview_cache
+      footer class="group actions"
+        = time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
+        div class="button-groups"
+          div class="button-group minor-group"
+            = link_to_bookmark post if user_signed_in?
+            = link_to_observe post if user_signed_in?
+            = link_to_like post
+            = link_to_comments post
+          div class="button-group minor-group"
+            - if can? :edit, post
+              = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
+            = link_to "Show", post, :class => 'button primary'
 = paginate posts

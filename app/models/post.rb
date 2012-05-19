@@ -31,6 +31,10 @@ class Post < ActiveRecord::Base
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
   
+  def cache_key(type)
+    "post:#{id}:#{type}"
+  end
+  
   def link_name
     ln = title.blank? ? preview : title
     ln[0..30].strip
