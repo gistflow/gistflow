@@ -5,4 +5,10 @@ article class="comment"
     div class="avatar"
       = link_to user_path(presenter.user) do
         = avatar_image(presenter.user)
+        
+    div class="controls" id="controls_#{presenter.comment.id}"
+      - if can?(:edit, presenter.comment) && !presenter.comment.new_record?
+        ul
+          li= link_to 'Edit', edit_post_comment_path(presenter.comment.post, presenter.comment), remote: true, class: :edit_comment
+          li= link_to 'Delete', post_comments_path(presenter.comment.post, presenter.comment), method: :delete, remote: true, class: :delete_comment
   div class="markdown group" = presenter.content

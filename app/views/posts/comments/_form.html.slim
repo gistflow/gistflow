@@ -1,2 +1,2 @@
 = form_for [comment.post, comment], :remote => true do |f|
-  = render partial: "posts/comments/#{action}", locals: { f: f }
+  = render partial: "posts/comments/#{action}", locals: { f: f, action: action }

@@ -25,7 +25,7 @@ Gistflow::Application.routes.draw do
   end
   
   resources :posts do
-    resources :comments, only: :create, module: :posts do
+    resources :comments, only: [:create, :edit, :update, :destroy], module: :posts do
       collection do
         post :build
         post :preview
