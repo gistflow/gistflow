@@ -28,7 +28,8 @@ class Ability
       cannot :create, :like, :user_id => user.id
       can :destroy, :sessions
       can :create, :comments
-      can [:preview, :build, :create], :'posts/comments'
+      can [:edit, :update, :destroy], :comments, :user_id => user.id
+      can [:preview, :build, :update, :create, :edit, :destroy], :'posts/comments'
       can :index, [:'account/gists', :'account/notifications']
       can [:index, :create, :destroy], :'account/subscriptions'
       can [:edit, :update, :destroy], :posts, :user_id => user.id

@@ -53,6 +53,17 @@ article.comment {
     }
   }
   
+  .controls {
+    display: none;
+    float: right;
+    margin-top: -22px;
+    
+    li {
+      display: inline-block;
+      @include li-separator;
+    }
+  }
+  
   .markdown {
     margin-left: 40px;
     

@@ -31,6 +31,31 @@ class Posts::CommentsController < ApplicationController
     render json: { form: render_form(:preview) }
   end
   
+  def edit
+    @comment = current_user.comments.find(params[:id])
+    authorize! :edit, @comment
+    render json: { form: render_form(:edit) }
+  end
+  
+  def update
+    @new_comment = current_user.comments.find(params[:id])
+    authorize! :edit, @new_comment
+    
+    if @new_comment.update_attributes(params[:comment])
+      render json: { comment: render_comment }
+    else
+      render_json_error("We are sorry, but comment couldn't be updated.")
+    end
+  end
+
+  def destroy
+    comment = current_user.comments.find(params[:post_id])
+    authorize! :destroy, comment
+    
+    comment.destroy
+    render json: { message: 'Comment was deleted.' }
+  end
+  
 protected
   
   def find_post(id)
