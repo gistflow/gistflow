@@ -10,4 +10,13 @@ class UserMailer < ActionMailer::Base
     )
   end
   
+  def notification_email(notification_id)
+    @notification = Notification.find(notification_id)
+    @user = @notification.user
+  
+    mail(
+      :to => @user.profile.email, 
+      :subject => "New #{@notification.notifiable_type.downcase} notification"
+    )
+  end
 end

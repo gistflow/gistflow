@@ -9,4 +9,13 @@ class Notification < ActiveRecord::Base
   
   scope :read, where(read: true)
   scope :unread, where(read: false)
+  
+  after_create :create_mailer_task
+  
+  protected
+  def create_mailer_task
+    if self.user.profile.email_valid?
+      Resque.enqueue(Mailer, 'UserMailer', :notification_email, self.id)
+    end
+  end
 end
