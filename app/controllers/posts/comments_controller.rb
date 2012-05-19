@@ -38,7 +38,7 @@ class Posts::CommentsController < ApplicationController
   end
   
   def update
-    @new_comment = current_user.comments.find(params[:id])
+    @new_comment = Comment.find(params[:id])
     authorize! :edit, @new_comment
     
     if @new_comment.update_attributes(params[:comment])
@@ -49,7 +49,7 @@ class Posts::CommentsController < ApplicationController
   end
 
   def destroy
-    comment = current_user.comments.find(params[:post_id])
+    comment = Comment.find(params[:id])
     authorize! :destroy, comment
     
     comment.destroy
