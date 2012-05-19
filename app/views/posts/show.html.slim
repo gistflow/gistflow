@@ -1,6 +1,10 @@
 - window_title @presenter.post.title
+javascript:
+  window.posts = {
+    "#{@presenter.post.id}": #{@presenter.post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
+  }
 - cache "post:#{@presenter.post.id}:detail" do
-  article class="post detail" data-author="#{@presenter.post.user.username}"
+  article class="post detail" data-id="#{@presenter.post.id}" data-author="#{@presenter.post.user.username}"
     header
       h1 = @presenter.title
     div class="body markdown"
