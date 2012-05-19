@@ -24,8 +24,8 @@ class Ability
       can [:create, :destroy], [:'account/followings', :'account/observings', :'account/bookmarks']
       can :create, :'account/likes'
       can [:show, :update], [:'account/profiles', :'account/settings']
-      can [:all, :flow, :following, :observing], :posts
-      can [:new, :create, :memorize, :forgot, :like], :posts
+      can [:all, :flow, :following, :bookmarks], :posts
+      can [:new, :create], :posts
       cannot :create, :like, :user_id => user.id
       can :destroy, :sessions
       can :create, :comments

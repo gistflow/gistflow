@@ -25,19 +25,23 @@ $(function(){
     post.find('a.like').html(like_name)
     
     // setup observing
+    var observe = post.find('a.observe')
     if (window.current_user) {
-      var observe = post.find('a.observe')
       if (_.include(window.current_user.observings, post_data.id)) {
         observe.data('method', 'delete').html('Unobserve')
       }
+    } else {
+      observe.remove()
     }
     
     // setup bookmarks
+    var bookmark = post.find('a.bookmark')
     if (window.current_user) {
-      var bookmark = post.find('a.bookmark')
       if (_.include(window.current_user.observings, post_data.id)) {
         bookmark.data('method', 'delete').html('Unbookmark')
       }
+    } else {
+      bookmark.remove()
     }
   })
   

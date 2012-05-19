@@ -24,9 +24,7 @@ describe Ability do
     
     it { should be_able_to(:new, :posts) }
     it { should be_able_to(:create, :posts) }
-    it { should be_able_to(:memorize, :posts) }
     it { should be_able_to(:destroy, :sessions) }
-    it { should be_able_to(:forgot, :posts) }
     it { should be_able_to(:create, :comments) }
     it { should be_able_to(:index, :'account/subscriptions') }
     it { should be_able_to(:create, :'account/subscriptions') }
