@@ -65,7 +65,7 @@ module ApplicationHelper
   end
   
   def link_to_subscribe(tag, method = :post, options = {})
-    link_to tag.name, account_subscription_path(tag),
+    link_to tag.name, account_subscribe_path(tag),
       { :remote    => true,
         :method    => method,
         :class     => 'button subscribe replaceable',
