@@ -12,13 +12,8 @@ use Rack::Cache,
 require ::File.expand_path('../config/environment',  __FILE__)
 require 'resque/server'
 
-resque_config = YAML.load_file("#{Rails.root}/config/resque.yml")
-
-AUTH_PASSWORD = resque_config[:password]
-if AUTH_PASSWORD
-  Resque::Server.use Rack::Auth::Basic do |username, password|
-    password == AUTH_PASSWORD
-  end
+Resque::Server.use Rack::Auth::Basic do |username, password|
+  password ==  ENV['RESQUE-AUTH_PASSWORD']
 end
 
 run Rack::URLMap.new \
