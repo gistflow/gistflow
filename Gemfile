@@ -17,6 +17,8 @@ gem 'twitter'
 gem 'googl'
 gem 'sqlite3'
 gem 'redis-rails'
+gem 'redis-rack'
+gem 'redis-rack-cache'
 
 group :production do
   gem 'god'

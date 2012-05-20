@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   include Models::Mentionable
   
   belongs_to :user
-  belongs_to :post, counter_cache: true
+  belongs_to :post, counter_cache: true, touch: true
   has_many :notifications, {
     as:         :notifiable,
     dependent:  :destroy,
