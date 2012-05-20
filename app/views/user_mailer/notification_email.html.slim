@@ -3,7 +3,7 @@ html
   head
   body
     h1 New notification
-    p = @notification.message
+    p = @notification.message(true)
 
     | See all notifications at
     a href="http://gistflow.com/account/notifications"

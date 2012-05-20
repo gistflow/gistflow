@@ -54,6 +54,10 @@ class Post < ActiveRecord::Base
     ln[0..30].strip
   end
   
+  def title_for_notification post_title = true
+    post_title ? title : id
+  end
+  
   def preview
     content_parts.first.to_s.strip
   end

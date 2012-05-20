@@ -18,4 +18,8 @@ class Notification < ActiveRecord::Base
       Resque.enqueue(Mailer, 'UserMailer', :notification_email, self.id)
     end
   end
+  
+  def host
+    Rails.application.config.host
+  end
 end

@@ -34,4 +34,6 @@ Gistflow::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  config.host = 'http://localhost:3000'
 end
