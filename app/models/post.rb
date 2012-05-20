@@ -40,6 +40,11 @@ class Post < ActiveRecord::Base
     hash.to_json
   end
   
+  # Max updated_at value for cache
+  def self.last_modified
+    all.map(&:updated_at).map(&:utc).max
+  end
+  
   def cache_key(type)
     "post:#{id}:#{type}"
   end

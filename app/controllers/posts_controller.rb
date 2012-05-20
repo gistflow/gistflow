@@ -6,7 +6,9 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:user).page(params[:page])
-    render :index
+    if user_signed_in? || stale?(etag: user_signed_in?, last_modified: @posts.last_modified, public: true)
+      render :index
+    end
   end
   alias all index
   
