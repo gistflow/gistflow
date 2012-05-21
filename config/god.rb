@@ -1,5 +1,5 @@
 rails_env = ENV['RAILS_ENV'] || 'production'
-rails_root = ENV['RAILS_ROOT'] || "/u/apps/gistflow/current/"
+rails_root = ENV['RAILS_ROOT'] || "/u/apps/gistflow/current"
 
 God.watch do |w|
   w.name = "unicorn"
