@@ -42,7 +42,7 @@ $(function(){
     // setup bookmarks
     var bookmark = post.find('a.bookmark')
     if (window.current_user) {
-      if (_.include(window.current_user.observings, post_data.id)) {
+      if (_.include(window.current_user.bookmarks, post_data.id)) {
         bookmark.data('method', 'delete').html('Unbookmark')
       }
     } else {
