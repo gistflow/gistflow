@@ -36,4 +36,11 @@ describe Post do
       end
     end
   end
+  
+  describe '#title_for_notification' do
+    let(:post) { create :post }
+    
+    it { post.title_for_notification(true).should == post.title }
+    it { post.title_for_notification(false).should == post.id }
+  end
 end

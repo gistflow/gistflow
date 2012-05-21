@@ -19,6 +19,7 @@ gem 'sqlite3'
 gem 'redis-rails'
 gem 'redis-rack'
 gem 'redis-rack-cache'
+gem 'resque'
 
 group :production do
   gem 'god'

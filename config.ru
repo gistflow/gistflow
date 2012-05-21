@@ -10,4 +10,12 @@ use Rack::Session::Redis
 #   :entitystore => 'redis://localhost:6379/0/entitystore'
 
 require ::File.expand_path('../config/environment',  __FILE__)
-run Gistflow::Application
+require 'resque/server'
+
+Resque::Server.use Rack::Auth::Basic do |username, password|
+  password ==  ENV['RESQUE-AUTH_PASSWORD']
+end
+
+run Rack::URLMap.new \
+  "/" => Gistflow::Application,
+  "/resque" => Resque::Server.new

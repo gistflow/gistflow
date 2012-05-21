@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+def host
+  Rails.application.config.host
+end
+
 describe Notification do
   let(:comment_notification) { create(:comment_notification) }
   let(:mention_notification) { create(:mention_notification) }
@@ -22,8 +26,8 @@ describe Notification do
     
     its(:message) do
       user = comment.user
-      link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
-      link_to_post = %{<a href="/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
+      link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
+      link_to_post = %{<a href="#{host}/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
       should == "#{link_to_user} wrote a comment in #{link_to_post}"
     end
   end
@@ -31,7 +35,7 @@ describe Notification do
   describe 'Notification::Following#message' do
     it 'should have proper message' do
       user = following_notification.notifiable.follower
-      link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
+      link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
       message = "#{link_to_user} started following you."
       following_notification.message.should == message
     end
@@ -49,8 +53,8 @@ describe Notification do
       
       its(:message) do
         user = comment.user
-        link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
-        link_to_post = %{<a href="/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
+        link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
+        link_to_post = %{<a href="#{host}/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
         should == "#{link_to_user} mentioned you in comment to #{link_to_post}"
       end
     end
@@ -66,8 +70,8 @@ describe Notification do
       
       its(:message) do
         user = post.user
-        link_to_user = %{<a href="/users/#{user.username}">#{user}</a>}
-        link_to_post = %{<a href="/posts/#{post.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
+        link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
+        link_to_post = %{<a href="#{host}/posts/#{post.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
         should == "#{link_to_user} mentioned you in #{link_to_post}"
       end
     end

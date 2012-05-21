@@ -160,6 +160,8 @@ GEM
     redis-activesupport (3.2.3)
       activesupport (~> 3.2.3)
       redis-store (~> 1.1.0)
+    redis-namespace (1.0.3)
+      redis (< 3.0.0)
     redis-rack (1.4.1)
       rack (= 1.4.1)
       redis-store (~> 1.1.0)
@@ -172,6 +174,11 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.0)
       redis (~> 2.2.0)
+    resque (1.20.0)
+      multi_json (~> 1.0)
+      redis-namespace (~> 1.0.2)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.9.0)
@@ -238,6 +245,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
@@ -262,6 +271,7 @@ DEPENDENCIES
   redis-rack
   redis-rack-cache
   redis-rails
+  resque
   rspec-rails
   sass-rails (~> 3.2.5)
   slim

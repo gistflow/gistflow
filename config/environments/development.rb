@@ -36,4 +36,6 @@ Gistflow::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+  
+  config.host = 'http://localhost:3000'
 end
