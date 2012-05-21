@@ -13,9 +13,5 @@
         li
           = f.radio_button :default_wall, wall
           = f.label :default_wall, wall
-  fieldset
-    = f.check_box :recieve_daily_reports
-    = f.label :recieve_daily_reports, 'Email me new notifications daily.'
-  
   div class="button-group"
     = f.submit 'Update settings', :class => 'button'
