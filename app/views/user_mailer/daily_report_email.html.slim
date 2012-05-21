@@ -1,9 +1,0 @@
-doctype
-html
-  head
-  body
-    h1 = "Your daily Gistflow report for #{Time.now.to_date}"
-    ul
-      - @notifications.each do |type, notifications|
-        li= "#{notifications.count} of #{type.downcase} notifications."
-    | Sincerely, Gistflow team
