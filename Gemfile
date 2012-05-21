@@ -20,6 +20,8 @@ gem 'redis-rails'
 gem 'redis-rack'
 gem 'redis-rack-cache'
 gem 'resque'
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 group :production do
   gem 'god'
