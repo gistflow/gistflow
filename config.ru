@@ -13,7 +13,7 @@ require ::File.expand_path('../config/environment',  __FILE__)
 require 'resque/server'
 
 Resque::Server.use Rack::Auth::Basic do |username, password|
-  password ==  ENV['RESQUE-AUTH_PASSWORD']
+  password ==  ENV['RESQUE_AUTH_PASSWORD']
 end
 
 run Rack::URLMap.new \
