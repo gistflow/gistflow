@@ -78,7 +78,7 @@ module ApplicationHelper
   end
   
   def link_to_follow(user, name = 'Follow', method = :post)
-    link_to name, account_following_path(user),
+    link_to name, account_follow_path(user),
       { :remote    => true,
         :method    => method,
         :class     => 'button follow replaceable',
