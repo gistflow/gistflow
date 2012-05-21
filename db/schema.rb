@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120512102709) do
+ActiveRecord::Schema.define(:version => 20120516081351) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -143,17 +143,19 @@ ActiveRecord::Schema.define(:version => 20120512102709) do
     t.string    "company"
     t.string    "home_page"
     t.integer   "user_id"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.timestamp "created_at",                     :null => false
+    t.timestamp "updated_at",                     :null => false
+    t.boolean   "email_valid", :default => false
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id", :unique => true
 
   create_table "settings", :force => true do |t|
     t.string    "default_wall"
-    t.timestamp "created_at",   :null => false
-    t.timestamp "updated_at",   :null => false
+    t.timestamp "created_at",                              :null => false
+    t.timestamp "updated_at",                              :null => false
     t.integer   "user_id"
+    t.boolean   "recieve_daily_reports", :default => true
   end
 
   add_index "settings", ["user_id"], :name => "index_settings_on_user_id", :unique => true

@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Profile do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:profile) { create(:user).profile }
+  
+  it 'should have factory' do
+    profile.should be
+  end
+  
+  it 'should have valid email' do
+    profile.email_valid.should == true
+  end
 end

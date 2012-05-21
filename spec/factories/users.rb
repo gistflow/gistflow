@@ -2,9 +2,10 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.name }
     sequence(:username) { |n| "user_#{n}" }
-    sequence(:email) { |n| "user_#{n}@gistflow.com" }
-    company { Faker::Name.name }
-    home_page { "http://#{Faker::Internet.domain_name}" }
+    
+    after_create do |user|
+      user.profile = FactoryGirl.create(:profile, :user => user)
+    end
     
     factory :admin do
       after_create do |user|

@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :settings, :class => 'Settings' do
-    default_wall { Settings::WALLS[Settings::WALLS.size] }
+    user
+    default_wall { Settings::WALLS[rand Settings::WALLS.size] }
   end
 end
