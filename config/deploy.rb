@@ -12,7 +12,7 @@ set :application, "gistflow"
 set :repository,  "git@github.com:gistflow/gistflow.git"
 
 set :scm, :git
-set :branch, "capistrano"
+set :branch, "master"
 set :user, "git"
 
 role :web, "37.188.125.88"
