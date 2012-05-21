@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   include Models::Taggable
   include Models::Mentionable
+  include Models::Indestructible
   
   belongs_to :user
   belongs_to :post, counter_cache: true, touch: true

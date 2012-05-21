@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Mentionable
+  include Models::Indestructible
   
   default_scope order: 'posts.id desc'
   
