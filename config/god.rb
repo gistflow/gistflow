@@ -18,10 +18,10 @@ God.watch do |w|
 
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
-  w.pid_file = "#{rails_root}/tmp/pids/unicorn.pid"
+  # w.pid_file = "#{rails_root}/tmp/pids/unicorn.pid"
 
-  w.uid = 'git'
-  w.gid = 'git'
+  # w.uid = 'git'
+  # w.gid = 'git'
 
   w.behavior(:clean_pid_file)
 
