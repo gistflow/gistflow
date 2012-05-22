@@ -6,6 +6,9 @@ module Models
     included do
       # prevent destroy action if it called by accident
       before_destroy { false }
+      
+      # hide deleted posts by default
+      default_scope where(deleted_at: nil)
     end
     
     def mark_deleted?

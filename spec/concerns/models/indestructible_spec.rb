@@ -17,12 +17,29 @@ describe Models::Indestructible do
     post.should_not be_destroyed
   end
   
+  it 'should setup default scope' do
+    Post.scoped.where_values_hash.should include(deleted_at: nil)
+  end
+  
+  describe '#mark_deleted?' do
+    let(:record) { create(:post) }
+    
+    it 'should not be for not marked as deleted' do
+      record.should_not be_mark_deleted
+    end
+    
+    it 'should be for marked as deleted' do
+      record.mark_deleted
+      record.should be_mark_deleted
+    end
+  end
+  
   describe '#mark_deleted' do
     let(:record) { create(:post) }
     
     it 'should mark record as deleted' do
       record.mark_deleted
-      record.mark_deleted?.should be_true
+      record.should be_mark_deleted
     end
     
     it 'should assing deleted_at if blank' do

@@ -7,7 +7,6 @@ class Comment < ActiveRecord::Base
   belongs_to :post, counter_cache: true, touch: true
   has_many :notifications, {
     as:         :notifiable,
-    dependent:  :destroy,
     class_name: 'Notification::Comment'
   }
   
