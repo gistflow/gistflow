@@ -8,5 +8,7 @@ class Notification::Comment < Notification
     title = post.title_for_notification post_title
     link_to_post = %{<a href="#{host}/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{title}</a>}
     "#{link_to_user} wrote a comment in #{link_to_post}".html_safe
+  rescue
+    "Comment was deleted"
   end
 end
