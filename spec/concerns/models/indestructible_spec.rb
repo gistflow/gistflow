@@ -16,4 +16,26 @@ describe Models::Indestructible do
     post.destroy
     post.should_not be_destroyed
   end
+  
+  describe '#mark_deleted' do
+    let(:record) { create(:post) }
+    
+    it 'should mark record as deleted' do
+      record.mark_deleted
+      record.mark_deleted?.should be_true
+    end
+    
+    it 'should assing deleted_at if blank' do
+      record.deleted_at = nil
+      record.mark_deleted
+      record.deleted_at.should be_kind_of(Time)
+    end
+    
+    it 'should not change deleted_at if exists' do
+      time = Time.now
+      record.deleted_at = time
+      record.mark_deleted
+      record.deleted_at.should == time
+    end
+  end
 end

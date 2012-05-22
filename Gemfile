@@ -19,7 +19,7 @@ gem 'sqlite3'
 gem 'redis-rails'
 gem 'redis-rack'
 gem 'redis-rack-cache'
-gem 'resque'
+gem 'resque', :git => 'git://github.com/defunkt/resque.git'
 gem 'capistrano'
 gem 'rvm-capistrano'
 

@@ -10,11 +10,6 @@ class Post < ActiveRecord::Base
   has_many :observings
   has_many :bookmarks
   has_many :likes
-  has_many :notifications, {
-    as:         :notifiable,
-    dependent:  :destroy,
-    class_name: :'Notification::Post'
-  }
   
   validates :user, :title, presence: true
   validates :cuts_count, inclusion: { in: [0, 1] }
@@ -28,7 +23,6 @@ class Post < ActiveRecord::Base
   
   after_create :tweet
   after_create :setup_observing_for_author
-  after_destroy :clear_cache
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
   

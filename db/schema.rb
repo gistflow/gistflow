@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516081351) do
+ActiveRecord::Schema.define(:version => 20120522055916) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120516081351) do
     t.integer   "likes_count", :default => 0
     t.timestamp "created_at",                     :null => false
     t.timestamp "updated_at",                     :null => false
+    t.datetime  "deleted_at"
   end
 
   create_table "favorite_posts_lovers", :id => false, :force => true do |t|
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20120516081351) do
     t.timestamp "updated_at",                    :null => false
     t.boolean   "question"
     t.text      "preview_cache"
+    t.datetime  "deleted_at"
   end
 
   create_table "profiles", :force => true do |t|
