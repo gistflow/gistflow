@@ -14,6 +14,8 @@ protected
     title = post.title_for_notification post_title
     link_to_post = %{<a href="#{host}/posts/#{post.id}" data-title="#{post.title}" class="notification_link">post #{title}</a>}
     "#{link_to_user} mentioned you in #{link_to_post}"
+  rescue
+    "Post was deleted"
   end
   
   def message_for_comment post_title
@@ -23,5 +25,7 @@ protected
     title = post.title_for_notification post_title
     link_to_post = %{<a href="#{host}/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{title}</a>}
     "#{link_to_user} mentioned you in comment to #{link_to_post}"
+  rescue
+    "Comment was deleted"
   end
 end
