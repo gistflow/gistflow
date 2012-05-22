@@ -4,6 +4,11 @@ $(function(){
     var author = post.data('author')
     var post_data = window.posts[post.data('id')]
     
+    // setup edit button
+    if (!window.current_user || (window.current_user.username != author && !window.current_user.admin)) {
+      post.find('a.edit').remove()
+    }
+    
     // setup comments count
     post.find('a.comment').html('Comments (' + post_data.comments_count + ')')
     

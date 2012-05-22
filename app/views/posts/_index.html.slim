@@ -29,7 +29,6 @@ javascript:
             = link_to_like post
             = link_to_comments post
           div class="button-group minor-group"
-            - if can? :edit, post
-              = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
+            = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
             = link_to "Show", post, :class => 'button primary'
 = paginate posts
