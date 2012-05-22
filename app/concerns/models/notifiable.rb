@@ -3,7 +3,7 @@ module Models
     extend ActiveSupport::Concern
     
     included do
-      has_many :notifications, as: :notifiable, dependent: :destroy
+      has_many :notifications, as: :notifiable
     end
   end
 end

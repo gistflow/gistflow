@@ -13,21 +13,19 @@ module Models
       after_save :assign_tags, :subscribe_user
     end
     
-    module InstanceMethods
-    protected
+  protected
       
-      def assign_tags
-        self.tags = Replaceable.new(content).tagnames.map do |name|
-          Tag.where(name: name).first_or_create!
-        end
+    def assign_tags
+      self.tags = Replaceable.new(content).tagnames.map do |name|
+        Tag.where(name: name).first_or_create!
       end
+    end
 
-      def subscribe_user
-        (tags - user.tags).each do |tag|
-          user.subscriptions.create! do |subsctiption|
-            subsctiption.tag = tag
-          end rescue ActiveRecord::RecordNotUnique
-        end
+    def subscribe_user
+      (tags - user.tags).each do |tag|
+        user.subscriptions.create! do |subsctiption|
+          subsctiption.tag = tag
+        end rescue ActiveRecord::RecordNotUnique
       end
     end
   end

@@ -52,7 +52,7 @@ class Posts::CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     authorize! :destroy, comment
     
-    comment.destroy
+    comment.mark_deleted
     render json: { message: 'Comment was deleted.' }
   end
   
