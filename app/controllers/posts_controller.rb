@@ -72,7 +72,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     authorize! :destroy, @post
     
-    @post.destroy
+    @post.mark_deleted
     redirect_to root_path
   end
   

@@ -1,12 +1,12 @@
 class Comment < ActiveRecord::Base
   include Models::Taggable
   include Models::Mentionable
+  include Models::Indestructible
   
   belongs_to :user
   belongs_to :post, counter_cache: true, touch: true
   has_many :notifications, {
     as:         :notifiable,
-    dependent:  :destroy,
     class_name: 'Notification::Comment'
   }
   

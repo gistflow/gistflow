@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120516081351) do
     t.integer   "likes_count", :default => 0
     t.timestamp "created_at",                     :null => false
     t.timestamp "updated_at",                     :null => false
+    t.datetime  "deleted_at"
   end
 
   create_table "favorite_posts_lovers", :id => false, :force => true do |t|
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20120516081351) do
     t.timestamp "updated_at",                    :null => false
     t.boolean   "question"
     t.text      "preview_cache"
+    t.datetime  "deleted_at"
   end
 
   create_table "profiles", :force => true do |t|
