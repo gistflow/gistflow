@@ -14,4 +14,13 @@ $(function(){
     $(this).addClass('active')
     img.attr('src', $(this).data('rel'))
   })
+  
+  $('div.more').hide()
+  
+  $(document).on('click', 'a.more', function(){
+    var more = $('div.more')
+    more.show()
+    $('html, body').animate({ scrollTop: more.position().top }, 'normal')
+    return false
+  })
 })

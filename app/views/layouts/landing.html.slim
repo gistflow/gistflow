@@ -45,4 +45,75 @@ html
           = link_to auth_path do
             = 'Sign up <span></span>'.html_safe
         div class="description"
-          p Write code related posts, discuss and rock!
+          p 
+            | Join community of social coders, write and discuss code related posts. 
+            = link_to 'more', '#more', class: 'more'
+        div class="more" id="more"
+          div class="message"
+            h2 Gistflow – is an open-source gist-sharing service for developers. 
+            p We see this project as a place where developers can share their skills by writing code-related posts and discuss it. By now all the necessary social features are implemented – user following, subscriptions for tags, post comments, personal bookmarks, ratings, import code to posts from gist.github.com, markdown and code highlighting.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/github.png')
+            h3 Github account
+            p By our opinion Github – the best place to share code. You can find many open source projects there including Rails, jQuery and a lot more. So you definitely need to have Github to be a social coder and to be able to sign up for Gistflow.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/following.png')
+            h3 User following
+            
+            p
+              | We have following posts wall for you to be aware of all new posts from users you follow. Following developers is 
+              em a good way to learn 
+              | something new.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/tags.png')
+            h3 Tags
+            p
+              | As simple as in Twitter. Use inline 
+              em hash #tags 
+              | to tag your posts. Subscribe for tags – your flow is basically posts tagged with tags you subscribed for. Search tags easily prepending "#" in search field.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/discuss.png')
+            h3 Discussions
+            p
+              | Post questions and write comments, 
+              em @mention users 
+              | easily and subscribe for comments to featured posts – you will be notified by email and receive internal notification to not miss anything.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/gists.png')
+            h3 Import code to posts from gist.github.com
+            p
+              | As you can see Gistflow is inspired 
+              em by gist.github.com
+              | , so if you have any gists in Github we will 
+              em import them 
+              | carefully for you to be able to write posts based on gists.
+          
+          div class="group message"
+            div class="image" = image_tag asset_path('landing/more/markdown.png')
+            h3 Markdown
+            p
+              | Write beautiful posts with 
+              em Markdown 
+              | syntax, include 
+              em code snippets 
+              | directly in post body and it will be highlighted. Never heard about 
+              = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/', target: :blank
+              | ?
+          
+          div class="message"
+            h3 Plans
+            p We are just in the beginning of our way, but as you can see we are working continuously to bring all the conceived features to production as soon as possible. 
+          
+          div class="message"
+            h2 We are glad to say that you can start posting right away!
+            p class="center"
+              | Feel free to talk to us 
+              = mail_to 'info@gistflow.com', 'info@gistflow.com', :encode => :hex
+              = " or directly post here with "
+              = link_to '#gistflow', tag_path('gistflow'), target: :blank
+              = " tag."
