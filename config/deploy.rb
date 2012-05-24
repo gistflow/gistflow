@@ -22,6 +22,7 @@ role :db,  "37.188.125.88", :primary => true
 after "deploy:restart", "deploy:cleanup"
 
 after "deploy:update_code", "sqlite3:link_configuration_file"
+after "deploy:update_code", "settings:link_settings_file"
 
 set(:shared_database_path) {"#{shared_path}/databases"}
 set(:shared_config_path) { "#{shared_path}/config" }
@@ -30,6 +31,13 @@ namespace :sqlite3 do
   desc "Links the configuration file"
   task :link_configuration_file, :roles => :db do
     run "ln -nsf #{shared_config_path}/sqlite_config.yml #{current_release}/config/database.yml"
+  end
+end
+
+namespace :settings do
+  desc "Links the settings file"
+  task :link_settings_file do
+    run "ln -nsf #{shared_config_path}/application.yml #{current_release}/config/application.yml"
   end
 end
 

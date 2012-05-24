@@ -5,8 +5,6 @@ God.watch do |w|
   w.name = "unicorn"
   w.interval = 30.seconds # default
   
-  w.env = YAML.load_file "/home/git/config.yml"
-
   # unicorn needs to be run from the rails root
   w.start = "cd #{rails_root} && bundle exec unicorn_rails -c #{rails_root}/config/unicorn.rb -E #{rails_env} -D"
 
