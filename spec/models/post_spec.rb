@@ -37,11 +37,11 @@ describe Post do
     end
   end
   
-  describe '#cut_tag' do
+  describe '#cut_text' do
     context 'with text' do
       subject { create(:post, content: 'preview<cut text="More">body #ruby') }
       
-      its(:cut_tag) do
+      its(:cut_text) do
         should == 'More'
       end
     end
@@ -49,7 +49,7 @@ describe Post do
     context 'without text' do
       subject { create(:post, content: 'preview<cut>body #ruby') }
       
-      its(:cut_tag) do
+      its(:cut_text) do
         should == I18n.translate(:default_cut)
       end
     end

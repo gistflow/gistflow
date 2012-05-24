@@ -85,7 +85,7 @@ class Post < ActiveRecord::Base
     where("title like :q or content like :q", q: "%#{text}%")
   end
   
-  def cut_tag
+  def cut_text
     if content_parts.size > 1
       content.match(CUT).to_a[2] || I18n.translate(:default_cut)
     end
@@ -99,7 +99,7 @@ protected
       raw.to_s
     end)
     
-    preview << %(<a href="/posts/#{id}">#{cut_tag}</a>).html_safe if cut_tag
+    preview << %(<a href="/posts/#{id}">#{cut_text}</a>).html_safe if cut_text
     write_attribute(:preview_cache, preview)
   end
   
