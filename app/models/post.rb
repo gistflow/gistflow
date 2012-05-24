@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   include Models::Mentionable
   include Models::Indestructible
   
+  CUT = /<cut(\stext\s?=\s?\\?[\",']([^[\",',\\]]*)\\?[\",']\s?)?>/
+  
   default_scope order: 'posts.id desc'
   
   belongs_to :user, inverse_of: :posts
@@ -12,7 +14,6 @@ class Post < ActiveRecord::Base
   has_many :likes
   
   validates :user, :title, presence: true
-  validates :cuts_count, inclusion: { in: [0, 1] }
   validates :preview, length: { minimum: 3, maximum: 500, too_long: 'is too long. Use <cut> tag to separate preview and text.', too_short: 'is too short.' }
   validates :tags_size, numericality: { greater_than: 0 }
   validates :status, format: { with: %r{http://goo.gl/xxxxxx} }, 
@@ -58,7 +59,7 @@ class Post < ActiveRecord::Base
   end
   
   def body
-    content.to_s.gsub('<cut>', "\r\n")
+    content.sub(CUT, "\r\n")
   end
   
   def tags_size
@@ -84,28 +85,27 @@ class Post < ActiveRecord::Base
     where("title like :q or content like :q", q: "%#{text}%")
   end
   
+  def cut_text
+    if content_parts.size > 1
+      content[CUT, 2] || I18n.translate(:default_cut)
+    end
+  end
 protected
   
   def cache_preview
-    write_attribute(:preview_cache, Markdown.markdown(begin
-      raw = Replaceable.new(preview)
+    preview = Markdown.markdown(begin
+      raw = Replaceable.new(self.preview)
       raw.replace_gists!.replace_tags!.replace_usernames!
       raw.to_s
-    end))
-  end
-  
-  def cuts_count
-    if content.blank?
-      0
-    elsif content == '<cut>'
-      1
-    else
-      content.split('<cut>').size - 1
-    end
+    end)
+    
+    preview << %(<a href="/posts/#{id}">#{cut_text}</a>).html_safe if cut_text
+    write_attribute(:preview_cache, preview)
   end
   
   def content_parts
-    @content_parts ||= content.to_s.split('<cut>', 2)
+    m = content.split(CUT, 2)
+    @content_parts ||= [m.first, m.last].uniq.compact
   end
   
   def tweet

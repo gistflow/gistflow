@@ -7,7 +7,7 @@
   fieldset
     = f.text_field :title, :placeholder => 'Title'
   fieldset
-    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut>Body", :class => 'hint', :id => 'post_content'
+    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint', :id => 'post_content'
   fieldset
     = f.check_box :question
     = f.label :question, 'Question?'
