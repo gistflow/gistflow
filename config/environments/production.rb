@@ -53,9 +53,9 @@ Gistflow::Application.configure do
   ActionMailer::Base.smtp_settings = {
     :authentication => :plain,
     :address        => Configuration.mailgun.address,
-    :port           => Configuration.mailgun.password,
-    :domain         => Configuration.mailgun.password,
-    :user_name      => Configuration.mailgun.password,
+    :port           => Configuration.mailgun.port,
+    :domain         => Configuration.mailgun.domain,
+    :user_name      => Configuration.mailgun.user_name,
     :password       => Configuration.mailgun.password
   }
   ActionMailer::Base.delivery_method = :smtp
