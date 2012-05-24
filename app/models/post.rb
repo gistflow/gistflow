@@ -87,7 +87,7 @@ class Post < ActiveRecord::Base
   
   def cut_text
     if content_parts.size > 1
-      content.match(CUT).to_a[2] || I18n.translate(:default_cut)
+      content[CUT, 2] || I18n.translate(:default_cut)
     end
   end
 protected
