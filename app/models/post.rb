@@ -4,7 +4,6 @@ class Post < ActiveRecord::Base
   include Models::Indestructible
   
   CUT = /<cut(\stext\s?=\s?\\?[\",']([^[\",',\\]]*)\\?[\",']\s?)?>/
-  DEFAULT_CUT = 'More under the cut'
   
   default_scope order: 'posts.id desc'
   
@@ -88,7 +87,7 @@ class Post < ActiveRecord::Base
   
   def cut_tag
     if content_parts.size > 1
-      content.match(CUT).to_a[2] || DEFAULT_CUT
+      content.match(CUT).to_a[2] || I18n.translate(:default_cut)
     end
   end
 protected

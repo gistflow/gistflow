@@ -50,7 +50,7 @@ describe Post do
       subject { create(:post, content: 'preview<cut>body #ruby') }
       
       its(:cut_tag) do
-        should == Post::DEFAULT_CUT
+        should == I18n.translate(:default_cut)
       end
     end
   end
@@ -62,7 +62,7 @@ describe Post do
     it { post.title_for_notification(false).should == post.id }
   end
   
-  describe 'preview and body for post' do
+  describe 'preview and body' do
     context 'with single cut tag' do
       context 'with text' do
         let(:post) { create(:post, content: 'preview<cut text="More">body #ruby') }
