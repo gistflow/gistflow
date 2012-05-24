@@ -52,11 +52,11 @@ Gistflow::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   ActionMailer::Base.smtp_settings = {
     :authentication => :plain,
-    :address        => "smtp.mailgun.org",
-    :port           => 587,
-    :domain         => "redstonelabs.mailgun.org",
-    :user_name      => "postmaster@redstonelabs.mailgun.org",
-    :password       => ENV['MAILGUN_SMTP_PASSWORD']
+    :address        => Configuration.mailgun.address,
+    :port           => Configuration.mailgun.password,
+    :domain         => Configuration.mailgun.password,
+    :user_name      => Configuration.mailgun.password,
+    :password       => Configuration.mailgun.password
   }
   ActionMailer::Base.delivery_method = :smtp
 

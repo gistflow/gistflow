@@ -1,0 +1,28 @@
+defaults: &defaults
+  mailgun:
+    address: "smtp.mailgun.org"
+    port: 587
+    domain: "redstonelabs.mailgun.org"
+    user_name: "postmaster@redstonelabs.mailgun.org"
+    password: ""
+  airbrake:
+    api_key: ""
+  omniauth:
+    github:
+      key: ""
+      secret: ""
+    twitter:
+      key: ""
+      secret: ""
+  resque:
+    http_username: gistflow
+    http_password: gistflow
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

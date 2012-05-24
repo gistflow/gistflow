@@ -22,6 +22,7 @@ gem 'redis-rack-cache'
 gem 'resque', :git => 'git://github.com/defunkt/resque.git'
 gem 'capistrano'
 gem 'rvm-capistrano'
+gem 'settingslogic'
 
 group :production do
   gem 'god'

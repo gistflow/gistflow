@@ -9,6 +9,11 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+class Configuration < Settingslogic
+  source File.expand_path('../application.yml', __FILE__)
+  namespace Rails.env
+end
+
 module Gistflow
   class Application < Rails::Application
     config.assets.initialize_on_precompile = false
