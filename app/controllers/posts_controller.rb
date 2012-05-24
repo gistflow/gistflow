@@ -13,12 +13,7 @@ class PostsController < ApplicationController
   alias all index
   
   def flow
-    @posts = current_user.intrested_posts.page(params[:page])
-  end
-  
-  def following
-    @posts = current_user.followed_posts.includes(user: [:likes, :observings]).
-      page(params[:page])
+    @posts = current_user.flow.page(params[:page])
   end
   
   def bookmarks
