@@ -23,9 +23,13 @@ class User < ActiveRecord::Base
   after_create :assign_settings, :assign_profile
   attr_accessor :company, :github_page, :home_page, :email
   
-  def intrested_posts
+  def flow
     tag_ids = subscriptions.select(:tag_id).to_sql
-    Post.joins(:taggings).where("taggings.tag_id in(#{tag_ids})").uniq
+    user_ids = followings.select(:followed_user_id).to_sql
+    conditions = []
+    conditions << "taggings.tag_id in (#{tag_ids})"
+    conditions << "posts.user_id in (#{user_ids})"
+    Post.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
   # Bookmarks
@@ -73,10 +77,6 @@ class User < ActiveRecord::Base
   
   def unfollow user
     followings.where(followed_user_id: user.id).destroy_all
-  end
-  
-  def followed_posts
-    Post.followed_by(self)
   end
   
   # Likes

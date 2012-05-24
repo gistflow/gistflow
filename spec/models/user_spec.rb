@@ -12,18 +12,17 @@ describe User do
     user.profile.should be
   end
   
-  describe '#intested_posts' do
-    before do
-      @user = FactoryGirl.create(:user)
-      @tag = FactoryGirl.create(:tag)
-      @other_post = FactoryGirl.create(:post)
-      @subscription = FactoryGirl.create(:subscription, :user => @user, :tag => @tag)
-      @intrested_post = FactoryGirl.create(:post)
-      @intrested_post.tags << @tag
+  describe "#flow" do
+    it 'should find post with subscribed tag' do
+      tag = create(:subscription, :user => user).tag
+      post = create(:post); post.tags = [tag]
+      subject.flow.should include(post)
     end
     
-    it 'should find all intrested posts' do
-      @user.intrested_posts.should == [@intrested_post]
+    it 'should find post by followed user' do
+      followed_user = create(:following, :follower => user).followed_user
+      post = create(:post, :user => followed_user)
+      subject.flow.should include(post)
     end
   end
   
