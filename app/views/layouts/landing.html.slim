@@ -113,7 +113,9 @@ html
             p We are just in the beginning of our way, but as you can see we are working continuously to bring all the conceived features to production as soon as possible. 
           
           div class="message"
-            h2 We are glad to say that you can start posting right away!
+            h2
+              | You can start posting right away! 
+              = link_to 'sign up', auth_path
             p class="center"
               | Feel free to talk to us 
               = mail_to 'info@gistflow.com', 'info@gistflow.com', :encode => :hex
