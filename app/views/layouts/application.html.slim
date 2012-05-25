@@ -7,7 +7,7 @@ html
     = javascript_include_tag 'application'
     = csrf_meta_tags
     title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
-    = render :partial => 'shared/google_analytics'
+    = render partial: 'shared/google_analytics'
     - if user_signed_in?
       javascript:
         window.current_user = {
@@ -58,3 +58,4 @@ html
           = mail_to 'info@gistflow.com', 'email us', :encode => :hex
           | .
         = render :partial => 'shared/creative_commons'
+    = render partial: 'shared/yandex_analytics'
