@@ -1,5 +1,5 @@
 class Settings < ActiveRecord::Base
-  attr_accessible :default_wall
+  attr_accessible :default_wall, :receive_notification_emails
   
   WALLS = %w(all flow)
   
