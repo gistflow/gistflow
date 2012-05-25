@@ -7,7 +7,7 @@ section class="tags"
       = ul(sidebar_tags.map { |t| link_to_tag t })
     - else
       div class="highlight"
-        p You should create subscriptions for use your own flow
+        p You should create subscriptions for use your own flow.
         p = link_to 'click here', account_subscriptions_path
   - if user_signed_in? && sidebar_tags.any?
     footer

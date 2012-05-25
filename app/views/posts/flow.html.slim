@@ -6,7 +6,14 @@
       | Hello, 
       = current_user.username
       | . This is your posts flow.
-    p For use it you should subscribe interested tags or follow someone.
+    p
+      | For use it you should subscribe interested 
+      = link_to 'tags', account_subscriptions_path
+      |  or follow someone.
+    p
+      | You can also subscribe tags on his page. For example: 
+      = link_to '#ruby', tag_path('ruby')
+      | .
   
   p There are no posts to display.
 
