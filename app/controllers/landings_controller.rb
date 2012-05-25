@@ -12,6 +12,7 @@ class LandingsController < ApplicationController
 protected
   
   def explore
-    redirect_to controller: :posts, action: current_user.settings.default_wall
+    action = current_user.settings.default_wall_action
+    redirect_to controller: :posts, action: action
   end
 end

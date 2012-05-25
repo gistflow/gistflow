@@ -6,10 +6,9 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:user).page(params[:page])
-    if user_signed_in?
-      render :index
-    end
+    render :index
   end
+  alias all index
   
   def flow
     @posts = current_user.flow.page(params[:page])

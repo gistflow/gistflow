@@ -4,9 +4,9 @@ class Settings < ActiveRecord::Base
   WALLS = %w(all flow)
   
   belongs_to :user
-  validates :default_wall, :inclusion => { :in => WALLS }
+  validates :default_wall, inclusion: { in: WALLS }
   
-  def default_wall
-    self[:default_wall] || 'flow'
+  def default_wall_action
+    { flow: 'flow', all: 'index' }[default_wall.to_sym]
   end
 end
