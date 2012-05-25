@@ -2,10 +2,10 @@ doctype
 html
   head
   body
-    h1 New notification
+    p New notification
     p = @notification.message(true)
-
-    | See all notifications at
-    a href="http://gistflow.com/account/notifications"
-      | http://gistflow.com/account/notifications
-    | Sincerely, Gistflow team
+    p 
+      | See all notifications at
+      = link_to 'your account', 'http://gistflow.com/account/notifications'
+      | .
+    p Sincerely, Gistflow team
