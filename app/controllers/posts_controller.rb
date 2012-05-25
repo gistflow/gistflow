@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper
+  cache_sweeper :subscription_sweeper
+  
   before_filter :authenticate!, :except => [:show, :index]
   
   def index

@@ -1,4 +1,6 @@
 class Posts::CommentsController < ApplicationController
+  cache_sweeper :subscription_sweeper
+  
   def create
     @post = find_post(params[:post_id])
     @new_comment = @post.comments.build(params[:comment]) do |comment|
