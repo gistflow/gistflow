@@ -1,10 +1,6 @@
 module ApplicationHelper
   def auth_path
-    '/auth/github'
-  end
-  
-  def all_posts_page?
-    ['/', '/all'].include? request.fullpath
+    Rails.env.production? ? '/auth/github' : login_path
   end
   
   def link_to_gists(user)

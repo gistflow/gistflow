@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
   cache_sweeper :post_sweeper
-  
   before_filter :authenticate!, :except => [:show, :index]
-  before_filter :choose_wall, :only => :index, :if => :user_signed_in?
   
   def index
     @posts = Post.includes(:user).page(params[:page])
@@ -10,7 +8,6 @@ class PostsController < ApplicationController
       render :index
     end
   end
-  alias all index
   
   def flow
     @posts = current_user.flow.page(params[:page])
@@ -69,11 +66,5 @@ class PostsController < ApplicationController
     
     @post.mark_deleted
     redirect_to root_path
-  end
-  
-protected
-  
-  def choose_wall
-    redirect_to action: current_user.settings.default_wall.to_sym
   end
 end

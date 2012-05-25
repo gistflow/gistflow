@@ -1,7 +1,7 @@
 @import "configuration";
 
 section.landing {
-  
+  position: relative;
   > header {
     h1 {
       font-size: 33px;
@@ -9,6 +9,20 @@ section.landing {
       color: #666;
       padding: 60px 0 40px;
       text-align: center;
+    }
+    .login {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 18px;
+      padding: 10px 0 0 0;
+      text-transform: lowercase;
+      a {
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
   
