@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   end
   
   def newbie?
-    tags.count < 3
+    tags.empty? && followed_users.empty?
   end
   
   def create_cookie_secret

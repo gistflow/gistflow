@@ -1,10 +1,6 @@
 module ApplicationHelper
   def auth_path
-    '/auth/github'
-  end
-  
-  def all_posts_page?
-    ['/', '/all'].include? request.fullpath
+    Rails.env.production? ? '/auth/github' : login_path
   end
   
   def link_to_gists(user)
@@ -64,17 +60,29 @@ module ApplicationHelper
     link_to name, '#', class: 'icon like button replaceable disabled'
   end
   
-  def link_to_subscribe(tag, method = :post, options = {})
-    link_to tag.name, account_subscribe_path(tag),
-      { :remote    => true,
-        :method    => method,
-        :class     => 'button subscribe replaceable',
-        :'data-id' => tag.id }.merge(options)
+  def link_to_subscribe(tag, options = {})
+    default_options = {
+      method:    :post,
+      class:     %w(button subscribe replaceable),
+      :remote    => true,
+      :'data-id' => tag.id
+    }
+    options = default_options.merge(options)
+    if options[:onoff]
+      name = options[:method] == :post ? 'Subscribe' : 'Subscribed'
+    else
+      name = tag.name
+    end
+    link_to name, account_subscribe_path(tag, :onoff => options[:onoff]),
+      options
   end
   
-  def link_to_unsubscribe(tag)
-    options = { class: 'button subscribe replaceable active' }
-    link_to_subscribe(tag, :delete, options)
+  def link_to_unsubscribe(tag, options = {})
+    default_options = {
+      class: 'button subscribe replaceable active',
+      method: :delete
+    }
+    link_to_subscribe(tag, default_options.merge(options))
   end
   
   def link_to_follow(user, name = 'Follow', method = :post)

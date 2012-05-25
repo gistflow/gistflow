@@ -3,7 +3,7 @@
 section.main {
   padding-top: 0;
   
-  > div.menu {
+  div.menu {
     ul.menu {
       float: left;
       width: 300px;
@@ -109,6 +109,10 @@ section.main {
         line-height: 13px;
       }
     }
+  }
+  
+  div.subscription {
+    padding: 0 0 10px 0;
   }
   
   ul.subscriptions {

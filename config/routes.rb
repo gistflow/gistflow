@@ -6,7 +6,7 @@ Gistflow::Application.routes.draw do
   match '/logout' => 'sessions#destroy'
   
   match '/flow'      => 'posts#flow'
-  match '/all'       => 'posts#all'
+  match '/all'       => 'posts#index'
   match '/bookmarks' => 'posts#bookmarks'
   
   get :sitemap, to: 'sitemap#show', as: :xml
@@ -56,12 +56,10 @@ Gistflow::Application.routes.draw do
     end
   end
   
-  resource :landing, only: :show
-  
   namespace :admin do
     resources :users, only: :index
   end
   
-  root to: 'posts#index'
+  root to: 'landings#show'
   match '*a', to: 'errors#not_found'
 end
