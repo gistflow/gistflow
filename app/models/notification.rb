@@ -16,7 +16,8 @@ class Notification < ActiveRecord::Base
   
   protected
   def create_mailer_task
-    if self.user.profile.email_valid?
+    if self.user.profile.email_valid? &&
+      self.user.settings.receive_notification_emails?
       Resque.enqueue(Mailer, 'UserMailer', :notification_email, self.id)
     end
   end

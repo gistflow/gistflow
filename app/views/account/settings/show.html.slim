@@ -13,5 +13,8 @@
         li
           = f.radio_button :default_wall, wall
           = f.label :default_wall, wall
+  fieldset
+    = f.check_box :receive_notification_emails
+    = f.label :receive_notification_emails
   div class="button-group"
     = f.submit 'Update settings', :class => 'button'
