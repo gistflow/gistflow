@@ -3,7 +3,12 @@ section class="tags"
     h1 Tags
   - options = user_signed_in? ? ["sidebar:subscriptions:#{current_user.id}"] : ["sidebar:tags:all", expires_in: 1.hour]
   - cache *options do
-    = ul(sidebar_tags.map { |t| link_to_tag t })
-  - if user_signed_in?
+    - if sidebar_tags.any?
+      = ul(sidebar_tags.map { |t| link_to_tag t })
+    - else
+      div class="highlight"
+        p You should create subscriptions for use your own flow
+        p = link_to 'click here', account_subscriptions_path
+  - if user_signed_in? && sidebar_tags.any?
     footer
       nav = link_to 'subscribe for more', account_subscriptions_path

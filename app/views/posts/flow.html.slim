@@ -1,2 +1,13 @@
 - window_title 'Flow'
+
+- if @posts.empty?
+  div.highlight
+    p
+      | Hello, 
+      = current_user.username
+      | . This is your posts flow.
+    p For use it you should subscribe interested tags or follow someone.
+  
+  p There are no posts to display.
+
 = render :partial => 'index', :locals => { :posts => @posts }
