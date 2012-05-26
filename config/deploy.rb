@@ -43,8 +43,8 @@ end
 
 namespace :deploy do
   task :restart do
-    run "cd #{current_release} && bundle exec god terminate"
-    run "cd #{current_release} && bundle exec god -c #{current_release}/config/god.rb"
+    # run "cd #{current_release} && bundle exec god terminate"
+    # run "cd #{current_release} && bundle exec god -c #{current_release}/config/god.rb"
     # run "cd #{current_release} && bundle exec god stop unicorn"
     # run "cd #{current_release} && bundle exec god start unicorn"
   end
