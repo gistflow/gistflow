@@ -48,52 +48,32 @@ ActiveRecord::Schema.define(:version => 20120525195835) do
   add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
 
   create_table "comments", :force => true do |t|
-    t.boolean   "question",    :default => false
-    t.text      "content"
-    t.integer   "user_id"
-    t.integer   "post_id"
-    t.integer   "likes_count", :default => 0
-    t.timestamp "created_at",                     :null => false
-    t.timestamp "updated_at",                     :null => false
-    t.datetime  "deleted_at"
+    t.boolean  "question",    :default => false
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "likes_count", :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.datetime "deleted_at"
   end
-
-  create_table "favorite_posts_lovers", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
-  add_index "favorite_posts_lovers", ["post_id", "user_id"], :name => "index_favorite_posts_lovers_on_post_id_and_user_id", :unique => true
 
   create_table "followings", :force => true do |t|
-    t.integer   "follower_id"
-    t.integer   "followed_user_id"
-    t.timestamp "created_at",       :null => false
-    t.timestamp "updated_at",       :null => false
+    t.integer  "follower_id"
+    t.integer  "followed_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "followings", ["followed_user_id", "follower_id"], :name => "index_followings_on_followed_user_id_and_follower_id", :unique => true
   add_index "followings", ["followed_user_id"], :name => "index_followings_on_followed_user_id"
   add_index "followings", ["follower_id"], :name => "index_followings_on_follower_id"
 
-  create_table "frameworks", :force => true do |t|
-    t.string    "name"
-    t.integer   "language_id"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
-  end
-
   create_table "gists", :force => true do |t|
     t.integer "user_id"
     t.integer "source_id"
     t.string  "source_type"
     t.integer "github_id"
-  end
-
-  create_table "languages", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
   end
 
   create_table "likes", :force => true do |t|
@@ -106,13 +86,13 @@ ActiveRecord::Schema.define(:version => 20120525195835) do
   add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
 
   create_table "notifications", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "notifiable_id"
-    t.string    "notifiable_type"
-    t.boolean   "read",            :default => false
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
-    t.string    "type"
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "type"
   end
 
   add_index "notifications", ["user_id", "notifiable_id", "notifiable_type", "type"], :name => "notifications_users_notifiables", :unique => true
@@ -127,27 +107,27 @@ ActiveRecord::Schema.define(:version => 20120525195835) do
   add_index "observings", ["user_id"], :name => "index_observings_on_user_id"
 
   create_table "posts", :force => true do |t|
-    t.integer   "comments_count", :default => 0
-    t.integer   "likes_count",    :default => 0
-    t.string    "title"
-    t.text      "content"
-    t.integer   "state_id"
-    t.integer   "user_id"
-    t.timestamp "created_at",                    :null => false
-    t.timestamp "updated_at",                    :null => false
-    t.boolean   "question"
-    t.text      "preview_cache"
-    t.datetime  "deleted_at"
+    t.integer  "comments_count", :default => 0
+    t.integer  "likes_count",    :default => 0
+    t.string   "title"
+    t.text     "content"
+    t.integer  "state_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "question",       :default => false
+    t.text     "preview_cache"
+    t.datetime "deleted_at"
   end
 
   create_table "profiles", :force => true do |t|
-    t.string    "email"
-    t.string    "company"
-    t.string    "home_page"
-    t.integer   "user_id"
-    t.timestamp "created_at",                     :null => false
-    t.timestamp "updated_at",                     :null => false
-    t.boolean   "email_valid", :default => false
+    t.string   "email"
+    t.string   "company"
+    t.string   "home_page"
+    t.integer  "user_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "email_valid", :default => false
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id", :unique => true
@@ -187,10 +167,10 @@ ActiveRecord::Schema.define(:version => 20120525195835) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string    "username"
-    t.string    "name"
-    t.string    "gravatar_id"
-    t.timestamp "created_at"
+    t.string   "username"
+    t.string   "name"
+    t.string   "gravatar_id"
+    t.datetime "created_at"
   end
 
 end
