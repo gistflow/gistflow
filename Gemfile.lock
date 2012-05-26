@@ -305,7 +305,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.5)
   settingslogic
   slim
-  sqlite3
   state_machine
   taps
   therubyracer
