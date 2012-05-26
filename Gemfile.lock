@@ -272,6 +272,7 @@ GEM
       raindrops (~> 0.7)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -312,3 +313,4 @@ DEPENDENCIES
   twitter
   uglifier (>= 1.0.3)
   unicorn
+  yaml_db

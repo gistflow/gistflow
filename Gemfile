@@ -24,6 +24,7 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'settingslogic'
 gem 'pg'
+gem 'yaml_db'
 
 group :production do
   gem 'god'
