@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
   scope :read, where(read: true)
   scope :unread, where(read: false)
   
-  after_commit :create_mailer_task
+  after_commit :create_mailer_task, on: :create
   
   delegate :host, to: :'Rails.application.config'
   
