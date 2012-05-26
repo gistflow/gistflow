@@ -23,6 +23,7 @@ gem 'resque', :git => 'git://github.com/defunkt/resque.git'
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'settingslogic'
+gem 'pg'
 
 group :production do
   gem 'god'

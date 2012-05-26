@@ -27,8 +27,6 @@ class PostsController < ApplicationController
   def new
     @post = Post.new(:content => params[:content])
     @presenter = Posts::FormPresenter.new(@post)
-    
-    flash[:info] = "Add your gists to the post by click on add."
   end
 
   def edit
