@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  
   enable_authorization
   protect_from_forgery
   

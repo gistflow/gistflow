@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def render_git_version
+    "<!-- version: #{Gistflow::VERSION} -->".html_safe
+  end
+  
   def auth_path
     Rails.env.production? ? '/auth/github' : login_path
   end
