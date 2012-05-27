@@ -23,6 +23,13 @@ section.landing {
           text-decoration: none;
         }
       }
+      
+      ul {
+        li {
+          display: inline-block;
+          padding: 0 3px;
+        }
+      }
     }
   }
   
