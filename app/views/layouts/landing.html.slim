@@ -48,8 +48,7 @@ html
                 li = link_to '•', '#', 'data-rel' => asset_path('landing/subscriptions.png')
                 li = link_to '•', '#', 'data-rel' => asset_path('landing/followers.png')
         div class="sign-up"
-          = link_to auth_path do
-            = 'Sign up <span></span>'.html_safe
+          = link_to 'Sign up', auth_path
         div class="description"
           p 
             | Join community of social coders, write and discuss code related posts. 
