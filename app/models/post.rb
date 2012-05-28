@@ -51,7 +51,7 @@ class Post < ActiveRecord::Base
   end
   
   def title_for_notification post_title = true
-    post_title ? title : id
+    post_title ? title : "post #{id}"
   end
   
   def preview
