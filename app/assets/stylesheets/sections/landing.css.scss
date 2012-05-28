@@ -23,12 +23,21 @@ section.landing {
           text-decoration: none;
         }
       }
+      
+      ul {
+        li {
+          display: inline-block;
+          padding: 0 3px;
+        }
+      }
     }
   }
   
   div.sign-up {
     text-align: center;
     padding: 60px 0 40px;
+    position: relative;
+    
     a {
       font-size: 40px;
       border: 1px solid $layout;
@@ -45,8 +54,10 @@ section.landing {
       background-image: -moz-linear-gradient(top, white, whiteSmoke);
       background-image: linear-gradient(top, white, whiteSmoke);
       
-      span {
+      &:after {
+        content: "";
         background: url(asset-path('octocat.png', image)) no-repeat right center;
+        margin-left: 10px;
         width: 40px;
         height: 40px;
         display: inline-block;
