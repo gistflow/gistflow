@@ -14,8 +14,12 @@ html
       section class="landing"
         header
           h1 A place to share and improve developer skills
-          div class="login"
-            = link_to 'Skip and login', auth_path
+          nav class="login"
+            ul
+              li= link_to 'Login', auth_path
+              li or
+              li= link_to 'Skip', all_path
+            
         div class="group"
           section class="gistflow"
             header
@@ -44,8 +48,7 @@ html
                 li = link_to '•', '#', 'data-rel' => asset_path('landing/subscriptions.png')
                 li = link_to '•', '#', 'data-rel' => asset_path('landing/followers.png')
         div class="sign-up"
-          = link_to auth_path do
-            = 'Sign up <span></span>'.html_safe
+          = link_to 'Sign up', auth_path
         div class="description"
           p 
             | Join community of social coders, write and discuss code related posts. 
