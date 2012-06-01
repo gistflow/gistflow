@@ -73,6 +73,8 @@ describe Account::Github do
       let(:user) { account.user }
       
       it { account.should be_persisted }
+      it { user.profile.should be_persisted }
+      it { user.settings.should be_persisted }
       it { account.token.should == 'foobar' }
       it { account.github_id.should == 348907 }
       it { user.should be_persisted }
@@ -106,13 +108,14 @@ describe Account::Github do
       let(:user) { account.user }
       
       it { account.should be_persisted }
+      it { user.profile.should be_persisted }
+      it { user.settings.should be_persisted }
       it { account.token.should == 'foobar' }
       it { account.github_id.should == 348907 }
       it { user.should be_persisted }
       it { user.username.should == 'releu' }
       it { user.name.should == 'releu' }
       it { user.gravatar_id.should == '757fb0d5ec7560b6f25f5bd98eadc020' }
-      
       it { user.profile.home_page.should be_nil }
       it { user.profile.email.should be_nil }
       it { user.profile.company.should be_nil }

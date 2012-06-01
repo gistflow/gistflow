@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   validates :username, :name, presence: true
   validates :username, uniqueness: true
   
-  after_create :assign_settings, :assign_profile
+  before_create :assign_settings
+  before_create :assign_profile
   attr_accessor :company, :github_page, :home_page, :email
   
   def flow
@@ -161,11 +162,11 @@ class User < ActiveRecord::Base
 private
   
   def assign_settings
-    create_settings
+    build_settings
   end
   
   def assign_profile
-    create_profile do |p|
+    build_profile do |p|
       p.company = company
       p.home_page = home_page
       p.email = email

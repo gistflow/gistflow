@@ -2,11 +2,8 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.name }
     sequence(:username) { |n| "user_#{n}" }
-    
-    after_create do |user|
-      user.profile = FactoryGirl.create(:profile, :user => user)
-    end
-    
+    sequence(:email) { |n| "user_#{n}@gistflow.com" }
+
     factory :admin do
       after_create do |user|
         Rails.application.config.admins << user.username

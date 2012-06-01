@@ -16,5 +16,6 @@ class Profile < ActiveRecord::Base
   
   def check_email
     self.email_valid = !!(self.email =~ EMAIL_FORMAT)
+    true
   end
 end
