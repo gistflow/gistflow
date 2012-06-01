@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Landing' do
+describe 'Landing', :local => true do
   before { visit root_path }
   it 'should be available for non-authorized user' do
     page.should have_content('A place to share and improve developer skills')
