@@ -1,7 +1,8 @@
 language: ruby
 rvm:
   - 1.9.3
-before_script: "bundle exec rake db:migrate:reset"
+before_script:
+  - psql -c 'create database gistflow_test;' -U postgres
 notifications:
   email:
     - releu@me.com

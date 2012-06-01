@@ -12,6 +12,12 @@ test:
   username: gistflow
   pool: 5
 
+postgres:
+  adapter: postgresql
+  database: gistflow_test
+  username: postgres
+  pool: 5
+
 production:
   adapter: postgresql
   database: gistflow_production
