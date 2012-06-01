@@ -9,13 +9,7 @@ test:
   adapter: postgresql
   database: gistflow_test
   host: localhost
-  username: gistflow
-  pool: 5
-
-postgres:
-  adapter: postgresql
-  database: gistflow_test
-  username: postgres
+  username: <%= ENV['TRAVIS'] ? 'postgres' : 'gistflow' %>
   pool: 5
 
 production:
