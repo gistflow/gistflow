@@ -59,7 +59,7 @@ describe Post do
     let(:post) { create :post }
     
     it { post.title_for_notification(true).should == post.title }
-    it { post.title_for_notification(false).should == post.id }
+    it { post.title_for_notification(false).should == "post #{post.id}" }
   end
   
   describe 'preview and body' do

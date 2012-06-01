@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525195835) do
+ActiveRecord::Schema.define(:version => 20120601073650) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -170,6 +170,13 @@ ActiveRecord::Schema.define(:version => 20120525195835) do
     t.string   "username"
     t.string   "name"
     t.string   "gravatar_id"
+    t.datetime "created_at"
+  end
+
+  create_table "wikis", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "user_id"
+    t.text     "content"
     t.datetime "created_at"
   end
 
