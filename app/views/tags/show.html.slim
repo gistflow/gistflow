@@ -2,4 +2,5 @@
 - if user_signed_in?
   div class="subscription group"
     = link_to_subscribe @tag, onoff: true
+= render partial: 'wikis/preview', locals: { wiki: @tag.wiki }
 = render partial: 'posts/index', locals: { posts: @posts }

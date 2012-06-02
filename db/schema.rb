@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120601073650) do
+ActiveRecord::Schema.define(:version => 20120602181555) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -179,5 +179,7 @@ ActiveRecord::Schema.define(:version => 20120601073650) do
     t.text     "content"
     t.datetime "created_at"
   end
+
+  add_index "wikis", ["id", "tag_id"], :name => "index_wikis_on_id_and_tag_id"
 
 end

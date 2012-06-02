@@ -2,8 +2,7 @@ class Post < ActiveRecord::Base
   include Models::Taggable
   include Models::Mentionable
   include Models::Indestructible
-  
-  CUT = /<cut(\stext\s?=\s?\\?[\",']([^[\",',\\]]*)\\?[\",']\s?)?>/
+  include Models::Cuttable
   
   default_scope order: 'posts.id desc'
   
@@ -54,14 +53,6 @@ class Post < ActiveRecord::Base
     post_title ? title : "post #{id}"
   end
   
-  def preview
-    content_parts.first.to_s.strip
-  end
-  
-  def body
-    content.sub(CUT, "\r\n")
-  end
-  
   def tags_size
     raw = Replaceable.new(content)
     raw.tagnames.size
@@ -69,10 +60,6 @@ class Post < ActiveRecord::Base
   
   def status?
     status.present?
-  end
-  
-  def preview_cache
-    (read_attribute(:preview_cache) || cache_preview).html_safe
   end
   
   def self.followed_by(user)
@@ -85,28 +72,7 @@ class Post < ActiveRecord::Base
     where("title like :q or content like :q", q: "%#{text}%")
   end
   
-  def cut_text
-    if content_parts.size > 1
-      content[CUT, 2] || I18n.translate(:default_cut)
-    end
-  end
 protected
-  
-  def cache_preview
-    preview = Markdown.markdown(begin
-      raw = Replaceable.new(self.preview)
-      raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
-    
-    preview << %(<a href="/posts/#{id}">#{cut_text}</a>).html_safe if cut_text
-    write_attribute(:preview_cache, preview)
-  end
-  
-  def content_parts
-    m = content.split(CUT, 2)
-    @content_parts ||= [m.first, m.last].uniq.compact
-  end
   
   def tweet
     if user.twitter_client? && status.present?
