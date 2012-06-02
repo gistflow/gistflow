@@ -8,7 +8,7 @@ javascript:
   window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
 - posts.each do |post|
   - cache post.cache_key(:preview) do
-    article class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
+    article id="post-#{post.id}" class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
       header
         h1
           = link_to(post.title, post) << ' '
