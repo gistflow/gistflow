@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "user_#{n}@gistflow.com" }
 
     factory :admin do
-      after_create do |user|
+      after(:create) do |user|
         Rails.application.config.admins << user.username
       end
     end

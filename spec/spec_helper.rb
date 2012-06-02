@@ -12,9 +12,7 @@ RSpec.configure do |config|
   config.filter_run_excluding :remote => true
   config.filter_run_excluding :local => true if ENV['TRAVIS']
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
+  config.before(:each) { DatabaseCleaner.start }
   config.after(:each) do
     DatabaseCleaner.clean
     config = YAML.load_file("#{Rails.root}/config/admins.yml")

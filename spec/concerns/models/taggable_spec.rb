@@ -1,6 +1,6 @@
 require 'spec_helper'
 include RSpec::Rails::Matchers::RoutingMatchers
-include ActionView::Helpers::UrlHelper
+# include ActionView::Helpers::UrlHelper
 
 describe Models::Taggable do
   describe "#subscribe_user" do
