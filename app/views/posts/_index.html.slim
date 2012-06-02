@@ -1,6 +1,8 @@
 - if user_signed_in?
   - content_for(:submenu) do
     = link_to('New Post', new_post_path, :class => 'button')
+- else
+  - title 'Posts'
 - content_for(:menu) do
   li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
   li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
@@ -8,7 +10,7 @@ javascript:
   window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
 - posts.each do |post|
   - cache post.cache_key(:preview) do
-    article class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
+    article id="post-#{post.id}" class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
       header
         h1
           = link_to(post.title, post) << ' '

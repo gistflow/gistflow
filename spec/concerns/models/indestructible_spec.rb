@@ -1,6 +1,6 @@
 require 'spec_helper'
 include RSpec::Rails::Matchers::RoutingMatchers
-include ActionView::Helpers::UrlHelper
+# include ActionView::Helpers::UrlHelper
 
 describe Models::Indestructible do
   it 'should be in post' do

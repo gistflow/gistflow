@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :post do
     user
-    title { Faker::Lorem.paragraph }
+    title { Faker::Lorem.paragraph[0...255] }
     content { Faker::Lorem.paragraph << " #tag " }
     
     trait :with_gist do

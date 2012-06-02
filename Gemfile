@@ -31,10 +31,11 @@ end
 
 group :test, :development do
   gem 'factory_girl_rails'
+  gem 'capybara'
   gem 'rspec-rails'
   gem 'faker'
+  gem 'launchy'
   gem 'guard-rspec'
-  gem 'taps'
 end
 
 group :test do
