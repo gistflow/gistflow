@@ -40,8 +40,8 @@ html
               - if content_for?(:submenu)
                 nav class="submenu"
                   = yield(:submenu)
-          - else
-            h1 Posts
+          - elsif content_for?(:title)
+            h1 = yield(:title)
         = yield
       section class="sidebar"
         = yield(:sidebar)

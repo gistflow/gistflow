@@ -1,6 +1,8 @@
 - if user_signed_in?
   - content_for(:submenu) do
     = link_to('New Post', new_post_path, :class => 'button')
+- else
+  - title 'Posts'
 - content_for(:menu) do
   li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
   li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
