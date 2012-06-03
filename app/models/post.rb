@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
   # Max updated_at value for cache
   # ActiveRecord::Relation extends method
   def self.last_modified
-    all.map(&:updated_at).map(&:utc).max
+    all.map(&:updated_at).max.utc
   end
   
   def cache_key(type)
