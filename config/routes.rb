@@ -47,7 +47,11 @@ Gistflow::Application.routes.draw do
   get '/empty_search'  => 'searches#empty', as: 'nil_search'
   get '/search/:query' => 'searches#show',  as: 'show_search'
   
-  resources :tags, only: :show
+  resources :tags, only: :show do
+    resource :wiki, module: :tags, only: [:show, :edit, :update] do
+      get 'history'
+    end
+  end
   
   resources :users, only: :show do
     scope module: :users do

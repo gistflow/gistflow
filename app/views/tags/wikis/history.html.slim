@@ -1,0 +1,25 @@
+section class="contributors"
+  header
+    h1 Contributors
+  - if @contributors.any?
+    ul
+      - @contributors.each do |user|
+        li = link_to user, user
+  - else
+    p Nobody jet.
+
+section class="improvements"
+  header
+    h1 Improvements
+  - if @wikis.size > 1
+    - @wikis.each_with_previous do |wiki, previous|
+      - next unless previous
+      div class="diff-container"
+        div class="author"
+          | Changes by 
+          = link_to wiki.user, wiki.user
+          = " at #{wiki.created_at.to_formatted_s(:long)}"
+        == Diffy::Diff.new(wiki.content, previous.content).to_s(:html)
+  - else
+    p No improvements jet.
+  

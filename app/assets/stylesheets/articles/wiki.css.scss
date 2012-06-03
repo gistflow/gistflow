@@ -1,0 +1,20 @@
+@import "configuration";
+
+article.wiki {
+  &.preview {
+    background: whiteSmoke;
+    .markdown, header {
+      padding: 0 5px;
+    }
+  }
+  header h1 {
+    @include caption;
+  }
+  footer {
+    .button-groups {
+      float: right;
+      margin-right: 5px;
+    }
+  }
+  margin-bottom: 20px;
+}

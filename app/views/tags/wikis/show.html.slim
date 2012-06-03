@@ -1,0 +1,15 @@
+- window_title @wiki.title
+article class="wiki"
+  header.primary
+    h1 = @wiki.title
+  div class="markdown"
+    = wiki_body(wiki)
+  footer
+    div class="button-groups"
+      div class="button-group"
+        li = link_to "Return to tag", @wiki.tag, class: 'button'
+      div class="button-group"
+        = link_to_subscribe @wiki.tag, onoff: true
+        = link_to 'History', history_tag_wiki_path(@wiki.tag), class: 'button'
+      div class="button-group"
+        = link_to 'Edit', edit_tag_wiki_path(@wiki.tag), class: 'button'

@@ -13,10 +13,12 @@ class Ability
     can :not_found, :errors
     can :index, [:'users/followings', :'users/followers']
     can :show, :landings
+    can [:history, :show], :'tags/wikis'
     
     if user
       can(:access, :all) and return if user.admin?
       
+      can [:edit, :update], :'tags/wikis'
       can [:create], :'account/twitter'
       can [:edit, :update], :'account/settings'
       can [:edit, :update], :'account/profiles'

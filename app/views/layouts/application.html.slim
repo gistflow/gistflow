@@ -29,19 +29,8 @@ html
           nav class="user" = ul(authentication_items)
         = render_flash
       section class="main"
-        header class="title"
-          - if user_signed_in?
-            div class="menu group"
-              ul.menu
-                - if content_for?(:title)
-                  li = yield(:title)
-                - elsif content_for?(:menu)
-                  = yield(:menu)
-              - if content_for?(:submenu)
-                nav class="submenu"
-                  = yield(:submenu)
-          - elsif content_for?(:title)
-            h1 = yield(:title)
+        - if content_for?(:submenu)
+            nav class="submenu" = yield(:submenu)
         = yield
       section class="sidebar"
         = yield(:sidebar)

@@ -1,20 +1,26 @@
 - window_title 'Flow'
 
-- if @posts.empty?
-  div.highlight
-    p
-      | Hello, 
-      = current_user.username
-      | . This is your posts flow.
-    p
-      | For use it you should subscribe interested 
-      = link_to 'tags', account_subscriptions_path
-      |  or follow someone.
-    p
-      | You can also subscribe for tags on its page. For example: 
-      = link_to '#ruby', tag_path('ruby')
-      | .
-  
-  p There are no posts to display.
-
-= render :partial => 'index', :locals => { :posts => @posts }
+section.posts
+  header
+    - if user_signed_in?
+      nav.submenu
+        = link_to('New Post', new_post_path, :class => 'button')
+    nav.menu
+      ul
+        li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
+        li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
+  - if current_user.newbie?
+    div.highlight
+      p = "Hello, #{current_user}. This is your posts flow."
+      p
+        | For use it you should subscribe interested 
+        = link_to 'tags', account_subscriptions_path
+        |  or follow someone.
+      p
+        | You can also subscribe for tags on its page. For example: 
+        = link_to '#ruby', tag_path('ruby')
+        | .
+    
+    p There are no posts to display.
+  - else
+    = render :partial => 'index', :locals => { :posts => @posts }

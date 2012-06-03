@@ -4,6 +4,21 @@ describe Tag do
   let(:tag) { create(:tag) }
   subject { tag }
   
+  describe '#wiki' do
+    subject { tag.wiki }
+    
+    context 'without any wiki' do
+      it { should be_nil }
+    end
+    
+    context 'with many wikis' do
+      let!(:first_wiki) { create(:wiki, tag: tag) }
+      let!(:last_wiki) { create(:wiki, tag: tag) }
+      it { should be }
+      it { should == last_wiki }
+    end
+  end
+  
   describe('#name=') do
     subject { tag.name }
     before { tag.name = tag_name }

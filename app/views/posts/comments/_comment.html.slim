@@ -1,14 +1,13 @@
-- presenter = Comments::ShowPresenter.new(comment)
-article class="comment"
+article class="comment" data-author="#{comment.user}"
   header
-    h1= presenter.title
+    h1= comment_title comment
     div class="avatar"
-      = link_to user_path(presenter.user) do
-        = avatar_image(presenter.user)
+      = link_to comment.user do
+        = avatar_image comment.user
         
-    div class="controls" id="controls_#{presenter.comment.id}"
-      - if can?(:edit, presenter.comment) && presenter.comment.persisted?
+    div class="controls"
+      - if can?(:edit, comment) && comment.persisted?
         ul
-          li= link_to 'Edit', edit_post_comment_path(presenter.comment.post, presenter.comment), remote: true, class: :edit_comment
-          li= link_to 'Delete', [presenter.comment.post, presenter.comment], method: :delete, remote: true, class: :delete_comment
-  div class="markdown group" = presenter.content
+          li= link_to 'Edit', edit_post_comment_path(comment.post, comment), remote: true, class: :edit_comment
+          li= link_to 'Delete', [comment.post, comment], method: :delete, remote: true, class: :delete_comment
+  div class="markdown group" = comment_content comment

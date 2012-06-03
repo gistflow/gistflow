@@ -1,5 +1,17 @@
-- title @tag
-- if user_signed_in?
-  div class="subscription group"
-    = link_to_subscribe @tag, onoff: true
+- window_title @tag.to_s.capitalize
+article class="wiki preview"
+  header.primary
+    h1 = @tag
+  div class="markdown"
+    = wiki_preview @tag.wiki
+  - if user_signed_in?
+    footer class="group"
+      div class="button-groups"
+        div class="button-group"
+          = link_to_subscribe @tag, onoff: true
+          = link_to 'History', history_tag_wiki_path(@tag), class: 'button'
+        div class="button-group"
+          = link_to 'Edit', edit_tag_wiki_path(@tag), class: 'button'
+          = link_to "Show", tag_wiki_path(@tag), class: 'button primary'
+
 = render partial: 'posts/index', locals: { posts: @posts }
