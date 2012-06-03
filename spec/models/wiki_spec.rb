@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Wiki do
+  let(:wiki) { create(:wiki) }
+  subject { wiki }
+  
   describe '#improve' do
     context 'valid new wiki' do
-      let(:content) { "new wiki content" }
+      let(:content) { { content: 'new wiki content' } }
       let(:user) { create(:user) }
-      let(:wiki) { create(:wiki) }
 
       subject { wiki.improve(content, user) }
 
@@ -16,6 +18,5 @@ describe Wiki do
     end
   end
   
-  describe '#preview' do
-  end
+  its(:title) { should == "#{wiki.tag.name}'s wiki" }
 end

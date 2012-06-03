@@ -1,29 +1,29 @@
-- window_title @presenter.post.title
+- window_title @post.title
 javascript:
   window.posts = {
-    "#{@presenter.post.id}": #{@presenter.post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
+    "#{@post.id}": #{@post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
   }
-- cache "post:#{@presenter.post.id}:detail" do
-  article class="post detail" data-id="#{@presenter.post.id}" data-author="#{@presenter.post.user.username}"
-    header
-      h1 = @presenter.title
+- cache @post.cache_key(:detail) do
+  article class="post detail" data-id="#{@post.id}" data-author="#{@post.user}"
+    header.primary
+      h1 = post_title @post
     div class="body markdown"
-      = @presenter.body
+      = post_body @post
     footer class="group actions"
-      = @presenter.timestamp
+      = post_timestamp @post
       div class="button-groups"
         div class="notice button-group minor-group group"
-          = link_to_bookmark @presenter.post
-          = link_to_observe @presenter.post
-          = link_to_like @presenter.post
+          = link_to_bookmark @post
+          = link_to_observe @post
+          = link_to_like @post
         div class="button-group minor-group"
-          = link_to "Edit", edit_post_path(@presenter.post), :class => 'button icon edit'
+          = link_to "Edit", edit_post_path(@post), :class => 'button icon edit'
 
 section class="comments"
   header
     h1 Comments
-  - if @presenter.comments.any?
-    = render :partial => 'posts/comments/comment', :collection => @presenter.comments
+  - if @post.persisted_comments.any?
+    = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
   - else
     p.no_comments No comments yet
   - if can? :create, :comments
@@ -31,6 +31,6 @@ section class="comments"
     = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
 
 div class='at-username-container'
-  - @presenter.usernames.each do |username|
+  - @post.usernames.each do |username|
     div href="#" class="username"
       = username

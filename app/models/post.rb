@@ -36,12 +36,17 @@ class Post < ActiveRecord::Base
   end
   
   # Max updated_at value for cache
+  # ActiveRecord::Relation extends method
   def self.last_modified
     all.map(&:updated_at).map(&:utc).max
   end
   
   def cache_key(type)
     "post:#{id}:#{type}"
+  end
+  
+  def path
+    "/posts/#{id}"
   end
   
   def link_name
@@ -63,13 +68,20 @@ class Post < ActiveRecord::Base
   end
   
   def self.followed_by(user)
-    followed_user_ids = %(SELECT followed_user_id FROM followings
-                           WHERE follower_id = :user_id)
-    where("user_id IN (#{followed_user_ids})", { user_id: user })
+    user_ids = user.followings.select(:followed_user_id).to_sql
+    where "user_id IN (#{user_ids})"
   end
   
   def self.search(text)
     where("title like :q or content like :q", q: "%#{text}%")
+  end
+  
+  def persisted_comments
+    comments.includes(:user).to_a.select(&:persisted?)
+  end
+  
+  def usernames
+    [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
 protected

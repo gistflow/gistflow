@@ -22,6 +22,10 @@ body {
   background: #fff;
 }
 
+section > header.primary h1, article > header.primary h1 {
+  color: #666 !important;
+}
+
 a {
   color: $link;
   text-decoration: none;

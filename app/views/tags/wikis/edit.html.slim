@@ -1,0 +1,19 @@
+- title "Edit #{@wiki.tag.name}'s wiki"
+= form_for [@wiki.tag, @wiki] do |f|
+  - if @wiki.errors.any?
+    ul class="errors"
+      - @wiki.errors.full_messages.each do |message|
+        li= message
+  fieldset
+    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint'
+  div class="actions group"
+    div class="left"
+      | This text will be parsed by 
+      = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
+      | . See 
+      = link_to 'hints', '#', :class => 'hints'
+      |.
+    div class="button-groups"
+      div class="button-group"
+        = f.submit commit_title, :class => 'button'
+    = render :partial => 'shared/markdown_hints'

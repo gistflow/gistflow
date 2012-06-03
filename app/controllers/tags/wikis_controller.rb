@@ -2,7 +2,9 @@ class Tags::WikisController < ApplicationController
   before_filter :authenticate!, only: [:edit, :update]
   
   def history
-    @wikis = find_tag(params[:tag_id).wikis.order('id desc')
+    @tag = find_tag(params[:tag_id])
+    @wikis = @tag.wikis.includes(:user).order('id desc')
+    @contributors = @wikis.map(&:user).uniq
   end
   
   def show
