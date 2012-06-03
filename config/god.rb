@@ -1,4 +1,4 @@
-rails_env = ENV['RAILS_ENV'] || 'production'
+rails_env = ENV['RAILS_ENV']
 rails_root = ENV['RAILS_ROOT'] || "/u/apps/gistflow/current"
 
 God.watch do |w|

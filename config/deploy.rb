@@ -16,7 +16,7 @@ set :application, "gistflow"
 set :repository,  "git@github.com:gistflow/gistflow.git"
 
 set :scm, :git
-set :branch, "master"
+set :branch, ENV['BRANCH'] || "master"
 set :user, "git"
 
 after "deploy:restart", "deploy:cleanup"
@@ -43,9 +43,7 @@ end
 
 namespace :deploy do
   task :restart do
-    # run "cd #{current_release} && bundle exec god terminate"
-    # run "cd #{current_release} && bundle exec god -c #{current_release}/config/god.rb"
-    # run "cd #{current_release} && bundle exec god stop unicorn"
-    # run "cd #{current_release} && bundle exec god start unicorn"
+    run "cd #{current_release} && bundle exec god -c #{current_release}/config/god.rb"
+    run "cd #{current_release} && bundle exec god restart unicorn"
   end
 end
