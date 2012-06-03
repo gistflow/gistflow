@@ -23,4 +23,9 @@ describe 'Landing', :local => true do
     click_link 'more'
     find('#more').should be_visible
   end
+  
+  it 'should redirect to all path when clicking skip' do
+    click_link 'Skip'
+    current_path.should == all_path
+  end
 end
