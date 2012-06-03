@@ -6,17 +6,17 @@ describe Wiki do
   
   describe '#improve' do
     context 'valid new wiki' do
-      let(:content) { { content: 'new wiki content' } }
+      let(:params) { { content: 'new wiki content' } }
       let(:user) { create(:user) }
 
-      subject { wiki.improve(content, user) }
+      subject { wiki.improve(params, user) }
 
       it { should be_a_kind_of(Wiki) }
       it { should be_persisted }
       its(:user) { should == user }
-      its(:content) { should == content }
+      its(:content) { should == params[:content] }
     end
   end
   
-  its(:title) { should == "#{wiki.tag.name}'s wiki" }
+  its(:title) { should == "#{wiki.tag.name}'s wiki".capitalize }
 end

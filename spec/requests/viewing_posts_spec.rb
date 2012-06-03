@@ -7,7 +7,7 @@ describe 'Viewing posts', local: true do
   
     context 'as unauthorized user', js: true do
       it 'should show Post title' do
-        page.find('header.title h1').should have_content('Posts')
+        page.find('section.posts > header').should have_content('Posts')
       end
       
       it 'should show 20 posts on page' do

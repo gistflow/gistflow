@@ -68,7 +68,7 @@ describe Post do
         let(:post) { create(:post, content: 'preview<cut text="More">body #ruby') }
 
         it 'should separate preview from body' do
-          post.preview.should == 'preview'
+          post.preview.should == "preview\n[More](/posts/1)"
           post.body.should == "preview\r\nbody #ruby"
         end
       end
@@ -77,7 +77,7 @@ describe Post do
         let(:post) { create(:post, content: 'preview<cut>body #ruby') }
 
         it 'should separate preview from body' do
-          post.preview.should == 'preview'
+          post.preview.should == "preview\n[More under the cut](/posts/#{post.id})"
           post.body.should == "preview\r\nbody #ruby"
         end
       end
@@ -96,7 +96,7 @@ describe Post do
         let(:post) { create(:post, content: 'preview<cut>body #ruby <cut> #haskell') }
 
         it 'should separate preview from body' do
-          post.preview.should == 'preview'
+          post.preview.should == "preview\n[More under the cut](/posts/#{post.id})"
           post.body.should == "preview\r\nbody #ruby <cut> #haskell"
         end
       end

@@ -6,6 +6,9 @@ section.posts
         = link_to('New Post', new_post_path, :class => 'button')
     nav.menu
       ul
-        li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
-        li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
+        - if user_signed_in?
+          li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
+          li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
+        - else
+          li Posts
   = render :partial => 'index', :locals => { :posts => @posts }
