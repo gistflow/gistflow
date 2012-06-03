@@ -17,6 +17,9 @@ defaults: &defaults
   resque:
     http_username: gistflow
     http_password: gistflow
+  http_auth:
+    username: Gistflow
+    password: Gistflow
 
 development:
   <<: *defaults

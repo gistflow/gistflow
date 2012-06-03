@@ -7,6 +7,18 @@ class ApplicationController < ActionController::Base
   # rescue_from Exception, with: :notify_batman
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
+  if Rails.env.staging?
+    prepend_before_filter :authenticate_staging
+    
+    def authenticate_staging
+      authenticate_or_request_with_http_basic do |username, password|
+        username == Config.http_auth.username && 
+          password == Config.http_auth.username
+      end
+    end
+    protected :authenticate_staging
+  end
+  
 protected
   
   def current_user_newbie?
