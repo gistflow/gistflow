@@ -12,6 +12,13 @@ test:
   username: <%= ENV['TRAVIS'] ? 'postgres' : 'gistflow' %>
   pool: 5
 
+staging:
+  adapter: postgresql
+  database: gistflow_staging
+  host: localhost
+  username: gistflow
+  pool: 5
+
 production:
   adapter: postgresql
   database: gistflow_production

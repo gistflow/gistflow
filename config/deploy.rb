@@ -3,6 +3,10 @@ require 'bundler/capistrano'
 $:.unshift(File.expand_path("./lib", ENV["rvm_path"]))
 require "rvm/capistrano"
 
+set :stages, %w(production staging)
+set :default_stage, 'staging'
+require 'capistrano/ext/multistage'
+
 set :rvm_ruby_string, '1.9.3'
 set :rvm_type, :root
 
@@ -14,10 +18,6 @@ set :repository,  "git@github.com:gistflow/gistflow.git"
 set :scm, :git
 set :branch, "master"
 set :user, "git"
-
-role :web, "37.188.125.88"
-role :app, "37.188.125.88"
-role :db,  "37.188.125.88", :primary => true
 
 after "deploy:restart", "deploy:cleanup"
 
