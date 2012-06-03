@@ -1,5 +1,5 @@
 rails_env = ENV['RAILS_ENV']
-worker_processes 4
+worker_processes rails_env == 'production' ? 4 : 1
 preload_app true
 timeout 30
 pid '/u/apps/gistflow/shared/pids/unicorn.pid'
