@@ -20,20 +20,16 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @presenter = Posts::ShowPresenter.new(@post)
     @comment = @post.comments.build if can? :create, :comments
   end
 
   def new
     @post = Post.new(:content => params[:content])
-    @presenter = Posts::FormPresenter.new(@post)
   end
 
   def edit
     @post = Post.find(params[:id])
     authorize! :edit, @post
-    
-    @presenter = Posts::FormPresenter.new(@post)
   end
 
   def create    
@@ -42,7 +38,6 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post
     else
-      @presenter = Posts::FormPresenter.new(@post)
       render :new
     end
   end
@@ -54,7 +49,6 @@ class PostsController < ApplicationController
     if @post.update_attributes(params[:post])
       redirect_to @post
     else
-      @presenter = Posts::FormPresenter.new(@post)
       render :edit
     end
   end

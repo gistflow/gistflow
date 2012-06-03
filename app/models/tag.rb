@@ -10,11 +10,17 @@ class Tag < ActiveRecord::Base
     conditions: { taggings: { taggable_type: 'Comment' } }
   }
   
+  has_many :wikis
+  
   validates :name, presence: true, format: { with: /[a-z]+/ }
   
   scope :popular, (lambda do |limit = 100|
     order('taggings_count desc').limit(limit)
   end)
+  
+  def wiki
+    wikis.last
+  end
   
   def to_s
     name

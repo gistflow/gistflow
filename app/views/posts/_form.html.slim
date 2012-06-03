@@ -1,8 +1,8 @@
-- title @presenter.title
-= form_for @presenter.post do |f|
-  - if @presenter.post.errors.any?
+- title [ (@post.new_record? ? "New" : "Edit"), 'post' ].join(' ')
+= form_for @post do |f|
+  - if @post.errors.any?
     ul class="errors"
-      - @presenter.post.errors.full_messages.each do |message|
+      - @post.errors.full_messages.each do |message|
         li= message
   fieldset
     = f.text_field :title, :placeholder => 'Title'
@@ -19,10 +19,10 @@
       = link_to 'hints', '#', :class => 'hints'
       |.
     div class="button-groups"
-      - if @presenter.post.persisted?
+      - if @post.persisted?
         div class="button-group"
-          = link_to 'Destroy', @presenter.post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
+          = link_to 'Destroy', @post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
       div class="button-group"
         = f.submit commit_title, :class => 'button'
-    = render :partial => 'markdown_hints'
+    = render :partial => 'shared/markdown_hints'
   = yield(:form)

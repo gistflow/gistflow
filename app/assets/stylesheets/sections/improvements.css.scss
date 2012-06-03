@@ -1,0 +1,7 @@
+@import "configuration";
+
+section.improvements {
+  header h1 {
+    @include caption;
+  }
+}

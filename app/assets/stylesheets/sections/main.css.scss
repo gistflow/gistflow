@@ -3,38 +3,6 @@
 section.main {
   padding-top: 0;
   
-  div.menu {
-    ul.menu {
-      float: left;
-      width: 300px;
-      li {
-        @include caption;
-        @include li-separator;
-        color: #666;
-      }
-    }
-    
-    header {
-      h1 {
-        @include caption;
-      }
-    }
-    
-    nav.submenu {
-      float: right;
-      text-transform: none;
-      position: relative;
-      top: 5px;
-    }
-  }
-  
-  > header {
-    h1 {
-      @include caption;
-      color: #666;
-    }
-  }
-  
   form {
     input[type="text"], textarea {
       width: 570px;

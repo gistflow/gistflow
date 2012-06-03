@@ -1,11 +1,3 @@
-- if user_signed_in?
-  - content_for(:submenu) do
-    = link_to('New Post', new_post_path, :class => 'button')
-- else
-  - title 'Posts'
-- content_for(:menu) do
-  li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
-  li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
 javascript:
   window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
 - posts.each do |post|
@@ -20,7 +12,7 @@ javascript:
       div class="avatar"
         = link_to avatar_image(post.user, 26), post.user
       div class="preview markdown group"
-        = post.preview_cache
+        = post_preview post
       footer class="group actions"
         = time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
         div class="button-groups"
