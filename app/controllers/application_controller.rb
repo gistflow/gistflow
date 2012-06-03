@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
     
     def authenticate_staging
       authenticate_or_request_with_http_basic do |username, password|
-        username == Config.http_auth.username && 
-          password == Config.http_auth.username
+        username == Configuration.http_auth.username && 
+          password == Configuration.http_auth.password
       end
     end
     protected :authenticate_staging
