@@ -12,6 +12,12 @@ describe User do
     user.profile.should be
   end
   
+  describe '#gistflow' do
+    subject { User.gistflow }
+    it { should be_a_kind_of(User) }
+    it { should be_persisted }
+  end
+  
   describe "#flow" do
     it 'should find post with subscribed tag' do
       tag = create(:subscription, :user => user).tag

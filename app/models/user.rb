@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
   before_create :assign_profile
   attr_accessor :company, :github_page, :home_page, :email
   
+  def self.gistflow
+    User.where(username: 'gistflow').first_or_create! do |user|
+      user.name = 'Gistflow'
+    end
+  end
+  
   def flow
     tag_ids = subscriptions.select(:tag_id).to_sql
     user_ids = followings.select(:followed_user_id).to_sql
