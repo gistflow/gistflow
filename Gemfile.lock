@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/intridea/omniauth-github.git
-  revision: 53861273a6f2f7702b9bcbcd3416acf67b8a2061
+  revision: 398051bf40600d77f3513c578635b9cc31e8f970
   specs:
     omniauth-github (1.0.1)
       omniauth (~> 1.0)
