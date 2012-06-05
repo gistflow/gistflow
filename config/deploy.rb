@@ -43,7 +43,8 @@ end
 
 namespace :deploy do
   task :restart do
-    run "cd #{current_release} && RAILS_ENV=#{deploy_env} bundle exec god -c #{current_release}/config/god.rb"
-    run "cd #{current_release} && bundle exec god restart unicorn"
+    # this isn't working :(
+    # run "cd #{current_release} && RAILS_ENV=#{deploy_env} bundle exec god -c #{current_release}/config/god.rb"
+    # run "cd #{current_release} && bundle exec god restart unicorn"
   end
 end
