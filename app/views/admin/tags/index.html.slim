@@ -1,0 +1,15 @@
+table
+  tr
+    th id
+    th Name
+    th Entity
+    th Aliases
+    th 
+  - @tags.each do |tag|
+    tr
+      td = tag.id
+      td = tag.name
+      td = tag.entity.try :name
+      td = tag.aliases.map(&:name)
+      td = link_to 'edit', edit_admin_tag_path(tag)
+  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602181555) do
+ActiveRecord::Schema.define(:version => 20120605185245) do
 
   create_table "account_cookies", :force => true do |t|
     t.string  "secret"
@@ -162,8 +162,10 @@ ActiveRecord::Schema.define(:version => 20120602181555) do
   create_table "tags", :force => true do |t|
     t.string  "name"
     t.integer "taggings_count", :default => 0
+    t.integer "entity_id"
   end
 
+  add_index "tags", ["entity_id"], :name => "index_tags_on_entity_id"
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
