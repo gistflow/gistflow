@@ -1,7 +1,9 @@
-- title "#{@user}'s followers"
-/ = render :partial => 'sidebar', :locals => { :user => @user }
+- window_title "#{@user}'s followers"
 
-- if @users.any?
-  = render :partial => 'users/users', :locals => { :users => @users }
-- else
-  p No followers yet.
+section class="users"
+  header class="primary"
+    h1 = "#{@user}'s followers"
+  - if @users.any?
+    = render :partial => 'users/users', :locals => { :users => @users }
+  - else
+    p No followers yet.

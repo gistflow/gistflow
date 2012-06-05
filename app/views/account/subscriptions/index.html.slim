@@ -1,5 +1,8 @@
-- title 'Subscriptions'
-ul class="subscriptions group"
-  - @tags.each do |tag|
-    li class="subscription"
-      = link_to_subscribe(tag)
+- window_title 'Subscriptions'
+section class="subscriptions"
+  header class="primary"
+    h1 Subscriptions
+  ul class="subscriptions group"
+    - @tags.each do |tag|
+      li class="subscription"
+        = link_to_subscribe(tag)

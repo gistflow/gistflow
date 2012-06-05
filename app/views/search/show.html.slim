@@ -1,2 +1,7 @@
-- title "Results for \"#{params[:query] || 'Nothing'}\""
-= render :partial => 'posts/index', :locals => { :posts => @posts }
+- window_title 'Search results'
+section class="search"
+  header class="primary"
+    h1 = %{Search results for "#{params[:query]}"}
+  = render :partial => 'posts/index', :locals => { :posts => @posts }
+  - if @posts.empty?
+    p Sorry, but we didn't find anything.

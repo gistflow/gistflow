@@ -7,7 +7,7 @@ article.wiki {
       padding: 0 5px;
     }
   }
-  header h1 {
+  > header h1 {
     @include caption;
   }
   footer {

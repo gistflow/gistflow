@@ -1,7 +1,7 @@
 @import "configuration";
 
 section.contributors {
-  header h1 {
+  > header h1 {
     @include caption;
   }
   li {

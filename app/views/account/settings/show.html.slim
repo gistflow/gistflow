@@ -1,20 +1,23 @@
-- content_for :menu do
-  = render :partial => 'shared/settings_menu'
-  
-= form_for [:account, @settings], :url => account_settings_url, :method => :put do |f|
-  - if @settings.errors.any?
-    ul class="errors"
-      - @settings.errors.full_messages.each do |message|
-        li= message
-  fieldset
-    | Choose default wall
-    ul
-      - Settings::WALLS.each do |wall|
-        li
-          = f.radio_button :default_wall, wall
-          = f.label :default_wall, wall
-  fieldset
-    = f.check_box :receive_notification_emails
-    = f.label :receive_notification_emails
-  div class="button-group"
-    = f.submit 'Update settings', :class => 'button'
+section class="settings"  
+  header
+    nav class="menu"
+      ul
+        li = link_to_unless_current 'Profile', account_profile_path
+        li class="primary" = link_to_unless_current 'Account settings', account_settings_path
+  = form_for [:account, @settings], :url => account_settings_url, :method => :put do |f|
+    - if @settings.errors.any?
+      ul class="errors"
+        - @settings.errors.full_messages.each do |message|
+          li= message
+    fieldset
+      | Choose default wall
+      ul
+        - Settings::WALLS.each do |wall|
+          li
+            = f.radio_button :default_wall, wall
+            = f.label :default_wall, wall
+    fieldset
+      = f.check_box :receive_notification_emails
+      = f.label :receive_notification_emails
+    div class="button-group"
+      = f.submit 'Update settings', :class => 'button'

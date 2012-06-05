@@ -1,3 +1,6 @@
 - title "#{@user}'s posts"
 = render :partial => 'sidebar', :locals => { :user => @user }
-= render :partial => 'posts/index', :locals => { :posts => @posts }
+section class="posts"
+  header class="primary"
+    h1 = @user.username
+  = render :partial => 'posts/index', :locals => { :posts => @posts }

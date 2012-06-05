@@ -45,3 +45,17 @@ div.highlight {
 .green {
   color: #00B25C;
 }
+
+nav.menu {
+  li {
+    @include li-separator;
+    @include caption;
+    color: #666;
+  }
+}
+nav.submenu {
+  float: right;
+  text-transform: none;
+  position: relative;
+  top: 5px;
+}

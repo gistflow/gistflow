@@ -1,6 +1,9 @@
 @import "configuration";
 
 section.notifications {
+  > header h1 {
+    @include caption;
+  }
   table {
     
     td {

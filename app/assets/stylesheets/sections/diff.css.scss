@@ -11,12 +11,21 @@ div.diff-container {
       line-height: 13px;
     }
     li.unchanged {
+      &:before {
+        content: '=';
+      }
     }
     li.del {
       background-color: #ffd0d0;
+      &:before {
+        content: '-';
+      }
     }
     li.ins {
       background-color: #d0ffd0;
+      &:before {
+        content: '+';
+      }
     }
   }
   .author {
