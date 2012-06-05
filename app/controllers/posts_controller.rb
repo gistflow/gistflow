@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new(:content => params[:content])
+    flash[:info] = tags_flash_info
   end
 
   def edit
@@ -38,6 +39,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post
     else
+      flash[:info] = tags_flash_info
       render :new
     end
   end
@@ -49,6 +51,7 @@ class PostsController < ApplicationController
     if @post.update_attributes(params[:post])
       redirect_to @post
     else
+      flash[:info] = tags_flash_info
       render :edit
     end
   end
@@ -59,5 +62,11 @@ class PostsController < ApplicationController
     
     @post.mark_deleted
     redirect_to root_path
+  end
+  
+protected
+  
+  def tags_flash_info
+    '<strong>#tagname</strong> will add tag to the post'.html_safe
   end
 end
