@@ -9,23 +9,16 @@ div.diff-container {
       padding: 1px 5px;
       font-size: 13px;
       line-height: 13px;
+      color: #555;
     }
     li.unchanged {
-      &:before {
-        content: '=';
-      }
+      color: #666;
     }
     li.del {
       background-color: #ffd0d0;
-      &:before {
-        content: '-';
-      }
     }
     li.ins {
       background-color: #d0ffd0;
-      &:before {
-        content: '+';
-      }
     }
   }
   .author {

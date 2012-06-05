@@ -12,6 +12,7 @@ section class="improvements"
   header
     h1 Improvements
   - if @wikis.size > 1
+    p class="back" = link_to 'Back to wiki', tag_wiki_path(@tag)
     - @wikis.each_with_previous do |wiki, previous|
       - next unless previous
       div class="diff-container"
@@ -22,4 +23,5 @@ section class="improvements"
         == Diffy::Diff.new(wiki.content, previous.content).to_s(:html)
   - else
     p No improvements jet.
+  p class="back" = link_to 'Back to wiki', tag_wiki_path(@tag)
   
