@@ -1,5 +1,6 @@
 class Wiki < ActiveRecord::Base
   include Models::Cuttable
+  include Models::Taggable
   
   belongs_to :user
   belongs_to :tag
