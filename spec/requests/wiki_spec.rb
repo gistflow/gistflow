@@ -30,7 +30,7 @@ describe 'Wiki' do
     before { visit tag_wiki_path(tag) }
     
     it 'should have a link to history' do
-      within('section.wiki') do
+      within('article.wiki') do
         page.should have_link 'History'
       end
     end

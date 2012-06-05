@@ -4,7 +4,7 @@ article class="wiki"
     h1 = @wiki.title
   div class="markdown"
     = wiki_body(@wiki)
-  footer
+  footer class="group"
     div class="button-groups"
       div class="button-group"
         li = link_to "Return to tag", @wiki.tag, class: 'button'
