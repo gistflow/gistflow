@@ -10,6 +10,6 @@ div class="preview"
       |.
     div class="button-groups"
       div class="button-group"
-        = f.submit 'Write', class: 'button preview', rel: build_post_comments_path(f.object.post)
+        = f.submit 'Edit', class: 'button preview', rel: build_post_comments_path(f.object.post)
         = f.submit commit_title('Comment'), class: 'button', rel: post_comments_path(f.object.post)
     = render :partial => 'posts/markdown_hints'
