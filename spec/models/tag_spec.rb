@@ -2,10 +2,55 @@ require 'spec_helper'
 
 describe Tag do
   let(:tag) { create(:tag) }
+  let(:tag_alias) { create(:tag_alias) }
   subject { tag }
+  
+  it 'should have a alias factory' do
+    tag_alias
+  end
   
   it 'should create wiki on create' do
     tag.wiki.should be_persisted
+  end
+  
+  describe 'fix taggings on update' do
+    let!(:post) { create(:post) }
+    let!(:tag1) { create(:tag) }
+    let!(:tag2) { create(:tag) }
+    
+    it 'should update tagging' do
+      post.tags = [tag1]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      post.tags(true).should == [tag2]
+    end
+    
+    it 'should destroy tagging' do
+      post.tags = [tag1, tag2]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      post.tags(true).should == [tag2]
+    end
+  end
+  
+  describe 'fix subsctiptions on update' do
+    let!(:user) { create(:user) }
+    let!(:tag1) { create(:tag) }
+    let!(:tag2) { create(:tag) }
+    
+    it 'should update tagging' do
+      user.tags = [tag1]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      user.tags(true).should == [tag2]
+    end
+    
+    it 'should destroy tagging' do
+      user.tags = [tag1, tag2]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      user.tags(true).should == [tag2]
+    end
   end
   
   describe '#wiki' do

@@ -17,7 +17,8 @@ module Models
       
     def assign_tags
       self.tags = Replaceable.new(content).tagnames.map do |name|
-        Tag.where(name: name).first_or_create!
+        tag = Tag.where(name: name).first_or_create!
+        tag.alias? ? tag.entity : tag
       end
     end
 
