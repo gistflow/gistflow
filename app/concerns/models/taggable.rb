@@ -16,10 +16,11 @@ module Models
   protected
       
     def assign_tags
-      self.tags = Replaceable.new(content).tagnames.map do |name|
+      tags = Replaceable.new(content).tagnames.map do |name|
         tag = Tag.where(name: name).first_or_create!
         tag.alias? ? tag.entity : tag
-      end
+      end.uniq
+      self.tags = tags
     end
 
     def subscribe_user
