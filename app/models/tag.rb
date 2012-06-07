@@ -22,8 +22,10 @@ class Tag < ActiveRecord::Base
   
   validates :name, presence: true, format: { with: /[a-z]+/ }
   
+  scope :real, where(entity_id: nil)
+  
   scope :popular, (lambda do |limit = 100|
-    order('taggings_count desc').limit(limit)
+    real.order('taggings_count desc').limit(limit)
   end)
   
   def alias?
