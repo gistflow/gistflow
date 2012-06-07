@@ -4,7 +4,6 @@ $(function(){
     var update_elements = data.update_elements;
     if(update_elements){
       _.each(update_elements, function(data, element){ 
-        console.log(element);
         $('.' + element).text(data);
       });
     }
