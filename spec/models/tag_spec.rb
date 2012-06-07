@@ -33,6 +33,26 @@ describe Tag do
     end
   end
   
+  describe 'fix subsctiptions on update' do
+    let!(:user) { create(:user) }
+    let!(:tag1) { create(:tag) }
+    let!(:tag2) { create(:tag) }
+    
+    it 'should update tagging' do
+      user.tags = [tag1]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      user.tags(true).should == [tag2]
+    end
+    
+    it 'should destroy tagging' do
+      user.tags = [tag1, tag2]
+      tag1.entity = tag2
+      tag1.save.should be_true
+      user.tags(true).should == [tag2]
+    end
+  end
+  
   describe '#wiki' do
     let!(:first_wiki) { create(:wiki, tag: tag) }
     let!(:last_wiki) { create(:wiki, tag: tag) }

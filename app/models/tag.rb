@@ -16,6 +16,7 @@ class Tag < ActiveRecord::Base
   
   before_create :build_default_wiki, unless: :wiki
   after_save :relink_related_records_to_entity, if: :alias?
+  after_save :resubscribe_users_to_entity, if: :alias?
   
   attr_accessible :name, :entity_id, as: :admin
   
@@ -60,6 +61,18 @@ protected
     end
   end
   
+  def resubscribe_users_to_entity
+    subscriptions.each do |subscription|
+      conditions = { user_id: subscription.user_id, tag_id: entity_id }
+      if Subscription.where(conditions).exists?
+        subscription.destroy # don't dublicate subscriptions
+      else
+        subscription.update_attribute :tag_id, entity_id
+      end
+    end
+    true
+  end
+  
   def relink_related_records_to_entity
     taggings.each do |tagging|
       conditions = {
@@ -73,5 +86,6 @@ protected
         tagging.update_attribute :tag_id, entity_id
       end
     end
+    true
   end
 end
