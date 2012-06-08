@@ -7,13 +7,11 @@ class Admin::TagsController < ApplicationController
     @tag = find_tag(params[:id])
   end
   
-  def update
-    @tag = find_tag(params[:id])
-    if @tag.update_attributes(params[:tag], as: :admin)
-      redirect_to admin_tags_path
-    else
-      render :edit
-    end
+  def entity
+    @tag = find_tag(params[:tag_id])
+    @entity = Tag.find(params[:tag][:entity_id])
+    @tag.set_entity @entity
+    redirect_to admin_tags_path
   end
   
 protected

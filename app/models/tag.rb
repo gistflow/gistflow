@@ -15,10 +15,8 @@ class Tag < ActiveRecord::Base
   has_many :wikis
   
   before_create :build_default_wiki, unless: :wiki
-  after_save :relink_related_records_to_entity, if: :alias?
-  after_save :resubscribe_users_to_entity, if: :alias?
   
-  attr_accessible :name, :entity_id, as: :admin
+  attr_accessible :name, as: :admin
   
   validates :name, presence: true, format: { with: /[a-z]+/ }
   
@@ -52,6 +50,16 @@ class Tag < ActiveRecord::Base
   
   def to_param
     name
+  end
+  
+  # Use this method for setup entity and update taggings and subscriptions
+  def set_entity(tag)
+    self.entity = tag
+    Tag.transaction do
+      save!
+      relink_related_records_to_entity
+      resubscribe_users_to_entity
+    end
   end
   
 protected
