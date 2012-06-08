@@ -62,7 +62,9 @@ Gistflow::Application.routes.draw do
   
   namespace :admin do
     resources :users, only: :index
-    resources :tags, only: [:index, :edit, :update]
+    resources :tags, only: [:index, :edit] do
+      post :entity
+    end
   end
   
   root to: 'landings#show'

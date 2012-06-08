@@ -1,4 +1,4 @@
-= form_for [:admin, @tag] do |f|
+= form_for @tag, url: [:admin, @tag, :entity], method: :post do |f|
   div
     = f.label :entity_id
     = f.collection_select :entity_id, Tag.order(:name), :id, :name, include_blank: true
