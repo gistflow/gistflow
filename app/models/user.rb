@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :account_cookies, class_name: :'Account::Cookie'
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
   has_one  :profile
@@ -120,12 +119,6 @@ class User < ActiveRecord::Base
   
   def newbie?
     tags.empty? && followed_users.empty?
-  end
-  
-  def create_cookie_secret
-    account_cookies.create! do |cookie|
-      cookie.generate_secret!
-    end.secret
   end
   
   def github_gists(use_cache = true)

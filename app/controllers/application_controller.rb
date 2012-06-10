@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
   enable_authorization
   protect_from_forgery
   
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  # rescue_from Exception, with: :notify_batman
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Exception, with: :notify_batman
+  rescue_from CanCan::Unauthorized, with: :handle_unauthorized
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
   if Rails.env.staging?
@@ -23,6 +24,12 @@ protected
   
   def current_user_newbie?
     current_user.try(:newbie?)
+  end
+  
+  def handle_unauthorized(exception)
+    notify_airbrake(exception)
+    flash[:error] = 'You are not authorized to access this page.'
+    redirect_to root_path
   end
   
   def notify_batman(exception)
@@ -53,18 +60,14 @@ protected
   end
   
   def current_user
-    @current_user ||= (User.find_by_id(session[:user_id]) || begin
-      Account::Cookie.user_by_secret(cookies[:secret])
-    end)
+    @current_user ||= User.find_by_id(session[:user_id])
   end
 
   def current_user=(user)
     if @current_user = user
       session[:user_id] = current_user.id
-      cookies.permanent[:secret] = current_user.create_cookie_secret
     else
       session[:user_id] = nil
-      cookies.delete(:secret)
     end
   end
   
