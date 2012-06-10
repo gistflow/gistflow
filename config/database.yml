@@ -21,7 +21,7 @@ staging:
 
 production:
   adapter: postgresql
-  database: gistflow_production
+  database: gistflow_developement
   host: localhost
   username: gistflow
   pool: 5

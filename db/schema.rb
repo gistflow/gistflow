@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605185245) do
-
-  create_table "account_cookies", :force => true do |t|
-    t.string  "secret"
-    t.integer "user_id"
-  end
-
-  add_index "account_cookies", ["secret"], :name => "index_account_cookies_on_secret", :unique => true
+ActiveRecord::Schema.define(:version => 20120610141348) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
