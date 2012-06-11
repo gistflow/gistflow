@@ -31,4 +31,18 @@ describe Comment do
     end
     
   end
+  
+  describe 'counter caches' do
+    it 'should increment for post' do
+      comment.post.reload.comments_count.should eq(1)
+    end
+    
+    context 'when delete comment' do
+      before { comment.mark_deleted }
+      
+      it 'should decrement post comments counter cache' do
+        comment.post.reload.comments_count.should eq(0)
+      end
+    end
+  end
 end
