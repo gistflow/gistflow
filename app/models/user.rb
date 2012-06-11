@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Todolist
+  
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
   has_one  :profile
@@ -156,47 +158,6 @@ class User < ActiveRecord::Base
       oauth_token: account_twitter.token,
       oauth_token_secret: account_twitter.secret
     )
-  end
-  
-  # todo list methods
-  # MOVE them to badges soon
-  
-  def author?
-    posts.non_deleted.any?
-  end
-
-  def subscriber?
-    tags.any?
-  end
-
-  def fan?
-    likes.any?
-  end
-
-  def follower?
-    followings.any?
-  end
-
-  def learner?
-    bookmarks.any?
-  end
-
-  def talker?
-    comments.non_deleted.any?
-  end
-
-  def observer?
-    observings.any?
-  end
-  
-  def todolist_finished?
-    author? && 
-    subscriber? &&
-    fan? &&
-    follower? &&
-    learner? &&
-    talker? &&
-    observer?
   end
   
 private

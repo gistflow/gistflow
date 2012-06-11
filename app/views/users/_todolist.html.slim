@@ -1,5 +1,6 @@
-section class='todolist'
-  header
-    h1 Welcome todolist
-  ul class='welcome_tasks'
-    = render_todolist
+- tasks = todolist_tasks
+- unless tasks.empty?
+  section class='todolist'
+    header
+      h1 Welcome todolist
+    = ul(tasks, class: :welcome_tasks)

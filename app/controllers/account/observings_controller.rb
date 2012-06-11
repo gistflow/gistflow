@@ -1,4 +1,5 @@
 class Account::ObservingsController < ApplicationController
+  cache_sweeper :observing_sweeper
   before_filter :authenticate!
   respond_to :json
   

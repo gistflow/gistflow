@@ -1,4 +1,5 @@
 class Account::FollowingsController < ApplicationController
+  cache_sweeper :following_sweeper
   before_filter :authenticate!, only: [:create, :destroy]
   
   def create
