@@ -1,4 +1,5 @@
 defaults: &defaults
+  secret_token: '0c1d9a3ad87e4de81c7f6f60f617ba6880666fb4e50925574f2f10d15a9f9df918b91d8b1488edf038f1877c4a870e62a2cc02749ba063e1e11806778cb525af'
   mailgun:
     address: "smtp.mailgun.org"
     port: 587
