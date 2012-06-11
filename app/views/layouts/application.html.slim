@@ -33,6 +33,7 @@ html
             nav class="submenu" = yield(:submenu)
         = yield
       section class="sidebar"
+        = render :partial => 'users/todolist' if user_signed_in? && !current_user.todolist_finished?
         = yield(:sidebar)
         = render :partial => 'general/about'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }

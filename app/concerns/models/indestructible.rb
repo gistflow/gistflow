@@ -9,6 +9,7 @@ module Models
       
       # hide deleted posts by default
       default_scope where(deleted_at: nil)
+      scope :non_deleted, where(deleted_at: nil)
     end
     
     def mark_deleted?
