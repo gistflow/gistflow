@@ -125,7 +125,7 @@ module ApplicationHelper
   end
   
   def javascript_enabled?
-    content_tag(:noscript) do
+    content_tag(:noscript, id: 'nojs') do
       concat(image_tag asset_path('no_js.jpg'), alt: 'You have not JS')
     end
   end
