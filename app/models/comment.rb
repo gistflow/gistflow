@@ -21,6 +21,11 @@ class Comment < ActiveRecord::Base
     content
   end
   
+  # called after mark_deleted
+  def decrement_counters
+    Post.decrement_counter(:comments_count, post_id)
+  end
+  
 protected
   
   def observe_post_to_author

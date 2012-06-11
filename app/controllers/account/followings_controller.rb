@@ -21,7 +21,7 @@ class Account::FollowingsController < ApplicationController
     render json: { 
       replaceable: link,
       update_elements: {
-        followers_count: @user.followed_users.count
+        followers_count: @user.followers.count
       }
     }
   end
