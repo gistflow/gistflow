@@ -2,6 +2,8 @@ module Models
   module Todolistable
     extend ActiveSupport::Concern
     
+    Struct.new('Task', :name, :complited)
+    
     TASKS = {
       post_task:      :author?,
       like_task:      :fan?,
@@ -14,7 +16,6 @@ module Models
 
     def tasks
       @tasks ||= begin
-        Struct.new('Task', :name, :complited)
         TASKS.map do |task, method|
           name = I18n.t "welcome_todolist_tasks.#{task}"
           Struct::Task.new name, send(method)
