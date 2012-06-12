@@ -1,4 +1,5 @@
 class Account::SubscriptionsController < ApplicationController
+  cache_sweeper :user_sweeper
   cache_sweeper :subscription_sweeper
   
   before_filter :authenticate!, :only => :index

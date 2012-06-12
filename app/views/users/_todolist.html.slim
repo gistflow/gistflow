@@ -1,0 +1,11 @@
+- unless current_user.todolist_finished?
+  - cache current_user.todolist_cache_key do
+    section class="todolist"
+      header class="primary"
+        h1 Welcome todolist
+      ul
+        - current_user.tasks.each do |task|
+          - if task.completed
+            li class="completed" = task.name
+          - else
+            li = task.name
