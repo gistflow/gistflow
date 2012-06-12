@@ -10,6 +10,7 @@ Gistflow::Application.routes.draw do
   match '/bookmarks' => 'posts#bookmarks'
   
   get :sitemap, to: 'sitemap#show', as: :xml
+  resource :tutorial, only: :show
   
   namespace :account do
     post   '/followings/:user_id' => 'followings#create',  :as => :follow

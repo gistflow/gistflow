@@ -5,7 +5,7 @@ javascript:
   }
 - cache @post.cache_key(:detail) do
   article class="post detail" data-id="#{@post.id}" data-author="#{@post.user}"
-    header.primary
+    header class="primary"
       h1 = post_title @post
     div class="body markdown"
       = post_body @post
