@@ -1,4 +1,13 @@
 $(function(){
+  function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+  }
+  
   var inline_gist_template = _.template(' \
     <li> \
       <a href="/posts/new" class="add" data-id="<%= id %>" data-lang="<%= language %>">add</a> \
@@ -77,7 +86,8 @@ $(function(){
     var element = $(this);
     $.getJSON('https://api.github.com/gists/' + id, function(data){
       _.each(data.files, function(raw, name){
-        var gist = detail_gist_template({ code: raw.content, lang: raw.language.toLowerCase() });
+        code = escapeHtml(raw.content)
+        var gist = detail_gist_template({ code: code, lang: raw.language.toLowerCase() });
         element.after(gist);
       });
       // remove all rehighlighting
