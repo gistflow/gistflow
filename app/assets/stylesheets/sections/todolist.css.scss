@@ -7,7 +7,7 @@ section.todolist {
   
   ul {
     li {
-      &.complited {
+      &.completed {
         text-decoration: line-through;
       }
     }

@@ -2,7 +2,7 @@ module Models
   module Todolistable
     extend ActiveSupport::Concern
     
-    Struct.new('Task', :name, :complited)
+    Struct.new('Task', :name, :completed)
     
     TASKS = {
       post_task:      :author?,
