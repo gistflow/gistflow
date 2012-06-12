@@ -1,4 +1,5 @@
 class Posts::CommentsController < ApplicationController
+  cache_sweeper :user_sweeper
   cache_sweeper :comment_sweeper
   
   def create

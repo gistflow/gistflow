@@ -34,8 +34,8 @@ html
         = yield
       section class="sidebar"
         - if user_signed_in?
-          - cache(current_user.todolist_cache_key, expires_in: 1.day) do
-            = render :partial => 'users/todolist' 
+          - cache current_user.todolist_cache_key, expires_in: 1.day do
+            = render :partial => 'users/todolist'
         = yield(:sidebar)
         = render :partial => 'general/about'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }

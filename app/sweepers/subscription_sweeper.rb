@@ -3,7 +3,6 @@ class SubscriptionSweeper < ActionController::Caching::Sweeper
   
   def after_create subscription
     expire_cache_for subscription
-    expire_fragment "todolist:#{subscription.user_id}"
   end
   
   def after_destroy subscription

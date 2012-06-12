@@ -1,4 +1,5 @@
 class Tags::WikisController < ApplicationController
+  cache_sweeper :user_sweeper
   before_filter :authenticate!, only: [:edit, :update]
   
   def history

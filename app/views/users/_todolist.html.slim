@@ -1,6 +1,5 @@
-- tasks = todolist_tasks
-- unless tasks.empty?
+- if current_user.tasks.any?
   section class='todolist'
     header
       h1 Welcome todolist
-    = ul(tasks, class: :welcome_tasks)
+    = ul current_user.tasks, class: :welcome_tasks

@@ -1,5 +1,5 @@
 class Account::LikesController < ApplicationController
-  cache_sweeper :like_sweeper
+  cache_sweeper :user_sweeper
   before_filter :authenticate!
   respond_to :json
   

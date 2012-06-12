@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include Todolist
+  include Models::Todolistable
   
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
