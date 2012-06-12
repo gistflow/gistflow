@@ -1,0 +1,15 @@
+@import "configuration";
+
+section.todolist {
+  > header h1 {
+    @include caption;
+  }
+  
+  ul {
+    li {
+      &.completed {
+        text-decoration: line-through;
+      }
+    }
+  }
+}

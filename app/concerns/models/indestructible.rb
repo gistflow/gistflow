@@ -7,7 +7,7 @@ module Models
       # prevent destroy action if it called by accident
       before_destroy { false }
       
-      # hide deleted posts by default
+      # hide "deleted" records by default
       default_scope where(deleted_at: nil)
     end
     

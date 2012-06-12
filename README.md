@@ -6,6 +6,19 @@ Micro-blog platform for developers inspired by [Gist.github.com](http://gist.git
 
 You are always welcome to contribute or create issue. Checkout [issues page](https://github.com/gist-flow/gistflow/issues).
 
+## Setup
+
+* git clone
+* bundle
+* configure your database.yml file
+* be shure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
+* rake db:create && rake db:migrate && rake db:seed
+* rails s
+
+## Testing
+
+Every new feature comes with bunch of rspec and capybara tests. Be sure to write all necessary tests and launch `rspec .` to check all of them passed.
+
 ## Contributors
 
 * [Jan Bernacki](https://github.com/makaroni4) (releu)
