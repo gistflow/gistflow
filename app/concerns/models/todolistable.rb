@@ -13,9 +13,13 @@ module Models
     }
 
     def tasks
-      TASKS.map do |task, method|
-        I18n.t("welcome_todolist_tasks.#{task}") unless send(method)
-      end.compact
+      @tasks ||= begin
+        Struct.new('Task', :name, :complited)
+        TASKS.map do |task, method|
+          name = I18n.t "welcome_todolist_tasks.#{task}"
+          Struct::Task.new name, send(method)
+        end
+      end
     end
     
     def todolist_cache_key

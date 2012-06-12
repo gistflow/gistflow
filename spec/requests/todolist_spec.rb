@@ -20,7 +20,7 @@ describe 'Todolist partial', local: true do
       end
 
       it 'should have 7 tasks' do
-        find('.welcome_tasks').all('li').size.should eq(7)
+        find('section.todolist').all('li').size.should eq(7)
       end
     end
     
