@@ -1,10 +1,10 @@
 module PostHelper
   def post_preview(post)
-    format post.preview
+    markup post.preview
   end
   
   def post_body(post)
-    format post.body
+    markup post.body
   end
   
   def post_timestamp(post)
@@ -18,11 +18,9 @@ module PostHelper
   
 protected
   
-  def format(text)
-    (Markdown.markdown begin
-      raw = Replaceable.new(text)
-      raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
+  def markup(text)
+    raw = Replaceable.new(text)
+    raw.replace_gists!.replace_tags!.replace_usernames!
+    Markdown.markdown raw.to_s
   end
 end
