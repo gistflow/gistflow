@@ -1,5 +1,6 @@
 - if current_user.tasks.any?
-  section class='todolist'
-    header
-      h1 Welcome todolist
-    = ul current_user.tasks, class: :welcome_tasks
+  - cache current_user.todolist_cache_key, expires_in: 1.day do
+    section class="todolist"
+      header
+        h1 Welcome todolist
+      = ul current_user.tasks, class: :welcome_tasks
