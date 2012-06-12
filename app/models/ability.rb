@@ -18,6 +18,7 @@ class Ability
     if user
       can(:access, :all) and return if user.admin?
       
+      can :show, :tutorials
       can [:edit, :update], :'tags/wikis'
       can [:create], :'account/twitter'
       can [:edit, :update], :'account/settings'
