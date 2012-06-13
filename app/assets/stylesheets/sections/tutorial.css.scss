@@ -1,0 +1,18 @@
+@import "configuration";
+
+section.tutorial {
+  > header h1 {
+    @include caption;
+  }
+  
+  .markdown {
+    h2 {
+      line-height: 40px;
+      font-size: 24px;
+    }
+    img {
+      border: 5px solid $gray;
+      max-width: 570px;
+    }
+  }
+}
