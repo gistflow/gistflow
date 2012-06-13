@@ -19,8 +19,8 @@ describe 'Todolist partial', local: true do
         page.should have_content('Welcome todolist')
       end
 
-      it 'should have 7 tasks' do
-        find('section.todolist').all('li').size.should eq(7)
+      it 'should have 8 tasks' do
+        find('section.todolist').all('li').size.should eq(8)
       end
     end
     
