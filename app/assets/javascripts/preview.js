@@ -47,7 +47,6 @@ $(function(){
   
   $(document).on('hover', 'article.comment', function(){
     if (window.current_user.admin || window.current_user.username == $(this).data('author')) {
-      console.log('toggle')
       $(this).find('div.controls').toggle();
     }
   })

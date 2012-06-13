@@ -217,8 +217,63 @@ $(document).ready(function() {
         if (users.length === 0) {
           return true;
         }
+        
+        /// -----
+        
+        function getcaretPosition(ctrl) {
+          var caretPos = 0; // IE Support
+          if (document.selection) {
+            ctrl.focus();
+            var sel = document.selection.createRange();
+            sel.moveStart('character', -ctrl.value.length);
+            caretPos = sel.text.length;
+          }
+          // Firefox support
+          else if (ctrl.selectionStart || ctrl.selectionStart == '0') caretPos = ctrl.selectionStart;
+          return (caretPos);
+        }
 
+        var offset = getcaretPosition(this);
+
+        var div = '<div id="post_content_dup" class="wordwrap" style="width: 580px; font-family:Lucida Grande; font-size: 13px; line-height: normal; opacity:0; position:relative;z-index:-10"></div>';
+        
+        $('body').append(div);
+
+        var $dup_div = $('div#post_content_dup');
+        $dup_div.text($(this).val());
+
+        var span = '<span class="ins_str" style="color:red;">@</span>';
+        $dup_div.html($dup_div.text().substr(0, offset - 1) + span + $dup_div.text().substr(offset - 1, 1));
+
+        var x = $dup_div.offset().left,
+            y = $dup_div.offset().top,
+            width = $dup_div.outerWidth() - 15,
+            height = $dup_div.outerHeight() - 15;
+
+        $dup_div.html(function(index, old) {
+          return old.replace(/\n/g, '<br/>')
+        });
+
+        var $span = $dup_div.find('span.ins_str');
+        if ($span.length > 0) {
+          var span_offset = $span.offset(),
+              dup_div_offset = $dup_div.offset(),
+              char_x = span_offset.left - dup_div_offset.left,
+              char_y = span_offset.top - dup_div_offset.top;
+        }
+        $dup_div.remove();
+        console.log(char_x, char_y);
+        /// -----
+        
         username_list = createUsernameAutocomplete(textarea, usernames_container, users, settings.numResults);
+
+        if(char_x >= 0 && char_y >= 0) {
+          username_list.css({
+            top: textarea.offset().top + char_y + 22,
+            left: textarea.offset().left + char_x + 22
+          });
+        }  
+        
         ddl = $('#at-username-autocomplete');
 
         if (ddl.length > 0) {
