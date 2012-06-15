@@ -1,9 +1,20 @@
 @import "configuration";
 
-.button.disabled {
-  background: rgba(245, 245, 245, 0.56) !important;
-  &:active, &:hover, &:focus, &.active {
-    color: $base;
+.arrow {
+  font-size: 20px;
+  line-height: 20px;
+  color: $charcoal;
+  vertical-align: middle;
+  margin-right: 5px;
+  font-weight: 600;
+}
+
+.button {
+  &.disabled {
+    background: rgba(245, 245, 245, 0.56) !important;
+    &:active, &:hover, &:focus, &.active {
+      color: $base;
+    }
   }
 }
 
