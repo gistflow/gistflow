@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612075928) do
+ActiveRecord::Schema.define(:version => 20120615132259) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
     t.boolean  "question",       :default => false
     t.text     "preview_cache"
     t.datetime "deleted_at"
+    t.string   "status"
   end
 
   create_table "profiles", :force => true do |t|
