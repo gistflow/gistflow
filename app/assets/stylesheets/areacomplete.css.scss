@@ -12,6 +12,12 @@
    word-wrap: break-word;      /* IE */
 }
 
+.invisible {
+  opacity: 0;
+  position: relative;
+  z-index: -10;
+}
+
 .at-username-container {
   display: none;
 }

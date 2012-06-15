@@ -35,7 +35,7 @@ jQuery.fn.extend({
   }
 });
 
-function getcaretPosition(ctrl) {
+function getCaretPosition(ctrl) {
   var caretPos = 0; // IE Support
   if (document.selection) {
     ctrl.focus();
@@ -46,6 +46,10 @@ function getcaretPosition(ctrl) {
   // Firefox support
   else if (ctrl.selectionStart || ctrl.selectionStart == '0') caretPos = ctrl.selectionStart;
   return (caretPos);
+}
+
+function getPreviousKey(textarea, offset) {  
+  return textarea.val().length == 0 ? null : textarea.val().substr(offset - 1, offset);
 }
 
 $(document).ready(function() {
@@ -233,9 +237,14 @@ $(document).ready(function() {
 
         /// ----- calculating autocomplete offset -----
 
-        var offset = getcaretPosition(this);
+        var offset = getCaretPosition(this);
+        var last_key = getPreviousKey(textarea, offset);
         
-        var div = '<div id="post_content_dup" class="wordwrap" style="opacity:0;position:relative;z-index:-10"></div>';
+        if(last_key != null && last_key.match(/\W/) == null) {
+          return true;
+        }
+        
+        var div = '<div id="post_content_dup" class="wordwrap invisible"></div>';
         
         textarea.after(div);
 
@@ -258,13 +267,8 @@ $(document).ready(function() {
         var span = '<span class="ins_str">@</span>';
         $dup_div.html($dup_div.text().substr(0, offset) + span + $dup_div.text().substr(offset, $dup_div.text().length));
 
-        var x = $dup_div.offset().left,
-            y = $dup_div.offset().top,
-            width = $dup_div.outerWidth() - 15,
-            height = $dup_div.outerHeight() - 15;
-
         $dup_div.html(function(index, old) {
-          return old.replace(/\n/g, '<br>')
+          return old.replace(/\n/g, '<br />')
         });
       
         var $span = $dup_div.find('span.ins_str');
@@ -279,8 +283,14 @@ $(document).ready(function() {
         // fix for Firefox
         // auto-resize plugin hides one line so we need to
         // subtract its height from vertical offset
-        if($.browser.mozilla && textarea.height() > 32 && char_y > 18) {
-          char_y = char_y - 18; // normal line-height is 18px
+        var textarea_default_height = 32;
+        var textarea_default_lineheight = 18;
+        
+        if($.browser.mozilla && 
+          textarea.height() > textarea_default_height && 
+          char_y > textarea_default_lineheight
+        ) {
+          char_y = char_y - textarea_default_lineheight; 
         }
         
         $dup_div.remove();
