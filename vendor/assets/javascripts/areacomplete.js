@@ -35,6 +35,19 @@ jQuery.fn.extend({
   }
 });
 
+function getcaretPosition(ctrl) {
+  var caretPos = 0; // IE Support
+  if (document.selection) {
+    ctrl.focus();
+    var sel = document.selection.createRange();
+    sel.moveStart('character', -ctrl.value.length);
+    caretPos = sel.text.length;
+  }
+  // Firefox support
+  else if (ctrl.selectionStart || ctrl.selectionStart == '0') caretPos = ctrl.selectionStart;
+  return (caretPos);
+}
+
 $(document).ready(function() {
 
   var xhrUsernamesList = [];
@@ -195,7 +208,7 @@ $(document).ready(function() {
     }
 
     this.live('keydown', function(e) {
-      var textarea = $(this);
+      var textarea = $(this);      
       var textarea_wrapper = textarea.parent();
       var username_list;
       var ddl;
@@ -217,33 +230,33 @@ $(document).ready(function() {
         if (users.length === 0) {
           return true;
         }
-        
-        /// -----
-        
-        function getcaretPosition(ctrl) {
-          var caretPos = 0; // IE Support
-          if (document.selection) {
-            ctrl.focus();
-            var sel = document.selection.createRange();
-            sel.moveStart('character', -ctrl.value.length);
-            caretPos = sel.text.length;
-          }
-          // Firefox support
-          else if (ctrl.selectionStart || ctrl.selectionStart == '0') caretPos = ctrl.selectionStart;
-          return (caretPos);
-        }
+
+        /// ----- calculating autocomplete offset -----
 
         var offset = getcaretPosition(this);
-
-        var div = '<div id="post_content_dup" class="wordwrap" style="width: 580px; font-family:Lucida Grande; font-size: 13px; line-height: normal; opacity:0; position:relative;z-index:-10"></div>';
         
-        $('body').append(div);
+        var div = '<div id="post_content_dup" class="wordwrap" style="opacity:0;position:relative;z-index:-10"></div>';
+        
+        textarea.after(div);
 
         var $dup_div = $('div#post_content_dup');
-        $dup_div.text($(this).val());
+        
+        var cssToCopy = [
+      		'fontFamily',
+      		'fontSize',
+      		'width',
+          'lineHeight'
+      	];
+        	
+        var i = cssToCopy.length;
+        while (i--) {
+					$dup_div.css(cssToCopy[i], textarea.css(cssToCopy[i]));
+				}
+        				                
+        $dup_div.text(textarea.val());
 
-        var span = '<span class="ins_str" style="color:red;">@</span>';
-        $dup_div.html($dup_div.text().substr(0, offset - 1) + span + $dup_div.text().substr(offset - 1, 1));
+        var span = '<span class="ins_str">@</span>';
+        $dup_div.html($dup_div.text().substr(0, offset) + span + $dup_div.text().substr(offset, $dup_div.text().length));
 
         var x = $dup_div.offset().left,
             y = $dup_div.offset().top,
@@ -251,22 +264,31 @@ $(document).ready(function() {
             height = $dup_div.outerHeight() - 15;
 
         $dup_div.html(function(index, old) {
-          return old.replace(/\n/g, '<br/>')
+          return old.replace(/\n/g, '<br>')
         });
-
+      
         var $span = $dup_div.find('span.ins_str');
+        
         if ($span.length > 0) {
           var span_offset = $span.offset(),
               dup_div_offset = $dup_div.offset(),
               char_x = span_offset.left - dup_div_offset.left,
               char_y = span_offset.top - dup_div_offset.top;
         }
+        
+        // fix for Firefox
+        // auto-resize plugin hides one line so we need to
+        // subtract its height from vertical offset
+        if($.browser.mozilla && textarea.height() > 32 && char_y > 18) {
+          char_y = char_y - 18; // normal line-height is 18px
+        }
+        
         $dup_div.remove();
-        console.log(char_x, char_y);
-        /// -----
+        
+        /// ----- END calculating autocomplete offset -----
         
         username_list = createUsernameAutocomplete(textarea, usernames_container, users, settings.numResults);
-
+        
         if(char_x >= 0 && char_y >= 0) {
           username_list.css({
             top: textarea.offset().top + char_y + 22,
@@ -320,36 +342,8 @@ $(document).ready(function() {
           return false;
         }
 
-      } else if (e.which === 27) { // ESC
-        removeUsernameAutocomplete(textarea_wrapper);
-
       } else { // any other key
-        if (!textarea.hasClass('autocomplete_active')) {
-          return true;
-        }
-
-        var ac_start = textarea.data('ac_start');
-        var ac_current = textarea.val().length;
-
-        if (e.which === 8) { // backspace
-          ac_current--;
-        }
-
-        if (ac_current <= ac_start) {
-          removeUsernameAutocomplete(textarea_wrapper);
-        }
-
-        var search_term = textarea.val().substring(ac_start + 1, ac_current);
-
-        if (e.which > 48 && e.which < 90) { // 0-9, a-z
-          search_term += String.fromCharCode(e.which);
-        }
-
-        search_term = search_term.toLowerCase();
-        var usernames = getUsernameList(usernames_container, settings.usernameSelector, settings.xhrUsernames);
-        var search_results = searchUsernameList(usernames, search_term);
-        username_list = createUsernameAutocomplete(textarea, usernames_container, search_results, settings.numResults);
-        $('#at-username-autocomplete').replaceWith(username_list);
+        removeUsernameAutocomplete(textarea_wrapper);
       }
 
     });
