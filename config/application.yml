@@ -21,6 +21,9 @@ defaults: &defaults
   http_auth:
     username: Gistflow
     password: Gistflow
+  rackspace:
+    username: gistflow
+    api_key: gistflow
 
 development:
   <<: *defaults
