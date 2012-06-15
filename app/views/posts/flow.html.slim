@@ -4,7 +4,7 @@ section.posts
   header
     - if user_signed_in?
       nav.submenu
-        = link_to('New Post', new_post_path, :class => 'button')
+        = link_to_new_post
     nav.menu
       ul
         li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow

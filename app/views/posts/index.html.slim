@@ -3,7 +3,7 @@ section class="posts"
   header
     - if user_signed_in?
       nav class="submenu"
-        = link_to('New Post', new_post_path, :class => 'button')
+        = link_to_new_post
     nav class="menu"
       ul
         - if user_signed_in?
