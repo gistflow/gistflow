@@ -2,7 +2,10 @@ require 'bundler/capistrano'
 
 $:.unshift(File.expand_path("./lib", ENV["rvm_path"]))
 require 'rvm/capistrano'
-require 'rvm/whenever'
+
+set :whenever_command, 'bundle exec whenever'
+set :whenever_environment, defer { deploy_env }
+require 'whenever/capistrano'
 
 set :stages, %w(production staging)
 set :default_stage, 'staging'
