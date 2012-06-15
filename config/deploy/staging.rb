@@ -1,2 +1,2 @@
-server 'gistflow.me', :app, :web, :primary => true
+server 'gistflow.me', :app, :web, :db, :primary => true
 set :deploy_env, 'staging'
