@@ -278,20 +278,7 @@ $(document).ready(function() {
               dup_div_offset = $dup_div.offset(),
               char_x = span_offset.left - dup_div_offset.left,
               char_y = span_offset.top - dup_div_offset.top;
-        }
-        
-        // fix for Firefox
-        // auto-resize plugin hides one line so we need to
-        // subtract its height from vertical offset
-        var textarea_default_height = 32;
-        var textarea_default_lineheight = 18;
-        
-        if($.browser.mozilla && 
-          textarea.height() > textarea_default_height && 
-          char_y > textarea_default_lineheight
-        ) {
-          char_y = char_y - textarea_default_lineheight; 
-        }
+        }    
         
         $dup_div.remove();
         
