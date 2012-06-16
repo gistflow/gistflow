@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
 $:.unshift(File.expand_path("./lib", ENV["rvm_path"]))
-require "rvm/capistrano"
+require 'rvm/capistrano'
 
 set :stages, %w(production staging)
 set :default_stage, 'staging'

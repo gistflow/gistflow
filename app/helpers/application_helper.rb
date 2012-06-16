@@ -1,3 +1,4 @@
+# coding: utf-8
 module ApplicationHelper
   def render_git_version
     "<!-- version: #{Gistflow::VERSION} -->".html_safe
@@ -116,6 +117,11 @@ module ApplicationHelper
   def link_to_github_user(user)
     link = "http://github.com/#{user.username}"
     link_to link, link, target: "_blank"
+  end
+  
+  def link_to_new_post
+    content_tag(:span, '→', class: 'arrow') << 
+      link_to('New Post', new_post_path, :class => 'button primary')
   end
   
   def subscription_form(subscription)

@@ -1,20 +1,6 @@
 - window_title 'New'
+
 section class="posts"
   header class="primary"
     h1 New
   = render 'form'
-- content_for(:form) do
-  div class="twitter"
-    h2 Tweet
-    - if current_user.twitter_client?
-      fieldset
-        = text_area_tag 'post[status]', nil
-      fieldset
-        = check_box_tag :post_status_toggle
-        = label_tag :post_status_toggle, 'Disable for this post'
-        
-    - else
-      p
-        | You can tweet about your post automatically after 
-        = link_to 'sign in', '/auth/twitter', target: '_blank'
-        | .

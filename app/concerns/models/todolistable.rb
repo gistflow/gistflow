@@ -5,6 +5,7 @@ module Models
     Struct.new('Task', :name, :completed)
     
     TASKS = {
+      signup_task:    :registered?,
       post_task:      :author?,
       like_task:      :fan?,
       subscribe_task: :subscriber?,
@@ -26,7 +27,11 @@ module Models
     def todolist_cache_key
       "todolist:#{id}"
     end
-
+    
+    def registered?
+      true
+    end
+    
     def author?
       posts.any?
     end

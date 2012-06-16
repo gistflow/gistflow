@@ -15,13 +15,11 @@ class Post < ActiveRecord::Base
   validates :user, :title, presence: true
   validates :preview, length: { minimum: 3, maximum: 500, too_long: 'is too long. Use <cut> tag to separate preview and text.', too_short: 'is too short.' }
   validates :tags_size, numericality: { greater_than: 0 }
-  validates :status, format: { with: %r{http://goo.gl/xxxxxx} }, 
-    length: { maximum: 140 }, if: :status?
+  validates :status, length: { maximum: 120 }, if: :status?
   
-  attr_accessor :status
   attr_accessible :title, :content, :question, :status
   
-  after_create :tweet
+  after_create :tweet, if: :status?
   after_create :setup_observing_for_author
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
@@ -39,6 +37,10 @@ class Post < ActiveRecord::Base
   # ActiveRecord::Relation extends method
   def self.last_modified
     all.map(&:updated_at).max.utc
+  end
+  
+  def available_symbols_for_status
+    120 - status.to_s.length
   end
   
   def cache_key(type)
@@ -87,10 +89,9 @@ class Post < ActiveRecord::Base
 protected
   
   def tweet
-    if user.twitter_client? && status.present?
+    if user.twitter_client?
       url = Googl.shorten("http://gistflow.com/posts/#{id}")
-      status.gsub!('http://goo.gl/xxxxxx', '')
-      status << url.short_url
+      status << url.short_url # http://goo.gl/xxxxxx
       user.twitter_client.update(status)
     end
   end

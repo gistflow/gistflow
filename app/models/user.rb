@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   validates :username, :name, presence: true
   validates :username, uniqueness: true
   
+  default_scope order: 'users.id asc'
+  
   before_create :assign_settings
   before_create :assign_profile
   attr_accessor :company, :github_page, :home_page, :email

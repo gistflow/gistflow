@@ -33,6 +33,10 @@ a {
   &:hover, &.active {
     color: #0E4C89;
   }
+  
+  &.js {
+    border-bottom: 1px dashed;
+  }
 }
 
 div.highlight {
