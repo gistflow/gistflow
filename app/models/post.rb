@@ -91,7 +91,7 @@ protected
   def tweet
     if user.twitter_client?
       url = Googl.shorten("http://gistflow.com/posts/#{id}")
-      status << url.short_url # http://goo.gl/xxxxxx
+      status << " " << url.short_url # http://goo.gl/xxxxxx
       user.twitter_client.update(status)
     end
   end
