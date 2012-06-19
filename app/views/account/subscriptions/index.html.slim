@@ -2,6 +2,7 @@
 section class="subscriptions"
   header class="primary"
     h1 Subscriptions
+  = search_field_tag :subscription_search, nil, placeholder: 'Search..'
   ul class="subscriptions group"
     - @tags.each do |tag|
       li class="subscription"
