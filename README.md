@@ -21,8 +21,8 @@ Every new feature comes with bunch of rspec and capybara tests. Be sure to write
 
 ## Contributors
 
-* [Jan Bernacki](https://github.com/makaroni4) (releu)
-* [Anatoli Makarevich](https://github.com/releu) (makaroni4)
+* [Jan Bernacki](https://github.com/releu) (releu)
+* [Anatoli Makarevich](https://github.com/makaroni4) (makaroni4)
 
 ## License
 
