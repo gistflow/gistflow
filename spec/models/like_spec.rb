@@ -5,6 +5,7 @@ describe Like do
   subject { like }
   
   it 'should have a factory' do
-    should be
+    # test for jenkins!
+    should_not be
   end
 end

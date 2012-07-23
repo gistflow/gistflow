@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
   end
   
   def flow
-    raise '123'
     tag_ids = subscriptions.select(:tag_id).to_sql
     user_ids = followings.select(:followed_user_id).to_sql
     conditions = []
