@@ -20,12 +20,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if params[:id] =~ /\A\d+\z/
-      @post = Post.find(params[:id])
-    else
-      @post = Post.find_by_private_key(params[:id])
-    end
-    
+    @post = Post.find_by_param params[:id]
     @comment = @post.comments.build if can? :create, :comments
   end
 

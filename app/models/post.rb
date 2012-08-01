@@ -28,6 +28,18 @@ class Post < ActiveRecord::Base
   scope :not_private, where(private_key: nil)
   scope :private, where('posts.private_key IS NOT NULL')
   
+  def to_param
+    private_key? ? private_key : id
+  end
+  
+  def self.find_by_param param
+    if param =~ /\A\d+\z/
+      Post.find param
+    else
+      Post.find_by_private_key param
+    end
+  end
+  
   # ActiveRecord::Relation extends method
   def self.to_json_hash(options = nil)
     hash = {}
