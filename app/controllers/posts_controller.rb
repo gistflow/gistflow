@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     
     if @post.save
-      redirect_to_post @post
+      redirect_to @post
     else
       flash[:info] = tags_flash_info
       render :new
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     authorize! :update, @post
     
     if @post.update_attributes(params[:post])
-      redirect_to_post @post
+      redirect_to @post
     else
       flash[:info] = tags_flash_info
       render :edit
@@ -69,9 +69,5 @@ protected
   
   def tags_flash_info
     '<strong>#tagname</strong> will add tag to the post'.html_safe
-  end
-  
-  def redirect_to_post post
-    redirect_to post.is_private? ? post_path(:id => post.private_key) : post
   end
 end
