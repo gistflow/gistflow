@@ -5,7 +5,7 @@ javascript:
     article id="post-#{post.id}" class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
       header
         h1
-          = link_to(post.title, post) << ' '
+          = link_to_post(post) << ' '
           span
             | by 
             = link_to post.user, post.user

@@ -4,6 +4,8 @@ describe Post do
   let(:post) { create(:post) }
   subject { post }
   
+  its(:private_key) { should be_blank }
+  
   describe 'observe post for author after create' do
     subject { Observing.where(post_id: post.id, user_id: post.user_id) }
     it { should be_exists }
@@ -100,6 +102,21 @@ describe Post do
           post.body.should == "preview\r\nbody #ruby <cut> #haskell"
         end
       end
+    end
+  end
+  
+  context 'when private' do
+    let(:private_post) { Factory :private_post }
+    
+    it 'should have private_key' do
+      private_post.private_key.should_not be_nil
+    end
+    
+    it 'should clear private_key when become public' do
+      private_post.is_private = false
+      private_post.save
+      
+      private_post.private_key.should be_nil
     end
   end
 end

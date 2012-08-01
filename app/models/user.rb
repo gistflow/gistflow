@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     conditions = []
     conditions << "taggings.tag_id in (#{tag_ids})"
     conditions << "posts.user_id in (#{user_ids})"
-    Post.joins(:taggings).where(conditions.join(' or ')).uniq
+    Post.not_private.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
   # Bookmarks

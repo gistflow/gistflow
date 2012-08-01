@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include Models::Indestructible
   include Models::Cuttable
   
-  default_scope order: 'posts.id desc'
+  default_scope order('posts.id desc')
   
   belongs_to :user, inverse_of: :posts
   has_many :comments
@@ -17,12 +17,16 @@ class Post < ActiveRecord::Base
   validates :tags_size, numericality: { greater_than: 0 }
   validates :status, length: { maximum: 120 }, if: :status?
   
-  attr_accessible :title, :content, :question, :status
+  attr_accessor :is_private
+  attr_accessible :title, :content, :question, :status, :is_private
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
+  before_save :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
+  scope :not_private, where(private_key: nil)
+  scope :private, where('posts.private_key IS NOT NULL')
   
   # ActiveRecord::Relation extends method
   def self.to_json_hash(options = nil)
@@ -31,6 +35,10 @@ class Post < ActiveRecord::Base
       hash[post.id] = post.as_json(options)
     end
     hash.to_json
+  end
+  
+  def is_private
+    @is_private ||= false
   end
   
   # Max updated_at value for cache
@@ -86,7 +94,7 @@ class Post < ActiveRecord::Base
     [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
-protected
+private
   
   def tweet
     if user.twitter_client?
@@ -101,5 +109,15 @@ protected
       observing.post = self
     end
     true
+  end
+  
+  def assign_private_key
+    if self.is_private
+      self.private_key = Digest::SHA1.hexdigest(
+        Time.now.to_s.concat Configuration.private_key_salt
+      )
+    else
+      self.private_key = nil
+    end
   end
 end

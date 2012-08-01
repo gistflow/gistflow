@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
+    @posts = Post.not_private.includes(:user).page(params[:page])
     render :index
   end
   alias all index
@@ -20,7 +20,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    if params[:id] =~ /\A\d+\z/
+      @post = Post.find(params[:id])
+    else
+      @post = Post.find_by_private_key(params[:id])
+    end
+    
     @comment = @post.comments.build if can? :create, :comments
   end
 
@@ -38,7 +43,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     
     if @post.save
-      redirect_to @post
+      redirect_to_post @post
     else
       flash[:info] = tags_flash_info
       render :new
@@ -50,7 +55,7 @@ class PostsController < ApplicationController
     authorize! :update, @post
     
     if @post.update_attributes(params[:post])
-      redirect_to @post
+      redirect_to_post @post
     else
       flash[:info] = tags_flash_info
       render :edit
@@ -69,5 +74,9 @@ protected
   
   def tags_flash_info
     '<strong>#tagname</strong> will add tag to the post'.html_safe
+  end
+  
+  def redirect_to_post post
+    redirect_to post.is_private? ? post_path(:id => post.private_key) : post
   end
 end
