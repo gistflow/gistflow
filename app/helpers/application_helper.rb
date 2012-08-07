@@ -121,6 +121,7 @@ module ApplicationHelper
   
   def link_to_new_post
     content_tag(:span, '→', class: 'arrow') << 
+      link_to('New private post', new_private_posts_path, :class => 'button primary') <<
       link_to('New Post', new_post_path, :class => 'button primary')
   end
   

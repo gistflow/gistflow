@@ -39,7 +39,26 @@ class Post < ActiveRecord::Base
       Post.find_by_private_key param
     end
   end
+
+  def is_private= val
+    self[:is_private] = case val.to_s
+                        when '0'
+                          false
+                        when '1'
+                          true
+                        else
+                          val
+                        end
+  end
   
+  def is_private
+    if private_key? && (self[:is_private].nil? || self[:is_private] == true)
+      true
+    else
+      self[:is_private]
+    end
+  end
+
   # ActiveRecord::Relation extends method
   def self.to_json_hash(options = nil)
     hash = {}
@@ -47,10 +66,6 @@ class Post < ActiveRecord::Base
       hash[post.id] = post.as_json(options)
     end
     hash.to_json
-  end
-  
-  def is_private
-    @is_private ||= false
   end
   
   # Max updated_at value for cache

@@ -62,7 +62,7 @@ class Posts::CommentsController < ApplicationController
 protected
   
   def find_post(id)
-    Post.find(id)
+    Post.find_by_param params[:id]
   end
   
   def render_form(action)
