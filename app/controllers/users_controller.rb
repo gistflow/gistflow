@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   
   def show
     if @user = User.includes(:profile).find_by_username(params[:id])
-      @posts = @user.posts.page(params[:page])
+      @posts = @user.posts.not_private.page(params[:page])
     else
       render 'search/nothing'
     end
