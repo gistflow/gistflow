@@ -4,6 +4,9 @@ html
     meta charset='UTF-8' 
     meta name='description' content='Social learning'
     = javascript_include_tag 'application'
+    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
+    javascript:
+      try{Typekit.load();}catch(e){}
     = stylesheet_link_tag 'landing'
     = csrf_meta_tags
     title = "Gistflow :: Welcome"
