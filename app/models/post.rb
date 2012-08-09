@@ -28,12 +28,14 @@ class Post < ActiveRecord::Base
   scope :private, where(is_private: true)
   
   def to_param
-    private_key? ? private_key : id
+    is_private? ? private_key : id
   end
   
   def self.find_by_param param
     if param =~ /\A\d+\z/
-      Post.find param
+      post = Post.find param
+      raise ActiveRecord::RecordNotFound if post.is_private?
+      post
     else
       Post.find_by_private_key param
     end
