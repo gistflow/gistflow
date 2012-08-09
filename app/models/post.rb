@@ -68,7 +68,7 @@ class Post < ActiveRecord::Base
   end
   
   def path
-    "/posts/#{id}"
+    "/posts/#{to_param}"
   end
   
   def link_name
