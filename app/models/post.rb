@@ -26,6 +26,9 @@ class Post < ActiveRecord::Base
   scope :from_followed_users, lambda { |user| followed_by(user) }
   scope :not_private, where(is_private: false)
   scope :private, where(is_private: true)
+  scope :with_privacy, lambda { |author, user|
+    where(is_private: false) unless author == user
+  }
   
   def to_param
     is_private? ? private_key : id
