@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
   end
 
   def is_private= val
-    self[:is_private] = case val.to_s
+    @is_private = case val.to_s
                         when '0'
                           false
                         when '1'
@@ -52,10 +52,10 @@ class Post < ActiveRecord::Base
   end
   
   def is_private
-    if private_key? && (self[:is_private].nil? || self[:is_private] == true)
+    if private_key? && (@is_private.nil? || @is_private)
       true
     else
-      self[:is_private]
+      @is_private
     end
   end
 
