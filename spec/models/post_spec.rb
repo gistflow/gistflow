@@ -4,6 +4,8 @@ describe Post do
   let(:post) { create(:post) }
   subject { post }
   
+  its(:private_key) { should be }
+  
   describe 'observe post for author after create' do
     subject { Observing.where(post_id: post.id, user_id: post.user_id) }
     it { should be_exists }

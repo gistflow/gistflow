@@ -14,5 +14,9 @@ FactoryGirl.define do
     
     factory :post_with_gist, :traits => [:with_gist]
     factory :post_with_tag, :traits => [:with_tag]
+    
+    factory :private_post do
+      is_private true
+    end
   end
 end

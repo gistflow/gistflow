@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include Models::Indestructible
   include Models::Cuttable
   
-  default_scope order: 'posts.id desc'
+  default_scope order('posts.id desc')
   
   belongs_to :user, inverse_of: :posts
   has_many :comments
@@ -17,13 +17,28 @@ class Post < ActiveRecord::Base
   validates :tags_size, numericality: { greater_than: 0 }
   validates :status, length: { maximum: 120 }, if: :status?
   
-  attr_accessible :title, :content, :question, :status
+  attr_accessible :title, :content, :question, :status, :is_private
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
+  before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
+  scope :not_private, where(is_private: false)
+  scope :private, where(is_private: true)
   
+  def to_param
+    private_key? ? private_key : id
+  end
+  
+  def self.find_by_param param
+    if param =~ /\A\d+\z/
+      Post.find param
+    else
+      Post.find_by_private_key param
+    end
+  end
+
   # ActiveRecord::Relation extends method
   def self.to_json_hash(options = nil)
     hash = {}
@@ -86,7 +101,7 @@ class Post < ActiveRecord::Base
     [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
-protected
+private
   
   def tweet
     if user.twitter_client?
@@ -101,5 +116,9 @@ protected
       observing.post = self
     end
     true
+  end
+  
+  def assign_private_key
+    self.private_key = Digest::SHA1.hexdigest(rand.to_s)
   end
 end

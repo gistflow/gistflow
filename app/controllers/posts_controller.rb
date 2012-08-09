@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
+    @posts = Post.not_private.includes(:user).page(params[:page])
     render :index
   end
   alias all index
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     @comment = @post.comments.build if can? :create, :comments
   end
 
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :edit, @post
   end
 
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :update, @post
     
     if @post.update_attributes(params[:post])
@@ -58,13 +58,19 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :destroy, @post
     
     @post.mark_deleted
     redirect_to root_path
   end
   
+  def new_private
+    @post = Post.new(is_private: true)
+    flash[:info] = tags_flash_info
+    render :new
+  end
+
 protected
   
   def tags_flash_info

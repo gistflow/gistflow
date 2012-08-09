@@ -37,8 +37,9 @@ class User < ActiveRecord::Base
     tag_ids = subscriptions.select(:tag_id).to_sql
     user_ids = followings.select(:followed_user_id).to_sql
     conditions = []
-    conditions << "taggings.tag_id in (#{tag_ids})"
-    conditions << "posts.user_id in (#{user_ids})"
+    conditions << "posts.user_id = #{id}"
+    conditions << "taggings.tag_id in (#{tag_ids}) and posts.is_private = 'f'"
+    conditions << "posts.user_id in (#{user_ids}) and posts.is_private = 'f'"
     Post.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
