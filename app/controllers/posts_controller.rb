@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   end
   
   def new_private
-    @post = Post.new(:is_private => true)
+    @post = Post.new(is_private: true)
     flash[:info] = tags_flash_info
     render :new
   end

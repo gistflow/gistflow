@@ -17,11 +17,8 @@ module PostHelper
   end
   
   def link_to_post(post)
-    link_to(
-      post.title,
-      post_path(post),
-      :class => post.private_key? ? 'private' : ''
-    )
+    klass = post.is_private? ? 'private' : ''
+    link_to post.title, post_path(post), class: klass
   end
   
 protected

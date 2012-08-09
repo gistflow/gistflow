@@ -33,6 +33,7 @@ html
             nav class="submenu" = yield(:submenu)
         = yield
       section class="sidebar"
+        = render partial: 'shared/news'
         - if user_signed_in?
           = render :partial => 'users/todolist'
         = yield(:sidebar)

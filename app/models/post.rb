@@ -17,16 +17,15 @@ class Post < ActiveRecord::Base
   validates :tags_size, numericality: { greater_than: 0 }
   validates :status, length: { maximum: 120 }, if: :status?
   
-  attr_accessor :is_private
   attr_accessible :title, :content, :question, :status, :is_private
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
-  before_save :assign_private_key
+  before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
-  scope :not_private, where(private_key: nil)
-  scope :private, where('posts.private_key IS NOT NULL')
+  scope :not_private, where(is_private: false)
+  scope :private, where(is_private: true)
   
   def to_param
     private_key? ? private_key : id
@@ -37,25 +36,6 @@ class Post < ActiveRecord::Base
       Post.find param
     else
       Post.find_by_private_key param
-    end
-  end
-
-  def is_private= val
-    @is_private = case val.to_s
-                        when '0'
-                          false
-                        when '1'
-                          true
-                        else
-                          val
-                        end
-  end
-  
-  def is_private
-    if private_key? && (@is_private.nil? || @is_private)
-      true
-    else
-      @is_private
     end
   end
 
@@ -139,12 +119,6 @@ private
   end
   
   def assign_private_key
-    if self.is_private
-      self.private_key = Digest::SHA1.hexdigest(
-        Time.now.to_s.concat Configuration.private_key_salt
-      )
-    else
-      self.private_key = nil
-    end
+    self.private_key = Digest::SHA1.hexdigest(rand.to_s)
   end
 end
