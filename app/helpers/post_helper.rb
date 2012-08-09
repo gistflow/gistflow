@@ -13,7 +13,12 @@ module PostHelper
   
   def post_title(post)
     link_to_user = link_to post.user, post.user
-    "#{link_to(post.title, post)} <span>by #{link_to_user}</span>".html_safe
+    "#{link_to_post(post)} <span>by #{link_to_user}</span>".html_safe
+  end
+  
+  def link_to_post(post)
+    klass = post.is_private? ? 'private' : ''
+    link_to post.title, post_path(post), class: klass
   end
   
 protected
