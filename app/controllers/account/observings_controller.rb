@@ -20,6 +20,6 @@ class Account::ObservingsController < ApplicationController
 protected
   
   def find_post(id)
-    Post.find_by_param params[:id]
+    Post.find_by_param id
   end
 end
