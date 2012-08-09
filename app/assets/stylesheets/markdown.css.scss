@@ -57,7 +57,9 @@
   }
   pre {
     white-space: pre-wrap;
+    
     code {
+      overflow-x: scroll;
       display: block;
       padding: .25em .5em .3em .5em;
       font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
