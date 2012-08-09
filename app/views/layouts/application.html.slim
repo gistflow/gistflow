@@ -40,6 +40,7 @@ html
         = render partial: 'shared/news'
         - if user_signed_in?
           = render :partial => 'users/todolist'
+        = render partial: 'shared/ads'
         = yield(:sidebar)
         = render :partial => 'general/about'
         = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
