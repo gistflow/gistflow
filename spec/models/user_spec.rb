@@ -43,9 +43,9 @@ describe User do
       subject.flow.should_not include(post)
     end
     
-    it 'should not show self private posts' do
+    it 'should show self private posts' do
       post = create(:private_post, user: user)
-      subject.flow.should_not include(post)
+      subject.flow.should include(post)
     end
   end
   
