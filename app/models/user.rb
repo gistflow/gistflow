@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
   has_one  :profile
+  has_one  :account_token, class_name: 'Account::Token'
   has_many :posts
   has_many :likes
   has_many :comments
@@ -25,12 +26,17 @@ class User < ActiveRecord::Base
   
   before_create :assign_settings
   before_create :assign_profile
+  before_create :assign_token
   attr_accessor :company, :github_page, :home_page, :email
   
   def self.gistflow
     User.where(username: 'gistflow').first_or_create! do |user|
       user.name = 'Gistflow'
     end
+  end
+  
+  def self.find_by_token(token)
+    Account::Token.find_by_token(token).user
   end
   
   def flow
@@ -174,6 +180,12 @@ private
       p.company = company
       p.home_page = home_page
       p.email = email
+    end
+  end
+  
+  def assign_token
+    build_account_token do |token|
+      token.token = Digest::SHA1.hexdigest(rand.to_s)
     end
   end
 end

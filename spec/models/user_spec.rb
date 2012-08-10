@@ -5,11 +5,15 @@ describe User do
   subject { user }
   
   it 'should have settings' do
-    user.settings.should be
+    user.settings.should be_persisted
   end
   
   it 'should have profile' do
-    user.profile.should be
+    user.profile.should be_persisted
+  end
+  
+  it 'should have token' do
+    user.account_token.should be_persisted
   end
   
   describe '#gistflow' do

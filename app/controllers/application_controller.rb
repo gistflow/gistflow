@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, with: :handle_unauthorized
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
+  prepend_before_filter :token_authentication
+  
   if Rails.env.staging?
     prepend_before_filter :authenticate_staging
     
@@ -77,5 +79,12 @@ protected
   
   def render_json_error(message)
     render :json => { :message => message }, :status => :error
+  end
+  
+  def token_authentication
+    if params[:token]
+      self.current_user = User.find_by_token(params[:token])
+    end
+    true
   end
 end
