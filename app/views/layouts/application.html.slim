@@ -9,6 +9,13 @@ html
     javascript:
       try{Typekit.load();}catch(e){}
     
+    meta property="og:title" content="Gistflow"
+    meta property="og:type" content="company"
+    meta property="og:url" content="http://gistflow.com"
+    meta property="og:image" content=""
+    meta property="og:site_name" content="Gistflow"
+    meta property="fb:admins" content="100001584897024"
+    
     = csrf_meta_tags
     title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
     = render partial: 'shared/google_analytics'
@@ -24,6 +31,7 @@ html
           admin: #{current_user.admin?}
         }
   body
+    div id="fb-root"
     = raw javascript_enabled?
     div class="wrap group"
       header class="main"
@@ -37,13 +45,14 @@ html
             nav class="submenu" = yield(:submenu)
         = yield
       section class="sidebar"
-        = render partial: 'shared/news'
+        = render partial: 'shared/facebook'
         - if user_signed_in?
           = render :partial => 'users/todolist'
-        = render partial: 'shared/ads'
         = yield(:sidebar)
-        = render :partial => 'general/about'
-        = render :partial => 'account/gists/sidebar', :locals => { :load_gists => false }
+        = render partial: 'shared/news'
+        = render partial: 'shared/ads'
+        = render partial: 'general/about'
+        = render partial: 'account/gists/sidebar', locals: { load_gists: false }
         = render 'account/bookmarks/sidebar' if user_signed_in?
         = render 'account/tags/sidebar'
     footer class="main"
