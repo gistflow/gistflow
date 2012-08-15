@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  skip_before_filter :verify_authenticity_token, if: :authenticated_by_token?
   
   enable_authorization
   protect_from_forgery
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
   
 protected
+  
+  def authenticated_by_token?
+    !!@authenticated_by_token
+  end
   
   def current_user_newbie?
     current_user.try(:newbie?)
@@ -83,7 +88,9 @@ protected
   
   def token_authentication
     if params[:token]
-      self.current_user = User.find_by_token(params[:token])
+      if self.current_user = User.find_by_token(params[:token])
+        @authenticated_by_token = true
+      end
     end
     true
   end
