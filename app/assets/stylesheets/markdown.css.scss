@@ -31,7 +31,15 @@
   
   p {
     line-height: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  
+  b, strong {
+    font-weight: 600;
+  }
+  
+  i, em {
+    font-style: italic;
   }
   
   ul {

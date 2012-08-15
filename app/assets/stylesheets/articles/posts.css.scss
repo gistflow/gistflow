@@ -3,13 +3,14 @@
 article.post {
   
   header h1 {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 28px;
     
     span {
       display: inline-block;
       font-size: 14px;
       color: $layout;
+      
       a {
         color: $charcoal;
         font-weight: 600;
