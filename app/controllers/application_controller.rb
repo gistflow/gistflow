@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  skip_before_filter :verify_authenticity_token, if: :authenticated_by_token?
-  
   enable_authorization
   protect_from_forgery
   

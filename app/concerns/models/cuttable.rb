@@ -26,7 +26,7 @@ module Models
     end
     
     def content_parts
-      m = content.split(CUT, 2)
+      m = content.to_s.split(CUT, 2)
       @content_parts ||= [m.first, m.last].uniq.compact
     end
   end
