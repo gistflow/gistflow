@@ -48,7 +48,7 @@ class PostsController < ApplicationController
       flash[:info] = tags_flash_info
       respond_to do |format|
         format.html { render :new }
-        format.json { render json: { errors: @post.errors.full_messages }, head: :unprocessible_entity }
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
       end
     end
   end
