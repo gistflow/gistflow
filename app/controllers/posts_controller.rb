@@ -40,10 +40,16 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     
     if @post.save
-      redirect_to @post
+      respond_to do |format|
+        format.html { redirect_to @post }
+        format.json { render json: {}, head: :ok }
+      end
     else
       flash[:info] = tags_flash_info
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: { errors: @post.errors.full_messages }, head: :unprocessible_entity }
+      end
     end
   end
 
