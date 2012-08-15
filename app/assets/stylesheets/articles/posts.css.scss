@@ -4,7 +4,8 @@ article.post {
   
   header h1 {
     font-size: 16px;
-    line-height: 28px;
+    line-height: 22px;
+    padding-bottom: 6px;
     
     span {
       display: inline-block;
@@ -28,7 +29,8 @@ article.post {
   &.detail {
     header h1 {
       font-size: 20px;
-      line-height: 36px;
+      line-height: 24px;
+      padding-botton: 12px;
       
       span {
         font-size: 18px;
