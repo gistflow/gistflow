@@ -31,16 +31,14 @@ class Post < ActiveRecord::Base
   }
   
   def to_param
-    is_private? ? private_key : id
+    is_private? ? private_key : "#{id}-#{title.parameterize}"
   end
   
   def self.find_by_param param
-    if param =~ /\A\d+\z/
-      post = Post.find param
-      raise ActiveRecord::RecordNotFound if post.is_private?
-      post
+    if param.size == 40 && param =~ /[a-z0-9]{20}/
+      Post.find_by_private_key! param
     else
-      Post.find_by_private_key param
+      Post.where(is_private: false).find param[/^(\d+)/, 1]
     end
   end
 

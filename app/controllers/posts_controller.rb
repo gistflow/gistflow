@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_param params[:id]
+    redirect_to(@post, status: 301) if params[:id] != @post.to_param
     @comment = @post.comments.build if can? :create, :comments
   end
 
