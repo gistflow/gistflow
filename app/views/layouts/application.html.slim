@@ -2,7 +2,9 @@ doctype html
 html
   head
     meta charset='UTF-8' 
-    meta name='description' content='Social learning'
+    meta name='description' content='#{content_for?(:description) ? yield(:description) : 'Social learning'}'
+    - if content_for?(:keywords)
+      meta name='keywords' content='#{yield(:keywords)}'
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = javascript_include_tag '//use.typekit.net/zky6kmq.js'
