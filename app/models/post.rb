@@ -35,7 +35,7 @@ class Post < ActiveRecord::Base
   end
   
   def self.find_by_param param
-    if param.size == 40 && param =~ /[a-z0-9]{20}/
+    if param.size == 40 && param =~ /[a-z0-9]{40}/
       Post.find_by_private_key! param
     else
       Post.where(is_private: false).find param[/^(\d+)/, 1]
