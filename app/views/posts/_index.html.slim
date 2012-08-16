@@ -1,4 +1,5 @@
 javascript:
+  window.ratings = #{Hash[posts.map { |p| [p.user.username, p.user.rating] }].to_json.html_safe}
   window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
 - posts.each do |post|
   - cache post.cache_key(:preview) do
@@ -11,6 +12,7 @@ javascript:
             = link_to post.user, post.user
       div class="avatar"
         = link_to avatar_image(post.user, 26), post.user
+        span class="rating"
       div class="preview markdown group"
         = post_preview post
       footer class="group actions"

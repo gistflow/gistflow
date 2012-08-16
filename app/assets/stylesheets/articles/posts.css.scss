@@ -44,9 +44,24 @@ article.post {
   
   .avatar {
     float: left;
+    width: 30px;
     
     a {
       @include frame;
+    }
+    
+    span.rating {
+      display: inline-block;
+      width: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: $charcoal;
+      font-family: "proxima-nova-condensed", sans-serif;
+      &:after {
+        content: "♥";
+        font-size: 9px;
+        margin: 0 0 0 1px;
+      }
     }
   }
   

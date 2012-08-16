@@ -3,6 +3,10 @@ $(function(){
     var post = $(post_html)
     var author = post.data('author')
     var post_data = window.posts[post.data('id')]
+    var rating = window.ratings[author]
+    
+    // setup user's rating
+    post.find('span.rating').html(rating)
     
     // setup edit button
     if (!window.current_user || (window.current_user.username != author && !window.current_user.admin)) {

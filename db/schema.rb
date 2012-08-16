@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810052854) do
+ActiveRecord::Schema.define(:version => 20120816174058) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20120810052854) do
     t.string   "gravatar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating",      :default => 0
   end
 
   create_table "wikis", :force => true do |t|
