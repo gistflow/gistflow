@@ -97,7 +97,7 @@ class Post < ActiveRecord::Base
   end
   
   def persisted_comments
-    comments.includes(:user).to_a.select(&:persisted?)
+    comments.order(:id).includes(:user).to_a.select(&:persisted?)
   end
   
   def usernames
