@@ -21,6 +21,7 @@ class Post < ActiveRecord::Base
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
+  after_create :notify_audience
   before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
@@ -63,6 +64,14 @@ class Post < ActiveRecord::Base
   
   def cache_key(type)
     "post:#{id}:#{type}"
+  end
+  
+  def audience
+    is_private? ? [] : begin
+      User.mailable.find_all do |user|
+        user.flow.include?(self) && user != self.user
+      end.uniq
+    end
   end
   
   def path
@@ -123,5 +132,9 @@ private
   
   def assign_private_key
     self.private_key = Digest::SHA1.hexdigest(rand.to_s)
+  end
+  
+  def notify_audience
+    Resque.enqueue(Mailer, 'UserMailer', :new_post, id)
   end
 end

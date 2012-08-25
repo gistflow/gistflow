@@ -37,5 +37,15 @@ Gistflow::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = false
   
-  config.host = 'http://localhost:3000'
+  config.host = 'http://gistflow.dev'
+  config.action_mailer.default_url_options = { host: 'http://gistflow.dev' }
+  
+  ActionMailer::Base.smtp_settings = {
+    :authentication => :plain,
+    :address        => Configuration.mailgun.address,
+    :port           => Configuration.mailgun.port,
+    :domain         => Configuration.mailgun.domain,
+    :user_name      => Configuration.mailgun.user_name,
+    :password       => Configuration.mailgun.password
+  }
 end

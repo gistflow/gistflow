@@ -16,4 +16,14 @@ class UserMailer < ActionMailer::Base
   
     mail to: @user.profile.email, subject: @notification.title
   end
+  
+  def new_post(post_id)
+    @post = Post.find(post_id)
+    
+    mail(
+      to: 'info@gistflow.com',
+      bcc: @post.audience.map { |u| u.profile.email },
+      subject: "New Post: #{@post.title}"
+    )
+  end
 end
