@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     if @post.save
       respond_to do |format|
         format.html { redirect_to @post }
-        format.json { render json: {}, head: :ok }
+        format.json { render json: { location: post_url(@post) }, head: :ok }
       end
     else
       flash[:info] = tags_flash_info
