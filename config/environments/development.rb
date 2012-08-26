@@ -38,7 +38,7 @@ Gistflow::Application.configure do
   config.assets.debug = false
   
   config.host = 'http://gistflow.dev'
-  config.action_mailer.default_url_options = { host: 'http://gistflow.dev' }
+  config.action_mailer.default_url_options = { host: 'gistflow.dev' }
   
   ActionMailer::Base.smtp_settings = {
     :authentication => :plain,
