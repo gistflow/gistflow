@@ -77,7 +77,7 @@ protected
   end
   
   def sidebar_tags
-    user_signed_in? ? current_user.tags : Tag.popular
+    user_signed_in? ? current_user.tags.limit(Tag::DISPLAY_LIMIT) : Tag.popular(Tag::DISPLAY_LIMIT)
   end
   
   def render_json_error(message)
