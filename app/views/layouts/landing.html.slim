@@ -5,8 +5,9 @@ html
     meta name='description' content='Social learning'
     = javascript_include_tag 'application'
     = javascript_include_tag '//use.typekit.net/zky6kmq.js'
+    = javascript_include_tag 'https://www.google.com/jsapi'    
     javascript:
-      try{Typekit.load();}catch(e){}
+      try{Typekit.load();}catch(e){}    
     = stylesheet_link_tag 'landing'
     = csrf_meta_tags
     title = "Gistflow :: Welcome"
@@ -16,7 +17,7 @@ html
     div class="wrap group"
       section class="landing"
         header
-          h1 A place to share and improve developer skills
+          h1 Join developers community blog, share and learn new skills.
           nav class="login"
             ul
               li= link_to 'Login', auth_path
@@ -55,17 +56,16 @@ html
         div class="description"
           p 
             | Join community of social coders, write and discuss code related posts. 
-            = link_to 'more', '#more', class: 'more'
         div class="more" id="more"
           div class="message"
-            h2 Gistflow – is an open-source gist-sharing service for developers. 
-            p We see this project as a place where developers can share their skills by writing code-related posts and discuss it. By now all the necessary social features are implemented – user following, subscriptions for tags, post comments, personal bookmarks, ratings, import code to posts from gist.github.com, markdown and code highlighting.
+            h2 Gistflow – is open-source blog platform and social network.
+            p Gistflow is a place where developers can share their skills by writing code-related posts and discussing it. User following, subscriptions for tags, post comments, personal bookmarks, ratings, import code to posts from gist.github.com, markdown and code highlighting – by now all the necessary social features are implemented.
           
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/github.png')
             h3 Github account
             p
-              | By our opinion Github – the best place to share code. You can find many 
+              | Start you developer blog in two clicks using Github account. By our opinion Github – the best place to share code. You can find many 
               em open source 
               | projects there including Rails, jQuery and a lot more. So you definitely need to have Github to be a social coder and to be able to sign up for Gistflow.
           
@@ -116,7 +116,10 @@ html
               = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/', target: :blank
               | ?
           
+          = render :partial => 'layouts/time_counters'        
           div class="message"
+            h3 Present            
+            div id="chart"
             h3 Future
             p We are just in the beginning of our way, but as you can see we are working continuously to bring all the conceived features to production as soon as possible. 
           
