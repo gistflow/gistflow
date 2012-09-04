@@ -1,0 +1,21 @@
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(
+      <%= load_time_counters %>
+    );
+
+    console.log(<%= load_time_counters %>);
+
+    var options = {
+      title: 'Gistflow statistics',
+      chartArea: {
+        top: 30
+      }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    chart.draw(data, options);
+  }
+</script>

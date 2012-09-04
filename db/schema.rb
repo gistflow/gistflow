@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816174058) do
+ActiveRecord::Schema.define(:version => 20120904203658) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -78,8 +78,10 @@ ActiveRecord::Schema.define(:version => 20120816174058) do
   end
 
   create_table "likes", :force => true do |t|
-    t.integer "user_id"
-    t.integer "post_id"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "likes", ["post_id"], :name => "index_likes_on_post_id"
@@ -156,9 +158,11 @@ ActiveRecord::Schema.define(:version => 20120816174058) do
   add_index "subscriptions", ["tag_id", "user_id"], :name => "index_subscriptions_on_tag_id_and_user_id", :unique => true
 
   create_table "taggings", :force => true do |t|
-    t.integer "taggable_id"
-    t.string  "taggable_type"
-    t.integer "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
@@ -166,13 +170,26 @@ ActiveRecord::Schema.define(:version => 20120816174058) do
   add_index "taggings", ["taggable_type", "taggable_id"], :name => "index_taggings_on_taggable_type_and_taggable_id"
 
   create_table "tags", :force => true do |t|
-    t.string  "name"
-    t.integer "taggings_count", :default => 0
-    t.integer "entity_id"
+    t.string   "name"
+    t.integer  "taggings_count", :default => 0
+    t.integer  "entity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "tags", ["entity_id"], :name => "index_tags_on_entity_id"
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
+
+  create_table "time_counters", :force => true do |t|
+    t.string   "model"
+    t.integer  "total_count"
+    t.integer  "today_count"
+    t.date     "date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "time_counters", ["model", "date"], :name => "index_time_counters_on_model_and_date", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"
