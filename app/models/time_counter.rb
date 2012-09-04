@@ -6,5 +6,5 @@ class TimeCounter < ActiveRecord::Base
 
   attr_accessible :total_count, :today_count, :date, :model
 
-  scope :for_landing, where('date >= ?', 20.days.ago)
+  scope :for_landing, where('date >= ?', 20.days.ago).order('date ASC')
 end
