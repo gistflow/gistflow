@@ -147,7 +147,7 @@ module ApplicationHelper
   def load_time_counters
     points = TimeCounter.for_landing.group_by(&:date).each_pair.map do |date, data|
       grouped_data = data.group_by(&:model)
-      [date, TimeCounter::MODELS.map { |m| grouped_data[m.to_s] ? grouped_data[m.to_s].first.total_count : nil }].flatten
+      [date.strftime("%b, %d"), TimeCounter::MODELS.map { |m| grouped_data[m.to_s] ? grouped_data[m.to_s].first.total_count : nil }].flatten
     end
 
     points.insert(0, TimeCounter::MODELS.dup.insert(0, 'Date'))
