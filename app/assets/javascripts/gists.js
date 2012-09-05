@@ -81,7 +81,7 @@ $(function(){
     </div> \
   ')
   
-  $("article.post.detail a:contains('gist:')").each(function(){
+  $("article.post.detail a:contains('gist:'), article.comment a:contains('gist:')").each(function(){
     var id = $(this).html().match(/gist:(\d+)/)[1];
     var element = $(this);
 		
