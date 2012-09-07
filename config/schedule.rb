@@ -5,5 +5,5 @@ every 4.hours do
 end
 
 every 1.day do
-  rake 'time_counters:generate'
+  rake 'time_counters:generate_todays'
 end

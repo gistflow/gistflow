@@ -3,6 +3,7 @@ namespace :time_counters do
     TimeCounter::MODELS.each do |model_name|
       klass = model_name.to_s.classify.constantize
 
+      # TODO group by date, not by datetime (keys are the same dates for today_count)
       klass.select(:created_at).order('created_at DESC').
         group_by(&:created_at).
         each_pair do |date, records|
