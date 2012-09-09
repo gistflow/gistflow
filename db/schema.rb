@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904203658) do
+ActiveRecord::Schema.define(:version => 20120909112248) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -141,9 +141,9 @@ ActiveRecord::Schema.define(:version => 20120904203658) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id", :unique => true
 
   create_table "settings", :force => true do |t|
-    t.string   "default_wall",                :default => "flow"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.string   "default_wall",                :default => "all"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "user_id"
     t.boolean  "receive_notification_emails", :default => true
   end
