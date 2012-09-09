@@ -39,6 +39,11 @@ class Replaceable
     self
   end
   
+  def replace_emoji!
+    self.body = self.body.emojify    
+    self
+  end
+
   def tagnames
     body.to_s.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
       match[1].gsub(/[\-_]/, '').downcase
