@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :reverse_followings, foreign_key: :followed_user_id, class_name: :'Following'
   has_many :followed_users, through: :followings, source: :followed_user
   has_many :followers, through: :reverse_followings
+  has_many :flow
   
   validates :username, :name, presence: true
   validates :username, uniqueness: true
@@ -43,16 +44,6 @@ class User < ActiveRecord::Base
   
   def self.find_by_token(token)
     Account::Token.find_by_token(token).user
-  end
-  
-  def flow
-    tag_ids = subscriptions.select(:tag_id).to_sql
-    user_ids = followings.select(:followed_user_id).to_sql
-    conditions = []
-    conditions << "posts.user_id = #{id}"
-    conditions << "taggings.tag_id in (#{tag_ids}) and posts.is_private = 'f'"
-    conditions << "posts.user_id in (#{user_ids}) and posts.is_private = 'f'"
-    Post.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
   # Bookmarks

@@ -23,4 +23,5 @@ section.posts
     
     p There are no posts to display.
   - else
-    = render :partial => 'index', :locals => { :posts => @posts }
+    = render :partial => 'index', :locals => { :posts => @flow.map(&:post) }
+  = paginate @flow

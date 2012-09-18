@@ -12,3 +12,4 @@ section class="posts"
         - else
           li Posts
   = render :partial => 'index', :locals => { :posts => @posts }
+  = paginate @posts

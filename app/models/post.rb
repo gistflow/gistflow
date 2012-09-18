@@ -11,6 +11,7 @@ class Post < ActiveRecord::Base
   has_many :observings
   has_many :bookmarks
   has_many :likes
+  has_many :flow
   
   validates :user, :title, presence: true
   validates :preview, length: { minimum: 3, maximum: 500, too_long: 'is too long. Use <cut> tag to separate preview and text', too_short: 'is too short' }
@@ -23,6 +24,7 @@ class Post < ActiveRecord::Base
   after_create :setup_observing_for_author
   after_create :notify_audience
   before_create :assign_private_key
+  after_save :move_to_flow
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
   scope :not_private, where(is_private: false)
@@ -114,6 +116,33 @@ class Post < ActiveRecord::Base
   end
   
 private
+  
+  def after_mark_deleted
+    flow.destroy_all
+    true
+  end
+
+  def move_to_flow
+    return true if mark_deleted?
+    
+    # to author
+    flow.where(user_id: user_id).first_or_create!
+    
+    # to followers
+    unless is_private?
+      user_ids = user.follower_ids
+      flow.where(user_id: user.follower_ids).first_or_create! if user_ids.any?
+    end
+    
+    # to subscribers
+    unless is_private?
+      conditions = { subscriptions: { tag_id: tag_ids } }
+      user_ids = User.joins(:subscriptions).where(conditions).pluck("users.id")
+      flow.where(user_id: user_ids).first_or_create! if user_ids.any?
+    end
+    
+    true
+  end
   
   def tweet
     if user.twitter_client?

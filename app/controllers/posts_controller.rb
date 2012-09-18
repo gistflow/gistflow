@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   alias all index
   
   def flow
-    @posts = current_user.flow.page(params[:page])
+    @flow = current_user.flow.includes(:post).page(params[:page])
   end
   
   def bookmarks

@@ -18,8 +18,9 @@ module Models
     # if there are couter caches needed to be decremented
     # implement decrement_counters method in model
     def mark_deleted
-      mark_deleted? || ActiveRecord::Base.transaction do
+      mark_deleted? || begin
         update_attribute :deleted_at, Time.now
+        after_mark_deleted if respond_to? :after_mark_deleted
         decrement_counters if respond_to? :decrement_counters
       end
     end
