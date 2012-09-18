@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909112248) do
+ActiveRecord::Schema.define(:version => 20120918042655) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(:version => 20120909112248) do
     t.datetime "updated_at",                     :null => false
     t.datetime "deleted_at"
   end
+
+  create_table "flow", :force => true do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
+  add_index "flow", ["post_id"], :name => "index_flow_on_post_id"
+  add_index "flow", ["user_id", "post_id"], :name => "index_flow_on_user_id_and_post_id", :unique => true
+  add_index "flow", ["user_id"], :name => "index_flow_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"

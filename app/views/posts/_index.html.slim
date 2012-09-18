@@ -1,6 +1,6 @@
 javascript:
   window.ratings = #{Hash[posts.map { |p| [p.user.username, p.user.rating] }].to_json.html_safe}
-  window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
+  window.posts = #{Hash[posts.map { |p| [p.id, p.likes_count, p.comments_count] }].to_json.html_safe}
 - posts.each do |post|
   - cache post.cache_key(:preview) do
     article id="post-#{post.id}" class="post group" rel="#{post_url(post)}" data-id="#{post.id}" data-author="#{post.user.username}"
@@ -26,4 +26,3 @@ javascript:
           div class="button-group minor-group"
             = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
             = link_to "Show", post, :class => 'button primary'
-= paginate posts

@@ -26,30 +26,34 @@ describe User do
     it 'should find post with subscribed tag' do
       tag = create(:subscription, :user => user).tag
       post = create(:post); post.tags = [tag]
-      subject.flow.should include(post)
+      post.send :move_to_flow
+      subject.flow.map(&:post).should include(post)
     end
     
     it 'should not find private post with subscribed tag' do
       tag = create(:subscription, user: user).tag
       post = create(:private_post); post.tags = [tag]
-      subject.flow.should_not include(post)
+      post.send :move_to_flow
+      subject.flow.map(&:post).should_not include(post)
     end
     
     it 'should find post by followed user' do
       followed_user = create(:following, follower: user).followed_user
       post = create(:post, user: followed_user)
-      subject.flow.should include(post)
+      post.send :move_to_flow
+      subject.flow.map(&:post).should include(post)
     end
     
     it 'should find post by followed user' do
       followed_user = create(:following, follower: user).followed_user
       post = create(:private_post, user: followed_user)
-      subject.flow.should_not include(post)
+      post.send :move_to_flow
+      subject.flow.map(&:post).should_not include(post)
     end
     
     it 'should show self private posts' do
       post = create(:private_post, user: user)
-      subject.flow.should include(post)
+      subject.flow.map(&:post).should include(post)
     end
   end
   
