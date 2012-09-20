@@ -3,7 +3,7 @@ require 'spec_helper'
 PUNCTUATION = ['.', ',', ':', ';', '?', '!', '(', ')']
 
 describe Replaceable do
-  describe '#replace_gists' do
+  describe '#replace_gists!' do
     let(:replaceable) { Replaceable.new('gist:1, gist:2') }
     before { replaceable.replace_gists! }
     subject { replaceable.to_s }
@@ -21,18 +21,69 @@ describe Replaceable do
   end
   
   describe '#replace_tags!' do
-    let(:replaceable) { Replaceable.new('#tag1, #tag2') }
     before { replaceable.replace_tags! }
     subject { replaceable.to_s }
     
-    it 'should replace tags to links' do
-      should == '[#tag1](/tags/tag1), [#tag2](/tags/tag2)'
+    context 'in plain text' do
+      let(:replaceable) { Replaceable.new('#tag1, #tag2') }
+
+      it 'should replace tags to links' do
+        should == '[#tag1](/tags/tag1), [#tag2](/tags/tag2)'
+      end
+
+      PUNCTUATION.each do |char|
+        context "end with #{char}" do
+          let(:replaceable) { Replaceable.new("#tag#{char}") }
+          it { should == "[#tag](/tags/tag)#{char}" }
+        end
+      end
     end
     
-    PUNCTUATION.each do |char|
-      context "end with #{char}" do
-        let(:replaceable) { Replaceable.new("#tag#{char}") }
-        it { should == "[#tag](/tags/tag)#{char}" }
+    context 'in links' do
+      context 'created with []' do
+        let(:replaceable) { Replaceable.new('[link name](http://gistflow.com#tag)') }
+        
+        it { should == '[link name](http://gistflow.com#tag)' }
+      end
+      
+      context 'created with <>' do
+        let(:replaceable) { Replaceable.new('<http://gistflow.com#tag>') }
+        
+        it 'should not replace tags to links' do
+          should == '<http://gistflow.com#tag>'
+        end
+      end
+    end
+    
+    context 'in code' do
+      context 'created with ``````' do
+        let(:replaceable) { Replaceable.new("```ruby\n #ruby \n```") }
+        
+        it { should == "```ruby\n #ruby \n```" }
+      end
+      
+      context 'created with `````` inline' do
+        let(:replaceable) { Replaceable.new("```ruby #ruby ```") }
+        
+        it { should == "``` #ruby ```" }
+      end
+      
+      context 'created with ``' do
+        let(:replaceable) { Replaceable.new("` #ruby `") }
+        
+        it { should == "` #ruby `" }
+      end
+      
+      context 'created with ~~~~~~' do
+        let(:replaceable) { Replaceable.new("```ruby\n #ruby \n```") }
+        
+        it { should == "```ruby\n #ruby \n```" }
+      end
+      
+      context 'created with ~~~~~~ inline' do
+        let(:replaceable) { Replaceable.new("~~~ #ruby ~~~") }
+        
+        it { should == "~~~ #ruby ~~~" }
       end
     end
   end
