@@ -62,10 +62,10 @@ describe Replaceable do
         it { should == "```ruby\n #ruby \n```" }
       end
       
-      context 'created with `````` inline' do
-        let(:replaceable) { Replaceable.new("```ruby #ruby ```") }
+      context 'created with `````` inline', focus: true do
+        let(:replaceable) { Replaceable.new("123 ``` #ruby ``` 321") }
         
-        it { should == "``` #ruby ```" }
+        it { should == "123 ``` #ruby ``` 321" }
       end
       
       context 'created with ``' do

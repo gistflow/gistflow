@@ -3,3 +3,11 @@ class String
     " #{self} "
   end
 end
+
+class ReplaceableString < String
+  attr_accessor :replaceable
+  
+  def replaceable?
+    !!@replaceable
+  end
+end
