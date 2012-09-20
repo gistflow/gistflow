@@ -41,7 +41,6 @@ group :test, :development do
 end
 
 group :test do
-  gem 'ci_reporter'
   gem 'database_cleaner'
   gem 'rake', '0.9.2.2'
 end
