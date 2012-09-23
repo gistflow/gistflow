@@ -3,13 +3,15 @@
 article.post {
   
   header h1 {
-    font-size: 15px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 22px;
+    padding-bottom: 6px;
     
     span {
       display: inline-block;
       font-size: 14px;
       color: $layout;
+      
       a {
         color: $charcoal;
         font-weight: 600;
@@ -27,7 +29,8 @@ article.post {
   &.detail {
     header h1 {
       font-size: 20px;
-      line-height: 36px;
+      line-height: 24px;
+      padding-botton: 12px;
       
       span {
         font-size: 18px;
@@ -41,9 +44,24 @@ article.post {
   
   .avatar {
     float: left;
+    width: 30px;
     
     a {
       @include frame;
+    }
+    
+    span.rating {
+      display: inline-block;
+      width: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: $charcoal;
+      font-family: "proxima-nova-condensed", sans-serif;
+      &:after {
+        content: "♥";
+        font-size: 9px;
+        margin: 0 0 0 1px;
+      }
     }
   }
   
@@ -67,11 +85,12 @@ article.post {
     
     time {
       float: left;
-      font-size: 12px;
+      font-size: 13px;
       line-height: 25px;
       position: relative;
       top: 1px;
       color: $charcoal;
+      font-family: "proxima-nova-condensed", sans-serif;
     }
     
 //    .button.favorite.icon {
@@ -84,4 +103,9 @@ article.post {
 //      height: 11px;
 //    }
   }
+}
+
+.private {
+  background: transparent url('private_lock.png') scroll no-repeat left center;
+  padding-left: 20px;
 }

@@ -31,7 +31,15 @@
   
   p {
     line-height: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  
+  b, strong {
+    font-weight: 600;
+  }
+  
+  i, em {
+    font-style: italic;
   }
   
   ul {
@@ -57,7 +65,9 @@
   }
   pre {
     white-space: pre-wrap;
+    
     code {
+      overflow-x: scroll;
       display: block;
       padding: .25em .5em .3em .5em;
       font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;

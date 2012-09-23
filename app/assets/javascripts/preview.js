@@ -3,6 +3,8 @@ $(function(){
     $(this).parents('form#new_comment:first').attr('action', $(this).attr('rel'))
   })
   
+
+  // callback when comment is previewed or commited
   $(document).on('ajax:success', 'form#new_comment', function(e, data){
     if (data.comment) {
       $(this).prev().before(data.comment);
@@ -10,8 +12,8 @@ $(function(){
     }
     var form = $(data.form)
     $(this).replaceWith(data.form)
-    // fix to local
-    $('textarea').autosize().tabby({tabString: '  '})
+    // fix to local    
+    $('textarea').autoResize().tabby({tabString: '  '})
   })
   
   $(document).on('ajax:error', 'form#new_comment', function(e, data){
@@ -29,10 +31,11 @@ $(function(){
     flash_error();
   })
   
+  // callback when user switch from previewing comment to editing
   $(document).on('ajax:success', 'a.edit_comment', function(e, data){
     var form = $(data.form);
     $(this).parents().closest('article.comment').replaceWith(data.form);
-    $('textarea').autosize().tabby({tabString: '  '});
+    $('textarea').autoResize().tabby({tabString: '  '});
   })
   
   $(document).on('ajax:error', 'a.edit_comment', function(e, data){

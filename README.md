@@ -1,4 +1,4 @@
-## [Gistflow](http://gistflow.com) - social learning. [![Build Status](https://secure.travis-ci.org/gistflow/gistflow.png)](http://travis-ci.org/gist-flow/gistflow)
+## [Gistflow](http://gistflow.com) - social learning. [![Build Status](https://secure.travis-ci.org/gistflow/gistflow.png)](http://travis-ci.org/gistflow/gistflow)
 
 Micro-blog platform for developers inspired by [Github:Gist](http://gist.github.com) and [Twitter](http://twitter.com).
 
@@ -21,8 +21,8 @@ Every new feature comes with bunch of rspec and capybara tests. Be sure to write
 
 ## Contributors
 
-* [Jan Bernacki](https://github.com/makaroni4) (releu)
-* [Anatoli Makarevich](https://github.com/releu) (makaroni4)
+* [Jan Bernacki](https://github.com/releu) (releu)
+* [Anatoli Makarevich](https://github.com/makaroni4) (makaroni4)
 
 ## License
 

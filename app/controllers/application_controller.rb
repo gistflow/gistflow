@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  
   enable_authorization
   protect_from_forgery
   
@@ -7,6 +6,8 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, with: :notify_batman
   rescue_from CanCan::Unauthorized, with: :handle_unauthorized
   helper_method :user_signed_in?, :current_user, :sidebar_tags
+  
+  prepend_before_filter :token_authentication
   
   if Rails.env.staging?
     prepend_before_filter :authenticate_staging
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
   end
   
 protected
+  
+  def authenticated_by_token?
+    !!@authenticated_by_token
+  end
   
   def current_user_newbie?
     current_user.try(:newbie?)
@@ -72,10 +77,19 @@ protected
   end
   
   def sidebar_tags
-    user_signed_in? ? current_user.tags : Tag.popular
+    user_signed_in? ? current_user.tags.limit(Tag::DISPLAY_LIMIT) : Tag.popular(Tag::DISPLAY_LIMIT)
   end
   
   def render_json_error(message)
     render :json => { :message => message }, :status => :error
+  end
+  
+  def token_authentication
+    if params[:token]
+      if self.current_user = User.find_by_token(params[:token])
+        @authenticated_by_token = true
+      end
+    end
+    true
   end
 end

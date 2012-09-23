@@ -1,4 +1,7 @@
 - window_title @post.title
+- description @post.title
+- keywords @post.tags.map(&:name).join(', ')
+
 javascript:
   window.posts = {
     "#{@post.id}": #{@post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
