@@ -7,15 +7,9 @@ module Markdown
       :no_intra_emphasis,
       :lax_html_blocks,
       :autolink
-    ]
+    ].map { |e| [e, true] }
     
-    RedcarpetCompat.new(text, *options).to_html.html_safe
-    
-    # this code brake text
-    # # sanitizing html except images for emoji smiles
-    # RedcarpetCompat.new(
-    #   Sanitize.clean(text, elements: ['img'], attributes: { 'img' => ['src', 'alt', 'title', 'class', 'width', 'height']}), 
-    #   *options
-    # ).to_html.html_safe
+    md = Redcarpet::Markdown.new(GFHTML, Hash[options])
+    md.render(text).html_safe
   end
 end

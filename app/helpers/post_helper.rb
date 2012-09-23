@@ -24,8 +24,6 @@ module PostHelper
 protected
   
   def post_markup(text)
-    raw = Replaceable.new(text)
-    raw.replace_gists!.replace_tags!.replace_usernames!
-    Markdown.markdown raw.to_s
+    Markdown.markdown text
   end
 end

@@ -38,54 +38,6 @@ describe Replaceable do
         end
       end
     end
-    
-    context 'in links' do
-      context 'created with []' do
-        let(:replaceable) { Replaceable.new('[link name](http://gistflow.com#tag)') }
-        
-        it { should == '[link name](http://gistflow.com#tag)' }
-      end
-      
-      context 'created with <>' do
-        let(:replaceable) { Replaceable.new('<http://gistflow.com#tag>') }
-        
-        it 'should not replace tags to links' do
-          should == '<http://gistflow.com#tag>'
-        end
-      end
-    end
-    
-    context 'in code' do
-      context 'created with ``````' do
-        let(:replaceable) { Replaceable.new("```ruby\n #ruby \n```") }
-        
-        it { should == "```ruby\n #ruby \n```" }
-      end
-      
-      context 'created with `````` inline', focus: true do
-        let(:replaceable) { Replaceable.new("123 ``` #ruby ``` 321") }
-        
-        it { should == "123 ``` #ruby ``` 321" }
-      end
-      
-      context 'created with ``' do
-        let(:replaceable) { Replaceable.new("` #ruby `") }
-        
-        it { should == "` #ruby `" }
-      end
-      
-      context 'created with ~~~~~~' do
-        let(:replaceable) { Replaceable.new("```ruby\n #ruby \n```") }
-        
-        it { should == "```ruby\n #ruby \n```" }
-      end
-      
-      context 'created with ~~~~~~ inline' do
-        let(:replaceable) { Replaceable.new("~~~ #ruby ~~~") }
-        
-        it { should == "~~~ #ruby ~~~" }
-      end
-    end
   end
   
   describe '#replace_usernames' do
@@ -160,9 +112,11 @@ describe Replaceable do
     it { should == %w(tag1 tag2 tag3) }
   end
   
-  describe '#usernames' do
-    let(:replaceable) { Replaceable.new('@username1, @username2, @username3, @UserName') }
-    subject { replaceable.usernames }
+  describe '#usernames', focus: true do
+    let!(:usernames) { %w(username1 username2 username3 UserName) }
+    let!(:users) { usernames.map { |u| FactoryGirl.create(:user, :username => u) } }
+    subject { Replaceable.new(usernames.map { |u| "@#{u}" }.join(', ')).usernames }
+    
     it { should == %w(username1 username2 username3 UserName) }
   end
 end
