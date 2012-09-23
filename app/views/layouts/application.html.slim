@@ -18,6 +18,8 @@ html
     meta property="og:site_name" content="Gistflow"
     meta property="fb:admins" content="100001584897024"
     
+    = favicon_link_tag '/assets/favicon.ico'
+    
     = csrf_meta_tags
     title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
     = render partial: 'shared/google_analytics'
