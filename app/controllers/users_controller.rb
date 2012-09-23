@@ -12,12 +12,12 @@ class UsersController < ApplicationController
   
   def show
     if @user = User.includes(:profile).find_by_username(params[:id])
-      @posts = @user.posts.page(params[:page])
+      @posts = @user.posts.with_privacy(@user, current_user).page(params[:page])
     else
       render 'search/nothing'
     end
   end
-  
+
 protected
   
   def omniauth

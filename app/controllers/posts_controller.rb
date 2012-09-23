@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, if: :authenticated_by_token?
+  
   cache_sweeper :post_sweeper
   cache_sweeper :subscription_sweeper
   cache_sweeper :user_sweeper
@@ -6,7 +8,7 @@ class PostsController < ApplicationController
   before_filter :authenticate!, :except => [:show, :index]
   
   def index
-    @posts = Post.includes(:user).page(params[:page])
+    @posts = Post.not_private.includes(:user).page(params[:page])
     render :index
   end
   alias all index
@@ -20,7 +22,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
+    redirect_to(@post, status: 301) if params[:id] != @post.to_param
     @comment = @post.comments.build if can? :create, :comments
   end
 
@@ -30,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :edit, @post
   end
 
@@ -38,15 +41,21 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     
     if @post.save
-      redirect_to @post
+      respond_to do |format|
+        format.html { redirect_to @post }
+        format.json { render json: { location: post_url(@post) }, head: :ok }
+      end
     else
       flash[:info] = tags_flash_info
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :update, @post
     
     if @post.update_attributes(params[:post])
@@ -58,13 +67,19 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find_by_param params[:id]
     authorize! :destroy, @post
     
     @post.mark_deleted
     redirect_to root_path
   end
   
+  def new_private
+    @post = Post.new(is_private: true)
+    flash[:info] = tags_flash_info
+    render :new
+  end
+
 protected
   
   def tags_flash_info

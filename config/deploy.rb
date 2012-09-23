@@ -1,6 +1,5 @@
 require 'bundler/capistrano'
 
-$:.unshift(File.expand_path("./lib", ENV["rvm_path"]))
 require 'rvm/capistrano'
 
 set :stages, %w(production staging)
@@ -18,6 +17,9 @@ set :repository,  "git@github.com:gistflow/gistflow.git"
 set :scm, :git
 set :branch, ENV['BRANCH'] || "master"
 set :user, "git"
+
+set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
 after "deploy:restart", "deploy:cleanup"
 
@@ -43,8 +45,12 @@ end
 
 namespace :deploy do
   task :restart do
-    # this isn't working :(
-    # run "cd #{current_release} && RAILS_ENV=#{deploy_env} bundle exec god -c #{current_release}/config/god.rb"
-    # run "cd #{current_release} && bundle exec god restart unicorn"
+    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{deploy_env} -D; fi"
+  end
+  task :start do
+    run "cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{deploy_env} -D"
+  end
+  task :stop do
+    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
 end

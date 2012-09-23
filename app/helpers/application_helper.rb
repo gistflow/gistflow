@@ -1,5 +1,15 @@
 # coding: utf-8
 module ApplicationHelper
+  def self.define_partial_helpers(*partials)
+    partials.each do |partial|
+      define_method partial do |content|
+        content_for partial, content
+      end
+    end
+  end
+  
+  define_partial_helpers :title, :description, :keywords, :window_title
+  
   def render_git_version
     "<!-- version: #{Gistflow::VERSION} -->".html_safe
   end
@@ -16,14 +26,6 @@ module ApplicationHelper
     un = user.username
     title, url = "#{un}'s gists", "https://gist.github.com/#{un}"
     (link_to title, url) << " on Github"
-  end
-  
-  def title(title)
-    content_for(:title, title)
-  end
-  
-  def window_title(title)
-    content_for(:window_title, title)
   end
   
   def commit_title(commit = 'Commit')
@@ -140,5 +142,15 @@ module ApplicationHelper
     if !url.blank? && url =~ URI::regexp(%w(http https))
       link_to url, url, options
     end
+  end
+
+  def load_time_counters
+    points = TimeCounter.for_landing.group_by(&:date).each_pair.map do |date, data|
+      grouped_data = data.group_by(&:model)
+      [date.strftime("%b, %d"), TimeCounter::MODELS.map { |m| grouped_data[m.to_s] ? grouped_data[m.to_s].first.total_count : nil }].flatten
+    end
+
+    points.insert(0, TimeCounter::MODELS.dup.insert(0, 'Date'))
+    points.to_json.html_safe
   end
 end

@@ -1,4 +1,6 @@
 class Tag < ActiveRecord::Base
+  DISPLAY_LIMIT = 15
+
   has_many :subscriptions
   has_many :taggings
   has_many :posts, {

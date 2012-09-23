@@ -28,6 +28,8 @@ gem 'settingslogic'
 gem 'pg'
 gem 'yaml_db'
 gem 'diffy'
+gem 'rails_emoji'
+gem 'sanitize'
 
 group :production do
   gem 'god'

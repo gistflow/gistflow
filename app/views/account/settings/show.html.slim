@@ -4,6 +4,7 @@ section class="settings"
       ul
         li = link_to_unless_current 'Profile', account_profile_path
         li class="primary" = link_to_unless_current 'Account settings', account_settings_path
+  
   = form_for [:account, @settings], :url => account_settings_url, :method => :put do |f|
     - if @settings.errors.any?
       ul class="errors"
@@ -21,3 +22,5 @@ section class="settings"
       = f.label :receive_notification_emails
     div class="button-group"
       = f.submit 'Update settings', :class => 'button'
+  
+  p Auth Token: #{current_user.account_token.token}
