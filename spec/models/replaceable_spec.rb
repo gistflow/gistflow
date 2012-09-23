@@ -3,49 +3,52 @@ require 'spec_helper'
 PUNCTUATION = ['.', ',', ':', ';', '?', '!', '(', ')']
 
 describe Replaceable do
-  describe '#replace_gists' do
-    let(:replaceable) { Replaceable.new('gist:1, gist:2') }
-    before { replaceable.replace_gists! }
+  describe '#replace_gists!' do
+    let(:replaceable) { Replaceable.new('<p>gist:1, gist:2</p>') }
+    before { replaceable.replace(:gists) }
     subject { replaceable.to_s }
     
     it 'should replace gists to links' do
-      should == '[gist:1](https://gist.github.com/1), [gist:2](https://gist.github.com/2)'
+      should == %{<p><a href="https://gist.github.com/1">gist:1</a>, <a href="https://gist.github.com/2">gist:2</a></p>}
     end
     
     PUNCTUATION.each do |char|
       context "end with #{char}" do
-        let(:replaceable) { Replaceable.new("gist:1#{char}") }
-        it { should == "[gist:1](https://gist.github.com/1)#{char}" }
+        let(:replaceable) { Replaceable.new("<p>gist:1#{char}</p>") }
+        it { should == %{<p><a href="https://gist.github.com/1">gist:1</a>#{char}</p>}}
       end
     end
   end
   
   describe '#replace_tags!' do
-    let(:replaceable) { Replaceable.new('#tag1, #tag2') }
-    before { replaceable.replace_tags! }
+    before { replaceable.replace(:tags) }
     subject { replaceable.to_s }
     
-    it 'should replace tags to links' do
-      should == '[#tag1](/tags/tag1), [#tag2](/tags/tag2)'
-    end
-    
-    PUNCTUATION.each do |char|
-      context "end with #{char}" do
-        let(:replaceable) { Replaceable.new("#tag#{char}") }
-        it { should == "[#tag](/tags/tag)#{char}" }
+    context 'in plain text' do
+      let(:replaceable) { Replaceable.new('<p>#tag1, #tag2</p>') }
+
+      it 'should replace tags to links' do
+        should == %{<p><a href="/tags/tag1" title="tag1">#tag1</a>, <a href="/tags/tag2" title="tag2">#tag2</a></p>}
+      end
+
+      PUNCTUATION.each do |char|
+        context "end with #{char}" do
+          let(:replaceable) { Replaceable.new("<p>#tag#{char}</p>") }
+          it { should == %{<p><a href="/tags/tag" title="tag">#tag</a>#{char}</p>} }
+        end
       end
     end
   end
   
   describe '#replace_usernames' do
-    before { replaceable.replace_usernames! }
+    before { replaceable.replace(:usernames) }
     subject { replaceable.to_s }
     
     context 'unexisted user' do
-      let(:replaceable) { Replaceable.new(' @username ') }
+      let(:replaceable) { Replaceable.new('<p> @username </p>') }
       
       it 'should not replace it' do
-        should == ' @username '
+        should == '<p> @username </p>'
       end
     end
     
@@ -53,41 +56,40 @@ describe Replaceable do
       before do
         FactoryGirl.create(:user, :username => 'username')
         FactoryGirl.create(:user, :username => 'UserName')
-        replaceable.replace_usernames!
       end
       
       context 'wrapped @usename' do
-        let(:replaceable) { Replaceable.new(' @username ') }
-        it { should == ' [@username](/users/username) ' }
+        let(:replaceable) { Replaceable.new('<p> @username </p>') }
+        it { should == '<p> <a href="/users/username" title="username">@username</a> </p>' }
       end
       
       context 'two usernames' do
-        let(:replaceable) { Replaceable.new('@username @username') }
-        it { should == '[@username](/users/username) [@username](/users/username)' }
+        let(:replaceable) { Replaceable.new('<p>@username @username</p>') }
+        it { should == '<p><a href="/users/username" title="username">@username</a> <a href="/users/username" title="username">@username</a></p>' }
       end
       
       context 'started with @username' do
-        let(:replaceable) { Replaceable.new('@username ') }
-        it { should == '[@username](/users/username) ' }
+        let(:replaceable) { Replaceable.new('<p>@username </p>') }
+        it { should == '<p><a href="/users/username" title="username">@username</a> </p>' }
       end
       
       context 'camel case' do
-        let(:replaceable) { Replaceable.new('@UserName') }
-        it { should == '[@UserName](/users/UserName)' }
+        let(:replaceable) { Replaceable.new('<p>@UserName</p>') }
+        it { should == '<p><a href="/users/UserName" title="UserName">@UserName</a></p>' }
       end
       
       context 'at the end of the line' do
-        let(:replaceable) { Replaceable.new(' @username') }
-        it { should == ' [@username](/users/username)' }
+        let(:replaceable) { Replaceable.new('<p> @username</p>') }
+        it { should == '<p> <a href="/users/username" title="username">@username</a></p>' }
       end
       
       context 'a part of email' do
-        let(:replaceable) { Replaceable.new('foo@username') }
-        it { should == 'foo@username' }
+        let(:replaceable) { Replaceable.new('<p>foo@username</p>') }
+        it { should == '<p>foo@username</p>' }
       end
       
       context 'a double @username@username' do
-        let(:replaceable) { Replaceable.new('@username@username') }
+        let(:replaceable) { Replaceable.new('<p>@username@username</p>') }
         it do
           # should == '@username@username'
           pending "Is it really needed?"
@@ -96,22 +98,24 @@ describe Replaceable do
       
       PUNCTUATION.each do |char|
         context "end with #{char}" do
-          let(:replaceable) { Replaceable.new("@username#{char}") }
-          it { should == "[@username](/users/username)#{char}" }
+          let(:replaceable) { Replaceable.new("<p>@username#{char}</p>") }
+          it { should == %{<p><a href="/users/username" title="username">@username</a>#{char}</p>} }
         end
       end
     end
   end
   
   describe '#tagnames' do
-    let(:replaceable) { Replaceable.new('#tag1, #tag2, #tag3') }
+    let(:replaceable) { Replaceable.new('<p>#tag1, #tag2, #tag3</p>') }
     subject { replaceable.tagnames }
     it { should == %w(tag1 tag2 tag3) }
   end
   
-  describe '#usernames' do
-    let(:replaceable) { Replaceable.new('@username1, @username2, @username3, @UserName') }
-    subject { replaceable.usernames }
+  describe '#usernames', focus: true do
+    let!(:usernames) { %w(username1 username2 username3 UserName) }
+    let!(:users) { usernames.map { |u| FactoryGirl.create(:user, :username => u) } }
+    subject { Replaceable.new("<p>#{usernames.map { |u| "@#{u}" }.join(', ')}</p>").usernames }
+    
     it { should == %w(username1 username2 username3 UserName) }
   end
 end
