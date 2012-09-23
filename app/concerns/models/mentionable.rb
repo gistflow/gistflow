@@ -9,7 +9,8 @@ module Models
   protected
     
     def notify_mentioned
-      usernames = Replaceable.new(content).usernames
+      html = Markdown.markdown(content)
+      usernames = Replaceable.new(html).usernames
       usernames.delete(user.username)
       usernames.each do |username|
         if user = User.find_by_username(username)

@@ -1,58 +1,108 @@
 class Replaceable
-  BASE_REGEXP = '(^|\W){1}%s(\b|\.|,|:|;|\?|!|\(|\)|$){1}'
+  REPLACEABLE_TAGS = %w(p li)
+  UNREPLAREABLE_TAGS = %w(a em strong code img)
+  BASE_REGEXP = '(^|\W){1}%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
   
-  attr_accessor :body
-  alias to_s body
+  attr_reader :html
   
-  def initialize(body)
-    self.body = body
+  def initialize(html)
+    @html = html
+    @actions, @usernames, @tagnames = [], [], []
   end
-    
-  def replace_gists!
-    regexp = Regexp.new(BASE_REGEXP % 'gist:(\d+)')
-    self.body.gsub!(regexp) do |match|
-      "#{$1}[gist:#{$2}](https://gist.github.com/#{$2})#{$3}"
+  
+  def to_s
+    safe_replace do |html|
+      @actions.each do |action|
+        send "replace_#{action}", html
+      end
     end
+    html
+  end
+  
+  def replace(*types)
+    @actions += types.uniq
     self
   end
   
-  def replace_usernames!
+  def tagnames
+    replace(:tags).to_s if @tagnames.empty?
+    @tagnames
+  end
+  
+  def usernames
+    replace(:usernames).to_s if @usernames.empty?
+    @usernames
+  end
+  
+private
+  
+  def safe_replace
+    REPLACEABLE_TAGS.each do |tag|
+      replaceable = {}
+      @html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
+        md5 = Digest::MD5.hexdigest(match)
+        replaceable[md5] = match
+        "{extraction-#{md5}}"
+      end
+      
+      replaceable.map do |md5, html|
+        
+        unreplaceable = {}
+        UNREPLAREABLE_TAGS.each do |tag|
+          html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
+            md5 = Digest::MD5.hexdigest(match)
+            unreplaceable[md5] = match
+            "{extraction-#{md5}}"
+          end
+        end
+        
+        yield html
+        
+        html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
+          unreplaceable[$1]
+        end
+      end
+      
+      @html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
+        replaceable[$1]
+      end
+    end
+  end
+  
+  def replace_gists(html)
+    regexp = Regexp.new(BASE_REGEXP % 'gist:(\d+)')
+    html.gsub!(regexp) do |match|
+      %{#{$1}<a href="https://gist.github.com/#{$2}">gist:#{$2}</a>#{$3}}
+    end
+    html
+  end
+  
+  def replace_usernames(html)
     regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
-    self.body.gsub!(regexp) do |match|
+    html.gsub!(regexp) do |match|
       username = $2
       if User.where(:username => username).exists?
-        "#{$1}[@#{$2}](/users/#{username})#{$3}"
+        @usernames << username
+        %{#{$1}<a href="/users/#{username}" title="#{username}">@#{$2}</a>#{$3}}
       else
         match
       end
     end
-    self
+    html
   end
   
-  def replace_tags!
+  def replace_tags(html)
     regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
-    self.body.gsub!(regexp) do |match|
+    html.gsub!(regexp) do |match|
       before, raw, after = $1, $2, $3
       tagname = raw.gsub(/[\-_]/, '').downcase
-      "#{before}[##{raw}](/tags/#{tagname})#{after}"
+      @tagnames << tagname
+      %{#{before}<a href="/tags/#{tagname}" title="#{tagname}">##{raw}</a>#{after}}
     end
-    self
+    html
   end
   
-  def replace_emoji!
-    self.body = self.body.emojify    
-    self
-  end
-
-  def tagnames
-    body.to_s.scan(Regexp.new(BASE_REGEXP % '#(\w+)')).map do |match|
-      match[1].gsub(/[\-_]/, '').downcase
-    end.uniq
-  end
-  
-  def usernames
-    body.scan(Regexp.new(BASE_REGEXP % '@(\w+)')).map do |match|
-      match[1]
-    end.uniq
+  def replace_emoji(html)
+    html.emojify
   end
 end
