@@ -24,6 +24,9 @@ module PostHelper
 protected
   
   def post_markup(text)
-    Markdown.markdown text
+    html = Markdown.markdown(text)
+    replaceable = Replaceable.new(html)
+    replaceable.replace!(:emoji, :usernames, :gists, :tags)
+    replaceable.to_s
   end
 end

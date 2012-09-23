@@ -7,68 +7,30 @@ class Replaceable
   
   def initialize(html)
     @html = html
-    @usernames = []
-    @tagnames = []
-  end
-  
-  def replace_gists!
-    regexp = Regexp.new(BASE_REGEXP % 'gist:(\d+)')
-    @body.gsub!(regexp) do |match|
-      "#{$1}[gist:#{$2}](https://gist.github.com/#{$2})#{$3}"
-    end
-    self
-  end
-  
-  def replace_usernames!
-    safe_replace do |html|
-      puts "replace: #{html.inspect}"
-      regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
-      html.gsub!(regexp) do |match|
-        username = $2
-        if User.where(:username => username).exists?
-          @usernames << username
-          %{#{$1}<a href="/users/#{username}" title="#{username}">@#{$2}></a>#{$3}}
-        else
-          match
-        end
-      end
-      html
-    end
-    self
-  end
-  
-  def replace_tags!
-    safe_replace do |html|
-      regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
-      html.gsub!(regexp) do |match|
-        before, raw, after = $1, $2, $3
-        tagname = raw.gsub(/[\-_]/, '').downcase
-        @tagnames << tagname
-        %{#{before}<a href="/tags/#{tagname}" title="#{tagname}">##{raw}</a>#{after}}
-      end
-      html
-    end
-    self
-  end
-  
-  def replace_emoji!
-    safe_replace do |html|
-      html.emojify
-    end
-    self
+    @actions, @usernames, @tagnames = [], [], []
   end
   
   def to_s
+    safe_replace do |html|
+      @actions.each do |action|
+        send "replace_#{action}", html
+      end
+    end
     html
   end
   
+  def replace(*types)
+    @actions += types.uniq
+    self
+  end
+  
   def tagnames
-    replace_tags! if @tagnames.empty?
+    replace(:tags).to_s if @tagnames.empty?
     @tagnames
   end
   
   def usernames
-    replace_usernames! if @usernames.empty?
+    replace(:usernames).to_s if @usernames.empty?
     @usernames
   end
   
@@ -83,8 +45,6 @@ private
         "{extraction-#{md5}}"
       end
       
-      puts replaceable.inspect
-      
       replaceable.map do |md5, html|
         
         unreplaceable = {}
@@ -96,8 +56,6 @@ private
           end
         end
         
-        puts html.inspect
-        
         yield html
         
         html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
@@ -106,8 +64,45 @@ private
       end
       
       @html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
-        "\n\n" + replaceable[$1]
+        replaceable[$1]
       end
     end
+  end
+  
+  def replace_gists(html)
+    regexp = Regexp.new(BASE_REGEXP % 'gist:(\d+)')
+    html.gsub!(regexp) do |match|
+      %{#{$1}<a href="https://gist.github.com/#{$2}">gist:#{$2}</a>#{$3}}
+    end
+    html
+  end
+  
+  def replace_usernames(html)
+    regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
+    html.gsub!(regexp) do |match|
+      username = $2
+      if User.where(:username => username).exists?
+        @usernames << username
+        %{#{$1}<a href="/users/#{username}" title="#{username}">@#{$2}</a>#{$3}}
+      else
+        match
+      end
+    end
+    html
+  end
+  
+  def replace_tags(html)
+    regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
+    html.gsub!(regexp) do |match|
+      before, raw, after = $1, $2, $3
+      tagname = raw.gsub(/[\-_]/, '').downcase
+      @tagnames << tagname
+      %{#{before}<a href="/tags/#{tagname}" title="#{tagname}">##{raw}</a>#{after}}
+    end
+    html
+  end
+  
+  def replace_emoji(html)
+    html.emojify
   end
 end
