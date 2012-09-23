@@ -1,5 +1,5 @@
 $(function(){
-  $('textarea').autosize()
+  $('textarea').autoResize()
   $('textarea').tabby({tabString: '  '})
   $('textarea').keydown(function (e) {
    if ((e.ctrlKey || e.metaKey) && e.keyCode == 13) {

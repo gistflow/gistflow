@@ -29,6 +29,8 @@ Gistflow::Application.configure do
   # ActionMailer::Base.deliveries array.
   
   config.action_mailer.delivery_method = :test
+
+  config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
   # config.action_mailer.delivery_method = :file
   #   ActionMailer::Base.file_settings = { 
   #    :location => Rails.root.join('tmp/mail')
