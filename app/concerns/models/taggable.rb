@@ -16,7 +16,8 @@ module Models
   protected
       
     def assign_tags
-      tags = Replaceable.new(content).tagnames.map do |name|
+      html = Markdown.markdown(content)
+      tags = Replaceable.new(html).tagnames.map do |name|
         tag = Tag.where(name: name).first_or_create!
         tag.alias? ? tag.entity : tag
       end.uniq

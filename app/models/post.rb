@@ -88,8 +88,8 @@ class Post < ActiveRecord::Base
   end
   
   def tags_size
-    raw = Replaceable.new(content)
-    raw.tagnames.size
+    html = Markdown.markdown(content)
+    Replaceable.new(html).tagnames.size
   end
   
   def status?

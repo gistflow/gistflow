@@ -26,7 +26,7 @@ protected
   def post_markup(text)
     html = Markdown.markdown(text)
     replaceable = Replaceable.new(html)
-    replaceable.replace!(:emoji, :usernames, :gists, :tags)
+    replaceable.replace(:gists, :tags, :usernames, :emoji)
     replaceable.to_s
   end
 end

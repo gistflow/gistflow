@@ -10,10 +10,9 @@ module WikiHelper
 protected
   
   def wiki_markup(text)
-    Markdown.markdown(begin
-      raw = Replaceable.new(text)
-      raw.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
+    html = Markdown.markdown(text)
+    replaceable = Replaceable.new(html)
+    replaceable.replace(:tags, :usernames)
+    replaceable.to_s
   end
 end
