@@ -43,7 +43,7 @@ describe Replaceable do
       let(:replaceable) { Replaceable.new('<p>don&#34;t</p>') }
       
       it 'should not replace #34 as tag' do
-        it { should == '<p>don&#34;t</p>' }
+        should == '<p>don&#34;t</p>'
       end
     end
   end
