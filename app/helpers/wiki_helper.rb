@@ -1,15 +1,15 @@
 module WikiHelper
   def wiki_preview(wiki)
-    format wiki.preview
+    wiki_markup wiki.preview
   end
   
   def wiki_body(wiki)
-    format wiki.body
+    wiki_markup wiki.body
   end
   
 protected
   
-  def format(text)
+  def wiki_markup(text)
     Markdown.markdown(begin
       raw = Replaceable.new(text)
       raw.replace_tags!.replace_usernames!

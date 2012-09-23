@@ -34,6 +34,7 @@ Gistflow::Application.routes.draw do
   end
   
   resources :posts do
+    get :new_private, on: :collection
     resources :comments, only: [:create, :edit, :update, :destroy], module: :posts do
       collection do
         post :build

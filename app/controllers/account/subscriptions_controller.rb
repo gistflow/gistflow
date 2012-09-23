@@ -5,7 +5,7 @@ class Account::SubscriptionsController < ApplicationController
   before_filter :authenticate!, :only => :index
   
   def index
-    @tags = Tag.popular
+    @tags = Tag.real.order(:name)
   end
   
   def create

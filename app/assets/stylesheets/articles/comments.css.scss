@@ -19,6 +19,12 @@ section.comments {
       border-bottom: none;
       margin-bottom: 0;
     }
+
+    .markdown {      
+      img {
+        background: whiteSmoke;
+      }
+    }
   }
   
   form.new_comment {
@@ -70,7 +76,7 @@ article.comment {
     img {
       max-height: 160px;
       max-width: 540px;
-      background: $gray;
+      background: white;
       margin: 5px 10px 0 0;
     }
   }

@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include Models::Indestructible
   include Models::Cuttable
   
-  default_scope order: 'posts.id desc'
+  default_scope order('posts.id desc')
   
   belongs_to :user, inverse_of: :posts
   has_many :comments
@@ -13,19 +13,36 @@ class Post < ActiveRecord::Base
   has_many :likes
   
   validates :user, :title, presence: true
-  validates :preview, length: { minimum: 3, maximum: 500, too_long: 'is too long. Use <cut> tag to separate preview and text.', too_short: 'is too short.' }
+  validates :preview, length: { minimum: 3, maximum: 500, too_long: 'is too long. Use <cut> tag to separate preview and text', too_short: 'is too short' }
   validates :tags_size, numericality: { greater_than: 0 }
-  validates :status, format: { with: %r{http://goo.gl/xxxxxx} }, 
-    length: { maximum: 140 }, if: :status?
+  validates :status, length: { maximum: 120 }, if: :status?
   
-  attr_accessor :status
-  attr_accessible :title, :content, :question, :status
+  attr_accessible :title, :content, :question, :status, :is_private
   
-  after_create :tweet
+  after_create :tweet, if: :status?
   after_create :setup_observing_for_author
+  after_create :notify_audience
+  before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
+  scope :not_private, where(is_private: false)
+  scope :private, where(is_private: true)
+  scope :with_privacy, lambda { |author, user|
+    where(is_private: false) unless author == user
+  }
   
+  def to_param
+    is_private? ? private_key : "#{id}-#{title.parameterize}"
+  end
+  
+  def self.find_by_param param
+    if param.size == 40 && param =~ /[a-z0-9]{40}/
+      Post.find_by_private_key! param
+    else
+      Post.where(is_private: false).find param[/^(\d+)/, 1]
+    end
+  end
+
   # ActiveRecord::Relation extends method
   def self.to_json_hash(options = nil)
     hash = {}
@@ -41,12 +58,24 @@ class Post < ActiveRecord::Base
     all.map(&:updated_at).max.utc
   end
   
+  def available_symbols_for_status
+    120 - status.to_s.length
+  end
+  
   def cache_key(type)
     "post:#{id}:#{type}"
   end
   
+  def audience
+    is_private? ? [] : begin
+      User.mailable.find_all do |user|
+        user.flow.include?(self) && user != self.user
+      end.uniq
+    end
+  end
+  
   def path
-    "/posts/#{id}"
+    "/posts/#{to_param}"
   end
   
   def link_name
@@ -77,20 +106,19 @@ class Post < ActiveRecord::Base
   end
   
   def persisted_comments
-    comments.includes(:user).to_a.select(&:persisted?)
+    comments.order(:id).includes(:user).to_a.select(&:persisted?)
   end
   
   def usernames
     [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
-protected
+private
   
   def tweet
-    if user.twitter_client? && status.present?
+    if user.twitter_client?
       url = Googl.shorten("http://gistflow.com/posts/#{id}")
-      status.gsub!('http://goo.gl/xxxxxx', '')
-      status << url.short_url
+      status << " " << url.short_url # http://goo.gl/xxxxxx
       user.twitter_client.update(status)
     end
   end
@@ -100,5 +128,13 @@ protected
       observing.post = self
     end
     true
+  end
+  
+  def assign_private_key
+    self.private_key = Digest::SHA1.hexdigest(rand.to_s)
+  end
+  
+  def notify_audience
+    Resque.enqueue(Mailer, 'UserMailer', :new_post, id)
   end
 end

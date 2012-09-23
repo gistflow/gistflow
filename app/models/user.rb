@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
   has_one  :profile
+  has_one  :account_token, class_name: 'Account::Token'
   has_many :posts
   has_many :likes
   has_many :comments
@@ -25,7 +26,14 @@ class User < ActiveRecord::Base
   
   before_create :assign_settings
   before_create :assign_profile
+  before_create :assign_token
   attr_accessor :company, :github_page, :home_page, :email
+  
+  conditions = {
+    profiles: { email_valid: true },
+    settings: { receive_notification_emails: true }
+  }
+  scope :mailable, joins(:profile, :settings).where(conditions)
   
   def self.gistflow
     User.where(username: 'gistflow').first_or_create! do |user|
@@ -33,12 +41,17 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.find_by_token(token)
+    Account::Token.find_by_token(token).user
+  end
+  
   def flow
     tag_ids = subscriptions.select(:tag_id).to_sql
     user_ids = followings.select(:followed_user_id).to_sql
     conditions = []
-    conditions << "taggings.tag_id in (#{tag_ids})"
-    conditions << "posts.user_id in (#{user_ids})"
+    conditions << "posts.user_id = #{id}"
+    conditions << "taggings.tag_id in (#{tag_ids}) and posts.is_private = 'f'"
+    conditions << "posts.user_id in (#{user_ids}) and posts.is_private = 'f'"
     Post.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
@@ -173,6 +186,12 @@ private
       p.company = company
       p.home_page = home_page
       p.email = email
+    end
+  end
+  
+  def assign_token
+    build_account_token do |token|
+      token.token = Digest::SHA1.hexdigest(rand.to_s)
     end
   end
 end

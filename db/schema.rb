@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612075928) do
+ActiveRecord::Schema.define(:version => 20120909112248) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
 
   add_index "account_githubs", ["github_id"], :name => "index_account_githubs_on_github_id", :unique => true
   add_index "account_githubs", ["token"], :name => "index_account_githubs_on_token", :unique => true
+
+  create_table "account_tokens", :force => true do |t|
+    t.integer "user_id"
+    t.string  "token"
+  end
+
+  add_index "account_tokens", ["token"], :name => "index_account_tokens_on_token", :unique => true
+  add_index "account_tokens", ["user_id"], :name => "index_account_tokens_on_user_id", :unique => true
 
   create_table "account_twitters", :force => true do |t|
     t.integer "user_id"
@@ -70,8 +78,10 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
   end
 
   create_table "likes", :force => true do |t|
-    t.integer "user_id"
-    t.integer "post_id"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "likes", ["post_id"], :name => "index_likes_on_post_id"
@@ -111,7 +121,12 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
     t.boolean  "question",       :default => false
     t.text     "preview_cache"
     t.datetime "deleted_at"
+    t.string   "status"
+    t.string   "private_key"
+    t.boolean  "is_private",     :default => false
   end
+
+  add_index "posts", ["private_key"], :name => "index_posts_on_private_key", :unique => true
 
   create_table "profiles", :force => true do |t|
     t.string   "email"
@@ -126,9 +141,9 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id", :unique => true
 
   create_table "settings", :force => true do |t|
-    t.string   "default_wall",                :default => "flow"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.string   "default_wall",                :default => "all"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "user_id"
     t.boolean  "receive_notification_emails", :default => true
   end
@@ -143,9 +158,11 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
   add_index "subscriptions", ["tag_id", "user_id"], :name => "index_subscriptions_on_tag_id_and_user_id", :unique => true
 
   create_table "taggings", :force => true do |t|
-    t.integer "taggable_id"
-    t.string  "taggable_type"
-    t.integer "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
@@ -153,13 +170,26 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
   add_index "taggings", ["taggable_type", "taggable_id"], :name => "index_taggings_on_taggable_type_and_taggable_id"
 
   create_table "tags", :force => true do |t|
-    t.string  "name"
-    t.integer "taggings_count", :default => 0
-    t.integer "entity_id"
+    t.string   "name"
+    t.integer  "taggings_count", :default => 0
+    t.integer  "entity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "tags", ["entity_id"], :name => "index_tags_on_entity_id"
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
+
+  create_table "time_counters", :force => true do |t|
+    t.string   "model"
+    t.integer  "total_count"
+    t.integer  "today_count"
+    t.date     "date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "time_counters", ["model", "date"], :name => "index_time_counters_on_model_and_date", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -167,6 +197,7 @@ ActiveRecord::Schema.define(:version => 20120612075928) do
     t.string   "gravatar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rating",      :default => 0
   end
 
   create_table "wikis", :force => true do |t|

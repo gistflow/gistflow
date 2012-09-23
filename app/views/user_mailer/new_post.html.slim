@@ -1,0 +1,12 @@
+doctype
+html
+  head
+  body
+    p
+      = link_to @post.user.username, user_url(@post.user)
+      |  wrote 
+      = link_to @post.title, post_url(@post)
+    p style="border-left: 3px solid #999; padding-left: 10px;" = @post.preview
+    p = link_to 'show post', post_url(@post)
+    p You can unsubscribe in your #{link_to 'settings', account_settings_url}
+    p Sincerely, Gistflow team

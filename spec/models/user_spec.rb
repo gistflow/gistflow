@@ -5,11 +5,15 @@ describe User do
   subject { user }
   
   it 'should have settings' do
-    user.settings.should be
+    user.settings.should be_persisted
   end
   
   it 'should have profile' do
-    user.profile.should be
+    user.profile.should be_persisted
+  end
+  
+  it 'should have token' do
+    user.account_token.should be_persisted
   end
   
   describe '#gistflow' do
@@ -25,9 +29,26 @@ describe User do
       subject.flow.should include(post)
     end
     
+    it 'should not find private post with subscribed tag' do
+      tag = create(:subscription, user: user).tag
+      post = create(:private_post); post.tags = [tag]
+      subject.flow.should_not include(post)
+    end
+    
     it 'should find post by followed user' do
-      followed_user = create(:following, :follower => user).followed_user
-      post = create(:post, :user => followed_user)
+      followed_user = create(:following, follower: user).followed_user
+      post = create(:post, user: followed_user)
+      subject.flow.should include(post)
+    end
+    
+    it 'should find post by followed user' do
+      followed_user = create(:following, follower: user).followed_user
+      post = create(:private_post, user: followed_user)
+      subject.flow.should_not include(post)
+    end
+    
+    it 'should show self private posts' do
+      post = create(:private_post, user: user)
       subject.flow.should include(post)
     end
   end

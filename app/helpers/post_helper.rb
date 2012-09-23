@@ -1,10 +1,10 @@
 module PostHelper
   def post_preview(post)
-    format post.preview
+    post_markup post.preview
   end
   
   def post_body(post)
-    format post.body
+    post_markup post.body
   end
   
   def post_timestamp(post)
@@ -13,16 +13,19 @@ module PostHelper
   
   def post_title(post)
     link_to_user = link_to post.user, post.user
-    "#{link_to(post.title, post)} <span>by #{link_to_user}</span>".html_safe
+    "#{link_to_post(post)} <span>by #{link_to_user}</span>".html_safe
+  end
+  
+  def link_to_post(post)
+    klass = post.is_private? ? 'private' : ''
+    link_to post.title, post_path(post), class: klass
   end
   
 protected
   
-  def format(text)
-    (Markdown.markdown begin
-      raw = Replaceable.new(text)
-      raw.replace_gists!.replace_tags!.replace_usernames!
-      raw.to_s
-    end)
+  def post_markup(text)
+    raw = Replaceable.new(text)
+    raw.replace_gists!.replace_tags!.replace_usernames!
+    Markdown.markdown raw.to_s
   end
 end
