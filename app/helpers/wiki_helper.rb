@@ -13,6 +13,6 @@ protected
     html = Markdown.markdown(text)
     replaceable = Replaceable.new(html)
     replaceable.replace(:tags, :usernames)
-    replaceable.to_s
+    replaceable.to_s.html_safe
   end
 end

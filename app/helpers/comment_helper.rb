@@ -11,6 +11,6 @@ module CommentHelper
     html = Markdown.markdown(comment.content)
     replaceable = Replaceable.new(html)
     replaceable.replace(:gists, :tags, :usernames, :emoji)
-    replaceable.to_s
+    replaceable.to_s.html_safe
   end
 end
