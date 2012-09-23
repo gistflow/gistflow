@@ -9,7 +9,7 @@ module CommentHelper
   
   def comment_content(comment)
     (Markdown.markdown begin
-      raw = Replaceable.new(comment.content)
+      raw = Replaceable.new(comment.content.dup)      
       raw.replace_gists!.
           replace_tags!.
           replace_usernames!.
