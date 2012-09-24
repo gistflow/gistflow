@@ -2,13 +2,18 @@
 
 section.about {
   h2 {
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 18px;
   }
+  
   li:before {
     content: "—";
     margin-right: 5px;
     color: $charcoal;
+  }
+  
+  li {
+    font-size: 14px;
   }
   
   h2, ul {
@@ -17,5 +22,8 @@ section.about {
   
   a {
     font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    left: 5px;
   }
 }

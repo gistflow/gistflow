@@ -49,11 +49,10 @@ html
             nav class="submenu" = yield(:submenu)
         = yield
       section class="sidebar"
-        - if user_signed_in?
-          = render :partial => 'users/todolist'
+        = render partial: 'general/about'
+        = render :partial => 'users/todolist' if user_signed_in?
         = yield(:sidebar)
         = render partial: 'shared/facebook'
-        = render partial: 'general/about'
         = render partial: 'account/gists/sidebar', locals: { load_gists: false }
         = render 'account/bookmarks/sidebar' if user_signed_in?
         = render 'account/tags/sidebar'

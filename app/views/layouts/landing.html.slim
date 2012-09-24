@@ -18,7 +18,7 @@ html
     div class="wrap group"
       section class="landing"
         header
-          h1 Join developers community blog, share and learn new skills.
+          h1 Join developers community blog, share and learn new skills
           nav class="login"
             ul
               li= link_to 'Login', auth_path
@@ -55,12 +55,30 @@ html
         div class="sign-up"
           = link_to 'Sign up', auth_path
         div class="description"
-          p 
-            | Join community of social coders, write and discuss code related posts. 
+          p
+            | When you learn something new share it with 
+            = link_to 'gistflow', login_path
         div class="more" id="more"
           div class="message"
-            h2 Gistflow – is open-source blog platform and social network.
-            p Gistflow is a place where developers can share their skills by writing code-related posts and discussing it. User following, subscriptions for tags, post comments, personal bookmarks, ratings, import code to posts from gist.github.com, markdown and code highlighting – by now all the necessary social features are implemented.
+            h2 We made a place where developers can share their skills by writing code-related posts
+            p
+              | User 
+              strong following
+              | , 
+              strong subscriptions 
+              | for 
+              strong tags
+              | , post 
+              strong comments, 
+              | personal 
+              strong bookmarks
+              | , 
+              strong ratings
+              | , import code to posts from gist.github.com, 
+              strong markdown 
+              | and 
+              strong code highlighting 
+              | – by now all the necessary social features are implemented.
           
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/github.png')
