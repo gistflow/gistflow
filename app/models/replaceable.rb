@@ -13,8 +13,9 @@ class Replaceable
   def to_s
     safe_replace do |html|      
       @actions.each do |action|
-        send "replace_#{action}", html        
+        html = send("replace_#{action}", html)
       end
+      html
     end
     html
   end
@@ -45,7 +46,7 @@ private
         "{extraction-#{md5}}"
       end
       
-      replaceable.map do |md5, html|
+      replaceable = Hash[replaceable.map do |md5, html|
         
         unreplaceable = {}
         UNREPLACEABLE_TAGS.each do |tag|
@@ -56,12 +57,14 @@ private
           end
         end
         
-        yield html
+        html = yield(html)
         
         html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
           unreplaceable[$1]
         end
-      end
+        
+        [md5, html]
+      end]
       
       @html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
         replaceable[$1]
@@ -79,7 +82,7 @@ private
   
   def replace_usernames(html)
     regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
-    html.gsub!(regexp) do |match|
+    html.gsub(regexp) do |match|
       username = $2
       if User.where(:username => username).exists?
         @usernames << username
@@ -88,21 +91,19 @@ private
         match
       end
     end
-    html
   end
   
   def replace_tags(html)
     regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
-    html.gsub!(regexp) do |match|
+    html.gsub(regexp) do |match|
       before, raw, after = $1, $2, $3
       tagname = raw.gsub(/[\-_]/, '').downcase
       @tagnames << tagname
       %{#{before}<a href="/tags/#{tagname}" title="#{tagname}">##{raw}</a>#{after}}
     end
-    html
   end
   
   def replace_emoji(html)
-    @html = html.emojify
+    html.emojify
   end
 end
