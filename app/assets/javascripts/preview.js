@@ -3,7 +3,6 @@ $(function(){
     $(this).parents('form#new_comment:first').attr('action', $(this).attr('rel'))
   })
   
-
   // callback when comment is previewed or commited
   $(document).on('ajax:success', 'form#new_comment', function(e, data){
     if (data.comment) {
@@ -45,6 +44,7 @@ $(function(){
   $(document).on('ajax:success', 'form.edit_comment', function(e, data){
     if (data.comment) {
       $(this).replaceWith(data.comment);
+      $('textarea').trigger('input.resize');
     }
   })
   
