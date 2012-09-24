@@ -1,6 +1,6 @@
 class Replaceable
   REPLACEABLE_TAGS = %w(p li)
-  UNREPLAREABLE_TAGS = %w(a em strong code img)
+  UNREPLACEABLE_TAGS = %w(a em strong code img)
   BASE_REGEXP = '(\s|\>)%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
   
   attr_reader :html
@@ -11,9 +11,9 @@ class Replaceable
   end
   
   def to_s
-    safe_replace do |html|
+    safe_replace do |html|      
       @actions.each do |action|
-        send "replace_#{action}", html
+        send "replace_#{action}", html        
       end
     end
     html
@@ -48,7 +48,7 @@ private
       replaceable.map do |md5, html|
         
         unreplaceable = {}
-        UNREPLAREABLE_TAGS.each do |tag|
+        UNREPLACEABLE_TAGS.each do |tag|
           html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
             md5 = Digest::MD5.hexdigest(match)
             unreplaceable[md5] = match
@@ -103,6 +103,6 @@ private
   end
   
   def replace_emoji(html)
-    html.emojify
+    @html = html.emojify
   end
 end
