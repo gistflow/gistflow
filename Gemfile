@@ -30,6 +30,8 @@ gem 'yaml_db'
 gem 'diffy'
 gem 'rails_emoji'
 gem 'sanitize'
+gem 'grape'
+gem 'active_model_serializers'
 
 group :production do
   gem 'god'

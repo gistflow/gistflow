@@ -69,5 +69,8 @@ Gistflow::Application.routes.draw do
   end
   
   root to: 'landings#show'
+  
+  mount ::API => '/'
+  
   match '*a', to: 'errors#not_found'
 end
