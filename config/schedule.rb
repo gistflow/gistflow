@@ -7,3 +7,7 @@ end
 every 1.day do
   rake 'time_counters:generate_todays'
 end
+
+every 1.hour do
+  rake 'posts:update_page_views LIMIT=100'
+end

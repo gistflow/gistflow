@@ -13,8 +13,11 @@ javascript:
     div class="body markdown"
       = post_body @post
     footer class="group actions"
-      = post_timestamp @post
-      div class="button-groups"
+      span class="post-info"
+        = post_timestamp @post
+        = ' |'
+        = page_views @post
+      div class="button-groups"        
         div class="notice button-group minor-group group"
           = link_to_bookmark @post
           = link_to_observe @post

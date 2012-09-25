@@ -81,16 +81,20 @@ article.post {
   }
   
   footer {
-    margin-top: 5px;
-    
-    time {
-      float: left;
+    margin-top: 5px;  
+
+    .post-info {
       font-size: 13px;
       line-height: 25px;
       position: relative;
       top: 1px;
       color: $charcoal;
       font-family: "proxima-nova-condensed", sans-serif;
+      float: left;
+    }
+
+    .page-views {      
+      margin-left: 5px;
     }
     
 //    .button.favorite.icon {

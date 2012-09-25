@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909112248) do
+ActiveRecord::Schema.define(:version => 20120925185427) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20120909112248) do
     t.string   "status"
     t.string   "private_key"
     t.boolean  "is_private",     :default => false
+    t.integer  "page_views",     :default => 1
   end
 
   add_index "posts", ["private_key"], :name => "index_posts_on_private_key", :unique => true
