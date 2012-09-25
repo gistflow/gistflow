@@ -38,37 +38,43 @@ class Replaceable
 private
   
   def safe_replace
+    # extract replaceable tags
+    replaceable = {}
     REPLACEABLE_TAGS.each do |tag|
-      replaceable = {}
       @html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
         md5 = Digest::MD5.hexdigest(match)
         replaceable[md5] = match
         "{extraction-#{md5}}"
       end
+    end
+    
+    # perform replacement
+    replaceable = Hash[replaceable.map do |md5, html|
       
-      replaceable = Hash[replaceable.map do |md5, html|
-        
-        unreplaceable = {}
-        UNREPLACEABLE_TAGS.each do |tag|
-          html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
-            md5 = Digest::MD5.hexdigest(match)
-            unreplaceable[md5] = match
-            "{extraction-#{md5}}"
-          end
+      # extract subtags
+      unreplaceable = {}
+      UNREPLACEABLE_TAGS.each do |tag|
+        html.gsub!(%r{<#{tag}>.*?</#{tag}>}m) do |match|
+          # don't modify md5 var
+          md6 = Digest::MD5.hexdigest(match)
+          unreplaceable[md6] = match
+          "{extraction-#{md6}}"
         end
-        
-        html = yield(html)
-        
-        html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
-          unreplaceable[$1]
-        end
-        
-        [md5, html]
-      end]
-      
-      @html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
-        replaceable[$1]
       end
+      
+      html = yield(html)
+      
+      # return subtags
+      html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
+        unreplaceable[$1]
+      end
+      
+      [md5, html]
+    end]
+    
+    # return replaceable tags
+    @html.gsub!(/\{extraction-([0-9a-f]{32})\}/) do
+      replaceable[$1]
     end
   end
   
