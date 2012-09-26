@@ -16,7 +16,8 @@ javascript:
       div class="preview markdown group"
         = post_preview post
       footer class="group actions"
-        = time_tag post.created_at, post.created_at.to_date.to_formatted_s(:long)
+        div class="post-info"
+          = post_timestamp(post)
         div class="button-groups"
           div class="button-group minor-group"
             = link_to_bookmark post
