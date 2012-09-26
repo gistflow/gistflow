@@ -3,7 +3,7 @@ require "rvm/capistrano"
 require "capistrano-resque"
 
 set :rvm_type, :system
-set :rvm_ruby_string, '1.9.3@gistflow'
+set :rvm_ruby_string, '1.9.3'
 
 set :application, "gistflow"
 set :rails_env, "production"

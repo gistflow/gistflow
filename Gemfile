@@ -28,13 +28,13 @@ gem 'sanitize'
 gem 'whenever'
 
 # deploy
-gem 'rvm-capistrano'
 gem 'capistrano-resque'
 gem 'capistrano-unicorn'
 gem 'cloudfiles'
 gem 'capistrano'
 
 group :test, :development do
+  gem 'rvm-capistrano'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rspec-rails'
