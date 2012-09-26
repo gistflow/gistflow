@@ -25,6 +25,10 @@ defaults: &defaults
     username: gistflow
     api_key: gistflow
   private_key_salt: asfdlaiw73byia7wv5coaw837cbawu
+  google_analytics:
+    login: ""
+    password: ""
+    web_property_id: ""
 development:
   <<: *defaults
 

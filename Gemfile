@@ -26,6 +26,7 @@ gem 'diffy'
 gem 'rails_emoji'
 gem 'sanitize'
 gem 'whenever'
+gem 'garb'
 
 # deploy
 gem 'capistrano-resque'

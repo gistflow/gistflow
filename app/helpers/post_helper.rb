@@ -10,6 +10,10 @@ module PostHelper
   def post_timestamp(post)
     time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
   end
+
+  def page_views(post)
+    content_tag :span, pluralize(post.page_views, 'pageview'), class: 'page-views'
+  end
   
   def post_title(post)
     link_to_user = link_to post.user, post.user
