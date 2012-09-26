@@ -93,19 +93,14 @@ article.post {
       float: left;
     }
 
-    .page-views {      
-      margin-left: 5px;
+    .page-views {
+      &:before {
+        content: "|";
+        color: $gray;
+        margin: 0 8px;
+      }
     }
     
-//    .button.favorite.icon {
-//      text-indent: -1000px;
-//      width: 8px;
-//    }
-//    
-//    .button.favorite.icon:before {
-//      background-position: 0 -349px;
-//      height: 11px;
-//    }
   }
 }
 

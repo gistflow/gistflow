@@ -12,7 +12,7 @@ module PostHelper
   end
 
   def page_views(post)
-    content_tag :span, pluralize(post.page_views, 'pageview'), :class => 'page-views'
+    content_tag :span, pluralize(post.page_views, 'pageview'), class: 'page-views'
   end
   
   def post_title(post)
