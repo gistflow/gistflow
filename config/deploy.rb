@@ -1,56 +1,55 @@
 require 'bundler/capistrano'
+require "rvm/capistrano"
+require "capistrano-resque"
+require "cocaine"
 
-require 'rvm/capistrano'
-
-set :stages, %w(production staging)
-set :default_stage, 'staging'
-require 'capistrano/ext/multistage'
-
-set :rvm_ruby_string, '1.9.3'
-set :rvm_type, :root
-
-set :server, :unicorn
+set :rvm_type, :system
+set :rvm_ruby_string, '1.9.3@gistflow'
 
 set :application, "gistflow"
+set :rails_env, "production"
+set :domain, "git@gistflow.com"
 set :repository,  "git@github.com:gistflow/gistflow.git"
-
+set :branch, "master"
+set :use_sudo, false
+set :deploy_to, "/u/apps/#{application}"
+set :keep_releases, 3
+set :normalize_asset_timestamps, false
 set :scm, :git
-set :branch, ENV['BRANCH'] || "master"
-set :user, "git"
 
-set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+role :app, domain
+role :web, domain
+role :db,  domain, :primary => true
+role :resque_worker, domain
 
-after "deploy:restart", "deploy:cleanup"
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
 
-after "deploy:update_code", "db:link_configuration_file"
-after "deploy:update_code", "settings:link_settings_file"
+require 'capistrano-unicorn'
 
-set(:shared_database_path) {"#{shared_path}/databases"}
-set(:shared_config_path) { "#{shared_path}/config" }
+after "deploy:restart", "resque:restart"
 
-namespace :db do
-  desc "Links the configuration file"
-  task :link_configuration_file do
-    run "ln -nsf #{shared_config_path}/database.yml #{current_release}/config/database.yml"
-  end
-end
-
-namespace :settings do
-  desc "Links the settings file"
-  task :link_settings_file do
-    run "ln -nsf #{shared_config_path}/application.yml #{current_release}/config/application.yml"
+namespace :app do
+  desc "Open the rails console on one of the remote servers"
+  task :console, :roles => :app do
+    exec %{ssh #{domain} -t "#{default_shell} -c 'cd #{current_path} && bundle exec rails c #{rails_env}'"}
   end
 end
 
 namespace :deploy do
   task :restart do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{deploy_env} -D; fi"
   end
-  task :start do
-    run "cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{deploy_env} -D"
-  end
-  task :stop do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+  
+  desc "Make symlinks"
+  task :make_symlinks, :roles => :app, :except => { :no_release => true } do
+    # db
+    run "rm -f #{latest_release}/config/database.yml"
+    run "ln -s #{deploy_to}/shared/config/database.yml #{latest_release}/config/database.yml"
+    
+    # settings
+    run "rm -f #{latest_release}/config/application.yml"
+    run "ln -s #{deploy_to}/shared/config/application.yml #{latest_release}/config/application.yml"
   end
 end
+
+after 'deploy:finalize_update', 'deploy:make_symlinks'
