@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one  :settings
   has_one  :profile
   has_one  :account_token, class_name: 'Account::Token'
+  has_one  :location, as: :locationable
   has_many :posts
   has_many :likes
   has_many :comments
