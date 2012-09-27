@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925185427) do
+ActiveRecord::Schema.define(:version => 20120927195257) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -87,6 +87,20 @@ ActiveRecord::Schema.define(:version => 20120925185427) do
   add_index "likes", ["post_id"], :name => "index_likes_on_post_id"
   add_index "likes", ["user_id", "post_id"], :name => "index_likes_on_user_id_and_post_id", :unique => true
   add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
+
+  create_table "locations", :force => true do |t|
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "locationable_id"
+    t.string   "locationable_type"
+    t.string   "address"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type", :unique => true
+  add_index "locations", ["locationable_id"], :name => "index_locations_on_locationable_id"
+  add_index "locations", ["locationable_type"], :name => "index_locations_on_locationable_type"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
