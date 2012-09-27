@@ -52,3 +52,13 @@ namespace :deploy do
 end
 
 after 'deploy:finalize_update', 'deploy:make_symlinks'
+
+# useful tasks
+
+# cap production rake TASK=users:fetch_locations
+namespace :rake do
+  desc "remote rake task"  
+  task :default do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} rake #{ENV['TASK']}"
+  end
+end
