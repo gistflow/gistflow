@@ -8,7 +8,7 @@ module PostHelper
   end
   
   def post_timestamp(post)
-    time_tag post.updated_at, post.updated_at.to_date.to_formatted_s(:long)
+    time_tag post.created_at, post.created_at.to_date.to_formatted_s(:long)
   end
 
   def page_views(post)
