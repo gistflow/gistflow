@@ -27,6 +27,7 @@ gem 'rails_emoji'
 gem 'sanitize'
 gem 'whenever'
 gem 'garb'
+gem 'geocoder'
 
 # deploy
 gem 'capistrano-resque'
