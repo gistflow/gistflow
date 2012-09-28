@@ -26,15 +26,17 @@ $(function(){
     if (window.current_user) {
       if (liked = _.include(window.current_user.likes, post_data.id)) {
         like.removeClass('icon-heart-empty').addClass('icon-heart disabled')
+          .attr('title', 'You liked it')
       }
     }
-    post.find('a.like').html(' <span>(' + post_data.likes_count + ')</span>')
+    like.html(' <span>(' + post_data.likes_count + ')</span>')
     
     // setup observing
     var observe = post.find('a.observe')
     if (window.current_user) {
       if (_.include(window.current_user.observings, post_data.id)) {
-        observe.data('method', 'delete').removeClass('icon-eye-open').addClass('icon-eye-close')
+        observe.data('method', 'delete').removeClass('icon-eye-close')
+          .addClass('icon-eye-open').attr('title', 'Unobserve')
       }
     } else {
       observe.remove()
@@ -44,7 +46,8 @@ $(function(){
     var bookmark = post.find('a.bookmark')
     if (window.current_user) {
       if (_.include(window.current_user.bookmarks, post_data.id)) {
-        bookmark.data('method', 'delete').removeClass('icon-bookmark-empty').addClass('icon-bookmark')
+        bookmark.data('method', 'delete').removeClass('icon-bookmark-empty')
+          .addClass('icon-bookmark').attr('title', 'Unbookmark')
       }
     } else {
       bookmark.remove()

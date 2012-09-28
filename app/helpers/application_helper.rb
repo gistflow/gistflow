@@ -44,34 +44,34 @@ module ApplicationHelper
   def link_to_bookmark(post)
     classes = %w(button bookmark replaceable icon-bookmark-empty)
     link_to '', account_bookmark_path(post),
-      { class: classes, remote: true, method: :post }
+      { class: classes, remote: true, method: :post, title: 'Bookmark' }
   end
   
   def link_to_unbookmark(post)
     classes = %w(button bookmark replaceable icon-bookmark)
     link_to '', account_bookmark_path(post),
-      { class: classes, remote: true, method: :delete }
+      { class: classes, remote: true, method: :delete, title: 'Unbookmark' }
   end
   
   def link_to_observe(post)
-    classes = %w(button observe replaceable icon-eye-open)
+    classes = %w(button observe replaceable icon-eye-close)
     link_to "", account_observe_path(post),
-      { class: classes, remote: true, method: :post }
+      { class: classes, remote: true, method: :post, title: 'Observe' }
   end
   
   def link_to_unobserve(post)
-    classes = %w(button observe replaceable icon-eye-close)
+    classes = %w(button observe replaceable icon-eye-open)
     link_to "", account_observe_path(post),
-      { class: classes, remote: true, method: :delete }
+      { class: classes, remote: true, method: :delete, title: 'Unobserve' }
   end
   
   def link_to_like(post)
     classes = %w( icon-heart-empty like button replaceable disabled)
-    link_to "", account_like_path(post), class: classes, remote: true, method: :post
+    link_to "", account_like_path(post), class: classes, remote: true, method: :post, title: 'Like it :)'
   end
   
   def link_to_liked(post)
-    link_to "", '#', class: 'icon-heart like button replaceable disabled'
+    link_to "", '#', class: 'icon-heart like button replaceable disabled', title: 'You liked it'
   end
   
   def link_to_subscribe(tag, options = {})
@@ -116,7 +116,7 @@ module ApplicationHelper
   end
   
   def link_to_comments(post)
-    link_to '', post, class: 'button comment icon-comments-alt'
+    link_to '', post, class: 'button comment icon-comments-alt', title: 'Comments'
   end
   
   def link_to_github_user(user)
