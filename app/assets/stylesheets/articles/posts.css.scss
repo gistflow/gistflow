@@ -102,6 +102,15 @@ article.post {
     }
     
   }
+  
+  .button {
+    font-size: 13px;
+    span {
+      font-size: 11px;
+      vertical-align: top;
+      font-weight: 600;
+    }
+  }
 }
 
 .private {

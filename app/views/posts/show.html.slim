@@ -16,13 +16,15 @@ javascript:
       span class="post-info"
         = post_timestamp @post
         = page_views @post
-      div class="button-groups"        
+      div class="button-groups"
+        div class="button-group minor-group"
+          = link_to_tweet @post
         div class="notice button-group minor-group group"
           = link_to_bookmark @post
           = link_to_observe @post
           = link_to_like @post
         div class="button-group minor-group"
-          = link_to "Edit", edit_post_path(@post), :class => 'button icon edit'
+          = link_to "", edit_post_path(@post), :class => 'button edit icon-pencil'
 
 section class="comments"
   header
