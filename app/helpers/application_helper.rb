@@ -41,34 +41,37 @@ module ApplicationHelper
     image_tag user.gravatar(size), size: [size, size].join('x')
   end
   
-  def link_to_bookmark(post, name = 'Bookmark', method = :post)
-    classes = %w(button bookmark replaceable)
-    link_to name, account_bookmark_path(post),
-      { class: classes, remote: true, method: method }
+  def link_to_bookmark(post)
+    classes = %w(button bookmark replaceable icon-bookmark-empty)
+    link_to '', account_bookmark_path(post),
+      { class: classes, remote: true, method: :post }
   end
   
   def link_to_unbookmark(post)
-    link_to_bookmark(post, 'Unbookmark', :delete)
+    classes = %w(button bookmark replaceable icon-bookmark)
+    link_to '', account_bookmark_path(post),
+      { class: classes, remote: true, method: :delete }
   end
   
-  def link_to_observe(post, name = 'Observe', method = :post)
-    classes = %w(button observe replaceable)
-    link_to name, account_observe_path(post),
-      { class: classes, remote: true, method: method }
+  def link_to_observe(post)
+    classes = %w(button observe replaceable icon-eye-open)
+    link_to "", account_observe_path(post),
+      { class: classes, remote: true, method: :post }
   end
   
   def link_to_unobserve(post)
-    link_to_observe(post, 'Unobserve', :delete)
+    classes = %w(button observe replaceable icon-eye-close)
+    link_to "", account_observe_path(post),
+      { class: classes, remote: true, method: :delete }
   end
   
   def link_to_like(post)
-    classes = %w(icon like button replaceable disabled)
-    link_to 'Like', account_like_path(post), class: classes, remote: true, method: :post
+    classes = %w( icon-heart-empty like button replaceable disabled)
+    link_to "", account_like_path(post), class: classes, remote: true, method: :post
   end
   
   def link_to_liked(post)
-    name = (post.likes_count == 1) ? '1 Like' : "#{post.likes_count} Likes"
-    link_to name, '#', class: 'icon like button replaceable disabled'
+    link_to "", '#', class: 'icon-heart like button replaceable disabled'
   end
   
   def link_to_subscribe(tag, options = {})
@@ -113,7 +116,7 @@ module ApplicationHelper
   end
   
   def link_to_comments(post)
-    link_to "Comments", post, class: 'button icon comment'
+    link_to '', post, class: 'button comment icon-comments-alt'
   end
   
   def link_to_github_user(user)
