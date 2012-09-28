@@ -105,6 +105,11 @@ article.post {
   
   .button {
     font-size: 13px;
+    min-width: 16px;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    
     span {
       font-size: 11px;
       vertical-align: top;
