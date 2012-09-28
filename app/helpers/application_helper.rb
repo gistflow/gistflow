@@ -156,4 +156,14 @@ module ApplicationHelper
     points.insert(0, TimeCounter::MODELS.dup.insert(0, 'Date'))
     points.to_json.html_safe
   end
+  
+  def link_to_tweet(post)
+    data = {
+      url: post_url(post),
+      text: post.title,
+      count: 'none',
+      hashtags: 'gistflow'
+    }
+    link_to " <span>tweet</span>".html_safe, "https://twitter.com/share", data: data, class: 'twitter-share-button'
+  end
 end
