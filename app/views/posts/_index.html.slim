@@ -20,11 +20,10 @@ javascript:
           = post_timestamp(post)
         div class="button-groups"
           div class="button-group minor-group"
+            = link_to_tweet post
+          div class="button-group minor-group"
             = link_to_bookmark post
             = link_to_observe post
             = link_to_like post
             = link_to_comments post
-          div class="button-group minor-group"
-            = link_to "Edit", edit_post_path(post), :class => 'button icon edit'
-            = link_to "Show", post, :class => 'button primary'
 = paginate posts
