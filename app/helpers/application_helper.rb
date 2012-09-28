@@ -66,12 +66,12 @@ module ApplicationHelper
   end
   
   def link_to_like(post)
-    classes = %w( icon-heart-empty like button replaceable disabled)
+    classes = %w( like button replaceable disabled)
     link_to "", account_like_path(post), class: classes, remote: true, method: :post, title: 'Like it :)'
   end
   
   def link_to_liked(post)
-    link_to "", '#', class: 'icon-heart like button replaceable disabled', title: 'You liked it'
+    link_to "", '#', class: 'like button replaceable disabled', title: 'You liked it'
   end
   
   def link_to_subscribe(tag, options = {})
@@ -116,7 +116,7 @@ module ApplicationHelper
   end
   
   def link_to_comments(post)
-    link_to '', post, class: 'button comment icon-comments-alt', title: 'Comments'
+    link_to '', post, class: 'button comment', title: 'Comments'
   end
   
   def link_to_github_user(user)

@@ -18,18 +18,20 @@ $(function(){
     }
     
     // setup comments count
-    post.find('a.comment').html(' <span>(' + post_data.comments_count + ')</span>')
+    post.find('a.comment').html('<span>' + post_data.comments_count + '</span> <i class="icon-comments-alt"></i>')
     
     // setup likes
     var like = post.find('a.like')
     
+    content = '<span>' + post_data.likes_count + '</span> <i class="icon-heart"></i>'
     if (window.current_user) {
-      if (liked = _.include(window.current_user.likes, post_data.id)) {
-        like.removeClass('icon-heart-empty').addClass('icon-heart disabled')
-          .attr('title', 'You liked it')
+      if (_.include(window.current_user.likes, post_data.id)) {
+        like.attr('title', 'You liked it')
+      } else {
+        content = '<span>' + post_data.likes_count + '</span> <i class="icon-heart-empty"></i>'
       }
     }
-    like.html(' <span>(' + post_data.likes_count + ')</span>')
+    like.html(content)
     
     // setup observing
     var observe = post.find('a.observe')
