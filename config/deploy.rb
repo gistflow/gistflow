@@ -45,9 +45,9 @@ namespace :db_migrations do
     from = source.next_revision(current_revision)
     if capture("cd #{latest_release} && #{source.local.log(from)} db/migrate | wc -l").to_i > 0
       run "cd #{current_release} && RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
-      logger.info "New migrations added – running migrations."
+      logger.info "New migrations added - running migrations."
     else
-      logger.info "Skipping migrations – there are not any new."
+      logger.info "Skipping migrations - there are not any new."
     end
   end
 end
