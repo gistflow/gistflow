@@ -1,6 +1,4 @@
 $(function(){
-  $('a.disabled').on('click', function(){ return false; })
-  
   $('article.post').each(function(i, post_html){
     var post = $(post_html)
     var author = post.data('author')

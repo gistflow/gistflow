@@ -66,12 +66,12 @@ module ApplicationHelper
   end
   
   def link_to_like(post)
-    classes = %w( like button replaceable disabled)
+    classes = %w( like button replaceable)
     link_to "", account_like_path(post), class: classes, remote: true, method: :post, title: 'Like it :)'
   end
   
   def link_to_liked(post)
-    link_to "", '#', class: 'like button replaceable disabled', title: 'You liked it'
+    link_to %{<span>#{post.likes_count}</span> <i class="icon-heart"></i>}.html_safe, '#', class: 'like button replaceable', title: 'You liked it'
   end
   
   def link_to_subscribe(tag, options = {})
