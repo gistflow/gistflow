@@ -160,10 +160,8 @@ module ApplicationHelper
   def link_to_tweet(post)
     data = {
       url: post_url(post),
-      text: post.title,
-      count: 'none',
-      hashtags: 'gistflow'
+      text: post.title
     }
-    link_to " <span>tweet</span>".html_safe, "https://twitter.com/share", data: data, class: 'twitter-share-button'
+    link_to " <span>Tweet</span>".html_safe, "https://twitter.com/share?#{data.to_param}", class: 'button icon-twitter', target: '_blank'
   end
 end
