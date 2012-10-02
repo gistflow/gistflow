@@ -11,6 +11,9 @@
 strong, b {
   font-weight: 600;
 }
+em, i {
+  font-style: italic;
+}
 
 input:focus, textarea:focus {
   outline: none;
