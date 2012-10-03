@@ -16,5 +16,16 @@ section.posts {
         color: $charcoal;
       }
     }
+    
+    div.preview {
+      background: whiteSmoke;
+      padding: 5px;
+      min-height: 196px;
+      margin-bottom: 10px;
+    }
+    
+    div.preview, a.edit {
+      display: none;
+    }
   }
 }
