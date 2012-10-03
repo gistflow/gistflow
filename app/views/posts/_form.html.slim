@@ -1,4 +1,4 @@
-= form_for @post do |f|
+= form_for @post, html: { class: 'previewable' } do |f|
   - if @post.errors.any?
     ul class="errors"
       - @post.errors.full_messages.each do |message|
@@ -6,7 +6,8 @@
   fieldset
     = f.text_field :title, :placeholder => 'Title'
   fieldset
-    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint', :id => 'post_content'
+    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint raw', :id => 'post_content'
+  div class="preview"
   fieldset
     = f.check_box :question
     = f.label :question, 'Question?'
@@ -25,7 +26,9 @@
         div class="button-group"
           = link_to 'Destroy', @post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
       div class="button-group"
-        = f.submit commit_title, :class => 'button'
+        = link_to 'Edit', '#', class: 'button edit'
+        = link_to 'Preview', '#', class: 'button preview'
+        = f.submit commit_title, class: 'button'
     = render :partial => 'shared/markdown_hints'
   
   - if @post.new_record?
