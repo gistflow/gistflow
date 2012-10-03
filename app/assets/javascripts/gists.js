@@ -95,8 +95,6 @@ $(function(){
         var gist = detail_gist_template({ code: code, lang: lang });
         element.after(gist);
       });
-      // remove all rehighlighting
-      $('pre code').each(function(i, e) { hljs.highlightBlock(e) });
       element.remove();
     })
   })

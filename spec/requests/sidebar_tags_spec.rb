@@ -6,7 +6,7 @@ describe 'Sidebar tags', local: true do
     before { visit all_path }
     
     it 'should not show hints' do
-      sidebar.should_not have_css('.highlight')
+      sidebar.should_not have_css('.content-highlight')
     end
     
     it 'should show popular tags' do

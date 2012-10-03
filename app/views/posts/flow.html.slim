@@ -10,7 +10,7 @@ section.posts
         li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
         li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
   - if current_user.newbie?
-    div.highlight
+    div.content-highlight
       p = "Hello, #{current_user}. This is your posts flow."
       p
         | For use it you should subscribe interested 
