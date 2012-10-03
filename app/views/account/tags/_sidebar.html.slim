@@ -6,7 +6,7 @@ section class="tags"
     - if user_signed_in? || sidebar_tags.any?
       = ul(sidebar_tags.map { |t| link_to_tag t })
     - elsif user_signed_in?
-      div class="highlight"
+      div class="content-highlight"
         p You should create subscriptions to use your own flow.
         p = link_to 'Subscribe', account_subscriptions_path
   - if user_signed_in? && sidebar_tags.any?

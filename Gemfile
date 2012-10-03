@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 
+gem 'pygments.rb', require: 'pygments', github: 'tmm1/pygments.rb'
+gem 'nokogiri'
 gem 'state_machine'
 gem 'jquery-rails'
 gem 'unicorn'
