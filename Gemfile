@@ -28,6 +28,7 @@ gem 'sanitize'
 gem 'whenever'
 gem 'garb'
 gem 'geocoder'
+gem 'underscore-rails'
 
 # deploy
 gem 'capistrano-resque'

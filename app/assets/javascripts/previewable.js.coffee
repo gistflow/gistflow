@@ -18,7 +18,7 @@ class Previewable
     ).done (data) =>
       @raw.hide()
       @container.show()
-      @container.html(data.html)
+      @container.html(data)
       @previewButton.hide()
       @editButton.show()
   
