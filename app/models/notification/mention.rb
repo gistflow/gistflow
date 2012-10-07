@@ -13,6 +13,10 @@ class Notification::Mention < Notification
     notifiable.is_a?(Post) ? notifiable : notifiable.post
   end
   
+  def target_url
+    "#{host}/posts/#{post.id}"
+  end
+  
 protected
   
   def message_for_post post_title

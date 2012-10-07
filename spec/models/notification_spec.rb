@@ -15,7 +15,7 @@ describe Notification do
     following_notification.should be
   end
   
-  describe 'Notification::Comment#message' do
+  describe 'Notification::Comment' do
     let(:post)    { create(:post) }
     let(:comment) { create(:comment, post: post) }
     let(:user)    { create(:user) }
@@ -23,6 +23,8 @@ describe Notification do
     subject do
       create(:comment_notification, { notifiable: comment, user: user })
     end
+    
+    its(:target_url) { should == "#{host}/posts/#{post.id}" }
     
     its(:message) do
       user = comment.user
@@ -32,16 +34,20 @@ describe Notification do
     end
   end
   
-  describe 'Notification::Following#message' do
-    it 'should have proper message' do
+  describe 'Notification::Following' do
+    subject { following_notification }
+    
+    its(:target_url) { should == "#{host}/users/#{following_notification.notifiable.follower}" }
+    
+    its(:message) do
       user = following_notification.notifiable.follower
       link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
       message = "#{link_to_user} started following you."
-      following_notification.message.should == message
+      should == message
     end
   end
   
-  describe 'Notification::Mention#message' do
+  describe 'Notification::Mention' do
     context 'in comment' do
       let(:post)    { create(:post ) } 
       let(:comment) { create(:comment, post: post) }
@@ -50,6 +56,8 @@ describe Notification do
       subject do
         create(:mention_notification, { notifiable: comment, user: user })
       end
+      
+      its(:target_url) { should == "#{host}/posts/#{post.id}" }
       
       its(:message) do
         user = comment.user
@@ -67,6 +75,8 @@ describe Notification do
       subject do
         create(:mention_notification, { notifiable: post, user: user })
       end
+      
+      its(:target_url) { should == "#{host}/posts/#{post.id}" }
       
       its(:message) do
         user = post.user

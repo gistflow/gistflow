@@ -15,6 +15,10 @@ class Notification < ActiveRecord::Base
   
   delegate :host, to: :'Rails.application.config'
   
+  def target_url
+    host
+  end
+  
 private
   
   def create_mailer_task
@@ -26,7 +30,11 @@ private
   end
   
   def push_to_redis
-    $redis.publish("notifications:#{user.token}", title)
+    package = {
+      title: title,
+      url: target_url
+    }
+    $redis.publish("notifications:#{user.token}", package.to_json)
     true
   end
 end

@@ -10,4 +10,8 @@ class Notification::Following < Notification
     link_to_follower = %{<a href="#{host}/users/#{user}">#{user}</a>}
     "#{link_to_follower} started following you.".html_safe
   end
+  
+  def target_url
+    "#{host}/users/#{notifiable.follower}"
+  end
 end

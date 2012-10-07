@@ -5,6 +5,10 @@ class Notification::Comment < Notification
     "#{notifiable.user} commented on post #{notifiable.post.title}"
   end
   
+  def target_url
+    "#{host}/posts/#{notifiable.post.id}"
+  end
+  
   def message post_title = false
     user, post, comment = notifiable.user, notifiable.post, notifiable
     link_to_user = %{<a href="#{host}/users/#{user.username}">#{user}</a>}
