@@ -11,14 +11,22 @@ class Notification < ActiveRecord::Base
   scope :unread, where(read: false)
   
   after_commit :create_mailer_task, on: :create
+  after_commit :push_to_redis, on: :create
   
   delegate :host, to: :'Rails.application.config'
   
-  protected
+private
+  
   def create_mailer_task
     if self.user.profile.email_valid? &&
       self.user.settings.receive_notification_emails?
       Resque.enqueue(Mailer, 'UserMailer', :notification_email, self.id)
     end
+    true
+  end
+  
+  def push_to_redis
+    $redis.publish("notifications:#{user.token}", title)
+    true
   end
 end

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Models::Todolistable
   
+  delegate :token, to: :account_token
+  
   has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :settings
   has_one  :profile
