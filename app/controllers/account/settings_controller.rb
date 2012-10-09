@@ -1,5 +1,5 @@
 class Account::SettingsController < ApplicationController
-  before_filter :authenticate!
+  prepend_before_filter :authenticate!
   
   def show
     @settings = current_user.settings

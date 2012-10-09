@@ -2,7 +2,7 @@ class Account::BookmarksController < ApplicationController
   cache_sweeper :bookmark_sweeper
   cache_sweeper :user_sweeper
   
-  before_filter :authenticate!
+  prepend_before_filter :authenticate!
   respond_to :json
   
   def create

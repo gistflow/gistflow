@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   cache_sweeper :subscription_sweeper
   cache_sweeper :user_sweeper
   
-  before_filter :authenticate!, :except => [:show, :index]
+  prepend_before_filter :authenticate!, :except => [:show, :index]
   
   def index
     @posts = Post.not_private.includes(:user).page(params[:page])

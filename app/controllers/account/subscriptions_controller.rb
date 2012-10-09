@@ -2,7 +2,7 @@ class Account::SubscriptionsController < ApplicationController
   cache_sweeper :user_sweeper
   cache_sweeper :subscription_sweeper
   
-  before_filter :authenticate!, :only => :index
+  prepend_before_filter :authenticate!, :only => :index
   
   def index
     @tags = Tag.real.order(:name)

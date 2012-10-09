@@ -1,5 +1,5 @@
 class Account::ProfilesController < ApplicationController
-  before_filter :authenticate!
+  prepend_before_filter :authenticate!
   
   def show
     @profile = current_user.profile

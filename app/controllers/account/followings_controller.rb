@@ -1,6 +1,6 @@
 class Account::FollowingsController < ApplicationController
   cache_sweeper :user_sweeper
-  before_filter :authenticate!, only: [:create, :destroy]
+  prepend_before_filter :authenticate!, only: [:create, :destroy]
   
   def create
     @user = find_user(params[:user_id])
