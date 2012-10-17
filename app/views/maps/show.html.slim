@@ -1,0 +1,24 @@
+header class="primary"
+  h1 Map
+
+div id="map_canvas"
+
+= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?key=AIzaSyB318hT-D450k4qM2cqq_qd4wfS8nxDycU&sensor=false'
+
+javascript:
+  $(document).ready(function(){
+    var mapOptions = {
+      center: new google.maps.LatLng(40, -20),
+      zoom: 3,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      panControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      overviewMapControl: false
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions)
+    
+    
+  })
+  
