@@ -34,7 +34,7 @@ private
       title: title,
       url: target_url
     }
-    $redis.publish("notifications:#{user.token}", package.to_json)
+    $redis.publish("notifications:#{user.token}", package.to_yaml)
     true
   end
 end
