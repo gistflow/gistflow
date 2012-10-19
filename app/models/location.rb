@@ -8,4 +8,8 @@ class Location < ActiveRecord::Base
   before_save :geocode
   
   attr_accessible :address
+  
+  def as_json(options)
+    { label: locationable.username, lat: lat, lng: lng }
+  end
 end

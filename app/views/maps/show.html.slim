@@ -3,8 +3,6 @@ header class="primary"
 
 div id="map_canvas"
 
-= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?key=AIzaSyB318hT-D450k4qM2cqq_qd4wfS8nxDycU&sensor=false'
-
 javascript:
   $(document).ready(function(){
     var mapOptions = {
@@ -19,6 +17,35 @@ javascript:
     }
     var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions)
     
+    var myOptions = {
+      content: '<div id="map-window"></div>',
+      pixelOffset: new google.maps.Size(-50, -50),
+      boxStyle: { width: "100px" }
+    }
+
+    var ib = new InfoBox(myOptions);
     
+    var locations = #{@locations.to_json.html_safe}
+    var markers = []
+    
+    var overlay = new google.maps.OverlayView();
+    overlay.draw = function() {};
+    overlay.setMap(map);
+
+    var proj = overlay.getProjection();
+    
+    _(locations).each(function(location){
+      var position = new google.maps.LatLng(location.lat,location.lng)
+      var marker = new google.maps.Marker({
+          position: position,
+          title: location.label
+      })
+      google.maps.event.addListener(marker, 'click', function(e) {
+        ib.setContent('<div id="map-window"><a href="/users/' + marker.title + '">@' + marker.title + '</a></div>')
+        ib.open(map, marker)
+      })
+      markers.push(marker)
+    })
+    var markerCluster = new MarkerClusterer(map, markers)
   })
   
