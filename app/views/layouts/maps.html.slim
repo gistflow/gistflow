@@ -1,0 +1,19 @@
+- window_title 'Map'
+
+- content_for :head do
+  = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
+
+- content_for :header do
+  header class="main map"
+    div class="group"
+      nav class="back"
+        = link_to 'back to main', root_path
+        |  
+        i class="icon-arrow-left"
+    = render_flash
+
+- content_for :main do
+  section class="map"
+    = yield
+
+= render 'layouts/base'

@@ -1,0 +1,38 @@
+header class="primary"
+  h1 Map
+
+div id="map_canvas"
+
+javascript:
+  $(document).ready(function(){
+    var mapOptions = {
+      center: new google.maps.LatLng(40, 0),
+      zoom: 2,
+      zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      panControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      overviewMapControl: false
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions)
+    var locations = #{@locations.to_json.html_safe}
+    
+    var overlay = new google.maps.OverlayView();
+    overlay.draw = function() {};
+    overlay.setMap(map);
+
+    var proj = overlay.getProjection();
+    
+    _(locations).each(function(location){
+      var position = new google.maps.LatLng(location.lat,location.lng)
+      var marker = new google.maps.Marker({
+          position: position,
+          title: _(location.users).map(function(e) { return '@' + e }).join(" "),
+          icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + location.count + '|FE6256|000000',
+          map: map
+      })
+    })
+  })
+  

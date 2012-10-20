@@ -11,3 +11,7 @@ end
 every 1.hour do
   rake 'posts:update_page_views LIMIT=100'
 end
+
+every 1.day do
+  rake 'users:fetch_locations'
+end
