@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
   def show
-    @locations = Location.ready.to_map
+    @locations = Location.with_coordinates.to_map
   end
 end
