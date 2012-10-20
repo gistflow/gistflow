@@ -6,6 +6,5 @@
 //= require twitter_tooltips
 //= require areacomplete
 //= require jquery.tabby
-//= require marker_clusterer
 //= require_tree .
 

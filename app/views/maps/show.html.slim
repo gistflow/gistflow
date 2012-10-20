@@ -23,10 +23,7 @@ javascript:
       boxStyle: { width: "100px" }
     }
 
-    var ib = new InfoBox(myOptions);
-    
     var locations = #{@locations.to_json.html_safe}
-    var markers = []
     
     var overlay = new google.maps.OverlayView();
     overlay.draw = function() {};
@@ -38,14 +35,10 @@ javascript:
       var position = new google.maps.LatLng(location.lat,location.lng)
       var marker = new google.maps.Marker({
           position: position,
-          title: location.label
+          title: _(location.users).map(function(e) { return '@' + e }).join(" "),
+          icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + location.count + '|FE6256|000000',
+          map: map
       })
-      google.maps.event.addListener(marker, 'click', function(e) {
-        ib.setContent('<div id="map-window"><a href="/users/' + marker.title + '">@' + marker.title + '</a></div>')
-        ib.open(map, marker)
-      })
-      markers.push(marker)
     })
-    var markerCluster = new MarkerClusterer(map, markers)
   })
   

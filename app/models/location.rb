@@ -3,7 +3,9 @@ class Location < ActiveRecord::Base
 
   validates :locationable_id, :locationable_type, :address, presence: true
   validates_uniqueness_of :locationable_id, scope: :locationable_type
-
+  
+  scope :ready, where("lat is not null and lng is not null")
+  
   geocoded_by :address, latitude: :lat, longitude: :lng
   before_save :geocode
   
