@@ -70,6 +70,8 @@ Gistflow::Application.routes.draw do
   
   post '/api/markdown', to: 'markdown#create'
   
+  resource :map
+  
   root to: 'landings#show'
   match '*a', to: 'errors#not_found'
 end

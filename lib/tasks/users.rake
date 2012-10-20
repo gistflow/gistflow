@@ -14,8 +14,12 @@ namespace :users do
       begin
         address = fetch_address user
         next if address.blank?
-
-        user.create_location(address: address)
+        
+        if user.location
+          user.location.update_atrribute(address: address)
+        else
+          user.create_location(address: address)
+        end
       rescue
         Rails.logger.info "No userinfo for #{user.username}"
       end
