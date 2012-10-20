@@ -13,7 +13,7 @@ class Location < ActiveRecord::Base
   
   def self.to_map
     user_ids = []
-    locations = scoped.group_by do |location|
+    locations = scoped.where(locationable_type: :User).group_by do |location|
       user_ids << location.locationable_id
       [location.lat, location.lng]
     end
