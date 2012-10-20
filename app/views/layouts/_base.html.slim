@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    meta name='description' content='#{content_for?(:description) ? yield(:description) : 'Social learning'}'
+    - if content_for?(:keywords)
+      meta name='keywords' content='#{yield(:keywords)}'
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
+    
+    javascript:
+      try{Typekit.load();}catch(e){}
+    
+    meta property="og:title" content="Gistflow"
+    meta property="og:type" content="company"
+    meta property="og:url" content="http://gistflow.com"
+    meta property="og:image" content=""
+    meta property="og:site_name" content="Gistflow"
+    meta property="fb:admins" content="100001584897024"
+    
+    = favicon_link_tag '/assets/favicon.ico'
+    
+    = csrf_meta_tags
+    title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
+    = render partial: 'shared/google_analytics'
+    = yield(:head)
+  body
+    div id="fb-root"
+    = raw javascript_enabled?
+    div class="wrap group"
+      = yield(:header)
+      = yield(:main)
+    = yield(:footer)
+    = render partial: 'shared/yandex_analytics'
+= render_git_version

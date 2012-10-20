@@ -1,49 +1,19 @@
-doctype html
-html
-  head
-    meta charset='UTF-8' 
-    meta name='description' content='#{content_for?(:description) ? yield(:description) : 'Social learning'}'
-    - if content_for?(:keywords)
-      meta name='keywords' content='#{yield(:keywords)}'
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
-    = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
-    javascript:
-      try{Typekit.load();}catch(e){}
-    
-    meta property="og:title" content="Gistflow"
-    meta property="og:type" content="company"
-    meta property="og:url" content="http://gistflow.com"
-    meta property="og:image" content=""
-    meta property="og:site_name" content="Gistflow"
-    meta property="fb:admins" content="100001584897024"
-    
-    = favicon_link_tag '/assets/favicon.ico'
-    
-    = csrf_meta_tags
-    title = "Gistflow :: Map"
-    = render partial: 'shared/google_analytics'
-    - if user_signed_in?
-      javascript:
-        window.current_user = {
-          username: "#{current_user.username}",
-          likes: #{current_user.likes.pluck(:post_id).to_json},
-          observings: #{current_user.observings.pluck(:post_id).to_json},
-          bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
-          following: #{current_user.followings.pluck(:followed_user_id).to_json},
-          subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json},
-          admin: #{current_user.admin?}
-        }
-  body
-    div id="fb-root"
-    = raw javascript_enabled?
-    div class="wrap group"
-      header class="main map"
-        div class="group"
-          h1 = link_to_unless_current 'Gistflow', root_path
-          nav class="back"
-            = link_to 'back to main', root_path
-        = render_flash
-      section class="map"
-        = yield
+- window_title 'Map'
+
+- content_for :head do
+  = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
+
+- content_for :header do
+  header class="main map"
+    div class="group"
+      nav class="back"
+        = link_to 'back to main', root_path
+        |  
+        i class="icon-arrow-left"
+    = render_flash
+
+- content_for :main do
+  section class="map"
+    = yield
+
+= render 'layouts/base'

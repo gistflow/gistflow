@@ -1,65 +1,43 @@
-doctype html
-html
-  head
-    meta charset='UTF-8' 
-    meta name='description' content='#{content_for?(:description) ? yield(:description) : 'Social learning'}'
-    - if content_for?(:keywords)
-      meta name='keywords' content='#{yield(:keywords)}'
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
-    
+- content_for(:main) do
+  section class="main"
+    - if content_for?(:submenu)
+        nav class="submenu" = yield(:submenu)
+    = yield
+  section class="sidebar"
+    = render partial: 'general/about'
+    = render :partial => 'users/todolist' if user_signed_in?
+    = yield(:sidebar)
+    = render partial: 'shared/facebook'
+    = render partial: 'account/gists/sidebar', locals: { load_gists: false }
+    = render 'account/bookmarks/sidebar' if user_signed_in?
+    = render 'account/tags/sidebar'
+
+- content_for(:head) do
+  - if user_signed_in?
     javascript:
-      try{Typekit.load();}catch(e){}
-    
-    meta property="og:title" content="Gistflow"
-    meta property="og:type" content="company"
-    meta property="og:url" content="http://gistflow.com"
-    meta property="og:image" content=""
-    meta property="og:site_name" content="Gistflow"
-    meta property="fb:admins" content="100001584897024"
-    
-    = favicon_link_tag '/assets/favicon.ico'
-    
-    = csrf_meta_tags
-    title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
-    = render partial: 'shared/google_analytics'
-    - if user_signed_in?
-      javascript:
-        window.current_user = {
-          username: "#{current_user.username}",
-          likes: #{current_user.likes.pluck(:post_id).to_json},
-          observings: #{current_user.observings.pluck(:post_id).to_json},
-          bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
-          following: #{current_user.followings.pluck(:followed_user_id).to_json},
-          subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json},
-          admin: #{current_user.admin?}
-        }
-  body
-    div id="fb-root"
-    = raw javascript_enabled?
-    div class="wrap group"
-      header class="main"
-        div class="group hr"
-          h1 = link_to_unless_current 'Gistflow', root_path
-          = render 'search/form'
-          nav class="user" = ul(authentication_items)
-        = render_flash
-      section class="main"
-        - if content_for?(:submenu)
-            nav class="submenu" = yield(:submenu)
-        = yield
-      section class="sidebar"
-        = render partial: 'general/about'
-        = render :partial => 'users/todolist' if user_signed_in?
-        = yield(:sidebar)
-        = render partial: 'shared/facebook'
-        = render partial: 'account/gists/sidebar', locals: { load_gists: false }
-        = render 'account/bookmarks/sidebar' if user_signed_in?
-        = render 'account/tags/sidebar'
-    footer class="main"
-      div class="wrap"
-        p If you have any ideas, comments or suggestions please #{link_to 'create issue', 'https://github.com/gistflow/gistflow/issues'} or #{mail_to 'info@gistflow.com', 'email us', :encode => :hex}.
-        p Powered by #{link_to 'Gistflow', 'https://github.com/gistflow', target: '_blank'} with #{link_to 'Evrone', 'https://github.com/evrone', target: '_blank'}.
-    = render partial: 'shared/yandex_analytics'
-= render_git_version
+      window.current_user = {
+        username: "#{current_user.username}",
+        likes: #{current_user.likes.pluck(:post_id).to_json},
+        observings: #{current_user.observings.pluck(:post_id).to_json},
+        bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
+        following: #{current_user.followings.pluck(:followed_user_id).to_json},
+        subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json},
+        admin: #{current_user.admin?}
+      }
+
+- content_for(:header) do
+  header class="main"
+    div class="group hr"
+      h1 = link_to_unless_current 'Gistflow', root_path
+      div class="map" = link_to(map_path) { '<i class="icon-globe"></i>'.html_safe }
+      = render 'search/form'
+      nav class="user" = ul(authentication_items)
+    = render_flash
+
+- content_for(:footer) do
+  footer class="main"
+    div class="wrap"
+      p If you have any ideas, comments or suggestions please #{link_to 'create issue', 'https://github.com/gistflow/gistflow/issues'} or #{mail_to 'info@gistflow.com', 'email us', :encode => :hex}.
+      p Powered by #{link_to 'Gistflow', 'https://github.com/gistflow', target: '_blank'} with #{link_to 'Evrone', 'https://github.com/evrone', target: '_blank'}.
+
+= render 'layouts/base'

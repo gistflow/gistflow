@@ -6,8 +6,8 @@ div id="map_canvas"
 javascript:
   $(document).ready(function(){
     var mapOptions = {
-      center: new google.maps.LatLng(40, -20),
-      zoom: 3,
+      center: new google.maps.LatLng(40, 0),
+      zoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       panControl: false,
       mapTypeControl: false,
@@ -16,13 +16,6 @@ javascript:
       overviewMapControl: false
     }
     var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions)
-    
-    var myOptions = {
-      content: '<div id="map-window"></div>',
-      pixelOffset: new google.maps.Size(-50, -50),
-      boxStyle: { width: "100px" }
-    }
-
     var locations = #{@locations.to_json.html_safe}
     
     var overlay = new google.maps.OverlayView();

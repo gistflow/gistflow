@@ -29,16 +29,20 @@ header.main {
     }
   }
   
-  &.map {
-    h1 {
-      a {
-        color: #536A85;
-        font-weight: bold;
-        text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  div.map {
+    position: absolute;
+    top: 10px;
+    left: 145px;
+    z-index: 20;
+    font-size: 20px;
+    a {
+      color: $gray;
+      &:hover {
+        color: $link;
       }
     }
   }
-  
+
   .hr {
     border-bottom: 1px solid $layout;
     margin-bottom: 5px;
@@ -81,16 +85,20 @@ header.main {
   }
   
   nav.back {
-    float: right;
-    width: 360px;
+    position: absolute;
+    left: 0;
+    top: 0;
     text-align: right;
     font-size: 18px;
-    padding: 10px 0 0 0;
-    a {
-      color: #536A85;
-      border-bottom: 1px solid;
-      font-weight: bold;
-      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    i {
+      position: relative;
+      top: 2px;
+      font-size: 20px;
+      color: $gray;
     }
   }
   
