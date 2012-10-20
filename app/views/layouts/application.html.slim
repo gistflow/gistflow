@@ -29,7 +29,7 @@
   header class="main"
     div class="group hr"
       h1 = link_to_unless_current 'Gistflow', root_path
-      div class="map" = link_to(map_path) { '<i class="icon-globe"></i>'.html_safe }
+      div class="map" = link_to(map_path, title: 'Gistflow in the World') { '<i class="icon-globe"></i>'.html_safe }
       = render 'search/form'
       nav class="user" = ul(authentication_items)
     = render_flash
