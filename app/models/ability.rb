@@ -14,6 +14,7 @@ class Ability
     can :index, [:'users/followings', :'users/followers']
     can :show, :landings
     can [:history, :show], :'tags/wikis'
+    can :show, :maps
     
     if user
       can(:access, :all) and return if user.admin?
