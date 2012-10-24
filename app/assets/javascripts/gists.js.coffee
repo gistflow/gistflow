@@ -90,13 +90,24 @@ $(document).ready ->
     # models
     class GistView
       constructor: (@storage) ->
+        @section = $('section.gists')
         @progressBar = $('div.gists-progress-bar')
+        @inline_gist_template = _.template('
+          <li>
+            <a href="/posts/new" class="add">add</a>
+            <span><%= description %></span>
+            <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a>
+          </li>
+        ')
       
       # show saved to storage gists
       showGists: =>
         @progressBar.hide()
+        ul = $('<ul>')
         @storage.list.each (id) =>
           gist = @storage.getGist(id)
+          console.log(gist)
+        @section.append(ul)
       
       # handle stored event
       updateProgress: () =>
@@ -115,7 +126,8 @@ $(document).ready ->
         url = 'https://api.github.com/users/' + @username + '/gists'
         # $.getJSON url, (gists) ->
         gists = _(window.gist_list)
-        @storage.maximum(gists.length)
+        console.log("import")
+        @storage.maximum(gists.size())
         gists.each (gist) =>
           unless @imported().contains(gist.id)
             @detail(gist)
@@ -137,7 +149,7 @@ $(document).ready ->
         @list = @getList()
         @length = @list.length
         
-      # set the lenght of the user gists
+      # set the length of the user gists
       maximum: (length) ->
         @length = length
       
@@ -146,7 +158,7 @@ $(document).ready ->
         if (new Date().getTime() - @lastUpdate()) < 24 * 60 * 1000
           false
         else
-          @length == @list.length
+          @length == @list.length && @length > 0
       
       # return a percent of loading
       progress: ->
@@ -159,12 +171,18 @@ $(document).ready ->
       # trigger stored event with gist id
       # trigger filled event when loads last gist
       store: (gist) ->
-        localStorage.setItem 'gist:' + gist.id, JSON.stringify(gist)
-        @list.push gist.id
+        console.log("store")
+        localStorage.setItem 'gists:' + gist.id, JSON.stringify(gist)
+        @pushTolist gist.id
         $(@).trigger('stored')
-        if @length == @list.length
+        if @length == @list.size()
           $(@).trigger('filled')
-          
+      
+      # update list and do persistance
+      pushTolist: (id) ->
+        current_list = @getList()
+        current_list.push(id)
+        localStorage.setItem('gists:ids', JSON.stringify(current_list.toArray()))
       
       # return list from storage or empty
       getList: ->
@@ -175,7 +193,7 @@ $(document).ready ->
       
       # get gist's json
       getGist: (id) ->
-        json = localStorage.getItem('gist:' + id)
+        json = localStorage.getItem('gists:' + id)
         JSON.parse(json)
       
       # return last update time or 0
@@ -195,11 +213,11 @@ $(document).ready ->
     storage  = new GistStorage(username)
     view     = new GistView(storage)
     if storage.filled()
-      console.log('filled')
+      console.log('_filled')
       view.showGists()
     else
       importer = new GistImporter(username, storage)
-      console.log('import')
+      console.log('_import')
       storage.bind('stored', view.updateProgress)
       storage.bind('filled', view.showGists)
       importer.import()
