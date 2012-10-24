@@ -77,7 +77,12 @@
   blockquote {
     border-left: 2px solid $gray;
     background: rgba(0, 0, 0, 0.03);
-    font-size: 12px;
-    padding: 5px 5px 5px 8px;
+    font-size: 13px;
+    padding: 5px 5px 4px 8px;
+    margin-bottom: 6px;
+    
+    *:last-child {
+      margin-bottom: 0;
+    }
   }
 }
