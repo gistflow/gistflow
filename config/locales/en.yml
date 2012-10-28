@@ -3,13 +3,13 @@
 
 en:
   default_cut: 'More under the cut'
-    
+
   welcome_todolist_tasks:
     signup_task: 'Sign up for Gistflow.com'
-    observe_task: 'Start observe post (receive notifications about comments)'
-    post_task: 'Write code-related post'
-    like_task: 'Like post, make somebody happy'
-    subscribe_task: 'Subscribe for tag to expand your flow'
-    bookmark_task: 'Bookmark post'
-    comment_task: 'Write comment'
-    follow_task: 'Follow user to expand your flow'
+    observe_task: 'Start observing a post (receive notifications about comments)'
+    post_task: 'Write a code-related post'
+    like_task: 'Like a post, make the author happy'
+    subscribe_task: 'Subscribe for a tag to expand your flow'
+    bookmark_task: 'Bookmark a post'
+    comment_task: 'Write a comment'
+    follow_task: 'Follow a user to expand your flow'
