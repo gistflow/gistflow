@@ -6,7 +6,7 @@ section class="contributors"
       - @contributors.each do |user|
         li = link_to user, user
   - else
-    p Nobody jet.
+    p Nobody here yet.
 
 section class="improvements"
   header
@@ -17,11 +17,10 @@ section class="improvements"
       - next unless previous
       div class="diff-container"
         div class="author"
-          | Changes by 
+          | Changes by
           = link_to wiki.user, wiki.user
           = " at #{wiki.created_at.to_formatted_s(:long)}"
         == Diffy::Diff.new(wiki.content, previous.content).to_s(:html)
   - else
-    p No improvements jet.
+    p No improvements yet.
   p class="back" = link_to 'Back to wiki', tag_wiki_path(@tag)
-  

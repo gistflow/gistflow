@@ -13,47 +13,47 @@ class Tag < ActiveRecord::Base
   }
   has_many :aliases, class_name: :Tag, foreign_key: :entity_id
   belongs_to :entity, class_name: :Tag
-  
+
   has_many :wikis
-  
+
   before_create :build_default_wiki, unless: :wiki
-  
+
   attr_accessible :name, as: :admin
-  
+
   validates :name, presence: true, format: { with: /[a-z]+/ }
-  
+
   scope :real, where(entity_id: nil)
-  
+
   scope :popular, (lambda do |limit = 100|
     real.order('taggings_count desc').limit(limit)
   end)
-  
+
   def alias?
     !!entity
   end
-  
+
   def wiki
     @wiki ||= wikis(true).last
   end
-  
+
   def to_s
     name
   end
-  
+
   def name=(name)
     name.to_s.gsub!(/[\-_]/, '')
     name.downcase!
     write_attribute :name, name
   end
-  
+
   def with_sign
     '#' << name.to_s
   end
-  
+
   def to_param
     name
   end
-  
+
   # Use this method for setup entity and update taggings and subscriptions
   def set_entity(tag)
     self.entity = tag
@@ -63,16 +63,16 @@ class Tag < ActiveRecord::Base
       resubscribe_users_to_entity
     end
   end
-  
+
 protected
-  
+
   def build_default_wiki
     wikis.build do |wiki|
       wiki.user    = User.gistflow
-      wiki.content = 'Nothing to display jet.'
+      wiki.content = 'Nothing to display yet.'
     end
   end
-  
+
   def resubscribe_users_to_entity
     subscriptions.each do |subscription|
       conditions = { user_id: subscription.user_id, tag_id: entity_id }
@@ -84,7 +84,7 @@ protected
     end
     true
   end
-  
+
   def relink_related_records_to_entity
     taggings.each do |tagging|
       conditions = {
