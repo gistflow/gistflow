@@ -15,15 +15,27 @@ $(document).ready ->
             <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a>
           </li>
         ')
+        @gist_template = _.template("<% files.each(function(file) { %>```<%= String(file.language).toLowerCase() %>\n<%= file.content  %>\n```\n\n<% }) %>")
       
       # show saved to storage gists
       showGists: =>
         @progressBar.hide()
         @refresh.show()
+        @textarea = $('#post_content')
         @storage.list().each (id) =>
           gist = @storage.getGist(id)
           options = { description: gist.description, id: gist.id }
-          li = @inline_gist_template(options)
+          li = $(@inline_gist_template(options))
+          template = @gist_template({ files: _(gist.files) })
+          $('a.add', li).on 'click', =>
+            if @textarea.val().length > 0
+              @textarea.val(@textarea.val() + "\n")
+            @textarea
+              .val(@textarea.val() + template)
+              .trigger('input.resize')
+              .focus()
+              .setCursorPosition(@textarea.val().length)
+            return false
           @gists.append(li)
         @gists.show()
       

@@ -8,7 +8,7 @@
     = render :partial => 'users/todolist' if user_signed_in?
     = yield(:sidebar)
     = render partial: 'shared/facebook'
-    = render partial: 'account/gists/sidebar', locals: { load_gists: false }
+    = render partial: 'account/gists/sidebar' if user_signed_in? && gists_page?
     = render 'account/bookmarks/sidebar' if user_signed_in?
     = render 'account/tags/sidebar'
 
