@@ -1,7 +1,19 @@
 @import "configuration";
 
-div.gists-progress-bar {
-  .bar {
-    width: 10%;
+section.gists {
+  div.gists-progress-bar {
+    .bar {
+      width: 1%;
+    }
+  }
+
+  a.gists-refresh {
+    font-size: 16px;
+    line-height: 36px;
+    padding-left: 5px;
+  }
+
+  ul.gists {
+    display: none;
   }
 }

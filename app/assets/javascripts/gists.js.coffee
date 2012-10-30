@@ -4,8 +4,10 @@ $(document).ready ->
     # models
     class GistView
       constructor: (@storage) ->
-        @section = $('section.gists')
-        @progressBar = $('div.gists-progress-bar')
+        @section     = $('section.gists')
+        @progressBar = $('div.gists-progress-bar', @section)
+        @refresh     = $('a.gists-refresh', @section)
+        @gists       = $('ul.gists', @section)
         @inline_gist_template = _.template('
           <li>
             <a href="/posts/new" class="add">add</a>
@@ -17,20 +19,22 @@ $(document).ready ->
       # show saved to storage gists
       showGists: =>
         @progressBar.hide()
-        ul = $('<ul>')
+        @refresh.show()
         @storage.list().each (id) =>
           gist = @storage.getGist(id)
           options = { description: gist.description, id: gist.id }
           li = @inline_gist_template(options)
-          ul.append(li)
-        @section.append(ul)
+          @gists.append(li)
+        @gists.show()
       
       # handle stored event
       updateProgress: () =>
         $('div.bar', @progressBar).width('' + @storage.progress() + '%')
         
     class GistImporter
-      constructor: (@username, @storage) ->
+      constructor: (@user, @storage) ->
+        @username = @user.username
+        @token = @user.oauth
       
       # ids of imported gists
       imported: ->
@@ -38,19 +42,22 @@ $(document).ready ->
       
       # start new import
       import: ->
-        url = 'https://api.github.com/users/' + @username + '/gists'
-        $.getJSON url, (gists) =>
-          @storage.maximum(gists.size())
-          gists.each (gist) =>
-            unless @imported().contains(gist.id)
-              @detail(gist)
+        @storage.clear()
+        $.ajax
+          url: 'https://api.github.com/users/' + @username + '/gists?token=' + @token
+          success: (gists) =>
+            gists = _(gists)
+            @storage.maximum(gists.size())
+            gists.each (gist) =>
+              unless @imported().contains(gist.id)
+                @detail(gist)
       
       # get detail data of gist
       detail: (gist) ->
-        url = 'https://api.github.com/' + gist.id
-        $.getJSON url, (gist) =>
-          gist = window.gist
-          @storage.store(gist)
+        $.ajax
+          url: 'https://api.github.com/gists/' + gist.id + '?token=' + @token
+          success: (gist) =>
+            @storage.store(gist)
     
     class GistStorage
       constructor: (@username) ->
@@ -117,15 +124,28 @@ $(document).ready ->
       # update update time to current
       touchUpdate: ->
         @storage.setItem 'gists:updated_at', new Date().getTime()
+      
+      # clear
+      clear: ->
+        @storage.clear()
+        @storage.setItem('username', @username)
+        null
     
     # controller
-    username = window.current_user.username
-    storage  = new GistStorage(username)
+    user     = window.current_user
+    storage  = new GistStorage(user.username)
     view     = new GistView(storage)
+    importer = new GistImporter(user, storage)
+    storage.on 'stored', view.updateProgress
+    storage.on 'filled', view.showGists
+    view.refresh.on 'click', ->
+      importer.import()
+      view.gists.html('')
+      view.progressBar.show()
+      view.updateProgress()
+    
     if storage.filled()
       view.showGists()
     else
-      importer = new GistImporter(username, storage)
-      storage.on('stored', view.updateProgress)
-      storage.on('filled', view.showGists)
       importer.import()
+      

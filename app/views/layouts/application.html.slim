@@ -22,7 +22,8 @@
         bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
         following: #{current_user.followings.pluck(:followed_user_id).to_json},
         subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json},
-        admin: #{current_user.admin?}
+        admin: #{current_user.admin?},
+        oauth: "#{current_user.oauth_token}"
       }
 
 - content_for(:header) do
