@@ -164,4 +164,10 @@ module ApplicationHelper
     }
     link_to " <span>Tweet</span>".html_safe, "https://twitter.com/share?#{data.to_param}", class: 'button icon-twitter', target: '_blank'
   end
+  
+  def gists_page?
+    [:show, :new, :create, :edit, :update].any? do |action|
+      current_page? controller: :posts, action: action
+    end
+  end
 end
