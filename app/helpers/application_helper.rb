@@ -167,7 +167,7 @@ module ApplicationHelper
   
   def gists_page?
     [:show, :new, :create, :edit, :update].any? do |action|
-      current_page? controller: :posts, action: action
+      params[:controller].to_sym == :posts && action == params[:action].to_sym
     end
   end
 end
