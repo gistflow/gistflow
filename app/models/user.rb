@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   delegate :token, to: :account_token
   
   has_one  :account_twitter, class_name: :'Account::Twitter'
+  has_one  :account_github, class_name: 'Account::Github'
   has_one  :settings
   has_one  :profile
   has_one  :account_token, class_name: 'Account::Token'
@@ -176,6 +177,10 @@ class User < ActiveRecord::Base
       oauth_token: account_twitter.token,
       oauth_token_secret: account_twitter.secret
     )
+  end
+  
+  def oauth_token
+    account_github.token
   end
   
 private

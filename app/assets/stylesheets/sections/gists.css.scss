@@ -1,10 +1,19 @@
 @import "configuration";
 
 section.gists {
-  display: none;
-  
-  a.disabled {
-    color: #858585;
-    font-weight: 600;
+  div.gists-progress-bar {
+    .bar {
+      width: 1%;
+    }
+  }
+
+  a.gists-refresh {
+    font-size: 16px;
+    line-height: 36px;
+    padding-left: 5px;
+  }
+
+  ul.gists {
+    display: none;
   }
 }
