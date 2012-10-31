@@ -21,12 +21,6 @@ class ApplicationController < ActionController::Base
     protected :authenticate_staging
   end
   
-  after_filter :set_access
-
-  def set_access
-    response.headers["Origin"] = "http://gistflow.com"
-  end
-  
 protected
   
   def authenticated_by_token?
