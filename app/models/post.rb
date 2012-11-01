@@ -135,6 +135,8 @@ private
   end
   
   def notify_audience
-    Resque.enqueue(Mailer, 'UserMailer', :new_post, id)
+    audience.each do |user|
+      Resque.enqueue(Mailer, 'UserMailer', :new_post, id, user.id)
+    end
   end
 end
