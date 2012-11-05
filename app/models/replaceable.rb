@@ -1,6 +1,6 @@
 class Replaceable
-  REPLACEABLE_TAGS = %w(p li)
-  UNREPLACEABLE_TAGS = %w(a em strong code img)
+  REPLACEABLE_TAGS = %w(p)
+  UNREPLACEABLE_TAGS = %w(a em strong code img li)
   BASE_REGEXP = '(\s|\>)%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
   
   attr_reader :html
