@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
-  after_create :notify_audience
+  after_commit :notify_audience, on: :create
   before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }

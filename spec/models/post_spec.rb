@@ -11,6 +11,14 @@ describe Post do
     it { should be_exists }
   end
   
+  describe 'should notify audience on create' do
+    subject { build(:post) }
+    it do
+      subject.should_receive(:notify_audience).once
+      subject.save
+    end
+  end
+  
   describe '#tags_size' do
     subject { build(:post, :content => 'foo #bar baz') }
     its(:tags_size) { should == 1 }
