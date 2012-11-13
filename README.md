@@ -11,7 +11,7 @@ You are always welcome to contribute or create issue. Checkout [issues page](htt
 * git clone
 * bundle
 * configure your database.yml file
-* be shure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
+* be sure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
 * rake db:setup
 * rails s
 
