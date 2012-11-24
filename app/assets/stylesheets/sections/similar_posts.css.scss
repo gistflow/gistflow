@@ -1,0 +1,9 @@
+@import "configuration";
+
+section.similar_posts {
+  > header {
+    h1 {
+      @include caption;
+    }
+  }
+}

@@ -104,4 +104,14 @@ describe Post do
       end
     end
   end
+
+  describe '#similar_posts' do
+    let(:tag) { create :tag }
+    let(:post) { create :post, :tags => [tag] }
+    let(:similar_post) { create :post, :tags => [tag] }
+
+    it 'should find similar post for post' do
+      post.similar_posts.should eq([similar_post])
+    end
+  end
 end
