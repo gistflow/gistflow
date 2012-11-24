@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'Landing', :local => true do
   before { visit root_path }
   
-  it 'should be available for non-authorized user' do
-    page.should have_content('Join developers community blog, share and learn new skills.')
+  it 'should have call to action' do
+    page.should have_content('Join developers community blog, share and learn new skills')
   end
   
   it 'should have link to login' do
