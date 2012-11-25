@@ -115,7 +115,7 @@ class Post < ActiveRecord::Base
   end
   
   def similar_posts
-    Post.except(self).tagged_with(tags.pluck(:name)).order('likes_count, comments_count DESC').limit(5)
+    Post.except(self).tagged_with(tags.pluck(:name)).order('likes_count, comments_count DESC').limit(3)
   end
 
 private
