@@ -10,7 +10,7 @@ class Profile < ActiveRecord::Base
   
   def send_welcome_email
     if email_valid?
-      Resque.enqueue(Mailer, 'UserMailer', :welcome_email, self.id)
+      Resque.enqueue(Mailer, 'UserMailer', :welcome_email, user_id)
     end
   end
   

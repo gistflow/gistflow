@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
   
   after_create :tweet, if: :status?
   after_create :setup_observing_for_author
-  after_create :notify_audience
+  after_commit :notify_audience, on: :create
   before_create :assign_private_key
   
   scope :from_followed_users, lambda { |user| followed_by(user) }
@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
   scope :with_privacy, lambda { |author, user|
     where(is_private: false) unless author == user
   }
+  scope :except, lambda { |post| where('posts.id != ?', post.id) }
   
   def to_param
     is_private? ? private_key : "#{id}-#{title.parameterize}"
@@ -113,8 +114,12 @@ class Post < ActiveRecord::Base
     [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
+  def similar_posts
+    Post.except(self).tagged_with(tags.pluck(:name)).order('likes_count, comments_count DESC').limit(3)
+  end
+
 private
-  
+
   def tweet
     if user.twitter_client?
       url = Googl.shorten("http://gistflow.com/posts/#{id}")
@@ -135,6 +140,8 @@ private
   end
   
   def notify_audience
-    Resque.enqueue(Mailer, 'UserMailer', :new_post, id)
+    audience.each do |user|
+      Resque.enqueue(Mailer, 'UserMailer', :new_post, id, user.id)
+    end
   end
 end

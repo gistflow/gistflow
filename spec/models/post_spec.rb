@@ -11,6 +11,14 @@ describe Post do
     it { should be_exists }
   end
   
+  describe 'should notify audience on create' do
+    subject { build(:post) }
+    it do
+      subject.should_receive(:notify_audience).once
+      subject.save
+    end
+  end
+  
   describe '#tags_size' do
     subject { build(:post, :content => 'foo #bar baz') }
     its(:tags_size) { should == 1 }
@@ -102,6 +110,16 @@ describe Post do
           post.body.should == "preview\r\nbody #ruby <cut> #haskell"
         end
       end
+    end
+  end
+
+  describe '#similar_posts' do
+    let(:tag) { create :tag }
+    let(:post) { create :post, :tags => [tag] }
+    let(:similar_post) { create :post, :tags => [tag] }
+
+    it 'should find similar post for post' do
+      post.similar_posts.should eq([similar_post])
     end
   end
 end
