@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
   scope :with_privacy, lambda { |author, user|
     where(is_private: false) unless author == user
   }
+  scope :except, lambda { |post| where('posts.id != ?', post.id) }
   
   def to_param
     is_private? ? private_key : "#{id}-#{title.parameterize}"
@@ -113,8 +114,12 @@ class Post < ActiveRecord::Base
     [*persisted_comments.map { |c| c.user.username }, user.username].uniq.sort
   end
   
+  def similar_posts
+    Post.except(self).tagged_with(tags.pluck(:name)).order('likes_count, comments_count DESC').limit(3)
+  end
+
 private
-  
+
   def tweet
     if user.twitter_client?
       url = Googl.shorten("http://gistflow.com/posts/#{id}")
