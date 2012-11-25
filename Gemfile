@@ -41,6 +41,7 @@ group :test, :development do
   gem 'rvm-capistrano'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'selenium-webdriver', '~> 2.22.0'
   gem 'rspec-rails'
   gem 'faker'
   gem 'launchy'

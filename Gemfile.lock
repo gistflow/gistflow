@@ -347,6 +347,7 @@ DEPENDENCIES
   rvm-capistrano
   sanitize
   sass-rails (~> 3.2.5)
+  selenium-webdriver (~> 2.22.0)
   settingslogic
   slim
   state_machine
