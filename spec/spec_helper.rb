@@ -9,7 +9,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.use_transactional_fixtures = false
   config.filter_run_excluding :remote => true
-  config.filter_run_excluding :local => true if ENV['TRAVIS']
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) do
