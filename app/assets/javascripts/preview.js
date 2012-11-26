@@ -9,11 +9,10 @@ $(function(){
       $(this).prev().before(data.comment);
       $('section.comments p.no_comments').remove();
     }
-    var form = $(data.form)
-    $(this).replaceWith(data.form)
-    // fix to local    
-    $('textarea').autoResize().tabby({tabString: '  '})
-  })
+    var form = $(data.form);
+    $(this).replaceWith(form);
+    form.find('textarea').autoResize().tabby({tabString: '  '}).trigger('input.resize');
+  });
   
   $(document).on('ajax:error', 'form#new_comment', function(e, data){
     var message = JSON.parse(data.responseText.toString()).message;
