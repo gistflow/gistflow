@@ -7,7 +7,7 @@
     = f.text_field :title, :placeholder => 'Title'
   fieldset
     = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint raw', :id => 'post_content'
-    .hint You can add tags (at least one is needed) by mentioning in post's body: #gistflow #code #ruby
+    div class="post-hint" You can add tags (at least one is needed) by mentioning in post's body: #gistflow #code #ruby
   div class="preview markdown"
   fieldset
     = f.check_box :question

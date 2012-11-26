@@ -1,3 +1,5 @@
+require ::File.expand_path('../config/environment',  __FILE__)
+
 require 'rack'
 require 'rack/cache'
 require 'redis-rack-cache'
@@ -9,7 +11,6 @@ use Rack::Session::Redis
 #   :metastore   => 'redis://localhost:6379/0/metastore',
 #   :entitystore => 'redis://localhost:6379/0/entitystore'
 
-require ::File.expand_path('../config/environment',  __FILE__)
 require 'resque/server'
 
 Resque::Server.use Rack::Auth::Basic do |username, password|
