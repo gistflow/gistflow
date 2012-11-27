@@ -70,21 +70,23 @@
   code {
     border: 1px solid #E1E1E8;
     font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-    padding: 0px 5px 1px;
+    display: inline-block;
+    padding: 0px 3px 1px;
     line-height: 19px;
     margin-bottom: 1em;
     background-color: #F7F7F9;
     border: 1px solid #E1E1E8;
-    font-size: 13px;
+    font-size: 12px;
+    border-radius: 3px;
   }
   pre {
     white-space: pre-wrap;
     overflow-x: scroll;
     display: block;
-    padding: 6px 10px;
+    padding: 4px 8px;
     font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
     line-height: 19px;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 3px;
     background: #F7F7F9;
     border: 1px solid #E1E1E8;
