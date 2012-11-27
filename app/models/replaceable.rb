@@ -87,7 +87,7 @@ private
   end
   
   def replace_usernames(html)
-    regexp = Regexp.new(BASE_REGEXP % '@(\w+)')
+    regexp = Regexp.new(BASE_REGEXP % '@([\w-]+)')
     html.gsub(regexp) do |match|
       username = $2
       if User.where(:username => username).exists?
@@ -100,7 +100,7 @@ private
   end
   
   def replace_tags(html)
-    regexp = Regexp.new(BASE_REGEXP % '#(\w+)')
+    regexp = Regexp.new(BASE_REGEXP % '#([\w-]+)')
     html.gsub(regexp) do |match|
       before, raw, after = $1, $2, $3
       tagname = raw.gsub(/[\-_]/, '').downcase

@@ -64,6 +64,7 @@ describe Replaceable do
       before do
         FactoryGirl.create(:user, :username => 'username')
         FactoryGirl.create(:user, :username => 'UserName')
+        FactoryGirl.create(:user, :username => 'user-name')
       end
       
       context 'wrapped @usename' do
@@ -102,6 +103,12 @@ describe Replaceable do
           # should == '@username@username'
           pending "Is it really needed?"
         end
+      end
+
+      context 'with hyphen' do
+        let(:replaceable) { Replaceable.new('<p>@user-name</p>') }
+
+        it { should == '<p><a href="/users/user-name" title="user-name">@user-name</a></p>' }
       end
       
       PUNCTUATION.each do |char|
