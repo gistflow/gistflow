@@ -91,6 +91,12 @@
     background: #F7F7F9;
     border: 1px solid #E1E1E8;
     color: #404040;
+
+    code {
+      background: none;
+      padding: 0;
+      border: none;
+    }
   }
   blockquote {
     border-left: 2px solid $gray;
