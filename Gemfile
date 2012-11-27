@@ -30,6 +30,7 @@ gem 'sanitize'
 gem 'whenever'
 gem 'garb'
 gem 'geocoder'
+gem 'relish'
 
 # deploy
 gem 'capistrano-resque'

@@ -4,15 +4,16 @@
   font-size: 14px;
   
   h1, h2, h3, h4, h5, h6 {
-    line-height: 28px;
     color: #333;
+    margin: 20px 0 10px;
   }
   h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 10px;
+    font-weight: bold;
   }
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
   h3 {
     font-size: 18px;
@@ -26,12 +27,15 @@
     font-weight: 600;
   }
   h6 {
-    font-weight: 600;
+    font-size: 14px;
+    color: #777;
   }
   
+  p, blockquote, ul, ol, dl, table {
+    margin: 15px 0;
+  }
   p {
     line-height: 18px;
-    margin-bottom: 6px;
   }
   
   b, strong {
@@ -50,39 +54,41 @@
   }
   ul, ol {
     margin-left: 2em;
-    margin-bottom: 10px;
-    font-size: 13px;
   }
   code {
     border: 1px solid #E1E1E8;
     font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
     padding: 0px 5px 1px;
-    line-height: 15px;
+    line-height: 19px;
     margin-bottom: 1em;
     background-color: #F7F7F9;
     border: 1px solid #E1E1E8;
-    font-size: 12px;
+    font-size: 13px;
   }
   pre {
     white-space: pre-wrap;
-    
-    code {
-      overflow-x: scroll;
-      display: block;
-      padding: .25em .5em .3em .5em;
-      font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
-      font-size: 12px;
-    }
+    overflow-x: scroll;
+    display: block;
+    padding: 6px 10px;
+    font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+    line-height: 19px;
+    font-size: 13px;
+    border-radius: 3px;
+    background: #F7F7F9;
+    border: 1px solid #E1E1E8;
+    color: #404040;
   }
   blockquote {
     border-left: 2px solid $gray;
     background: rgba(0, 0, 0, 0.03);
-    font-size: 13px;
-    padding: 5px 5px 4px 8px;
-    margin-bottom: 6px;
-    
+    padding: 10px;
+
+    *:first-child {
+      margin-top: 0px;
+    }
+
     *:last-child {
-      margin-bottom: 0;
+      margin-bottom: 0px;
     }
   }
 }
