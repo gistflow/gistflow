@@ -4,6 +4,10 @@ class Notification::Following < Notification
   def title
     "#{notifiable.follower} started following you"
   end
+
+  def mailer_title
+    title
+  end
   
   def message *args
     user = notifiable.follower

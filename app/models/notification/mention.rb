@@ -4,6 +4,10 @@ class Notification::Mention < Notification
   def title
     "#{notifiable.user} mentioned you in #{post.title}"
   end
+
+  def mailer_title
+    title
+  end
   
   def message post_title = false
     send("message_for_#{notifiable_type.downcase}", post_title).html_safe

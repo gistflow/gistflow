@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
     @notification = Notification.find(notification_id)
     @user = @notification.user
   
-    mail to: @user.profile.email, subject: @notification.title
+    mail to: @user.profile.email, subject: @notification.mailer_title
   end
   
   def new_post(post_id, user_id)

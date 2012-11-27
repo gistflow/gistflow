@@ -4,6 +4,10 @@ class Notification::Comment < Notification
   def title
     "#{notifiable.user} commented on post #{notifiable.post.title}"
   end
+
+  def mailer_title
+    "New comment on post #{notifiable.post.title}"
+  end
   
   def target_url
     "#{host}/posts/#{notifiable.post.id}"
