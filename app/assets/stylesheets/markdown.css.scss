@@ -2,6 +2,13 @@
 
 .markdown {
   font-size: 14px;
+
+  *:first-child {
+    margin-top: 0;
+  }
+  *:last-child {
+    margin-bottom: 0;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     color: #333;
@@ -9,25 +16,30 @@
   }
   h1 {
     font-size: 28px;
+    line-height: 28px;
     margin-bottom: 10px;
     font-weight: bold;
   }
   h2 {
     font-size: 24px;
+    line-height: 24px;
   }
   h3 {
     font-size: 18px;
   }
   h4 {
     font-size: 16px;
+    line-height: 16px;
     font-weight: 600;
   }
   h5 {
     font-size: 14px;
+    line-height: 14px;
     font-weight: 600;
   }
   h6 {
     font-size: 14px;
+    line-height: 14px;
     color: #777;
   }
   
