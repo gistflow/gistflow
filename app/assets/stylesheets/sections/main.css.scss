@@ -105,6 +105,11 @@ section.main {
     
     .avatar {
       @include frame;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
     }
     
     h2 {

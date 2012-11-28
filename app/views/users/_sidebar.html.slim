@@ -4,7 +4,7 @@
       h1 = user
     div class="user"
       div class="group"
-        div class="avatar" = avatar_image(user, 66)
+        div class="avatar" = avatar_image(user, 132)
         = render partial: 'users/contacts', :locals => { :user => user }
       = link_to_follow(user) if user_signed_in? && current_user != user
 

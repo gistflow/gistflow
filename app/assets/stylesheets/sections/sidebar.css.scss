@@ -11,6 +11,10 @@ section.sidebar {
     .avatar {
       @include frame;
       margin-bottom: 10px;
+      img {
+        width: 66px;
+        height: 66px;
+      }
     }
     div.user {
       margin-bottom: 10px;

@@ -37,7 +37,7 @@ module ApplicationHelper
     request.env['HTTP_USER_AGENT'].to_s =~ /Macintosh/
   end
   
-  def avatar_image(user, size = 26, type = :user)
+  def avatar_image(user, size = 52, type = :user)
     image_tag user.gravatar(size), size: [size, size].join('x')
   end
   

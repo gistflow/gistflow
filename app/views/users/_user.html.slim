@@ -1,7 +1,7 @@
 div class="user group"
   div class="group"
     div class="avatar"
-      = link_to avatar_image(user, 48), user_path(user)
+      = link_to avatar_image(user, 96), user_path(user)
     div class="info"
       h2 = link_to "#{user.name} <span>#{user.username}</span>".html_safe, user_path(user)
       - if user_signed_in?
