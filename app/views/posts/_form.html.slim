@@ -1,8 +1,5 @@
 = form_for @post, html: { class: 'previewable' } do |f|
-  - if @post.errors.any?
-    ul class="errors"
-      - @post.errors.full_messages.each do |message|
-        li= message
+  = render_error_messages @post
   fieldset
     = f.text_field :title, :placeholder => 'Title'
   fieldset
