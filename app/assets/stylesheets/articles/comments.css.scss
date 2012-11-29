@@ -53,6 +53,11 @@ article.comment {
   
   .avatar {
     float: left;
+
+    img {
+      width: 26px;
+      height: 26px;
+    }
     
     a {
       @include frame;
