@@ -4,12 +4,13 @@ Micro-blog platform for developers inspired by [Github:Gist](http://gist.github.
 
 ## Contributing
 
-You are always welcome to contribute or create issue. Checkout [issues page](https://github.com/gist-flow/gistflow/issues).
+You are always welcome to contribute or create issue. Checkout [issues page](https://github.com/gistflow/gistflow/issues).
 
 ## Setup
 
 * git clone
 * bundle
+* cp config/database.yml.example config/database.yml
 * configure your database.yml file
 * be sure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
 * rake db:setup
