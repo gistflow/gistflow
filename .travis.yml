@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 1.9.3
 before_script:
-  - echo "cp config/database.yml.travis config/database.yml"
+  - cp config/database.yml.travis config/database.yml
   - psql -c 'create database gistflow_test;' -U postgres
   - bundle exec rake db:migrate
 notifications:
