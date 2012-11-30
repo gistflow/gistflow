@@ -1,0 +1,6 @@
+test:
+  adapter: postgresql
+  database: gistflow_test
+  host: localhost
+  username: 'postgres'
+  pool: 5
