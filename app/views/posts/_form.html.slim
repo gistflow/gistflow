@@ -27,20 +27,4 @@
         = link_to 'Edit', '#', class: 'button edit'
         = link_to 'Preview', '#', class: 'button preview'
         = f.submit commit_title, class: 'button'
-    = render :partial => 'shared/markdown_hints'
-  
-  - if @post.new_record?
-    div class="twitter"
-      h2 Tweet
-      - if current_user.twitter_client?
-        fieldset class="twitter"
-          = f.text_area :status, :size => '40x2'
-          div id="status-length" = @post.available_symbols_for_status
-        fieldset
-          = link_to 'copy from title', '#', class: 'js', id: 'twitter-copy'
-      - else
-        p
-          | You can tweet about your post automatically after 
-          = link_to 'sign in', '/auth/twitter', target: '_blank'
-          | .
-  
+    = render :partial => 'shared/markdown_hints'  

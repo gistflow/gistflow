@@ -7,16 +7,6 @@ section.posts {
   }
   
   form {
-    fieldset.twitter {
-      position: relative;
-      #status-length {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-        color: $charcoal;
-      }
-    }
-
     textarea {
       font-family: monospace;
     }

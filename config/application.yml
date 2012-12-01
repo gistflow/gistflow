@@ -12,9 +12,6 @@ defaults: &defaults
     github:
       key: ""
       secret: ""
-    twitter:
-      key: ""
-      secret: ""
   resque:
     http_username: gistflow
     http_password: gistflow

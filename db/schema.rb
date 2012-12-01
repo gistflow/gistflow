@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017194715) do
+ActiveRecord::Schema.define(:version => 20121201112320) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(:version => 20121017194715) do
 
   add_index "account_tokens", ["token"], :name => "index_account_tokens_on_token", :unique => true
   add_index "account_tokens", ["user_id"], :name => "index_account_tokens_on_user_id", :unique => true
-
-  create_table "account_twitters", :force => true do |t|
-    t.integer "user_id"
-    t.integer "twitter_id"
-    t.string  "token"
-    t.string  "secret"
-  end
-
-  add_index "account_twitters", ["user_id"], :name => "index_account_twitters_on_user_id", :unique => true
 
   create_table "bookmarks", :force => true do |t|
     t.integer "post_id"

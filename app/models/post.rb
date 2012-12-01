@@ -19,7 +19,6 @@ class Post < ActiveRecord::Base
   
   attr_accessible :title, :content, :question, :status, :is_private
   
-  after_create :tweet, if: :status?
   after_create :setup_observing_for_author
   after_commit :notify_audience, on: :create
   before_create :assign_private_key
@@ -119,14 +118,6 @@ class Post < ActiveRecord::Base
   end
 
 private
-
-  def tweet
-    if user.twitter_client?
-      url = Googl.shorten("http://gistflow.com/posts/#{id}")
-      status << " " << url.short_url # http://goo.gl/xxxxxx
-      user.twitter_client.update(status)
-    end
-  end
   
   def setup_observing_for_author
     user.observings.create do |observing|

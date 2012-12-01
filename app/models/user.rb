@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   
   delegate :token, to: :account_token
   
-  has_one  :account_twitter, class_name: :'Account::Twitter'
   has_one  :account_github, class_name: 'Account::Github'
   has_one  :settings
   has_one  :profile
@@ -164,19 +163,6 @@ class User < ActiveRecord::Base
   
   def subscribe tag
     Subscription.find_or_create_by_user_id_and_tag_id(self.id, tag.id)
-  end
-  
-  def twitter_client?
-    !!account_twitter
-  end
-  
-  def twitter_client
-    return unless twitter_client?
-    
-    @twitter_account ||= Twitter::Client.new(
-      oauth_token: account_twitter.token,
-      oauth_token_secret: account_twitter.secret
-    )
   end
   
   def oauth_token
