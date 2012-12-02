@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   include Models::Mentionable
   include Models::Indestructible
   include Models::Cuttable
+  include Models::Searchable
   
   default_scope order('posts.id desc')
   
@@ -99,10 +100,6 @@ class Post < ActiveRecord::Base
   def self.followed_by(user)
     user_ids = user.followings.select(:followed_user_id).to_sql
     where "user_id IN (#{user_ids})"
-  end
-  
-  def self.search(text)
-    where("title like :q or content like :q", q: "%#{text}%")
   end
   
   def persisted_comments

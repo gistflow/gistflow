@@ -28,6 +28,7 @@ gem 'whenever'
 gem 'garb'
 gem 'geocoder'
 gem 'relish'
+gem 'tire'
 
 # deploy
 gem 'capistrano-resque'
