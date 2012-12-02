@@ -1,6 +1,6 @@
 javascript:
   window.ratings = #{Hash[posts.map { |p| [p.user.username, p.user.rating] }].to_json.html_safe}
-  window.posts = #{posts.to_json_hash(only: [:id, :likes_count, :comments_count]).html_safe}
+  window.posts = #{posts_hash(posts).to_json.html_safe}
 
 - if posts.any?
   - posts.each do |post|

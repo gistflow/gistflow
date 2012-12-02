@@ -14,8 +14,9 @@ module Models
         indexes :is_private,  index: :not_analyzed, type: :boolean
       end
 
-      def self.search(query, who = nil)
-        tire.search(load: { include: :user }) do
+      def self.search(query, options = {})
+        options.reverse_merge!(load: { include: :user })
+        tire.search(options) do
           query { string query } if query.present?
           filter :term, { is_private: false }
         end

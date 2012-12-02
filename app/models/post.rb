@@ -44,15 +44,6 @@ class Post < ActiveRecord::Base
     end
   end
 
-  # ActiveRecord::Relation extends method
-  def self.to_json_hash(options = nil)
-    hash = {}
-    all.each do |post|
-      hash[post.id] = post.as_json(options)
-    end
-    hash.to_json
-  end
-  
   # Max updated_at value for cache
   # ActiveRecord::Relation extends method
   def self.last_modified

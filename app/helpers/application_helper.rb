@@ -170,4 +170,12 @@ module ApplicationHelper
       params[:controller].to_sym == :posts && action == params[:action].to_sym
     end
   end
+
+  def posts_hash(posts)
+    hash = {}
+    posts.each do |post|
+      hash[post.id] = post.as_json(only: [:id, :likes_count, :comments_count])
+    end
+    hash
+  end
 end
