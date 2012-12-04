@@ -16,6 +16,16 @@ You are always welcome to contribute or create issue. Checkout [issues page](htt
 * rake db:setup
 * rails s
 
+### Github Authorization on your local machine
+
+You should run app at `http://gistflow.dev/` on the `:80` port to speak with GitHub omniauth freely. [Pow](http://pow.cx/) and [Powder](https://github.com/rodreegez/powder) will help you much with it.
+
+```
+curl get.pow.cx | sh
+gem install powder
+powder link
+```
+
 ## Testing
 
 Every new feature comes with bunch of rspec and capybara tests. Be sure to write all necessary tests and launch `rspec .` to check all of them passed.
