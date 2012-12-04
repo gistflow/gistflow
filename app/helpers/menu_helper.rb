@@ -9,14 +9,6 @@ module MenuHelper
     end
   end
   
-  def login_url
-    if Rails.env.development?
-      login_path
-    else
-      auth_path
-    end
-  end
-  
   def authentication_menu
     capture_haml do
       haml_tag :ul, :class => 'authentication' do
@@ -51,7 +43,7 @@ module MenuHelper
       items << link_to('settings', account_settings_path)
       items << link_to('logout', logout_path)
     else
-      items << link_to('login', login_url, :class => 'login')
+      items << link_to('login', auth_path, :class => 'login')
     end
     items
   end

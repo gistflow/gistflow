@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'User page', local: true do
-  let!(:user_1) { create(:user, username: :releu) }
-  let!(:user_2) { create(:user) }
+  # let!(:user_1) { create(:user, username: :releu) }
+  # let!(:user_2) { create(:user) }
   before do
     auth
-    visit user_path(user_2)
+    visit user_path(:releu)
   end
   
   context 'self user page' do

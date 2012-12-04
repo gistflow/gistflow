@@ -43,4 +43,29 @@ Gistflow::Application.configure do
   config.active_support.deprecation = :stderr
   
   config.host = 'http://localhost:3000'
+
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:github] = {
+    "provider" => "github",
+    "uid"      => 348907,
+    "info"     => {
+      "nickname" => "releu",
+      "email"    => "releu@me.com",
+      "name"     => "Jan Bernacki",
+      "urls"     => { 
+        "GitHub" => "https://github.com/releu",
+        "Blog"   => "http://gistflow.com"
+      }
+    },
+    "credentials" => {
+      "token" => "duckduck"
+    },
+    "extra" => {
+      "raw_info" => {
+        "company" => "Redstone Labs, s.r.o.",
+        "gravatar_id" => "757fb0d5ec7560b6f25f5bd98eadc020"
+      }
+    }
+  }
 end

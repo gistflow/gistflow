@@ -1,7 +1,6 @@
 Gistflow::Application.routes.draw do
   match '/auth/github/callback'  => 'users#create'
   
-  match '/login'  => 'sessions#create' unless Rails.env.production? || Rails.env.staging?
   match '/logout' => 'sessions#destroy'
   
   match '/flow'      => 'posts#flow'
