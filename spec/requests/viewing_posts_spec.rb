@@ -2,14 +2,11 @@ require 'spec_helper'
 
 describe 'Viewing posts', local: true do
   context 'on flow' do
-    let!(:posts) { 30.times.map { create(:post) } }
+    let!(:user) { create(:user) }
+    let!(:posts) { 30.times.map { create(:post, user: user) } }
     before { visit all_path }
   
     context 'as unauthorized user', js: true do
-      it 'should show Post title' do
-        page.find('section.posts > header').should have_content('Posts')
-      end
-      
       it 'should show 20 posts on page' do
         Post.page(nil).each do |post|
           page.should have_css('article.post h1', text: post.title)

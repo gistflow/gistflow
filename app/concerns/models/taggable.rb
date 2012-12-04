@@ -25,7 +25,7 @@ module Models
     end
 
     def subscribe_user
-      (tags - user.tags).each do |tag|
+      (tags - user.tags(true)).each do |tag|
         user.subscriptions.create! do |subsctiption|
           subsctiption.tag = tag
         end rescue ActiveRecord::RecordNotUnique

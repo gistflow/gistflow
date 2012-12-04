@@ -7,7 +7,7 @@ def should_have_private_post_link
   end
 end
 
-describe 'Private posts', local: true do
+describe 'Private posts', js: true do
   context 'on flow' do
     let!(:posts) { 10.times.map { create(:post) } }
     let!(:private_posts) { 10.times.map { create(:private_post) } }
@@ -35,13 +35,13 @@ describe 'Private posts', local: true do
     end
   end
   
-  context 'on users page' do
-    let!(:user) { create(:user, username: :releu) }
-    let!(:post) { create(:post, user_id: user.id) }
-    let!(:private_post) { create(:private_post, user_id: user.id) }
+  context 'on users page', focus: true do
+    let!(:user) { create(:user) }
+    let!(:post) { create(:post, user: user) }
+    let!(:private_post) { create(:private_post, user: user) }
     
     before do
-      auth
+      auth(user)
       visit user_path(user)
     end
     
