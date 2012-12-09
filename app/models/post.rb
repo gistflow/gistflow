@@ -30,7 +30,7 @@ class Post < ActiveRecord::Base
   scope :with_privacy, lambda { |author, user|
     where(is_private: false) unless author == user
   }
-  scope :except, lambda { |post| where('posts.id != ?', post.id) }
+  scope :except_post, lambda { |post| where('posts.id != ?', post.id) }
   
   def to_param
     is_private? ? private_key : "#{id}-#{title.parameterize}"
@@ -102,7 +102,7 @@ class Post < ActiveRecord::Base
   end
   
   def similar_posts
-    Post.select('DISTINCT "posts".*, random() rand').except(self).
+    Post.select('DISTINCT "posts".*, random() rand').except_post(self).
       not_private.joins(:taggings).where(taggings: { tag_id: tag_ids }).
       reorder('rand').limit(3)
   end
