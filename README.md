@@ -14,7 +14,16 @@ You are always welcome to contribute or create issue. Checkout [issues page](htt
 * configure your database.yml file
 * be sure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
 * rake db:setup
-* rails s
+
+### Github Authorization on your local machine
+
+You should run app at `http://gistflow.dev/` on the `:80` port to speak with GitHub omniauth freely. [Pow](http://pow.cx/) and [Powder](https://github.com/rodreegez/powder) will help you much with it.
+
+```
+curl get.pow.cx | sh
+gem install powder
+powder link
+```
 
 ## Testing
 
@@ -24,6 +33,7 @@ Every new feature comes with bunch of rspec and capybara tests. Be sure to write
 
 * [Jan Bernacki](https://github.com/releu) (releu)
 * [Anatoli Makarevich](https://github.com/makaroni4) (makaroni4)
+* [Nick Shebanov](https://github.com/killthekitten) (killthekitten)
 
 ## License
 

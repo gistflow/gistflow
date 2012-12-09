@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'Viewing posts', local: true do
   context 'on flow' do
-    let!(:posts) { 30.times.map { create(:post) } }
+    let!(:user) { create(:user) }
+    let!(:posts) { 30.times.map { create(:post, user: user) } }
     before { visit all_path }
   
     context 'as unauthorized user', js: true do

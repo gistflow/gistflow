@@ -15,11 +15,7 @@ module ApplicationHelper
   end
   
   def auth_path
-    if Rails.env.production? || Rails.env.staging?
-      '/auth/github'
-    else
-      login_path
-    end
+    '/auth/github'
   end
   
   def link_to_gists(user)

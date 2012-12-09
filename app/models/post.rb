@@ -102,7 +102,9 @@ class Post < ActiveRecord::Base
   end
   
   def similar_posts
-    Post.except(self).not_private.joins(:taggings).where(taggings: { tag_id: tags.pluck('tags.id') }).order('likes_count, comments_count DESC').limit(3)
+    Post.select('DISTINCT "posts".*, random() rand').except(self).
+      not_private.joins(:taggings).where(taggings: { tag_id: tag_ids }).
+      reorder('rand').limit(3)
   end
 
 private

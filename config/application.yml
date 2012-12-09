@@ -10,8 +10,8 @@ defaults: &defaults
     api_key: ""
   omniauth:
     github:
-      key: ""
-      secret: ""
+      key: "927a0bef13ad23c58248"
+      secret: "8e5e044e3b37ddbb425c725d001b489e7ec28845"
   resque:
     http_username: gistflow
     http_password: gistflow

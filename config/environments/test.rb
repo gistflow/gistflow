@@ -43,4 +43,6 @@ Gistflow::Application.configure do
   config.active_support.deprecation = :stderr
   
   config.host = 'http://localhost:3000'
+
+  OmniAuth.config.test_mode = true
 end
