@@ -23,10 +23,10 @@ Gistflow::Application.routes.draw do
     post   '/subscriptions/:tag_id' => 'subscriptions#create', :as => :subscribe
     delete '/subscriptions/:tag_id' => 'subscriptions#destroy'
     resources :subscriptions, only: :index
-    
-    post   '/likes/:post_id' => 'likes#create', :as => :like
-    delete '/likes/:post_id' => 'likes#destroy'
-    
+
+    resources :likes, only: [:create] do
+      delete :destroy, on: :collection
+    end
     resources :notifications, only: :index
     resource :settings, :only => [:show, :update]
     resource :profile, :only => [:show, :update]

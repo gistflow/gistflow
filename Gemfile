@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.9'
 
 gem 'pygments.rb', require: 'pygments', github: 'tmm1/pygments.rb'
 gem 'nokogiri'
@@ -40,7 +40,6 @@ group :test, :development do
   gem 'rvm-capistrano'
   gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'selenium-webdriver', '~> 2.22.0'
   gem 'rspec-rails'
   gem 'faker'
   gem 'launchy'

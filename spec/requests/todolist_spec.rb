@@ -3,12 +3,6 @@ require 'spec_helper'
 describe 'Todolist partial', local: true do
   let!(:user) { create(:user, username: :releu) }
 
-  context 'for unauthorized user' do
-    it 'should be on page' do
-      page.should_not have_content('Welcome todolist')
-    end
-  end
-
   context 'for authorized user' do
     before do
       auth

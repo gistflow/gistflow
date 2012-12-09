@@ -21,8 +21,8 @@ describe 'User page', local: true do
     end
     
     context 'when not following user' do
-      before do 
-        click_link 'Follow'
+      before do
+        find('a.button.follow').click
       end
       
       it 'should change follow link to unfollow', js: true do
@@ -36,7 +36,7 @@ describe 'User page', local: true do
 
     context 'when following user' do
       before do
-        click_link 'Follow'
+        user_1.follow user_2
       end
       
       context 'click unfollow' do
@@ -49,7 +49,6 @@ describe 'User page', local: true do
         it 'should decrement followers count', js: true do
           find('.followers_count').should have_content('0')
         end
-        
       end
     end
   end

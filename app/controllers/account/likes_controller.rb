@@ -4,9 +4,20 @@ class Account::LikesController < ApplicationController
   respond_to :json
   
   def create
-    @post = Post.find_by_param params[:post_id]
+    @post = Post.find params[:post_id]
     current_user.like(@post)
-    link = render_to_string(inline: "<%= link_to_liked(@post.reload) %>")
+    render_replaceable
+  end
+
+  def destroy
+  	@post = Post.find params[:post_id]
+    current_user.unlike(@post)
+    render_replaceable
+  end
+
+  private
+  def render_replaceable
+    link = render_to_string(inline: "<%= current_user.like?(@post.reload) ? link_to_unlike(@post) : link_to_like(@post) %>")
     render json: { replaceable: link }
   end
 end

@@ -7,6 +7,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Capybara::DSL
   config.use_transactional_fixtures = false
   config.filter_run_excluding :remote => true
   config.before(:suite) { DatabaseCleaner.strategy = :truncation }
