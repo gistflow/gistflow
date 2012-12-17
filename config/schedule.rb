@@ -9,7 +9,7 @@ every 1.day do
 end
 
 every 1.hour do
-  rake 'posts:update_page_views LIMIT=100'
+  rake 'posts:update_page_views'
 end
 
 every 1.day do
