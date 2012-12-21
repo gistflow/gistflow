@@ -29,8 +29,7 @@ section.join {
   h1 {
     font-size: 58.248px;
     line-height: 94.245px;
-    # color: #4785D9;
-    color: #4988DE;
+    color: #4785D9;
     text-shadow: 1px 1px rgba(255, 255, 255, 0.61);
   }
   p {
@@ -38,6 +37,27 @@ section.join {
     line-height: 36px;
     color: #7E7E7E;
     text-shadow: 1px 1px rgba(255, 255, 255, 0.61);
+  }
+  button {
+    font-size: 36px;
+    line-height: 36px;
+    color: #ECF4FF;
+    padding: 13.752px 22.250px;
+    cursor: pointer;
+    background: -webkit-gradient(
+      linear, left top, left bottom, 
+      from(#5199FA),
+      to(#4583D6));
+    border: 1px solid #3B6FB5;
+    border-radius: 10px;
+    text-shadow:
+      0px -1px 0px rgba(000,000,000,0.4),
+      0px 1px 0px rgba(255,255,255,0.3);
+    &:hover {
+      color: #ffffff;
+    }
+    position: relative;
+    top: 7.498px;
   }
   padding: 36px 0;
   background: #E8E8E8;
