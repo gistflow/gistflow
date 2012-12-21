@@ -14,143 +14,19 @@ html
     title = "Gistflow :: Welcome"
     = render :partial => 'shared/google_analytics'
   body
-    = raw javascript_enabled?
-    div class="wrap group"
-      section class="landing"
-        header
-          h1 Join developers community blog, share and learn new skills
-          nav class="login"
-            ul
-              li= link_to 'Login', auth_path
-              li or
-              li= link_to 'Skip', all_path
-            
-        div class="group"
-          section class="gistflow"
-            header
-              h1 = Gistflow
-              p social learning
-            div class="fork-me"
-              = link_to "https://github.com/gistflow/gistflow" do
-                = image_tag "https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png", alt: "Fork me on GitHub"
-            div class="statistics group"
-              div class="posts"
-                h2 Posts
-                p = @posts_count
-              div class="tags"
-                h2 Tags
-                p = @tags_count
-              div class="users"
-                h2 Users
-                p = @users_count
-          div class="slider"
-            = image_tag('landing/posts.png', 'data-name' => 'posts')
-            nav
-              ul
-                li = link_to '•', '#', 'data-rel' => asset_path('landing/posts.png'), :class => 'active'
-                li = link_to '•', '#', 'data-rel' => asset_path('landing/comments.png')
-                li = link_to '•', '#', 'data-rel' => asset_path('landing/profile.png')
-                li = link_to '•', '#', 'data-rel' => asset_path('landing/subscriptions.png')
-                li = link_to '•', '#', 'data-rel' => asset_path('landing/followers.png')
-        div class="sign-up"
-          = link_to 'Sign up', auth_path
-        div class="description"
-          p
-            | When you learn something new share it with 
-            = link_to 'gistflow', auth_path
-        div class="more" id="more"
-          div class="message"
-            h2 We made a place where developers can share their skills by writing code-related posts
-            p
-              | User 
-              strong following
-              | , 
-              strong subscriptions 
-              | for 
-              strong tags
-              | , post 
-              strong comments, 
-              | personal 
-              strong bookmarks
-              | , 
-              strong ratings
-              | , import code to posts from gist.github.com, 
-              strong markdown 
-              | and 
-              strong code highlighting 
-              | – by now all the necessary social features are implemented.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/github.png')
-            h3 Github account
-            p
-              | Start you developer blog in two clicks using Github account. By our opinion Github – the best place to share code. You can find many 
-              em open source 
-              | projects there including Rails, jQuery and a lot more. So you definitely need to have Github to be a social coder and to be able to sign up for Gistflow.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/following.png')
-            h3 User following
-            
-            p
-              | We have following posts wall for you to be aware of all new posts from users you follow. Following developers is 
-              em a good way to learn 
-              | something new.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/tags.png')
-            h3 Tags
-            p
-              | As simple as in Twitter. Use inline 
-              em hash #tags 
-              | to tag your posts. Subscribe for tags – your flow is basically posts tagged with tags you subscribed for. Search tags easily prepending "#" in search field.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/discuss.png')
-            h3 Discussions
-            p
-              | Post questions and write comments, 
-              em @mention users 
-              | easily and subscribe for comments to featured posts – you will be notified by email and receive internal notification to not miss anything.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/gists.png')
-            h3 Import code to posts from gist.github.com
-            p
-              | As you can see Gistflow is inspired 
-              em by gist.github.com
-              | , so if you have any gists in Github we will 
-              em import them 
-              | carefully for you to be able to write posts based on gists.
-          
-          div class="group message"
-            div class="image" = image_tag asset_path('landing/more/markdown.png')
-            h3 Markdown
-            p
-              | Write beautiful posts with 
-              em Markdown 
-              | syntax, include 
-              em code snippets 
-              | directly in post body and it will be highlighted. Never heard about 
-              = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/', target: :blank
-              | ?
-          
-          = render :partial => 'layouts/time_counters'        
-          div class="message"
-            h3 Present            
-            div id="chart"
-            h3 Future
-            p We are just in the beginning of our way, but as you can see we are working continuously to bring all the conceived features to production as soon as possible. 
-          
-          div class="message"
-            h2
-              | You can start posting right away! 
-              = link_to 'Sign up', auth_path
-            p class="center"
-              | Feel free to talk to us 
-              = mail_to 'info@gistflow.com', 'info@gistflow.com', :encode => :hex
-              = " or directly post here with "
-              = link_to '#gistflow', tag_path('gistflow'), target: :blank
-              = " tag."
+    header class="top"
+      div class="container"
+        h1 Gistflow
+    section class="join"
+      header
+        div class="container"
+          h1 Lorem ipsum dolor sit
+      div class="container group"
+        div class="span8"
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        div class="span4"
+          div class="join-sign-up"
+            button Sign Up
+
     = render partial: 'shared/yandex_analytics'
 = render_git_version

@@ -11,7 +11,6 @@
  *= require_self
  *= require meyer_reset.css
  *= require base
- *= require layout
  *= require sections/landing
 */
 @import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow);
