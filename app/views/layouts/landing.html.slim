@@ -5,7 +5,6 @@ html
     meta name='description' content='Social learning'
     = javascript_include_tag 'application'
     = javascript_include_tag '//use.typekit.net/zky6kmq.js'
-    = javascript_include_tag 'https://www.google.com/jsapi'
     = favicon_link_tag '/assets/favicon.ico'
     javascript:
       try{Typekit.load();}catch(e){}    
@@ -22,11 +21,42 @@ html
         div class="group"
           div class="span7"
             h1 Social Learning
-            p Share what you know, follow your interests in and discuss it with developer community.
+            p
+              | Share what you know, follow your interests and
+              br
+              | discuss it with developer community.
           div class="span5"
             div class="join-sign-up"
               button Sign Up
         
+    div class="container"
+      div class="span4"
+        section class="feature"
+          header
+            div class="icon"
+              i class="icon-search"
+            h1 Explore
+          p
+            | Search posts by tags and our 
+            br
+            | smart search machine.
+      div class="span4"
+        section class="feature"
+          header
+            div class="icon"
+              i class="icon-bookmark-empty"
+            h1 Bookmark
+          p Store posts and get it faster.
+      div class="span4"
+        section class="feature"
+          header
+            div class="icon"
+              i class="icon-comments-alt"
+            h1 Discuss
+          p
+            | Use Markdown to format your
+            br
+            | code-related comments.
 
     = render partial: 'shared/yandex_analytics'
 = render_git_version
