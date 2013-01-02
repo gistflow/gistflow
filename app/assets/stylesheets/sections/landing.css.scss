@@ -48,7 +48,7 @@ header.top {
     font-size: 36px;
     line-height: 36px;
     font-weight: 600;
-    color: #b0b0b0;
+    color: #7E7E7E;
     cursor: default;
   }
   padding-top: 22.249px;
@@ -95,16 +95,18 @@ section.join {
     position: relative;
     top: 14px;
   }
-  padding: 36px 0;
-  background: #e8e8e8 url('octoears.png') no-repeat 730px 180px;
-  background-size: 256px 256px;
+  background: #e8e8e8;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 
-  -webkit-transition: 0.14s linear;
-
-  &.hovered-sign-in:hover {
-    background-position: 705px 120px;
+  .octoears {
+    padding: 36px 0;
+    background: url('octoears.png') no-repeat 605px 180px;
+    background-size: 256px 256px;
+    -webkit-transition: 0.14s linear;
+  }
+  .hovered-sign-in:hover {
+    background-position: 605px 120px;
   }
 }
 
