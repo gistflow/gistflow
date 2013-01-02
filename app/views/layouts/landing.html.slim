@@ -29,7 +29,7 @@ html
             div class="join-sign-up"
               button Sign Up
         
-    div class="container"
+    div class="container group"
       div class="span4"
         section class="feature"
           header
@@ -58,5 +58,16 @@ html
             br
             | code-related comments.
 
-    = render partial: 'shared/yandex_analytics'
+  footer class="top"
+    div class="container"
+      ul
+        li = link_to "About"
+        li = link_to "Map"
+        li = link_to "Meetups"
+        li = link_to "Jobs"
+        li = link_to "Contacts"
+      div class="copyright"
+        | &copy; Redstone Labs
+
+  = render partial: 'shared/yandex_analytics'
 = render_git_version

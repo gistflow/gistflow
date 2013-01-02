@@ -142,4 +142,34 @@ section.feature {
     text-align: center;
     color: #7E7E7E;
   }
+
+  margin-bottom: 94.245px;
+}
+
+footer.top {
+  padding: 22.25px 0;
+  # background: #222B35;
+  background: #e8e8e8;
+  border-top: 1px solid #ccc;
+  font-size: 13.752px;
+  .container {
+    position: relative;
+  }
+  ul {
+    text-align: center;
+    margin-left: -36px;
+  }
+  li {
+    display: inline-block;
+    margin-right: 36px;
+  }
+  a {
+    text-transform: lowercase;
+  }
+  .copyright {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -6.876px;
+  }
 }
