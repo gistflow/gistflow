@@ -6,7 +6,7 @@ class Ability
     can :create, :sessions if development?
     
     can :show, :sitemap
-    can [:index, :all], :posts
+    can [:index, :all, :explore], :posts
     can :show, [:users, :posts, :tags, :gists]
     can [:show, :create, :empty], :searches
     can :create, :users

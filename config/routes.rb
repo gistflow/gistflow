@@ -6,6 +6,8 @@ Gistflow::Application.routes.draw do
   match '/flow'      => 'posts#flow'
   match '/all'       => 'posts#index'
   match '/bookmarks' => 'posts#bookmarks'
+
+  get '/explore', to: 'posts#explore'
   
   get :sitemap, to: 'sitemap#show', as: :xml
   

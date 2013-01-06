@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    meta name='description' content='Social learning'
+    = javascript_include_tag 'landing'
+    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
+    = favicon_link_tag '/assets/favicon.ico'
+    javascript:
+      try{ Typekit.load(); }catch(e){}    
+    = stylesheet_link_tag 'landing'
+    = csrf_meta_tags
+    title = "Gistflow :: Welcome"
+    = render :partial => 'shared/google_analytics'
+  body
+    header class="top"
+      div class="container group"
+        h1 Gistflow
+        input type="search" name="q" class="search" autofocus="true" placeholder="Explore" value="#rails"
+    
+    section class="main"
+      header
+        div class="container"
+          h1 278 posts founded
+            
+      div class="center-container"
+        - Post.limit(10).each do |post|
+          article class="post"
+            header
+              h1 = link_to post.title
+            = post_preview(post)
+
+    footer class="top"
+      div class="container"
+        ul
+          li = link_to "About"
+          li = link_to "Map"
+          li = link_to "Meetups"
+          li = link_to "Jobs"
+          li = link_to "Contacts"
+        div class="copyright"
+          | &copy; Redstone Labs
+
+    = render partial: 'shared/yandex_analytics'
+= render_git_version

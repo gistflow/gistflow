@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   cache_sweeper :subscription_sweeper
   cache_sweeper :user_sweeper
   
-  prepend_before_filter :authenticate!, :except => [:show, :index]
+  prepend_before_filter :authenticate!, :except => [:show, :index, :explore]
   
   def index
     @posts = Post.not_private.includes(:user).page(params[:page])
@@ -78,6 +78,10 @@ class PostsController < ApplicationController
     @post = Post.new(is_private: true)
     flash[:info] = tags_flash_info
     render :new
+  end
+
+  def explore
+    render layout: false
   end
 
 protected
