@@ -9,7 +9,7 @@ module Models
     
     def preview
       preview = content_parts.first.to_s.strip
-      preview << "\n[#{cut_text}](#{path})" if cut_text
+      preview << "... [more](#{path})" if cut_text
       preview
     end
     

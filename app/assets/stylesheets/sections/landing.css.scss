@@ -166,7 +166,6 @@ section.feature {
 
 footer.top {
   padding: 22.25px 0;
-  # background: #222B35;
   background: #e8e8e8;
   border-top: 1px solid #ccc;
   font-size: 13.752px;
@@ -223,6 +222,7 @@ article.post {
       font-size: 22.25px;
       line-height: 22.25px;
       margin-bottom: 13.752px;
+      font-weight: 600;
     }
   }
   width: 595px;
@@ -234,5 +234,15 @@ article.post {
 
   &:hover {
     border-left-color: #ddd;
+  }
+  > footer {
+    margin-top: 8.499px;
+    color: #b0b0b0;
+  }
+  div.stats {
+    float: left;
+  }
+  div.author {
+    float: right;
   }
 }

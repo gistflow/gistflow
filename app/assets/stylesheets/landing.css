@@ -13,5 +13,7 @@
  *= require base
  *= require awesome
  *= require sections/landing
+ *= require markdown
+ *= require highlighter
 */
 @import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow);
