@@ -14,7 +14,7 @@ You are always welcome to contribute or create issue. Checkout [issues page](htt
 * configure your database.yml file
 * be sure you have [postgres](http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x) and [redis](https://github.com/defunkt/resque#installing-redis) installed and launched
 * rake db:setup
-* download and run [ElasticSearch](http://www.elasticsearch.org)
+* download and run [ElasticSearch](http://www.elasticsearch.org) (simply `brew install elasticsearch` if you're on MacOSx and follow instructions)
 
 ### Github Authorization on your local machine
 
