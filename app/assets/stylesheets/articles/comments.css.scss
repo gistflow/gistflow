@@ -83,6 +83,10 @@ article.comment {
       max-width: 540px;
       background: white;
       margin: 5px 10px 0 0;
+
+      &.emoji {
+        margin: 0;
+      }
     }
   }
 }
