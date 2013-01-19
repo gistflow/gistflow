@@ -5,6 +5,7 @@ describe Post do
   subject { post }
   
   its(:private_key) { should be }
+  its(:likes_count) { should eq(0) }
   
   describe 'observe post for author after create' do
     subject { Observing.where(post_id: post.id, user_id: post.user_id) }
