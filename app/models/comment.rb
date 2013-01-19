@@ -44,8 +44,8 @@ protected
     mentioned_user_ids = mention_notifications.pluck(:user_id)
     
     post.observings.includes(:user).each do |observing|
-      next if observing.user_id == user_id
-      next if observing.user_id.in?(mentioned_user_ids)
+      next if observing.user_id == user_id ||
+        observing.user_id.in?(mentioned_user_ids)
       
       notifications.create! do |notification|
         notification.user = observing.user
