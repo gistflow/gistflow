@@ -9,6 +9,11 @@ class Comment < ActiveRecord::Base
     as:         :notifiable,
     class_name: 'Notification::Comment'
   }
+
+  has_many :mention_notifications, {
+    as:         :notifiable,
+    class_name: 'Notification::Mention'
+  }
   
   validates :content, :user, presence: true
   
@@ -36,8 +41,11 @@ protected
   end
   
   def notify_observing
+    mentioned_user_ids = mention_notifications.pluck(:user_id)
+    
     post.observings.includes(:user).each do |observing|
       next if observing.user_id == user_id
+      next if observing.user_id.in?(mentioned_user_ids)
       
       notifications.create! do |notification|
         notification.user = observing.user
