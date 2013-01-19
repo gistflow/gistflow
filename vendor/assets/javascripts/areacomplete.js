@@ -48,8 +48,8 @@ function getCaretPosition(ctrl) {
   return (caretPos);
 }
 
-function getPreviousKey(textarea, offset) {  
-  return textarea.val().length == 0 ? null : textarea.val().substr(offset - 1, offset);
+function getPreviousKey(textarea, offset) {
+  return (textarea.val().length == 0 || !offset) ? null : textarea.val().substr(offset - 1, offset);
 }
 
 $(document).ready(function() {
@@ -239,11 +239,11 @@ $(document).ready(function() {
 
         var offset = getCaretPosition(this);
         var last_key = getPreviousKey(textarea, offset);
-        
+
         if(last_key != null && last_key.match(/\W/) == null) {
           return true;
         }
-        
+
         var div = '<div id="post_content_dup" class="wordwrap invisible"></div>';
         
         textarea.after(div);
@@ -272,7 +272,7 @@ $(document).ready(function() {
         });
       
         var $span = $dup_div.find('span.ins_str');
-        
+
         if ($span.length > 0) {
           var span_offset = $span.offset(),
               dup_div_offset = $dup_div.offset(),
@@ -285,7 +285,7 @@ $(document).ready(function() {
         /// ----- END calculating autocomplete offset -----
         
         username_list = createUsernameAutocomplete(textarea, usernames_container, users, settings.numResults);
-        
+
         if(char_x >= 0 && char_y >= 0) {
           username_list.css({
             top: textarea.offset().top + char_y + 22,
