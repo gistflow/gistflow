@@ -65,6 +65,18 @@ describe Notification do
         link_to_post = %{<a href="#{host}/posts/#{post.id}#comment-#{comment.id}" data-title="#{post.title}" class="notification_link">post #{post.id}</a>}
         should == "#{link_to_user} mentioned you in comment to #{link_to_post}"
       end
+
+      context 'when mention user in new comment' do
+        let(:author) { post.user }
+        let(:mention) { author.notifications.first }
+        let!(:comment) { create :comment, content: "#{Faker::Lorem.sentence} @#{author.username}", post: post }
+
+        it 'creates only mention notification' do
+          author.notifications.should have(1).items
+          mention.should be_kind_of(Notification::Mention)
+          mention.notifiable.should eq(comment)
+        end
+      end
     end
     
     context 'in post' do
