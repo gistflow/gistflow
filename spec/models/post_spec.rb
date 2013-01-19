@@ -101,8 +101,8 @@ describe Post do
 
   describe '#similar_posts' do
     let(:tag) { create :tag }
-    let(:post) { create :post, :tags => [tag] }
-    let(:similar_post) { create :post, :tags => [tag] }
+    let(:post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag.name}" }
+    let(:similar_post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag.name}" }
 
     it 'should find similar post for post' do
       post.similar_posts.should eq([similar_post])
