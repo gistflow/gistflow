@@ -2,24 +2,12 @@ class ApplicationController < ActionController::Base
   enable_authorization
   protect_from_forgery
   
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Exception, with: :notify_batman
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from CanCan::Unauthorized, with: :handle_unauthorized
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
   prepend_before_filter :token_authentication
-  
-  if Rails.env.staging?
-    prepend_before_filter :authenticate_staging
-    
-    def authenticate_staging
-      authenticate_or_request_with_http_basic do |username, password|
-        username == ::Configuration.http_auth.username && 
-          password == ::Configuration.http_auth.password
-      end
-    end
-    protected :authenticate_staging
-  end
   
 protected
   
@@ -47,11 +35,7 @@ protected
   end
   
   def record_not_found(exception)
-    if Rails.env.production?
-      render 'errors/not_found', :layout => 'error'
-    else
-      raise exception
-    end
+    render 'errors/not_found', :layout => 'error', status: :not_found
   end
   
   def authenticate!
