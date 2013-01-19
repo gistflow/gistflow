@@ -63,12 +63,12 @@ module ApplicationHelper
   
   def link_to_like(post)
     classes = %w(like button replaceable)
-    link_to %{<span>#{post.likes_count}</span> <i class="icon-heart-empty"></i>}.html_safe, account_likes_path(:post_id => post.id), class: classes, remote: true, method: :post, title: 'Like it :)'
+    link_to %{<span>#{post.likes_count}</span> <i class="icon-heart-empty"></i>}.html_safe, account_likes_path(:post_id => post.id), class: classes, remote: true, method: :post, title: 'Like post :)'
   end
   
   def link_to_unlike(post)
     classes = %w(like button replaceable)
-    link_to %{<span>#{post.likes_count}</span> <i class="icon-heart"></i>}.html_safe, account_likes_path(:post_id => post.id), method: :delete, remote: true, class: classes, title: 'Unlike it'
+    link_to %{<span>#{post.likes_count}</span> <i class="icon-heart"></i>}.html_safe, account_likes_path(:post_id => post.id), method: :delete, remote: true, class: classes, title: 'Unlike post'
   end
   
   def link_to_subscribe(tag, options = {})

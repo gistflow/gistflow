@@ -24,9 +24,10 @@ $(function(){
     content = '<span>' + post_data.likes_count + '</span> <i class="icon-heart"></i>'
     if (window.current_user) {
       if (_.include(window.current_user.likes, post_data.id)) {
-        like.attr('title', 'You liked it')
+        like.attr('title', 'Unlike post')
         like.data('method', 'delete')
       } else {
+        like.attr('title', 'Like post')
         content = '<span>' + post_data.likes_count + '</span> <i class="icon-heart-empty"></i>'
       }
     }
