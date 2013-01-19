@@ -114,6 +114,10 @@ class User < ActiveRecord::Base
   def like post
     likes.where(post_id: post.id).first_or_create!
   end
+
+  def unlike post
+    likes.where(post_id: post.id).destroy_all
+  end
   
   # Subscriptions
   
@@ -166,7 +170,7 @@ class User < ActiveRecord::Base
   end
   
   def oauth_token
-    account_github.token
+    account_github.try(:token)
   end
   
 private

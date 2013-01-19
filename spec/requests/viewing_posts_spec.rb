@@ -7,11 +7,15 @@ describe 'Viewing posts', local: true do
     before { visit all_path }
   
     context 'as unauthorized user', js: true do
+      it 'should show Post title' do
+        page.find('section.posts nav.menu').should have_content('POSTS')
+      end
+      
       it 'should show 20 posts on page' do
         Post.page(nil).each do |post|
           page.should have_css('article.post h1', text: post.title)
         end
-      end    
+      end
       
       include_examples 'inactive buttons'
     end
