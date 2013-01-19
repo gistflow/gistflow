@@ -42,11 +42,9 @@ protected
   
   def notify_observing
     mentioned_user_ids = mention_notifications.pluck(:user_id)
+    mentioned_user_ids << user_id
     
-    post.observings.includes(:user).each do |observing|
-      next if observing.user_id == user_id ||
-        observing.user_id.in?(mentioned_user_ids)
-      
+    post.observings.where('observings.user_id NOT IN (?)', mentioned_user_ids).includes(:user).each do |observing|
       notifications.create! do |notification|
         notification.user = observing.user
       end
