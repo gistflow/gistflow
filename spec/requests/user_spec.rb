@@ -4,9 +4,6 @@ describe 'User page', local: true, js: true do
   let!(:user_1) { create(:user) }
   let!(:user_2) { create(:user) }
   
-  context 'self user page' do
-  end
-  
   context 'other user page' do
     before do
       auth(user_1)
@@ -25,10 +22,7 @@ describe 'User page', local: true, js: true do
     
     context 'when not following user' do
       before do
-        within('section.sidebar section.user') do
-          find("a.button.follow").click
-          sleep 0.5
-        end
+        find('a.button.follow').click
       end
       
       it 'should change follow link to unfollow', js: true do
@@ -44,9 +38,7 @@ describe 'User page', local: true, js: true do
 
     context 'when following user' do
       before do
-        within('section.sidebar section.user') do
-          2.times { find("a.button.follow").click; sleep 0.5 }
-        end
+        user_1.follow user_2
       end
       
       it 'should change unfollow link to follow', js: true do

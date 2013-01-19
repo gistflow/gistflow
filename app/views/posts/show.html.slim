@@ -22,7 +22,7 @@ javascript:
         div class="notice button-group minor-group group"
           = link_to_bookmark @post
           = link_to_observe @post
-          = link_to_like @post
+          = link_to_like(@post)
         div class="button-group minor-group"
           = link_to "", edit_post_path(@post), :class => 'button edit icon-pencil'
 
