@@ -8,6 +8,8 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database gistflow_test;' -U postgres
   - bundle exec rake db:migrate
+services:
+  - elasticsearch
 notifications:
   email:
     - releu@me.com
