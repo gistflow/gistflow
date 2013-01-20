@@ -29,6 +29,7 @@ gem 'garb'
 gem 'geocoder'
 gem 'relish'
 gem 'tire'
+gem 'poltergeist', github: 'brutuscat/poltergeist'
 
 # deploy
 gem 'capistrano-resque'

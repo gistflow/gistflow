@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/brutuscat/poltergeist.git
+  revision: ff21a30010709bee287ac3fafdcb074005ba043a
+  specs:
+    poltergeist (1.0.2)
+      capybara (~> 2.0, >= 2.0.1)
+      childprocess (~> 0.3)
+      faye-websocket (~> 0.4, >= 0.4.4)
+      http_parser.rb (~> 0.5.3)
+      multi_json (~> 1.0)
+
+GIT
   remote: git://github.com/intridea/omniauth-github.git
   revision: 398051bf40600d77f3513c578635b9cc31e8f970
   specs:
@@ -105,6 +116,8 @@ GEM
       i18n (~> 0.4)
     faraday (0.8.1)
       multipart-post (~> 1.1)
+    faye-websocket (0.4.6)
+      eventmachine (>= 0.12.0)
     ffi (1.2.0)
     garb (0.9.1)
       activesupport (>= 2.2.0)
@@ -120,6 +133,7 @@ GEM
     hashr (0.0.22)
     highline (1.6.15)
     hike (1.2.1)
+    http_parser.rb (0.5.3)
     httpauth (0.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -330,6 +344,7 @@ DEPENDENCIES
   nokogiri
   omniauth-github!
   pg
+  poltergeist!
   pygments.rb!
   rails (= 3.2.11)
   rails_emoji
