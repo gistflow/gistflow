@@ -33,7 +33,7 @@ $(function(){
   $(document).on('ajax:success', 'a.edit_comment', function(e, data){
     var form = $(data.form);
     $(this).parents().closest('article.comment').replaceWith(data.form);
-    $('textarea').autoResize().tabby({tabString: '  '});
+    $('form.edit_comment').find('textarea').autoResize().tabby({tabString: '  '}).trigger('input.resize');
   })
   
   $(document).on('ajax:error', 'a.edit_comment', function(e, data){
