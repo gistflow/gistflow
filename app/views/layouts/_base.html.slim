@@ -20,6 +20,7 @@ html
     meta property="fb:admins" content="100001584897024"
     
     = favicon_link_tag '/assets/favicon.ico'
+    link rel="alternate" type="application/rss+xml" title="Gistflow :: All RSS feed" href="/all.rss"
     
     = csrf_meta_tags
     title = "Gistflow :: #{yield(:title).present? ? 'Flow' : yield(:window_title)}"
