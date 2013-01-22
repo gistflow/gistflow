@@ -9,7 +9,10 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.not_private.includes(:user).page(params[:page])
-    render :index
+    respond_to do |format|
+      format.html { render :index }
+      format.rss  { render :layout => false }
+    end
   end
   alias all index
   
