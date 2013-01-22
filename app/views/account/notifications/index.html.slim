@@ -8,7 +8,7 @@ section class="notifications"
       - @notifications.each do |notification|
         tr
           td.time = notification.created_at.to_formatted_s(:short)
-          td.message = notification.message
+          td.message = notification.message(true)
     
     = paginate @notifications
   - else
