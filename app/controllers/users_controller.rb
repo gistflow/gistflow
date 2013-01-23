@@ -13,13 +13,15 @@ class UsersController < ApplicationController
   def show
     if @user = User.includes(:profile).find_by_username(params[:id])
       @posts = @user.posts.with_privacy(@user, current_user).page(params[:page])
-
       respond_to do |format|
         format.html
         format.rss { render 'posts/index', :layout => false }
       end
     else
-      render 'search/nothing'
+      respond_to do |format|
+        format.html { render 'search/nothing' }
+        format.rss { @posts = []; render 'posts/index', :layout => false }
+      end
     end
   end
 
