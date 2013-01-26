@@ -29,7 +29,7 @@ gem 'geocoder'
 gem 'relish'
 gem 'tire'
 gem 'poltergeist', github: 'brutuscat/poltergeist'
-gem 'redcarpet'
+gem 'github-markdown', require: 'github/markdown'
 gem 'sanitize'
 
 # deploy
