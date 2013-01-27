@@ -8,7 +8,7 @@ describe 'Viewing posts', local: true do
   
     context 'as unauthorized user', js: true do
       it 'should show Post title' do
-        page.find('section.posts nav.menu').should have_content('POSTS')
+        page.find('section.posts nav.menu').should have_content('Posts')
       end
       
       it 'should show 20 posts on page' do
