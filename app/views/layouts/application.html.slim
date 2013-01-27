@@ -32,7 +32,9 @@
       h1 = link_to_unless_current 'Gistflow', root_path
       div class="map" = link_to(map_path, title: 'Gistflow in the World') { '<i class="icon-globe"></i>'.html_safe }
       = render 'search/form'
-      nav class="user" = ul(authentication_items)
+      nav class="user"
+        = ul authentication_items, class: 'user-menu'
+        = ul [link_to('<i class="icon-edit"></i>'.html_safe, new_post_path)], class: 'post-menu'
     = render_flash
 
 - content_for(:footer) do

@@ -21,27 +21,15 @@ module MenuHelper
     
   def authentication_items
     items = []
-    if user_signed_in?
-      
+    if user_signed_in?      
+      items << link_to(current_user.username, current_user, class: 'username')
       items << link_to(
-        current_user.username, 
-        user_path(current_user.username), 
-        :class => 'username'
-      )
-      
-      unread_notifications = current_user.notifications.unread
-      if unread_notifications.any?
-        unread_notifications_block = "+#{unread_notifications.count}" 
-      end
-      
-      items << link_to(
-        "notifications#{unread_notifications_block}".html_safe,     
+        "<i class='icon-lightbulb'></i>".html_safe,     
         account_notifications_path,
-        :class => "#{'green' if unread_notifications.any?}"
+        :class => "#{'glow' if current_user.notifications.unread.any?}"
       )
-      
-      items << link_to('settings', account_settings_path)
-      items << link_to('logout', logout_path)
+      items << link_to('<i class="icon-cog"></i>'.html_safe, account_settings_path)
+      items << link_to('<i class="icon-signout"></i>'.html_safe, logout_path)
     else
       items << link_to('login', auth_path, :class => 'login')
     end
