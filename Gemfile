@@ -28,7 +28,7 @@ gem 'garb'
 gem 'geocoder'
 gem 'relish'
 gem 'tire'
-gem 'poltergeist', github: 'brutuscat/poltergeist'
+gem 'poltergeist'
 gem 'github-markdown', require: 'github/markdown'
 gem 'sanitize'
 
