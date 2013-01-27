@@ -3,15 +3,15 @@ class Account::SettingsController < ApplicationController
   
   def show
     @settings = current_user.settings
+    @profile  = current_user.profile
   end
   
   def update
-    if current_user.settings.update_attributes(params[:settings])
-      options = { :notice => 'Settings were updated.' }
+    @settings = current_user.settings
+    if @settings.update_attributes(params[:settings])
+      render json: {}, status: :ok
     else
-      options = { :error => 'Smth went wrong.' }
+      render json: { errors: @settings.errors.full_messages.to_sentence }, status: 422
     end
-    
-    redirect_to account_settings_path, options
   end
 end
