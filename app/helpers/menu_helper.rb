@@ -22,7 +22,11 @@ module MenuHelper
   def authentication_items
     items = []
     if user_signed_in?
-      
+      items << link_to(
+        'Write a new post!',
+        new_post_path
+      )
+
       items << link_to(
         current_user.username, 
         user_path(current_user.username), 
