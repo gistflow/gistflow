@@ -34,7 +34,8 @@
       = render 'search/form'
       nav class="user"
         = ul authentication_items, class: 'user-menu'
-        = ul [link_to('<i class="icon-edit"></i>'.html_safe, new_post_path)], class: 'post-menu'
+        - if user_signed_in?
+          = ul [link_to('<i class="icon-edit"></i>'.html_safe, new_post_path)], class: 'post-menu'
     = render_flash
 
 - content_for(:footer) do

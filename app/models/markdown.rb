@@ -1,10 +1,12 @@
 module Markdown
+  ALLOWED_ELEMENTS = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'code', 'pre', 'ul',
+    'ol', 'dl', 'dt', 'dd', 'blockquote', 'img', 'strong', 'em', 'span', 'div']
+
   def self.markdown(text)
-    text = Sanitize.clean(text)
     html = ::GitHub::Markdown.render_gfm(text)
     
     doc = Nokogiri::HTML(html)
-    doc.search("//pre[@lang]").each do |pre|
+    doc.search("//pre").each do |pre|
       replacement = 
         begin
           Pygments.highlight(pre.text.rstrip, lexer: pre[:lang])
@@ -12,6 +14,9 @@ module Markdown
         end
       pre.replace replacement if replacement
     end
-    doc.to_s
+    Sanitize.clean(doc.to_s, {
+      elements: ALLOWED_ELEMENTS,
+      attributes: { all: ['href', 'src', 'alt', 'title', 'class'] }
+    })
   end
 end
