@@ -8,7 +8,7 @@ $(document).ready ->
         @progressBar = $('div.gists-progress-bar', @section)
         @refresh     = $('a.gists-refresh', @section)
         @gists       = $('ul.gists', @section)
-        @inline_gist_template = _.template('<li><a href="/posts/new" class="add">add</a><span><%= description %></span><a href="https://gist.github.com/gists/<%= id %>/edit">edit</a></li>')
+        @inline_gist_template = _.template('<li><a href="/posts/new" class="add">add</a> <span><%= description %></span> <a href="https://gist.github.com/gists/<%= id %>/edit">edit</a></li>')
         @gist_template = _.template("<% files.each(function(file) { %>```<%= String(file.language).toLowerCase() %>\n<%= file.content  %>\n```\n\n<% }) %>")
       
       # show saved to storage gists
