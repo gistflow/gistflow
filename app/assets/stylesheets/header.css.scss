@@ -108,7 +108,23 @@ header.main {
     height: 35px;
     width: 360px;
     
-    ul {
+    ul.post-menu, ul.user-menu {
+      float: right;
+      text-align: right;
+    }
+
+    ul.post-menu {
+      font-size: 18px;
+      padding: 10px 10px 0 0;
+      i {
+        color: $base;
+        &:hover {
+          color: $link;
+        }
+      }
+    }
+
+    ul.user-menu {
       padding: 6px 14px 5px;
       border: 1px solid $gray;
       -moz-border-radius: 3px;
@@ -122,13 +138,27 @@ header.main {
       background-image: -ms-linear-gradient(top, white, whiteSmoke);
       background-image: -moz-linear-gradient(top, white, whiteSmoke);
       background-image: linear-gradient(top, white, whiteSmoke);
-      float: right;
-      text-align: right;
       
       li {
         display: inline-block;
         line-height: 19px;
         @include li-separator;
+      }
+
+      i {
+        font-size: 14px;
+        color: $base;
+        &:hover {
+          color: $link;
+        }
+
+        &.icon-edit {
+          position: relative;
+          top: 1px;
+        }
+      }
+      a.glow i {
+        text-shadow: 0 0 2px yellow;
       }
       
       a {
