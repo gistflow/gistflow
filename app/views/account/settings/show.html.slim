@@ -1,26 +1,44 @@
-section class="settings"  
-  header
-    nav class="menu"
-      ul
-        li = link_to_unless_current 'Profile', account_profile_path
-        li class="primary" = link_to_unless_current 'Account settings', account_settings_path
-  
-  = form_for [:account, @settings], :url => account_settings_url, :method => :put do |f|
-    - if @settings.errors.any?
-      ul class="errors"
-        - @settings.errors.full_messages.each do |message|
-          li= message
-    fieldset
-      | Choose default wall
-      ul
-        - Settings::WALLS.each do |wall|
-          li
-            = f.radio_button :default_wall, wall
-            = f.label :default_wall, wall
-    fieldset
-      = f.check_box :receive_notification_emails
-      = f.label :receive_notification_emails
-    div class="button-group"
-      = f.submit 'Update settings', :class => 'button'
-  
-  p Auth Token: #{current_user.account_token.token}
+- window_title 'Settings'
+section class="settings"
+  header class="primary"
+    h1 Settings
+
+  h2 Default wall
+  div class="form-group"
+    div class="form"
+      fieldset
+        ul
+          - Settings::WALLS.each do |wall|
+            li
+              = label_tag do
+                = radio_button_tag 'settings[default_wall]', wall, @settings.default_wall == wall
+                |  #{wall}
+        = hidden_field_tag 'settings[default_wall]', @settings.default_wall, data: { remote: true, method: :put, url: account_settings_path }
+
+  h2 Notifications
+  div class="form-group"
+    div class="form"
+      fieldset
+        = label_tag 'Email'
+        = text_field_tag 'profile[email]', @profile.email, data: { method: :put, remote: true, url: account_profile_path }
+      fieldset
+        = label_tag do
+          = check_box_tag 'settings[receive_notification_emails]', '1', @settings.receive_notification_emails
+          = hidden_field_tag 'settings[receive_notification_emails]', @settings.receive_notification_emails ? '1' : '0', data: { method: :put, remote: true, url: account_settings_path }
+          | Receive notification emails
+
+  h2 Profile
+  div class="form-group"
+    div class="form"
+      fieldset
+        = label_tag 'Home page'
+        = text_field_tag 'profile[home_page]', @profile.home_page, data: { method: :put, remote: true, url: account_profile_path }
+
+      fieldset
+        = label_tag 'Company'
+        = text_field_tag 'profile[company]', @profile.company, data: { method: :put, remote: true, url: account_profile_path }
+
+  h2 Auth Token
+  div class="form-group"
+    p class="markdown secret-token secretive" data-secret="#{current_user.account_token.token}"
+      code = "*" * 40

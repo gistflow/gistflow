@@ -1,16 +1,13 @@
 class Account::ProfilesController < ApplicationController
   prepend_before_filter :authenticate!
-  
-  def show
-    @profile = current_user.profile
-  end
-  
+  respond_to :js
+
   def update
     @profile = current_user.profile
     if @profile.update_attributes(params[:profile])
-      redirect_to account_profile_path, :notice => 'Profile was updated.'
+      render json: {}, status: :ok
     else
-      render :edit, :error => 'Smth went wrong.'
+      render json: { errors: @profile.errors.full_messages.to_sentence }, status: 422
     end
   end
 end
