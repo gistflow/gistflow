@@ -1,0 +1,24 @@
+@import "configuration";
+
+section.settings {
+  header h1 {
+    @include caption;  
+  }
+
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $charcoal;
+    line-height: 14px;
+  }
+
+  .form-group {
+    margin: 5px 0 15px;
+  }
+
+  .secret-token {
+    &.secretive {
+      cursor: pointer;
+    }
+  }
+}

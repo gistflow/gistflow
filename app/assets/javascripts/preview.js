@@ -1,5 +1,5 @@
 $(function(){
-  $(document).on('click', 'form#new_comment input[type.submit]', function(){
+  $(document).on('click', 'form#new_comment input[type=submit]', function(){
     $(this).parents('form#new_comment:first').attr('action', $(this).attr('rel'))
   })
   

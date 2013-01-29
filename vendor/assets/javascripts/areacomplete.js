@@ -205,13 +205,13 @@ $(document).ready(function() {
         }
       } // fnLoadXhrUsernames()
 
-      this.live('focus', fnLoadXhrUsernames); // bind to textarea
+      this.on('focus', fnLoadXhrUsernames); // bind to textarea
       if (!settings.xhrOnFocus) {
         fnLoadXhrUsernames();
       }
     }
 
-    this.live('keydown', function(e) {
+    this.on('keydown', function(e) {
       var textarea = $(this);      
       var textarea_wrapper = textarea.parent();
       var username_list;
