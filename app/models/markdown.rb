@@ -1,7 +1,7 @@
 module Markdown
   ALLOWED_ELEMENTS = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'code', 'pre', 'ul',
     'ol', 'dl', 'dt', 'dd', 'blockquote', 'img', 'strong', 'em', 'span', 'div',
-    'a']
+    'a', 'li']
 
   def self.markdown(text)
     html = ::GitHub::Markdown.render_gfm(text)
