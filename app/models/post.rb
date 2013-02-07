@@ -102,9 +102,8 @@ class Post < ActiveRecord::Base
   end
   
   def similar_posts
-    Post.select('DISTINCT "posts".*, random() rand').except_post(self).
-      not_private.joins(:taggings).where(taggings: { tag_id: tag_ids }).
-      reorder('rand').limit(3)
+    subquery = Post.except_post(self).tagged_with(tags.select(:name)).select('posts.id').to_sql
+    Post.where("posts.id IN (#{subquery})").order("RANDOM()").limit(3)
   end
 
 private

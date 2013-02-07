@@ -101,12 +101,16 @@ describe Post do
   end
 
   describe '#similar_posts' do
-    let(:tag) { create :tag }
-    let(:post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag.name}" }
-    let(:similar_post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag.name}" }
+    let!(:tag_1) { create :tag }
+    let!(:tag_2) { create :tag }
+    let!(:tag_3) { create :tag }
+    let!(:post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_2.name} ##{tag_1.name}" }
+    let!(:similar_post_1) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_3.name} ##{tag_1.name}" }
+    let!(:similar_post_2) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_3.name} ##{tag_1.name} ##{tag_2.name}" }
 
     it 'should find similar post for post' do
-      post.similar_posts.should eq([similar_post])
+      post.similar_posts.should have(2).items
+      post.similar_posts.should_not include(post)
     end
   end
 end
