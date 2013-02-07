@@ -47,11 +47,11 @@ $(function(){
     }
   })
   
-  $(document).on('hover', 'article.comment', function(){
+  $(document).on('mouseenter mouseleave', 'article.comment', function(){
     if (window.current_user.admin || window.current_user.username == $(this).data('author')) {
       $(this).find('div.controls').toggle();
     }
-  })
+  });
   
   $(document).on('ajax:error', 'form.edit_comment', function(e, data){
     flash_error();
