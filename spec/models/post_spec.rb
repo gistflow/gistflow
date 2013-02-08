@@ -107,6 +107,7 @@ describe Post do
     let!(:post) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_2.name} ##{tag_1.name}" }
     let!(:similar_post_1) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_3.name} ##{tag_1.name}" }
     let!(:similar_post_2) { create :post, :content => "#{Faker::Lorem.sentence} ##{tag_3.name} ##{tag_1.name} ##{tag_2.name}" }
+    let!(:similar_post_4) { create :private_post, :content => "#{Faker::Lorem.sentence} ##{tag_3.name} ##{tag_1.name} ##{tag_2.name}" }
 
     it 'should find similar post for post' do
       post.similar_posts.should have(2).items

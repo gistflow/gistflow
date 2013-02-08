@@ -102,7 +102,7 @@ class Post < ActiveRecord::Base
   end
   
   def similar_posts
-    subquery = Post.except_post(self).tagged_with(tags.select(:name)).select('posts.id').to_sql
+    subquery = Post.not_private.except_post(self).tagged_with(tags.select(:name)).select('posts.id').to_sql
     Post.where("posts.id IN (#{subquery})").order("RANDOM()").limit(3)
   end
 
