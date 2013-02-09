@@ -374,6 +374,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  meta_search
   nokogiri
   omniauth-github!
   pg
