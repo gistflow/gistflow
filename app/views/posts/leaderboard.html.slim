@@ -1,0 +1,24 @@
+- window_title 'Posts leaderboard'
+section class="leaderboard"
+  - if @posts.any?
+    table
+      tr
+        th Title
+        th User
+        th= sort_link @search, :likes_count, 'Likes', :default_order => :desc
+        th= sort_link @search, :comments_count, 'Comments', :default_order => :desc
+        th= sort_link @search, :page_views, 'Pageviews', :default_order => :desc
+      tr
+        td 
+          = link_to post.title, post
+          div class="tags"
+            ul
+              - post.tags.each do |tag|
+                li = link_to "##{tag.name}", tag
+        td = link_to post.user, post.user
+        td = post.likes_count
+        td = post.comments_count
+        td = post.page_views
+  - else
+    | No posts yet.
+  = paginate @posts

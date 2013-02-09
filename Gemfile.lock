@@ -185,6 +185,8 @@ GEM
       faye-websocket (~> 0.4, >= 0.4.4)
       http_parser.rb (~> 0.5.3)
       multi_json (~> 1.0)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     pry (0.9.11.4)
@@ -368,6 +370,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  meta_search
   nokogiri
   omniauth-github!
   pg

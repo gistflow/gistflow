@@ -1,0 +1,34 @@
+@import "configuration";
+section.leaderboard {
+  table {
+    th {
+      font-weight: bold;
+      padding: 0 5px 3px;
+    }
+
+    td {
+      padding: 3px 5px;
+    }
+
+    tbody tr:nth-child(even) {
+       background-color: rgba(240, 240, 240, 0.5);
+    }
+
+    th,td:not(:first-child) {
+      text-align: center;
+    }
+
+    div.tags {
+      ul {
+        li {
+          display: inline;
+          margin-right: 3px; 
+
+          a {
+            font-size: 0.75em;
+          }
+        }  
+      }
+    }
+  }
+}

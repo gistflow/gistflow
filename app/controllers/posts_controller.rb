@@ -83,6 +83,11 @@ class PostsController < ApplicationController
     render :new
   end
 
+  def leaderboard
+    @search = Post.not_private.includes(:user).metasearch params[:search]
+    @posts = @search.page params[:page]
+  end
+
 protected
   
   def tags_flash_info
