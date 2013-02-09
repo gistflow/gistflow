@@ -41,7 +41,12 @@
 - content_for(:footer) do
   footer class="main"
     div class="wrap"
-      p If you have any ideas, comments or suggestions please #{link_to 'create issue', 'https://github.com/gistflow/gistflow/issues'} or #{mail_to 'info@gistflow.com', 'email us', :encode => :hex}.
-      p Powered by #{link_to 'Gistflow', 'https://github.com/gistflow', target: '_blank'} with #{link_to 'Evrone', 'https://github.com/evrone', target: '_blank'}.
+      ul class="left"
+        li = link_to 'Posts leaderboard', leaderboard_posts_path
+        li = link_to 'Create issue', 'https://github.com/gistflow/gistflow/issues'
+        li = mail_to 'info@gistflow.com', 'Email us', :encode => :hex
+      = link_to '<g>', root_path, class: :logo
+      p class="right"
+        | &copy; 2013 #{link_to 'Gistflow', root_path} with #{link_to 'Evrone', 'http://evrone.ru'}
 
 = render 'layouts/base'
