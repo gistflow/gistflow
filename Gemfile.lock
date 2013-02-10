@@ -226,6 +226,11 @@ GEM
       activerecord (~> 3.0)
       polyamorous (~> 0.5.0)
     rdoc (3.12.1)
+    ransack (0.7.3)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
+    rdoc (3.12)
       json (~> 1.4)
     redis (3.0.2)
     redis-actionpack (3.2.3)
@@ -374,7 +379,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  meta_search
   nokogiri
   omniauth-github!
   pg
