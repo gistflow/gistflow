@@ -6,6 +6,7 @@ footer.main {
   border-top: 1px solid #f0f0f0;
   text-shadow: 0 1px 1px #fff;
   z-index: 20;
+  position: relative;
   
   img {
     vertical-align: middle;
@@ -15,31 +16,33 @@ footer.main {
     padding: 0 10px;
   }
 
-  ul.left {  
+  ul.links {  
     float: left;
 
     li {
       width: 100px;
       display: inline;
-      margin-right: 25px;
+      margin-right: 15px;
     }
   }    
 
-  p.right {
+  p.credentials {
     float: right;
   }
 
   a.logo {
-    left: 50%;
-    margin-top: -2px;
-    font-family: Verdana;
-    font-size: 20px;
-    font-weight: bold;
+    width: 30px;
     position: absolute;
-    color: rgba(150, 150, 150, 0.3);
+    left: 50%;
+    top: 23px;
+    margin-left: -15px;
+    text-indent: -9999em;
+    text-align: center;
+    height: 15px;
+    background-image: url('logo.png');
   }
 
   a.logo:hover {
-    color: #0069d6;
+    background-position-y: -15px;
   }
 }
