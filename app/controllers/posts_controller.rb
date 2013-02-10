@@ -84,8 +84,9 @@ class PostsController < ApplicationController
   end
 
   def leaderboard
-    @search = Post.not_private.includes(:user).metasearch params[:search]
-    @posts = @search.page params[:page]
+    @search = Post.reorder(:id).not_private.includes(:user, :tags).ransack(params[:search], search_key: :search)
+    @search.sorts = 'page_views desc' if @search.sorts.empty?
+    @posts = @search.result.page(params[:page])
   end
 
 protected
