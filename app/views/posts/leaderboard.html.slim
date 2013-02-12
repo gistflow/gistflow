@@ -7,9 +7,9 @@ section class="leaderboard"
       tr
         th Post
         th User
-        th= sort_link @search, :likes_count, 'Likes'
-        th= sort_link @search, :comments_count, 'Comments'
-        th= sort_link @search, :page_views, 'Pageviews'
+        th= sort_link @search, :likes_count, 'Likes', :default_order => :desc
+        th= sort_link @search, :comments_count, 'Comments', :default_order => :desc
+        th= sort_link @search, :page_views, 'Pageviews', :default_order => :desc
       - @posts.each do |post|
         tr
           td 
