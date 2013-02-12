@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 
 gem 'pygments.rb', require: 'pygments', github: 'tmm1/pygments.rb'
 gem 'nokogiri'
@@ -11,7 +11,7 @@ gem 'thin'
 gem 'airbrake'
 gem 'slim'
 gem 'kaminari'
-gem 'omniauth-github', github: 'intridea/omniauth-github'
+gem 'omniauth-github', github: 'intridea/omniauth-github', ref: '398051bf40600d77f3513c578635b9cc31e8f970'
 gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
 gem 'redis-rails'
 gem 'redis-rack'
