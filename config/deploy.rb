@@ -40,18 +40,6 @@ namespace :app do
   end
 end
 
-# namespace :db_migrations do
-#   task :run do
-#     from = source.next_revision(current_revision)
-#     if capture("cd #{latest_release} && #{source.local.log(from)} db/migrate | wc -l").to_i > 0
-#       run "cd #{current_release} && RAILS_ENV=#{rails_env} bin/rake db:migrate"
-#       logger.info "New migrations added - running migrations."
-#     else
-#       logger.info "Skipping migrations - there are not any new."
-#     end
-#   end
-# end
-
 namespace :deploy do
   task :restart do
   end
@@ -69,4 +57,3 @@ namespace :deploy do
 end
 
 after 'deploy:finalize_update', 'deploy:make_symlinks'
-# after 'deploy:make_symlinks', 'db_migrations:run'

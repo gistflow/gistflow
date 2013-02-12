@@ -8,10 +8,6 @@ every 1.day do
   rake 'time_counters:generate_todays'
 end
 
-every 1.hour do
-  rake 'posts:update_page_views'
-end
-
 every 1.day do
   rake 'users:fetch_locations'
 end
