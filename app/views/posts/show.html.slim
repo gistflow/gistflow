@@ -6,7 +6,7 @@ javascript:
   window.posts = {
     "#{@post.id}": #{@post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
   }
-- cache @post.cache_key(:detail) do
+- cache @post.cache_key(:detail), :expires_in => 15.minutes do
   article class="post detail" data-id="#{@post.id}" data-author="#{@post.user}"
     header.primary
       h1 = post_title @post

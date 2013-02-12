@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     @post = Post.find_by_param params[:id]
     redirect_to(@post, status: 301) if params[:id] != @post.to_param    
     @comment = @post.comments.build if can? :create, :comments
-    @post.increment!(:page_views)
+    @post.update_column(:page_views, @post.page_views + 1)
   end
 
   def new
