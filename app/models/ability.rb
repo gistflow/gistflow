@@ -6,7 +6,7 @@ class Ability
     can :create, :sessions if development?
     
     can :show, :sitemap
-    can [:index, :all], :posts
+    can [:index, :all, :leaderboard], :posts
     can :show, [:users, :posts, :tags, :gists]
     can [:show, :create, :empty], :searches
     can :create, :users
@@ -15,7 +15,7 @@ class Ability
     can :show, :landings
     can [:history, :show], :'tags/wikis'
     can :show, :maps
-    
+
     if user
       can(:access, :all) and return if user.admin?
       
