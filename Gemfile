@@ -31,6 +31,7 @@ gem 'tire'
 gem 'poltergeist'
 gem 'github-markdown', require: 'github/markdown'
 gem 'sanitize'
+gem 'ransack'
 
 # deploy
 gem 'capistrano-resque'

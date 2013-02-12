@@ -1,0 +1,48 @@
+@import "configuration";
+
+section.leaderboard {
+  > header h1 {
+    @include caption;
+  }
+  table {
+    th {
+      font-weight: bold;
+      padding: 0 5px 3px;
+    }
+
+    td {
+      padding: 3px 5px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody tr:nth-child(even) {
+       background-color: rgba(240, 240, 240, 0.5);
+    }
+    
+    td:first-child, th:first-child {
+      text-align: left;
+    }
+    
+    a.sort_link {
+      white-space: nowrap;
+    }
+
+    div.tags {
+      ul {
+        li {
+          display: inline;
+          margin-right: 3px; 
+
+          a {
+            font-size: 11px;
+            color: $charcoal;
+            &:hover {
+              color: #666;
+            }
+          }
+        }  
+      }
+    }
+  }
+}
