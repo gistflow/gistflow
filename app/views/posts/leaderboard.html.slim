@@ -1,9 +1,12 @@
 - window_title 'Posts leaderboard'
+
 section class="leaderboard"
+  header class="primary"
+    h1 Posts leaderboard
   - if @posts.any?
     table
       tr
-        th Title
+        th Post
         th User
         th= sort_link @search, :likes_count, 'Likes'
         th= sort_link @search, :comments_count, 'Comments'
@@ -16,7 +19,7 @@ section class="leaderboard"
               ul
                 - post.tags.each do |tag|
                   li = link_to "##{tag.name}", tag
-          td = link_to post.user, post.user
+          td = link_to "@#{post.user}", post.user
           td = post.likes_count
           td = post.comments_count
           td = post.page_views
