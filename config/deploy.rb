@@ -23,7 +23,6 @@ role :resque_worker, domain
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
-
 require 'capistrano-unicorn'
 
 after "deploy:restart", "resque:restart"
@@ -53,6 +52,18 @@ namespace :deploy do
     # settings
     run "rm -f #{latest_release}/config/application.yml"
     run "ln -s #{deploy_to}/shared/config/application.yml #{latest_release}/config/application.yml"
+  end
+  
+  namespace :assets do
+    task :precompile do
+      from = source.next_revision(current_revision)
+      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+        logger.info "Precompile assets."
+        run "cd #{release_path} && bundle exec rake RAILS_ENV=#{rails_env} RAILS_GROUPS=assets assets:precompile"
+      else
+        logger.info "Skipping asset pre-compilation because there were no asset changes"
+      end
+    end
   end
 end
 
