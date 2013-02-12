@@ -185,6 +185,8 @@ GEM
       faye-websocket (~> 0.4, >= 0.4.4)
       http_parser.rb (~> 0.5.3)
       multi_json (~> 1.0)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     pry (0.9.11.4)
@@ -219,8 +221,18 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
     rake (0.9.2.2)
+    ransack (0.7.3)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
     rdoc (3.12.1)
+    ransack (0.7.3)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
+    rdoc (3.12)
       json (~> 1.4)
+    rdoc (3.12.1)
     redis (3.0.2)
     redis-actionpack (3.2.3)
       actionpack (~> 3.2.3)
@@ -376,6 +388,7 @@ DEPENDENCIES
   rails (= 3.2.12)
   rails_emoji
   rake (= 0.9.2.2)
+  ransack
   redis-rack
   redis-rack-cache
   redis-rails

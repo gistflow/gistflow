@@ -83,6 +83,12 @@ class PostsController < ApplicationController
     render :new
   end
 
+  def leaderboard
+    @search = Post.reorder(:id).not_private.includes(:user, :tags).ransack(params[:search], search_key: :search)
+    @search.sorts = 'page_views desc' if @search.sorts.empty?
+    @posts = @search.result.page(params[:page])
+  end
+
 protected
   
   def tags_flash_info

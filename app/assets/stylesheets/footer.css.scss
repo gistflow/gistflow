@@ -1,14 +1,45 @@
 footer.main {
   line-height: 20px;
-  background: rgba(0, 0, 0, 0.035);
-  padding: 30px 0;
+  padding: 20px 0 0;
+  width: 960px;
+  margin: 0 auto;
   border-top: 1px solid #f0f0f0;
   text-shadow: 0 1px 1px #fff;
   z-index: 20;
+  position: relative;
+  
   img {
     vertical-align: middle;
   }
-  p {
-    padding: 0 10px;
+
+  ul.links {  
+    float: left;
+
+    li {
+      width: 100px;
+      display: inline;   
+      margin-right: 15px;
+    }
+  }
+
+  p.credentials {
+    float: right;
+  }
+
+  a.logo {
+    width: 30px;
+    height: 15px;
+    position: absolute;
+    left: 50%;
+    top: 23px;
+    margin-left: -15px;
+    text-indent: -9999em;
+    text-align: center;
+    background-image: url('logo.png');
+    background-size: 30px auto;
+  }
+
+  a.logo:hover {
+    background-position-y: -15px;
   }
 }
