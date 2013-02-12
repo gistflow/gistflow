@@ -232,6 +232,7 @@ GEM
       polyamorous (~> 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
+    rdoc (3.12.1)
     redis (3.0.2)
     redis-actionpack (3.2.3)
       actionpack (~> 3.2.3)
