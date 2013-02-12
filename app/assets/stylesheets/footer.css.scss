@@ -28,14 +28,15 @@ footer.main {
 
   a.logo {
     width: 30px;
+    height: 15px;
     position: absolute;
     left: 50%;
     top: 23px;
     margin-left: -15px;
     text-indent: -9999em;
     text-align: center;
-    height: 15px;
     background-image: url('logo.png');
+    background-size: 30px auto;
   }
 
   a.logo:hover {
