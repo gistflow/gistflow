@@ -1,0 +1,28 @@
+section.jqcloud {
+  overflow: hidden;
+  position: relative;
+  line-height: normal;
+
+  a {
+    color: inherit;
+  }
+
+  a:hover {
+    color: #c1c1c1;
+  }
+
+  span { 
+    padding: 5px; 
+  }
+
+  .w10 { font-size: 39px; color: #002A56; }
+  .w9  { font-size: 37px; color: #002A56; }
+  .w8  { font-size: 33px; color: #004996; }
+  .w7  { font-size: 26px; color: #004996; }
+  .w6  { font-size: 23px; color: #004996; }
+  .w5  { font-size: 19px; color: #0069D6; }
+  .w4  { font-size: 18px; color: #0069D6; }
+  .w3  { font-size: 17px; color: #006FE3; }
+  .w2  { font-size: 16px; color: #006FE3; }
+  .w1  { font-size: 13px; color: #006FE3; } 
+}

@@ -51,6 +51,7 @@ Gistflow::Application.routes.draw do
   get '/search/:query' => 'searches#show',  as: 'show_search'
   
   resources :tags, only: :show do
+    get :cloud, on: :collection
     resource :wiki, module: :tags, only: [:show, :edit, :update] do
       get 'history'
     end

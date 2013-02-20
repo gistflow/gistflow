@@ -23,7 +23,7 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true, format: { with: /[a-z]+/ }
 
   scope :real, where(entity_id: nil)
-
+  scope :for_cloud, select("name AS text, taggings_count AS weight, TEXTCAT('/tags/', tags.name) AS link").order('taggings_count DESC').limit(75)
   scope :popular, (lambda do |limit = 100|
     real.order('taggings_count desc').limit(limit)
   end)

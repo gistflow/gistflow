@@ -1,0 +1,38 @@
+- content_for(:head) do
+  - if user_signed_in?
+    javascript:
+      window.current_user = {
+        username: "#{current_user.username}",
+        likes: #{current_user.likes.pluck(:post_id).to_json},
+        observings: #{current_user.observings.pluck(:post_id).to_json},
+        bookmarks: #{current_user.bookmarks.pluck(:post_id).to_json},
+        following: #{current_user.followings.pluck(:followed_user_id).to_json},
+        subscriptions: #{current_user.subscriptions.pluck(:tag_id).to_json},
+        admin: #{current_user.admin?},
+        oauth: "#{current_user.oauth_token}"
+      }
+
+- content_for(:header) do
+  header class="main"
+    div class="group hr"
+      h1 = link_to_unless_current 'Gistflow', root_path
+      div class="map" = link_to(map_path, title: 'Gistflow in the World') { '<i class="icon-globe"></i>'.html_safe }
+      = render 'search/form'
+      nav class="user"
+        = ul authentication_items, class: 'user-menu'
+        - if user_signed_in?
+          = ul [link_to('<i class="icon-edit"></i>'.html_safe, new_post_path)], class: 'post-menu'
+    = render_flash
+
+- content_for(:footer) do
+  footer class="main"
+    ul class="links"
+      li = link_to 'Posts leaderboard', leaderboard_posts_path
+      li = link_to 'Tags cloud', cloud_tags_path
+      li = link_to 'Create issue', 'https://github.com/gistflow/gistflow/issues'
+      li = mail_to 'info@gistflow.com', 'Email us', :encode => :hex
+    = link_to '<g>', root_path, class: :logo
+    p class="credentials"
+      | &copy; 2013 #{link_to 'Gistflow', root_path} with #{link_to 'Evrone', 'http://evrone.ru'}
+
+= render 'layouts/base'

@@ -13,8 +13,9 @@ class Ability
     can :not_found, :errors
     can :index, [:'users/followings', :'users/followers']
     can :show, :landings
-    can [:history, :show], :'tags/wikis'
+    can [:history, :show], :'tags/wikis'    
     can :show, :maps
+    can :cloud, :tags
 
     if user
       can(:access, :all) and return if user.admin?

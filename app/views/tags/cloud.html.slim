@@ -1,0 +1,15 @@
+= javascript_include_tag 'jqcloud'
+
+- cache 'tag_cloud' do
+  javascript:
+    var word_array = #{@tags.to_json.html_safe};
+
+    $(function() {
+      $(".cloud").jQCloud(word_array, {
+        width: 960,
+        height: 400,
+        delayedMode: true
+      });
+    });
+
+  section class='cloud'
