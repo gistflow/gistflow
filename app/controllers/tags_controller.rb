@@ -10,4 +10,9 @@ class TagsController < ApplicationController
       render 'search/nothing'
     end
   end
+
+  def cloud
+    @tags = Tag.for_cloud
+    render layout: 'sidebarless'
+  end
 end
