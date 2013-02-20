@@ -1,7 +1,6 @@
 section.jqcloud {
   overflow: hidden;
   position: relative;
-  font-size: 10px;
   line-height: normal;
 
   a {
@@ -13,17 +12,17 @@ section.jqcloud {
   }
 
   span { 
-    padding: 0; 
+    padding: 5px; 
   }
 
-  .w10 { font-size: 550%; color: #9628A1; }
-  .w9 { font-size: 500%; color: #5429A3; }
-  .w8 { font-size: 450%; color: #7A3BEC; }
-  .w7 { font-size: 400%; color: #986AEC; }
-  .w6 { font-size: 350%; color: #A66500; }
-  .w5 { font-size: 300%; color: #BF8830; }
-  .w4 { font-size: 250%; color: #FF9C00; }
-  .w3 { font-size: 200%; color: #A69100; }
-  .w2 { font-size: 150%; color: #BFAE30; }
-  .w1 { font-size: 100%; color: #FFB540; } 
+  .w10 { font-size: 45px; color: #002A56; }
+  .w9  { font-size: 37px; color: #002A56; }
+  .w8  { font-size: 33px; color: #004996; }
+  .w7  { font-size: 26px; color: #004996; }
+  .w6  { font-size: 23px; color: #004996; }
+  .w5  { font-size: 19px; color: #0069D6; }
+  .w4  { font-size: 18px; color: #0069D6; }
+  .w3  { font-size: 17px; color: #006FE3; }
+  .w2  { font-size: 16px; color: #006FE3; }
+  .w1  { font-size: 13px; color: #006FE3; } 
 }
