@@ -16,25 +16,14 @@ section.jqcloud {
     padding: 0; 
   }
 
-  span.w10 { font-size: 550%; }
-  span.w9 { font-size: 500%; }
-  span.w8 { font-size: 450%; }
-  span.w7 { font-size: 400%; }
-  span.w6 { font-size: 350%; }
-  span.w5 { font-size: 300%; }
-  span.w4 { font-size: 250%; }
-  span.w3 { font-size: 200%; }
-  span.w2 { font-size: 150%; }
-  span.w1 { font-size: 100%; }
-  
-  span.w10 { color: #9628A1; }
-  span.w9 { color: #5429A3; }
-  span.w8 { color: #7A3BEC; }
-  span.w7 { color: #986AEC; }
-  span.w6 { color: #A66500; }
-  span.w5 { color: #BF8830; }
-  span.w4 { color: #FF9C00; }
-  span.w3 { color: #A69100; }
-  span.w2 { color: #BFAE30; }
-  span.w1 { color: #FFB540; }
+  .w10 { font-size: 550%; color: #9628A1; }
+  .w9 { font-size: 500%; color: #5429A3; }
+  .w8 { font-size: 450%; color: #7A3BEC; }
+  .w7 { font-size: 400%; color: #986AEC; }
+  .w6 { font-size: 350%; color: #A66500; }
+  .w5 { font-size: 300%; color: #BF8830; }
+  .w4 { font-size: 250%; color: #FF9C00; }
+  .w3 { font-size: 200%; color: #A69100; }
+  .w2 { font-size: 150%; color: #BFAE30; }
+  .w1 { font-size: 100%; color: #FFB540; } 
 }
