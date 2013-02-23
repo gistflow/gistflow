@@ -2,6 +2,7 @@
 @darkgray: #4b4b4b;
 @text: #7a7a7a;
 @lightgray: #eee;
+@red: #CC9090;
 
 .rounded-corners (@radius: 3px) {
   -webkit-border-radius: @radius;
@@ -43,7 +44,7 @@ a.secondary {
 
 .main-header {
   background: #eee;
-  border-bottom: 2px solid #CC9090;
+  border-bottom: 2px solid @red;
 }
 
 .main-logo {
@@ -241,7 +242,7 @@ a.secondary {
 
 
 .post {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   position: relative;
 }
 
@@ -272,7 +273,6 @@ a.secondary {
 .post-links {
   padding: 8px 10px;
   margin-top: 10px;
-  border-bottom: 1px dashed #ccc;
   font-size: 12px;
   background: url('grid.png');
   background-size: 3px 3px;
@@ -319,3 +319,29 @@ a.secondary {
     padding: 15px 0;
   }
 }
+
+.main-footer {
+  margin-top: 20px;
+  border-top: 2px solid @red;
+  background: #eee;
+}
+
+.main-footer-menu {
+  padding: 20px 0;
+  
+  ul {
+    margin: 0 100px 0 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+  }
+}
+
+.main-footer-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: @text;
+  padding-bottom: 5px;
+}
+
