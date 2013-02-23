@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta charset='UTF-8' 
+    = stylesheet_link_tag 'new_application'
+    = javascript_include_tag 'new_application'
+    = javascript_include_tag '//use.typekit.net/zky6kmq.js'
+    javascript:
+      try{Typekit.load();}catch(e){}
+    = csrf_meta_tags
+  body
+    section class="main"
+      header class="main-header"
+        h1 class="main-logo" = link_to 'Gistflow', '/'
+        div class="row"
+          nav class="main-auth"
+            ul
+              li = link_to current_user.username, current_user, class: 'secondary'
+              li = link_to account_settings_path do
+                i class="icon-cog"
+              li = link_to logout_path, class: 'secondary' do
+                i class="icon-signout"
+          div class="main-search"
+            input type="search" placeholder="Search..."
+      = yield

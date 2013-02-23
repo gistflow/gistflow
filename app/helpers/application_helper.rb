@@ -155,11 +155,10 @@ module ApplicationHelper
   end
   
   def link_to_tweet(post)
-    data = {
-      url: post_url(post),
-      text: post.title
-    }
-    link_to " <span>Tweet</span>".html_safe, "https://twitter.com/share?#{data.to_param}", class: 'button icon-twitter', target: '_blank'
+    data = { url: post_url(post), text: post.title }
+    link_to "https://twitter.com/share?#{data.to_param}", target: '_blank' do
+      %{<i class="button icon-twitter-sign"></i> Tweet}.html_safe
+    end
   end
   
   def gists_page?

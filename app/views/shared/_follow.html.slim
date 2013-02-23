@@ -1,0 +1,8 @@
+section class="follow"
+  header
+    h1 class="follow-title" What to subscribe?
+  ul class="follow-list"
+    - Tag.to_follow(current_user).each do |tag|
+      li
+        = link_to "##{tag.name}", tag
+        |  - #{tag.short_description}

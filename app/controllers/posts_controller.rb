@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   skip_before_filter :verify_authenticity_token, if: :authenticated_by_token?
   
+  layout 'new_application'
+  
   cache_sweeper :post_sweeper
   cache_sweeper :subscription_sweeper
   cache_sweeper :user_sweeper

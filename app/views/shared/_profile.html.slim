@@ -1,0 +1,37 @@
+section class="profile"
+  header
+    div class="profile-avatar"
+      = avatar_image current_user, 160
+    h1 class="profile-title" = current_user.username
+    div class="profile-tags"
+      a href="#" class="secondary" 15 notifications
+    div class="clear"
+  nav class="profile-stats"
+    ul
+      li
+        span class="profile-stats-stat" Posts
+        span class="profile-stats-value" = current_user.posts.not_private.count
+      li
+        span class="profile-stats-stat" Followers
+        span class="profile-stats-value" = current_user.followers.count
+      li
+        span class="profile-stats-stat" Likes
+        span class="profile-stats-value" = current_user.rating
+  div class="profile-new-post"
+    = link_to 'New Post', new_post_path
+  
+  div class="profile-menu"
+    ul
+      li
+        = link_to current_user, class: 'secondary' do
+          i class="icon-file-alt"
+          |  Posts
+          
+      li
+        = link_to bookmarks_path, class: 'secondary' do
+          i class="icon-book"
+          |  Bookmarks
+      li
+        = link_to [current_user, :followings], class: 'secondary' do
+          i class="icon-user"
+          |  Following

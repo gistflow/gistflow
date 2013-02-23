@@ -1,26 +1,35 @@
 - window_title 'Flow'
-
-section.posts
-  header
-    - if user_signed_in?
-      nav.submenu
-        = link_to_new_post
-    nav.menu
-      ul
-        li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
-        li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
-  - if current_user.newbie?
-    div.content-highlight
-      p = "Hello, #{current_user}. This is your posts flow."
-      p
-        | For use it you should subscribe interested 
-        = link_to 'tags', account_subscriptions_path
-        |  or follow someone.
-      p
-        | You can also subscribe for tags on its page. For example: 
-        = link_to '#ruby', tag_path('ruby')
-        | .
-    
-    p There are no posts to display.
-  - else
-    = render :partial => 'index', :locals => { :posts => @posts }
+div class="row"
+  = render 'shared/profile'
+  
+  section class="posts"
+    header
+      h1 class="posts-title" Flow
+  
+      - @posts.each do |post|
+        article class="post"
+          header
+            h1 class="post-title"
+              = link_to post.title, post
+              |  by 
+              = link_to post.user, post.user, class: 'post-title-author'
+            div class="post-box"
+              div class="post-box-bookmark"
+          div class="post-content post-content-preview markdown"
+            == Markdown.markdown post.preview, flavored: true
+          aside class="post-links"
+            div class="post-links-group"
+              = link_to post do
+                i class="icon-heart"
+                |  Like (#{post.likes_count})
+              = link_to post do
+                i class="icon-bookmark-empty"
+                |  Bookmark
+              = link_to post do
+                i class="icon-comments-alt"
+                |  Comments (#{post.comments_count})
+            div class="post-links-group"
+              = link_to_tweet post
+            
+  = render 'shared/follow'
+  div class="clear"

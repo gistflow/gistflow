@@ -2,52 +2,46 @@
 - description @post.title
 - keywords @post.tags.map(&:name).join(', ')
 
-javascript:
-  window.posts = {
-    "#{@post.id}": #{@post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
-  }
-- cache @post.cache_key(:detail), :expires_in => 15.minutes do
-  article class="post detail" data-id="#{@post.id}" data-author="#{@post.user}"
-    header.primary
-      h1 = post_title @post
-    div class="body markdown"
-      = post_body @post
-    footer class="group actions"
-      span class="post-info"
-        = post_timestamp @post
-        = page_views @post
-      div class="button-groups"
-        div class="button-group minor-group"
+div class="row"
+  = render 'shared/profile'
+  
+  article class="post post-detail"
+    header
+      h1 class="post-title" = @post.title
+      div class="post-content markdown"
+        == Markdown.markdown @post.content, flavored: true
+      aside class="post-links"
+        div class="post-links-group"
+          = link_to " Like (#{@post.likes_count})", @post, class: 'icon-heart'
+          = link_to " Comments (#{@post.comments_count})", @post, class: 'icon-comments-alt'
+        div class="post-links-group"
           = link_to_tweet @post
-        div class="notice button-group minor-group group"
-          = link_to_bookmark @post
-          = link_to_observe @post
-          = link_to_like(@post)
-        div class="button-group minor-group"
-          = link_to "", edit_post_path(@post), :class => 'button edit icon-pencil'
+            
+  = render 'shared/follow'
+  div class="clear"
 
-section class="similar_posts"
-  header
-    h1 Similar posts
-  - if @post.similar_posts.any?
-    ul
-      - @post.similar_posts.each do |post|
-        li= link_to_post(post)
-  - else
-    | Seems like there is no posts on the topic.
-
-section class="comments"
-  header
-    h1 Comments
-  - if @post.persisted_comments.any?
-    = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
-  - else
-    p.no_comments No comments yet
-  - if can? :create, :comments
-    h2 New comment
-    = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
-
-div class='at-username-container'
-  - @post.usernames.each do |username|
-    div href="#" class="username"
-      = username
+/ section class="similar_posts"
+/   header
+/     h1 Similar posts
+/   - if @post.similar_posts.any?
+/     ul
+/       - @post.similar_posts.each do |post|
+/         li= link_to_post(post)
+/   - else
+/     | Seems like there is no posts on the topic.
+/ 
+/ section class="comments"
+/   header
+/     h1 Comments
+/   - if @post.persisted_comments.any?
+/     = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
+/   - else
+/     p.no_comments No comments yet
+/   - if can? :create, :comments
+/     h2 New comment
+/     = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
+/ 
+/ div class='at-username-container'
+/   - @post.usernames.each do |username|
+/     div href="#" class="username"
+/       = username

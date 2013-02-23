@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201112320) do
+ActiveRecord::Schema.define(:version => 20130223085010) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
     t.datetime "deleted_at"
   end
 
+  create_table "flow", :force => true do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
+  add_index "flow", ["post_id"], :name => "index_flow_on_post_id"
+  add_index "flow", ["user_id", "post_id"], :name => "index_flow_on_user_id_and_post_id", :unique => true
+  add_index "flow", ["user_id"], :name => "index_flow_on_user_id"
+
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_user_id"
@@ -84,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
     t.float    "lng"
     t.integer  "locationable_id"
     t.string   "locationable_type"
-    t.string   "address",           :null => false
+    t.string   "address"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -177,10 +186,11 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.integer  "taggings_count", :default => 0
+    t.integer  "taggings_count",    :default => 0
     t.integer  "entity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_description"
   end
 
   add_index "tags", ["entity_id"], :name => "index_tags_on_entity_id"

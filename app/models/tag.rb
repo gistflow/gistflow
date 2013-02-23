@@ -27,6 +27,9 @@ class Tag < ActiveRecord::Base
   scope :popular, (lambda do |limit = 100|
     real.order('taggings_count desc').limit(limit)
   end)
+  scope :to_follow, (lambda do |user, limit = 5|
+    Tag.popular.where("tags.id not in (?)", user.tag_ids).first(limit)
+  end)
 
   def alias?
     !!entity
