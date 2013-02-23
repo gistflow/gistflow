@@ -1,6 +1,15 @@
 @link: #0069D6;
 @darkgray: #4b4b4b;
 @text: #7a7a7a;
+@lightgray: #eee;
+
+.rounded-corners (@radius: 3px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
 
 body {
   font-size: 14px;
@@ -34,7 +43,7 @@ a.secondary {
 
 .main-header {
   background: #eee;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #CC9090;
 }
 
 .main-logo {
@@ -45,7 +54,7 @@ a.secondary {
   width: 860px;
   margin: 0 auto;
   a {
-    color: #7a7a7a;
+    color: #666;
   }
 }
 
@@ -84,7 +93,18 @@ a.secondary {
   top: -35px;
   
   input {
-    width: 220px;
+    width: 208px;
+    font-size: 13px;
+    padding: 3px 5px;
+    border: 1px solid #bababa;
+    outline: none;
+    color: #666;
+    
+    .rounded-corners;
+    
+    &:focus {
+      border-color: #aaa;
+    }
   }
 }
 
@@ -155,10 +175,10 @@ a.secondary {
     display: block;
     text-align: center;
     color: white;
-    background: #7a7a7a;
-    border-radius: 5px;
+    background: @text;
     padding: 5px;
     
+    .rounded-corners(5px);
     &:hover {
       background: #888;
     }
