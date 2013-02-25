@@ -1,0 +1,18 @@
+aside class="post-links"
+  div class="post-links-group"
+    = link_to post do
+      i class="icon-heart"
+      |  Like (#{post.likes_count})
+    = link_to post do
+      i class="icon-bookmark-empty"
+      |  Bookmark
+    = link_to post do
+      i class="icon-comments-alt"
+      |  Comments (#{post.comments_count})
+  div class="post-links-group"
+    = link_to_tweet post
+  div class="post-links-group post-links-group-manage hidden"
+    = link_to post do
+      i class="icon-pencil"
+      |  Edit
+  div class="clear"

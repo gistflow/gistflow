@@ -21,17 +21,17 @@ html
               li = link_to logout_path, class: 'secondary' do
                 i class="icon-signout"
           div class="main-search"
-            input type="search" placeholder="Search..." autofocus="true"
-      = yield
+            input type="search" placeholder="Search..."
+      div class="main-row" = yield
       footer class="main-footer"
         div class="row"
           nav class="main-footer-menu"
             ul
               li class="main-footer-title" Contacts
               li
-                a class="secondary" href="#" Email us
+                a class="secondary" href="#" Email
               li
-                a class="secondary" href="#" Create issue
+                a class="secondary" href="#" Github
             ul
               li class="main-footer-title" Buns
               li

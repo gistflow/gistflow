@@ -1,35 +1,24 @@
 - window_title 'Flow'
 div class="row"
-  = render 'shared/profile'
+  div class="left-column"
+    = render 'shared/profile'
+    = render 'shared/follow'
   
-  section class="posts"
-    header
-      h1 class="posts-title" Flow
+  div class="right-column"
+    section class="posts"
+      header
+        h1 class="posts-title" Flow
   
-      - @posts.each do |post|
-        article class="post"
-          header
-            h1 class="post-title"
-              = link_to post.title, post
-              |  by 
-              = link_to post.user, post.user, class: 'post-title-author'
-            div class="post-box"
-              div class="post-box-bookmark"
-          div class="post-content post-content-preview markdown"
-            == Markdown.markdown post.preview, flavored: true
-          aside class="post-links"
-            div class="post-links-group"
-              = link_to post do
-                i class="icon-heart"
-                |  Like (#{post.likes_count})
-              = link_to post do
-                i class="icon-bookmark-empty"
-                |  Bookmark
-              = link_to post do
-                i class="icon-comments-alt"
-                |  Comments (#{post.comments_count})
-            div class="post-links-group"
-              = link_to_tweet post
-            
-  = render 'shared/follow'
+        - @posts.each do |post|
+          = post_article post do
+            header
+              h1 class="post-title"
+                = link_to post.title, post
+                |  by 
+                = link_to post.user, post.user, class: 'post-title-author'
+              div class="post-box"
+                div class="post-box-bookmark"
+            div class="post-content post-content-preview markdown"
+              == Markdown.markdown post.preview, flavored: true
+            = render partial: 'posts/links', locals: { post: post }
   div class="clear"

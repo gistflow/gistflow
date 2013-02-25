@@ -17,6 +17,18 @@ body {
   font-family: 'proxima-nova', sans-serif;
 }
 
+.left-column {
+  width: 220px;
+  padding: 20px 0;
+  float: left;
+}
+
+.right-column {
+  width: 620px;
+  float: right;
+  overflow: hidden;
+}
+
 .row {
   width: 860px;
   margin: 0 auto;
@@ -27,6 +39,10 @@ body {
 .clear {
   clear: both;
   line-height: 0;
+}
+
+.hidden {
+  display: none !important;
 }
 
 a {
@@ -40,6 +56,10 @@ a.secondary {
     text-decoration: underline;
     color: #4b4b4b;
   }
+}
+
+.main-row {
+  min-height: 550px; /* temp */
 }
 
 .main-header {
@@ -111,9 +131,7 @@ a.secondary {
 
 
 .profile {
-  width: 220px;
-  padding: 20px 0;
-  float: left;
+  
 }
 
 .profile-title {
@@ -229,9 +247,7 @@ a.secondary {
 
 
 .posts {
-  width: 620px;
-  float: right;
-  overflow: hidden;
+  
 }
 
 .posts-title {
@@ -290,7 +306,12 @@ a.secondary {
 
 .post-links-group {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 30px;
+}
+
+.post-links-group-manage {
+  float: right;
+  margin-right: 0;
 }
 
 .post-content-preview {
@@ -308,10 +329,6 @@ a.secondary {
 }
 
 .post-detail {
-  width: 620px;
-  float: right;
-  overflow: hidden;
-  
   .post-title {
     font-size: 28px;
     color: #4b4b4b;
@@ -330,7 +347,8 @@ a.secondary {
   padding: 20px 0;
   
   ul {
-    margin: 0 100px 0 0;
+    margin: 0;
+    width: 240px;
     padding: 0;
     list-style: none;
     float: left;
@@ -345,3 +363,28 @@ a.secondary {
   padding-bottom: 5px;
 }
 
+.posts-similar {
+  width: 620px;
+  float: right;
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  li {
+    margin-bottom: 2px;
+    color: @darkgray;
+    
+    &:before {
+      content: "—";
+      margin-right: 10px;
+    }
+  }
+}
+
+.posts-similar-title {
+  font-size: 20px;
+  margin: 0 0 5px;
+}
