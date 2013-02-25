@@ -6,7 +6,8 @@ html
     = javascript_include_tag 'new_application'
     = javascript_include_tag '//use.typekit.net/zky6kmq.js'
     javascript:
-      try{Typekit.load();}catch(e){}
+      try{Typekit.load();}catch(e){};
+      window.current_user = { username: #{current_user.username} };
     = csrf_meta_tags
   body
     section class="main"

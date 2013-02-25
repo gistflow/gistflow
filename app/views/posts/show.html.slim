@@ -16,20 +16,10 @@ div class="row"
         = render partial: 'posts/links', locals: { post: @post }
 
     = render partial: 'posts/similar', locals: { post: @post }
-  
+    = render partial: 'posts/comments', locals: { comments: @post.comments }
+    
   div class="clear"
 
-/ section class="comments"
-/   header
-/     h1 Comments
-/   - if @post.persisted_comments.any?
-/     = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
-/   - else
-/     p.no_comments No comments yet
-/   - if can? :create, :comments
-/     h2 New comment
-/     = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
-/ 
 / div class='at-username-container'
 /   - @post.usernames.each do |username|
 /     div href="#" class="username"

@@ -1,6 +1,12 @@
 @import "configuration";
 
 .markdown {
+  >:first-child {
+    >img:first-child {
+      border-top: none !important;
+    }
+  }
+  
   img {
     display: block;
     border-top: 10px solid white;

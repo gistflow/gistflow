@@ -8,7 +8,7 @@ div class="row"
     section class="posts"
       header
         h1 class="posts-title" Flow
-  
+        
         - @posts.each do |post|
           = post_article post do
             header
@@ -16,9 +16,11 @@ div class="row"
                 = link_to post.title, post
                 |  by 
                 = link_to post.user, post.user, class: 'post-title-author'
-              div class="post-box"
-                div class="post-box-bookmark"
+            div class="post-author"
+              = link_to post.user do
+                = avatar_image post.user, 84
             div class="post-content post-content-preview markdown"
               == Markdown.markdown post.preview, flavored: true
+            div class="clear"
             = render partial: 'posts/links', locals: { post: post }
   div class="clear"

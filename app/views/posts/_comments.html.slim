@@ -1,0 +1,20 @@
+section class="comments"
+  header
+    h1 Comments
+  
+  - @post.persisted_comments.each do |comment|
+    article class="comment" data-author="#{comment.user.username}"
+      div class="comment-body markdown"
+        == Markdown.markdown comment.content, flavored: true
+  
+  - if user_signed_in?
+    div class="new-comment"
+/     
+/ 
+/ - if @post.persisted_comments.any?
+/   = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
+/ - else
+/   p.no_comments No comments yet
+/ - if can? :create, :comments
+/   h2 New comment
+/   = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
