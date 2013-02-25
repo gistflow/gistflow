@@ -19,6 +19,10 @@ div class="row"
             div class="post-author"
               = link_to post.user do
                 = avatar_image post.user, 84
+              div class="post-title-author-rating"
+                = post.user.rating
+                |  
+                i class="icon-heart"
             div class="post-content post-content-preview markdown"
               == Markdown.markdown post.preview, flavored: true
             div class="clear"
