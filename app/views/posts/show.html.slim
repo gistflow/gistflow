@@ -11,6 +11,11 @@ div class="row"
     article class="post post-detail"
       header
         h1 class="post-title" = @post.title
+        div class="post-data"
+          | by 
+          = link_to @post.user.username, @post.user
+          |  at 
+          = time_tag @post.created_at, @post.created_at.to_date.to_s(:long)
         div class="post-content markdown"
           == Markdown.markdown @post.content, flavored: true
         = render partial: 'posts/links', locals: { post: @post }

@@ -269,15 +269,6 @@ a.secondary {
   margin: 0;
   line-height: 28px;
   font-size: 18px;
-  color: #ccc;
-}
-
-.post-title-author {
-  color: #7a7a7a;
-  
-  &:hover {
-    color: #666;
-  }
 }
 
 .post-title-author-rating {
@@ -367,9 +358,19 @@ a.secondary {
 .post-detail {
   .post-title {
     font-size: 28px;
-    color: #4b4b4b;
     line-height: 34px;
-    padding: 15px 0;
+    padding: 15px 0 0;
+  }
+}
+
+.post-data {
+  color: #666;
+  padding: 0 0 15px 0;
+  font-style: italic;
+  
+  &:before {
+    content: "—";
+    margin-right: 10px;
   }
 }
 
