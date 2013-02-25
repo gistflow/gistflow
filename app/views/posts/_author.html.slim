@@ -1,0 +1,7 @@
+div class="post-author"
+  = link_to user, title: user.username do
+    = avatar_image user, 84
+  div class="post-title-author-rating"
+    = user.rating
+    |  
+    i class="icon-heart"

@@ -264,7 +264,8 @@ a.secondary {
 }
 
 .post-title {
-  padding: 0 0 2px;
+  position: relative;
+  top: -4px;
   margin: 0;
   line-height: 28px;
   font-size: 18px;
@@ -339,8 +340,16 @@ a.secondary {
   }
 }
 
+.post-preview {
+  > header {
+    width: 560px;
+    float: right;
+  }
+}
+
 .post-content-preview {
-  margin-left: 60px;
+  float: right;
+  width: 560px;
   
   img {
     max-height: 100px;
