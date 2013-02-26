@@ -1,4 +1,7 @@
 - window_title 'Flow'
+
+= render partial: 'posts/dynamic', locals: { posts: @posts }
+
 div class="row"
   div class="left-column"
     = render 'shared/profile'

@@ -1,18 +1,18 @@
 aside class="post-links"
   div class="post-links-group"
-    = link_to post do
-      i class="icon-heart"
-      |  Like (#{post.likes_count})
+    = link_to account_likes_path(post_id: post.id), class: 'replaceable', remote: true, method: :post do
+      i class="icon-heart-empty"
+      | Like (#{post.likes_count})
     = link_to post do
       i class="icon-bookmark-empty"
-      |  Bookmark
+      | Bookmark
     = link_to post do
       i class="icon-comments-alt"
-      |  Comments (#{post.comments_count})
+      | Comments (#{post.comments_count})
   div class="post-links-group"
     = link_to_tweet post
   div class="post-links-group post-links-group-manage hidden"
     = link_to post do
       i class="icon-pencil"
-      |  Edit
+      | Edit
   div class="clear"
