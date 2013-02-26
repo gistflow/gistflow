@@ -8,7 +8,8 @@ class Account::LikesController < ApplicationController
     current_user.like(@post)
     link = {
       icon: 'icon-heart',
-      method: 'delete'
+      method: 'delete',
+      count: @post.reload.likes_count
     }
     render json: link
   end
@@ -18,7 +19,8 @@ class Account::LikesController < ApplicationController
     current_user.unlike(@post)
     link = {
       icon: 'icon-heart-empty',
-      method: 'post'
+      method: 'post',
+      count: @post.reload.likes_count
     }
     render json: link
   end
