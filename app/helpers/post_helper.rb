@@ -2,7 +2,7 @@ module PostHelper
   def post_article(post, &article)
     options = {
       class: 'post post-preview',
-      data: { author: post.user.username }
+      data: { author: post.user.username, id: post.id }
     }
     content_tag :article, options, &article
   end
