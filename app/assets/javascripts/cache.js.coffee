@@ -29,6 +29,8 @@ $ ->
         .addClass('icon-bookmark')
     
     # fill comments
+    link = $post.find('a.comments')
+    link.find('span:first').html '(' + data.comments_count + ')'
   
   $posts.on 'click a.replaceable', (e) ->
     $link = $(e.target)

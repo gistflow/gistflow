@@ -7,9 +7,10 @@ aside class="post-links"
     = link_to account_bookmark_path(post_id: post.id), class: 'replaceable bookmark', remote: true, method: :post do
       i class="icon-bookmark-empty"
       | Bookmark
-    = link_to post do
+    = link_to post, class: 'comments' do
       i class="icon-comments-alt"
-      | Comments
+      | Comments 
+      span
   div class="post-links-group"
     = link_to_tweet post
   div class="post-links-group post-links-group-manage hidden"
