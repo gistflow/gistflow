@@ -1,6 +1,6 @@
 section class="comments"
   header
-    h1 class="comments-title" Comments
+    h1 class="comments-title subtitle" Comments
   
   - @post.persisted_comments.each do |comment|
     article class="comment" data-author="#{comment.user.username}"
@@ -18,7 +18,18 @@ section class="comments"
       div class="clear"
   
   - if user_signed_in?
-    div class="new-comment"
+    h2 class="new-comment-title subtitle" New Comment
+    div class="new-comment-author"
+      = link_to current_user, title: current_user.username do
+        = avatar_image current_user, 84
+    div class="new-comment-form"
+      = form_for [@post, @comment] do |f|
+        fieldset
+          = f.text_area :body, rows: 3
+        div class="form-actions"
+          = f.submit 'Preview', class: 'button'
+          = f.submit 'Comment', class: 'button'
+    div class="clear"
 /     
 / 
 / - if @post.persisted_comments.any?

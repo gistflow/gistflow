@@ -12,7 +12,10 @@ aside class="post-links"
       | Comments 
       span
   div class="post-links-group"
-    = link_to_tweet post
+    - data = { url: post_url(post), text: post.title }
+    = link_to "https://twitter.com/share?#{data.to_param}", target: '_blank' do
+      i class="icon-twitter-sign"
+      | Tweet
   div class="post-links-group post-links-group-manage hidden"
     = link_to post do
       i class="icon-pencil"
