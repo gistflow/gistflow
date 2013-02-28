@@ -13,7 +13,7 @@ div class="row"
         h1 class="posts-title" Flow
         
         - @posts.each do |post|
-          = post_article post do
+          = post_article post, class: 'post-preview' do
             header
               h1 class="post-title" = link_to post.title, post
             = render partial: 'posts/author', locals: { user: post.user }

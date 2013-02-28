@@ -2,13 +2,15 @@
 - description @post.title
 - keywords @post.tags.map(&:name).join(', ')
 
+= render partial: 'posts/dynamic', locals: { posts: [@post] }
+
 div class="row"
   div class="left-column"
     = render 'shared/profile'
     = render 'shared/follow'
   
   div class="right-column"
-    article class="post post-detail"
+    = post_article @post, class: 'post-detail' do
       header
         h1 class="post-title" = @post.title
         div class="post-data"

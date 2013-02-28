@@ -1,10 +1,13 @@
 module PostHelper
-  def post_article(post, &article)
-    options = {
-      class: 'post post-preview',
+  def post_article(post, options = {}, &article)
+    default_options = {
+      class: ['post'],
       data: { author: post.user.username, id: post.id }
     }
-    content_tag :article, options, &article
+    if klass = options.delete(:class)
+      default_options[:class] << klass
+    end
+    content_tag :article, default_options.merge(options), &article
   end
   
   # def post_preview(post)
