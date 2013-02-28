@@ -278,15 +278,6 @@ a.secondary {
   color: @text;
 }
 
-.post-content {
-  >:first-child {
-    margin-top: 0;
-  }
-  >:last-child {
-    margin-bottom: 5px;
-  }
-}
-
 .post-links {
   padding: 8px 10px;
   margin-top: 10px;
@@ -425,6 +416,7 @@ a.secondary {
 .posts-similar {
   width: 620px;
   float: right;
+  margin-bottom: 30px;
   
   ul {
     margin: 0;
@@ -446,4 +438,50 @@ a.secondary {
 .posts-similar-title {
   font-size: 20px;
   margin: 0 0 5px;
+}
+
+.comments {
+  
+}
+
+.comments-title {
+  font-size: 24px;
+}
+
+.comment {
+  margin-bottom: 20px;
+}
+
+.comment-author {
+  float: left;
+  
+  a {
+    border: 1px solid #ccc;
+    padding: 2px;
+    display: inline-block;
+    line-height: 0;
+  }
+  
+  img {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.comment-container {
+  margin-left: 60px;
+}
+
+.comment-title {
+  a {
+    font-weight: bold;
+  }
+  
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.comment-body {
+  
 }

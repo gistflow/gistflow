@@ -2,9 +2,14 @@
 
 .markdown {
   >:first-child {
+    margin-top: 0;
     >img:first-child {
       border-top: none !important;
     }
+  }
+  
+  >:last-child {
+    margin-bottom: 5px;
   }
   
   img {
