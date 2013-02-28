@@ -2,20 +2,24 @@ section class="comments"
   header
     h1 class="comments-title subtitle" Comments
   
-  - @post.persisted_comments.each do |comment|
-    article class="comment" data-author="#{comment.user.username}"
-      div class="comment-author"
-        = link_to comment.user, title: comment.user.username do
-          = avatar_image comment.user, 84
-      div class="comment-container"
-        div class="comment-title"
-          = link_to comment.user, comment.user.username
-          |  commented  
-          = time_ago_in_words comment.created_at
-          |  ago
-        div class="comment-body markdown"
-          == Markdown.markdown comment.content, flavored: true
-      div class="clear"
+  - comments = @post.persisted_comments
+  - if comments.any?
+    - comments.each do |comment|
+      article class="comment" data-author="#{comment.user.username}"
+        div class="comment-author"
+          = link_to comment.user, title: comment.user.username do
+            = avatar_image comment.user, 84
+        div class="comment-container"
+          div class="comment-title"
+            = link_to comment.user, comment.user.username
+            |  commented  
+            = time_ago_in_words comment.created_at
+            |  ago
+          div class="comment-body markdown"
+            == Markdown.markdown comment.content, flavored: true
+        div class="clear"
+  - else
+    p class="comments-empty" No comments yet.
   
   - if user_signed_in?
     h2 class="new-comment-title subtitle" New Comment
