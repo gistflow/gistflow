@@ -22,7 +22,7 @@ section class="comments"
     p class="comments-empty" No comments yet.
   
   - if user_signed_in?
-    h2 class="new-comment-title subtitle" New Comment
+    h2 class="new-comment-title" New Comment
     div class="new-comment-author"
       = link_to current_user, title: current_user.username do
         = avatar_image current_user, 84
@@ -34,12 +34,3 @@ section class="comments"
           = f.submit 'Preview', class: 'button'
           = f.submit 'Comment', class: 'button'
     div class="clear"
-/     
-/ 
-/ - if @post.persisted_comments.any?
-/   = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
-/ - else
-/   p.no_comments No comments yet
-/ - if can? :create, :comments
-/   h2 New comment
-/   = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
