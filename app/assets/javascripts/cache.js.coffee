@@ -8,7 +8,6 @@ $ ->
     data = window.posts[id]
     
     # show edit button
-    
     if $post.data('author') == window.current_user.username || window.current_user.admin
       $post.find('div.post-links-group-manage').removeClass('hidden')
     
@@ -53,3 +52,13 @@ $ ->
   
   $posts.on 'ajax:success a.like', links_handler
   $posts.on 'ajax:success a.bookmark', links_handler
+  
+  # Comments
+  $comments = $('article.comment')
+  $comments.each (i, html) ->
+    $comment = $(html)
+    
+    # show controlls
+    if $comment.data('author') == window.current_user.username || window.current_user.admin
+      $comment.find('div.comment-controls').removeClass('hidden')
+  

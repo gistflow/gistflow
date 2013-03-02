@@ -22,46 +22,46 @@
 
 
 .button { 
-    position: relative;
-    overflow: visible;
-    display: inline-block;
-    padding: 0.4em 1em;
-    border: 1px solid #d4d4d4;
-    margin: 0;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 #fff; 
-    font-size: 12px;
-    font-family: 'proxima-nova', sans-serif;
-    color: #4b4b4b;
-    white-space: nowrap;
-    cursor: pointer;
-    outline: none;
-    .gradient(#f4f4f4, #ececec);
-    -webkit-background-clip: padding;
-    -moz-background-clip: padding;
-    -o-background-clip: padding-box;
-    .rounded-corners;
+  position: relative;
+  overflow: visible;
+  display: inline-block;
+  padding: 0.4em 1em;
+  border: 1px solid #d4d4d4;
+  margin: 0;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #fff; 
+  font-size: 12px;
+  font-family: 'proxima-nova', sans-serif;
+  color: #4b4b4b;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  .gradient(#f4f4f4, #ececec);
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  -o-background-clip: padding-box;
+  .rounded-corners;
 }
 .button:hover,
 .button:focus,
 .button:active,
 .button.active {
-    border-color: #3072b3;
-    border-bottom-color: #2a65a0;
-    text-decoration: none; 
-    text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
-    color: #fff; 
-    .gradient(#599bdc, #3072b3);
+  border-color: #3072b3;
+  border-bottom-color: #2a65a0;
+  text-decoration: none; 
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
+  color: #fff; 
+  .gradient(#599bdc, #3072b3);
 }
 .button:active,
 .button.active {
-    border-color: #2a65a0;
-    border-bottom-color: #3884CF;
-    .gradient(#3072b3, #599bdc);
+  border-color: #2a65a0;
+  border-bottom-color: #3884CF;
+  .gradient(#3072b3, #599bdc);
 }
 .button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+  padding: 0;
+  border: 0;
 }
 
 .subtitle {
@@ -520,6 +520,7 @@ a.secondary {
 }
 
 .comment {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -553,8 +554,25 @@ a.secondary {
   margin-bottom: 5px;
 }
 
-.comment-body {
+.comment-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
   
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  li {
+    display: inline-block;
+    margin-left: 5px;
+  }
+  
+  a {
+    font-size: 12px;
+  }
 }
 
 .new-comment-title {
