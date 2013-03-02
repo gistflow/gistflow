@@ -32,9 +32,19 @@ html
             ul
               li class="main-footer-title" Contacts
               li
-                a class="secondary" href="#" Email
+                - name = capture do
+                  i class="icon-envelope"
+                  span Email
+                = mail_to 'info@gistflow.com', name, class: 'secondary', encode: 'hex'
               li
-                a class="secondary" href="#" Github
+                
+                a class="secondary" href="#"
+                  i class="icon-github"
+                  span Github
+              li
+                a class="secondary" href="#"
+                  i class="icon-twitter"
+                  span Twitter
             ul
               li class="main-footer-title" Buns
               li
