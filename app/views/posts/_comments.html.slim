@@ -24,7 +24,7 @@ section class="comments"
                 i class="icon-pencil"
                 span Edit
             li class="comment-control-inactive"
-              = link_to [@post, comment], class: 'comment-control-remove secondary' do
+              = link_to [@post, comment], class: 'comment-control-remove secondary', data: { confirm: 'Are you sure?' } do
                 i class="icon-trash"
                 span Remove
             li class="comment-control-active hidden"

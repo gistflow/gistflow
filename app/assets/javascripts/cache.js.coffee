@@ -72,7 +72,6 @@ $ ->
       .prop('contenteditable', true)
       .html(data.content)
       .focus()
-    false
   
   $comments.on 'ajax:before', 'a.comment-control-save', (e, data) ->
     $link = $(@)
@@ -82,8 +81,7 @@ $ ->
     true
     
   
-  $comments.on 'ajax:success', 'a.comment-control-save', (e, data) ->
-    $link = $(@)
+  $comments.on 'ajax:success', 'a.comment-control-save, a.comment-control-cancel', (e, data) ->
     $comment = $(e.delegateTarget)
     $comment.find('li.comment-control-inactive').removeClass('hidden')
     $comment.find('li.comment-control-active').addClass('hidden')
@@ -91,4 +89,3 @@ $ ->
     $body
       .prop('contenteditable', false)
       .html(data.html)
-    false

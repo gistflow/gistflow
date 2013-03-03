@@ -37,12 +37,7 @@ Gistflow::Application.routes.draw do
       get :leaderboard
     end
 
-    resources :comments, only: [:create, :edit, :update, :destroy], module: :posts do
-      collection do
-        post :build
-        post :preview
-      end
-    end
+    resources :comments, except: :index, module: :posts
   end
   
   resource :search, only: :create

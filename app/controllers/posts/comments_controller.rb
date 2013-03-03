@@ -18,6 +18,11 @@ class Posts::CommentsController < ApplicationController
     # end
   end
   
+  def show
+    @comment = Comment.find(params[:id])
+    render json: { html: @comment.html }
+  end
+  
   def edit
     @comment = Comment.find(params[:id])
     authorize! :edit, @comment
@@ -28,7 +33,7 @@ class Posts::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize! :edit, @comment
     @comment.update_attribute(:content, params[:content])
-    render json: { html: Markdown.markdown(@comment.content, flavored: true) }
+    render json: { html: @comment.html }
   end
 
   def destroy
