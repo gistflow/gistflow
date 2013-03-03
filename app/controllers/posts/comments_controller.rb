@@ -38,7 +38,7 @@ class Posts::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    authorize! :destroy, comment
+    authorize! :destroy, @comment
     @comment.mark_deleted
     render json: {}
   end

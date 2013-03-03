@@ -89,3 +89,11 @@ $ ->
     $body
       .prop('contenteditable', false)
       .html(data.html)
+  
+  $comments.on 'ajax:success', 'a.comment-control-remove', (e, data) ->
+    $comment = $(e.delegateTarget)
+    $comment.fadeOut
+      done: ->
+        $comment.remove()
+    # if last comment
+  
