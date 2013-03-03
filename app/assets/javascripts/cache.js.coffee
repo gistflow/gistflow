@@ -62,3 +62,33 @@ $ ->
     if $comment.data('author') == window.current_user.username || window.current_user.admin
       $comment.find('div.comment-controls').removeClass('hidden')
   
+  $comments.on 'ajax:success', 'a.comment-control-edit', (e, data) ->
+    $link = $(@)
+    $comment = $(e.delegateTarget)
+    $comment.find('li.comment-control-active').removeClass('hidden')
+    $comment.find('li.comment-control-inactive').addClass('hidden')
+    $body = $comment.find('div.comment-body')
+    $body
+      .prop('contenteditable', true)
+      .html(data.content)
+      .focus()
+    false
+  
+  $comments.on 'ajax:before', 'a.comment-control-save', (e, data) ->
+    $link = $(@)
+    $comment = $(e.delegateTarget)
+    content = $comment.find('div.comment-body').text()
+    $link.data 'params', 'content=' + content
+    true
+    
+  
+  $comments.on 'ajax:success', 'a.comment-control-save', (e, data) ->
+    $link = $(@)
+    $comment = $(e.delegateTarget)
+    $comment.find('li.comment-control-inactive').removeClass('hidden')
+    $comment.find('li.comment-control-active').addClass('hidden')
+    $body = $comment.find('div.comment-body')
+    $body
+      .prop('contenteditable', false)
+      .html(data.html)
+    false

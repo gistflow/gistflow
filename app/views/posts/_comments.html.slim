@@ -19,14 +19,22 @@ section class="comments"
             == Markdown.markdown comment.content, flavored: true
         div class="comment-controls hidden"
           ul
-            li
-              = link_to '#', class: 'comment-control-edit secondary' do
+            li class="comment-control-inactive"
+              = link_to [:edit, @post, comment], class: 'comment-control-edit secondary', remote: true do
                 i class="icon-pencil"
                 span Edit
-            li
-              = link_to '#', class: 'comment-control-remove secondary' do
+            li class="comment-control-inactive"
+              = link_to [@post, comment], class: 'comment-control-remove secondary' do
                 i class="icon-trash"
                 span Remove
+            li class="comment-control-active hidden"
+              = link_to [@post, comment], class: 'comment-control-save secondary', remote: true, method: :put do
+                i class="icon-save"
+                span Save
+            li class="comment-control-active hidden"
+              = link_to [@post, comment], class: 'comment-control-cancel secondary', remote: true do
+                i class="icon-share-alt"
+                span Cancel
         div class="clear"
   - else
     p class="comments-empty" No comments yet.

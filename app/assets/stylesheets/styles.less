@@ -20,6 +20,17 @@
   background-image: linear-gradient(@from, @to);
 }
 
+.inputable {
+  padding: 4px;
+  outline: none;
+  margin: 0;
+  border: 1px solid #bbb;
+  &:focus {
+    border: 1px solid #7a7a7a;
+  }
+  .rounded-corners(3px);
+}
+
 
 .button { 
   position: relative;
@@ -554,6 +565,10 @@ a.secondary {
   margin-bottom: 5px;
 }
 
+.comment-body[contenteditable=true] {
+  .inputable;
+}
+
 .comment-controls {
   position: absolute;
   top: 0;
@@ -592,14 +607,7 @@ a.secondary {
   
   textarea {
     width: 550px;
-    padding: 4px;
-    outline: none;
-    margin: 0;
-    border: 1px solid #bbb;
-    &:focus {
-      border: 1px solid #7a7a7a;
-    }
-    .rounded-corners(3px)
+    .inputable;
   }
   
   .form-actions {
