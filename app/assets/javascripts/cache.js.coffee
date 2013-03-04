@@ -95,5 +95,5 @@ $ ->
     $comment.fadeOut
       done: ->
         $comment.remove()
-    # if last comment
+    # if last comment show that there is no comments
   

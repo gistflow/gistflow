@@ -3,19 +3,19 @@ class Posts::CommentsController < ApplicationController
   cache_sweeper :comment_sweeper
   
   def create
-    # @post = find_post(params[:post_id])
-    # @new_comment = @post.comments.build(params[:comment]) do |comment|
-    #   comment.user = current_user
-    # end
-    # 
-    # if @new_comment.save
-    #   @comment = @post.comments.build do |comment|
-    #     comment.user = current_user
-    #   end
-    #   render json: { form: render_form(:build), comment: render_comment }
-    # else
-    #   render_json_error("We are sorry, but comment couldn't be saved.")
-    # end
+    @post = find_post(params[:post_id])
+    @new_comment = @post.comments.build(params[:comment]) do |comment|
+      comment.user = current_user
+    end
+    
+    if @new_comment.save
+      @comment = @post.comments.build do |comment|
+        comment.user = current_user
+      end
+      render json: { form: render_form(:build), comment: render_comment }
+    else
+      render_json_error("We are sorry, but comment couldn't be saved.")
+    end
   end
   
   def show
