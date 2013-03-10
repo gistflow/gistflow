@@ -1,0 +1,31 @@
+article class="comment" data-author="#{comment.user.username}" data-id="#{comment.id}"
+  div class="comment-author"
+    = link_to comment.user, title: comment.user.username do
+      = avatar_image comment.user, 84
+  div class="comment-container"
+    div class="comment-title"
+      = link_to comment.user, comment.user.username
+      |  commented  
+      = time_ago_in_words comment.created_at || Time.current
+      |  ago
+    div class="comment-body markdown"
+      == Markdown.markdown comment.content, flavored: true
+  div class="comment-controls hidden"
+    ul
+      li class="comment-control-inactive"
+        = link_to '#', class: 'comment-control-edit secondary', remote: true do
+          i class="icon-pencil"
+          span Edit
+      li class="comment-control-inactive"
+        = link_to '#', class: 'comment-control-remove secondary', remote: true, method: :delete, data: { confirm: 'Are you sure?' } do
+          i class="icon-trash"
+          span Remove
+      li class="comment-control-active hidden"
+        = link_to '#', class: 'comment-control-save secondary', remote: true, method: :put do
+          i class="icon-save"
+          span Save
+      li class="comment-control-active hidden"
+        = link_to '#', class: 'comment-control-cancel secondary', remote: true do
+          i class="icon-share-alt"
+          span Cancel
+  div class="clear"

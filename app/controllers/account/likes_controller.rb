@@ -6,18 +6,22 @@ class Account::LikesController < ApplicationController
   def create
     @post = Post.find params[:post_id]
     current_user.like(@post)
-    render_replaceable
+    link = {
+      icon: 'icon-heart',
+      method: 'delete',
+      count: @post.reload.likes_count
+    }
+    render json: link
   end
 
   def destroy
-  	@post = Post.find params[:post_id]
+    @post = Post.find params[:post_id]
     current_user.unlike(@post)
-    render_replaceable
-  end
-
-  private
-  def render_replaceable
-    link = render_to_string(inline: "<%= current_user.like?(@post.reload) ? link_to_unlike(@post) : link_to_like(@post) %>")
-    render json: { replaceable: link }
+    link = {
+      icon: 'icon-heart-empty',
+      method: 'post',
+      count: @post.reload.likes_count
+    }
+    render json: link
   end
 end

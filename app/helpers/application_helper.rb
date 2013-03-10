@@ -154,14 +154,6 @@ module ApplicationHelper
     points.to_json.html_safe
   end
   
-  def link_to_tweet(post)
-    data = {
-      url: post_url(post),
-      text: post.title
-    }
-    link_to " <span>Tweet</span>".html_safe, "https://twitter.com/share?#{data.to_param}", class: 'button icon-twitter', target: '_blank'
-  end
-  
   def gists_page?
     [:show, :new, :create, :edit, :update].any? do |action|
       params[:controller].to_sym == :posts && action == params[:action].to_sym

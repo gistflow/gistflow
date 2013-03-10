@@ -8,15 +8,21 @@ class Account::BookmarksController < ApplicationController
   def create
     @post = find_post(params[:post_id])
     current_user.bookmark(@post)
-    link = render_to_string(inline: "<%= link_to_unbookmark(@post) %>")
-    render json: { replaceable: link }
+    link = {
+      icon: 'icon-bookmark',
+      method: 'delete'
+    }
+    render json: link
   end
   
   def destroy
     @post = find_post(params[:post_id])
     current_user.unbookmark(@post)
-    link = render_to_string(inline: "<%= link_to_bookmark(@post) %>")
-    render json: { replaceable: link }
+    link = {
+      icon: 'icon-bookmark-empty',
+      method: 'post'
+    }
+    render json: link
   end
   
 protected

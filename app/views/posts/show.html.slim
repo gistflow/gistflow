@@ -2,52 +2,32 @@
 - description @post.title
 - keywords @post.tags.map(&:name).join(', ')
 
-javascript:
-  window.posts = {
-    "#{@post.id}": #{@post.to_json(only: [:id, :likes_count, :comments_count]).html_safe}
-  }
-- cache @post.cache_key(:detail), :expires_in => 15.minutes do
-  article class="post detail" data-id="#{@post.id}" data-author="#{@post.user}"
-    header.primary
-      h1 = post_title @post
-    div class="body markdown"
-      = post_body @post
-    footer class="group actions"
-      span class="post-info"
-        = post_timestamp @post
-        = page_views @post
-      div class="button-groups"
-        div class="button-group minor-group"
-          = link_to_tweet @post
-        div class="notice button-group minor-group group"
-          = link_to_bookmark @post
-          = link_to_observe @post
-          = link_to_like(@post)
-        div class="button-group minor-group"
-          = link_to "", edit_post_path(@post), :class => 'button edit icon-pencil'
+= render partial: 'posts/dynamic', locals: { posts: [@post] }
 
-section class="similar_posts"
-  header
-    h1 Similar posts
-  - if @post.similar_posts.any?
-    ul
-      - @post.similar_posts.each do |post|
-        li= link_to_post(post)
-  - else
-    | Seems like there is no posts on the topic.
+div class="row"
+  div class="left-column"
+    = render 'shared/profile'
+    = render 'shared/follow'
+  
+  div class="right-column"
+    = post_article @post, class: 'post-detail' do
+      header
+        h1 class="post-title" = @post.title
+        div class="post-data"
+          | by 
+          = link_to @post.user.username, @post.user
+          |  at 
+          = time_tag @post.created_at, @post.created_at.to_date.to_s(:long)
+        div class="post-content markdown"
+          == Markdown.markdown @post.content, flavored: true
+        = render partial: 'posts/links', locals: { post: @post }
 
-section class="comments"
-  header
-    h1 Comments
-  - if @post.persisted_comments.any?
-    = render :partial => 'posts/comments/comment', :collection => @post.persisted_comments
-  - else
-    p.no_comments No comments yet
-  - if can? :create, :comments
-    h2 New comment
-    = render :partial => 'posts/comments/form', locals: { comment: @comment, action: :build }
+    / = render partial: 'posts/similar', locals: { post: @post }
+    = render partial: 'posts/comments', locals: { comments: @post.comments }
+    
+  div class="clear"
 
-div class='at-username-container'
-  - @post.usernames.each do |username|
-    div href="#" class="username"
-      = username
+/ div class='at-username-container'
+/   - @post.usernames.each do |username|
+/     div href="#" class="username"
+/       = username

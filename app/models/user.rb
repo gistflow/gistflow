@@ -58,6 +58,17 @@ class User < ActiveRecord::Base
     Post.joins(:taggings).where(conditions.join(' or ')).uniq
   end
   
+  def view_data
+    { username:      username,
+      likes:         likes.pluck(:post_id),
+      observings:    observings.pluck(:post_id),
+      bookmarks:     bookmarks.pluck(:post_id),
+      following:     followings.pluck(:followed_user_id),
+      subscriptions: subscriptions.pluck(:tag_id),
+      admin:         admin?,
+      oauth:         oauth_token }
+  end
+  
   # Bookmarks
   
   def bookmark? post

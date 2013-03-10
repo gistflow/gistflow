@@ -1,0 +1,10 @@
+section class="posts-similar"
+  header
+    h1 class="posts-similar-title" Similar posts
+  - posts = post.similar_posts
+  - if posts.any?
+    ul
+      - posts.each do |post|
+        li = link_to_post(post)
+  - else
+    p Seems like there is no posts on the topic.

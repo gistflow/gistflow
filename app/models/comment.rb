@@ -31,6 +31,10 @@ class Comment < ActiveRecord::Base
     Post.decrement_counter(:comments_count, post_id)
   end
   
+  def html
+    Markdown.markdown content, flavored: true
+  end
+  
 protected
   
   def observe_post_to_author

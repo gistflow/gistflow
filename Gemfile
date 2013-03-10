@@ -31,6 +31,7 @@ gem 'poltergeist'
 gem 'github-markdown', require: 'github/markdown'
 gem 'sanitize'
 gem 'ransack'
+gem 'less-rails'
 
 # deploy
 gem 'capistrano-resque'

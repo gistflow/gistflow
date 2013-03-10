@@ -1,0 +1,27 @@
+section class="comments"
+  header
+    h1 class="comments-title subtitle" Comments
+  
+  div class="comments-articles"
+    - comments = @post.persisted_comments
+    - if comments.any?
+      - comments.each do |comment|
+        = render comment
+  - if comments.empty?
+    p class="comments-empty" No comments yet.
+  
+  - if user_signed_in?
+    h2 class="new-comment-title" New Comment
+    div class="new-comment-template hidden"
+      = render @comment
+    div class="new-comment-author"
+      = link_to current_user, title: current_user.username do
+        = avatar_image current_user, 84
+    div class="new-comment-form"
+      = form_for @comment, url: post_comments_path(@post, format: :js), remote: true do |f|
+        fieldset
+          = f.text_area :content, rows: 3
+        div class="form-actions"
+          = f.submit 'Preview', class: 'button', data: { action: api_markdown_path }
+          = f.submit 'Comment', class: 'button', data: { action: url_for([@post, :comments]) }
+    div class="clear"
