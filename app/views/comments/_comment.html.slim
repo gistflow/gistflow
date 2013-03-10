@@ -1,4 +1,4 @@
-article class="comment" data-author="#{comment.user.username}" data-id="#{comment.id}"
+article class="comment" data-author="#{comment.user.username}" data-id="#{comment.id}" data-post-id="#{comment.post.id}"
   div class="comment-author"
     = link_to comment.user, title: comment.user.username do
       = avatar_image comment.user, 84
@@ -17,11 +17,11 @@ article class="comment" data-author="#{comment.user.username}" data-id="#{commen
           i class="icon-pencil"
           span Edit
       li class="comment-control-inactive"
-        = link_to '#', class: 'comment-control-remove secondary', remote: true, method: :delete, data: { confirm: 'Are you sure?' } do
+        = link_to '#', class: 'comment-control-remove secondary', remote: true, data: { confirm: 'Are you sure?' } do
           i class="icon-trash"
           span Remove
       li class="comment-control-active hidden"
-        = link_to '#', class: 'comment-control-save secondary', remote: true, method: :put do
+        = link_to '#', class: 'comment-control-save secondary', remote: true do
           i class="icon-save"
           span Save
       li class="comment-control-active hidden"

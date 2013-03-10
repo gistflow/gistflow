@@ -78,6 +78,42 @@ $ ->
     if $comment.data('author') == window.current_user.username || window.current_user.admin
       $comment.find('div.comment-controls').removeClass('hidden')
   
+  $comments.on 'click', 'a.comment-control-edit', (e) ->
+    $link = $(@)
+    $comment = $link.parents('article.comment:first')
+    post_id = $comment.data('post-id')
+    id = $comment.data('id')
+    $link.prop 'href', '/posts/' + post_id + '/comments/' + id + '/edit'
+    $link.data('method', 'get')
+    true
+  
+  $comments.on 'click', 'a.comment-control-cancel', (e) ->
+    $link = $(@)
+    $comment = $link.parents('article.comment:first')
+    post_id = $comment.data('post-id')
+    id = $comment.data('id')
+    $link.prop 'href', '/posts/' + post_id + '/comments/' + id
+    $link.data('method', 'get')
+    true
+  
+  $comments.on 'click', 'a.comment-control-remove', (e) ->
+    $link = $(@)
+    $comment = $link.parents('article.comment:first')
+    post_id = $comment.data('post-id')
+    id = $comment.data('id')
+    $link.prop 'href', '/posts/' + post_id + '/comments/' + id
+    $link.data('method', 'delete')
+    true
+  
+  $comments.on 'click', 'a.comment-control-save', (e) ->
+    $link = $(@)
+    $comment = $link.parents('article.comment:first')
+    post_id = $comment.data('post-id')
+    id = $comment.data('id')
+    $link.prop 'href', '/posts/' + post_id + '/comments/' + id
+    $link.data('method', 'put')
+    true
+  
   $comments.on 'ajax:success', 'a.comment-control-edit', (e, data) ->
     $link = $(@)
     $comment = $(e.delegateTarget)
@@ -95,7 +131,6 @@ $ ->
     content = $comment.find('div.comment-body').text()
     $link.data 'params', 'content=' + content
     true
-    
   
   $comments.on 'ajax:success', 'a.comment-control-save, a.comment-control-cancel', (e, data) ->
     $comment = $(e.delegateTarget)
