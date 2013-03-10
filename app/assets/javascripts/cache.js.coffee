@@ -1,4 +1,20 @@
+class @Flash
+  constructor: ->
+    @div = $('div#flash')
+  update: (type, message) ->
+    $div = @div
+    $div
+      .removeClass()
+      .addClass(type)
+      .html(message)
+      .fadeIn =>
+        setTimeout @hide, 3000
+  hide: =>
+    @div.fadeOut('slow')
+
 $ ->
+  window.flash = new Flash
+  
   # Posts
   $posts = $('article.post')
   $posts.each (i, html) ->
@@ -97,3 +113,9 @@ $ ->
         $comment.remove()
     # if last comment show that there is no comments
   
+  $new_comment = $('div.new-comment-form form:first')
+  $new_comment.on 'ajax:success', (e, data) ->
+    console.log(e)
+    console.log(data)
+  $new_comment.on 'ajax:error', (e, xhr) ->
+    window.flash.update 'error', xhr.responseText

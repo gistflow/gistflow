@@ -2,9 +2,11 @@ class ApplicationController < ActionController::Base
   enable_authorization
   protect_from_forgery
   
-  rescue_from Exception, with: :notify_batman
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  rescue_from CanCan::Unauthorized, with: :handle_unauthorized
+  if Rails.env.production?
+    rescue_from Exception, with: :notify_batman
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    rescue_from CanCan::Unauthorized, with: :handle_unauthorized
+  end
   helper_method :user_signed_in?, :current_user, :sidebar_tags
   
   prepend_before_filter :token_authentication

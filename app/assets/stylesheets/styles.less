@@ -635,3 +635,25 @@ a.secondary {
     height: 42px;
   }
 }
+
+div#flash {
+  position: fixed;
+  z-index: 100;
+  font-weight: bold;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  line-height: 30px;
+  display: none;
+  
+  &.error {
+    background: #FF7E79;
+    border-bottom: 2px solid #FF7E79 * 1.5;
+  }
+  &.notice {
+    background: #00ce00;
+    border-bottom: 2px solid #00ce00 * 1.5;
+  }
+}
