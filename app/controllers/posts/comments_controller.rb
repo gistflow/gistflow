@@ -8,7 +8,7 @@ class Posts::CommentsController < ApplicationController
       comment.user = current_user
     end
     if @comment.save
-      render json: {}, status: :created
+      render json: { html: @comment.html, id: @comment.id }, status: :created
     else
       errors = @comment.errors.to_a.to_sentence
       render text: errors, status: :unprocessable_entity

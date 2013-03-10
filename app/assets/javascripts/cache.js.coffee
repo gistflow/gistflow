@@ -111,11 +111,20 @@ $ ->
     $comment.fadeOut
       done: ->
         $comment.remove()
-    # if last comment show that there is no comments
+        if $('div.comments-articles').empty()
+          $('div.comments-empty').show()
   
   $new_comment = $('div.new-comment-form form:first')
+  $comment_template = $('div.new-comment-template > article.comment')
   $new_comment.on 'ajax:success', (e, data) ->
-    console.log(e)
-    console.log(data)
+    comment = $comment_template.clone()
+    comment
+      .removeClass('comment-template')
+      .data('id', data.id)
+      .find('div.comment-body')
+      .html(data.html)
+    $new_comment[0].reset()
+    comment.appendTo $('div.comments-articles')
+    $('div.comments-empty').hide()
   $new_comment.on 'ajax:error', (e, xhr) ->
     window.flash.update 'error', xhr.responseText
