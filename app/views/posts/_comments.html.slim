@@ -18,10 +18,11 @@ section class="comments"
       = link_to current_user, title: current_user.username do
         = avatar_image current_user, 84
     div class="new-comment-form"
-      = form_for @comment, url: post_comments_path(@post, format: :js), remote: true do |f|
-        fieldset
-          = f.text_area :content, rows: 3
-        div class="form-actions"
-          = f.submit 'Preview', class: 'button', data: { action: api_markdown_path }
-          = f.submit 'Comment', class: 'button', data: { action: url_for([@post, :comments]) }
+      fieldset
+        = text_area_tag :content, '', rows: 3
+      div class="new-comment-preview"
+      div class="form-actions"
+        = link_to 'Preview', api_markdown_path, class: 'button new-comment-preview', remote: true
+        = link_to 'Edit', '#', class: 'button new-comment-edit'
+        = link_to 'Comment', [@post, :comments], class: 'button new-comment-submit', data: { method: :post }, remote: true
     div class="clear"

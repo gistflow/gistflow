@@ -146,7 +146,7 @@ $ ->
     $comment.fadeOut
       done: ->
         $comment.remove()
-        if $('div.comments-articles').empty()
+        if $('div.comments-articles article.comment').length == 0
           $('div.comments-empty').show()
   
   $new_comment = $('div.new-comment-form form:first')
