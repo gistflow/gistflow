@@ -1,6 +1,11 @@
 - window_title 'New'
+- title 'New'
 
-section class="posts"
-  header class="primary"
-    h1 New
-  = render 'form'
+div class="row"
+  div class="left-column"
+    = render 'shared/profile'
+    = render 'shared/follow'
+  
+  div class="right-column"
+    = render 'form'
+  div class="clear"

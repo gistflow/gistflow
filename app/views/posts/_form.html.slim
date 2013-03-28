@@ -1,30 +1,25 @@
-= form_for @post, html: { class: 'previewable' } do |f|
-  = render_error_messages @post
+section class="new-post"
+  header
+    h1 New Post
   fieldset
-    = f.text_field :title, :placeholder => 'Title'
+    = text_field_tag :title, '', placeholder: 'Title', autofocus: true
+    div class="new-post-hint"
+      | Short description of the content
   fieldset
-    = f.text_area :content, :size => '40x12', :placeholder => "Preview<cut text=\"More under the cut\">Body", :class => 'hint raw', :id => 'post_content'
-    div class="post-hint" You can add tags (at least one is needed) by mentioning in post's body: #gistflow #code #ruby
-  div class="preview markdown"
-  fieldset
-    = f.check_box :question
-    = f.label :question, 'Question?'
-  fieldset
-    = f.check_box :is_private
-    = f.label :is_private, 'Private'
-  div class="actions group"
-    div class="left"
-      | This text will be parsed by 
-      = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
-      | . See 
-      = link_to 'hints', '#', :class => 'hints'
-      |.
-    div class="button-groups"
-      - if @post.persisted?
-        div class="button-group"
-          = link_to 'Destroy', @post, :method => :delete, :class => 'button danger', :confirm => 'Are you sure?'
-      div class="button-group"
-        = link_to 'Edit', '#', class: 'button edit'
-        = link_to 'Preview', '#', class: 'button preview'
-        = f.submit commit_title, class: 'button'
-    = render :partial => 'shared/markdown_hints'  
+    = text_area_tag :content, '', rows: 16, placeholder: 'Content'
+    div class="new-post-preview"
+    div class="new-post-hint"
+      | You have to add tags by mentioning them in the content: 
+      = link_to '#gistflow', tag_path('gistflow')
+      |  
+      = link_to '#eventmachine', tag_path('eventmachine')
+      |  
+      = link_to '#ruby', tag_path('ruby')
+  div class="new-post-notice"
+    | Content will be parsed by 
+    = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', target: '_blank'
+  div class="form-actions"
+    = link_to 'Preview', api_markdown_path, class: 'button new-post-preview', remote: true
+    = link_to 'Edit', '#', class: 'button new-post-edit hidden'
+    = link_to 'Publish', @post, class: 'button button-primary new-post-submit', data: { method: :post }, remote: true
+  div class="clear"

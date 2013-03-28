@@ -18,7 +18,7 @@ section class="profile"
         span class="profile-stats-stat" Likes
         span class="profile-stats-value" = current_user.rating
   div class="profile-new-post"
-    = link_to 'New Post', new_post_path
+    = link_to 'New Post', new_post_path, class: "#{'active' if current_page?(controller: 'posts', action: 'new')}"
   
   div class="profile-menu"
     ul

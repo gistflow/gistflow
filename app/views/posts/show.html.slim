@@ -22,12 +22,6 @@ div class="row"
           == Markdown.markdown @post.content, flavored: true
         = render partial: 'posts/links', locals: { post: @post }
 
-    / = render partial: 'posts/similar', locals: { post: @post }
     = render partial: 'posts/comments', locals: { comments: @post.comments }
     
   div class="clear"
-
-/ div class='at-username-container'
-/   - @post.usernames.each do |username|
-/     div href="#" class="username"
-/       = username

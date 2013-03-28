@@ -2,6 +2,7 @@
 @darkgray: #4b4b4b;
 @text: #7a7a7a;
 @lightgray: #eee;
+@gray: #999;
 @red: #CC9090;
 
 .rounded-corners (@radius: 3px) {
@@ -35,6 +36,12 @@
   -moz-transition: @duration;
   -webkit-transition: @duration;
   -o-transition: @duration;
+}
+
+.border-box {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .inputable {
@@ -90,6 +97,9 @@
 .button::-moz-focus-inner {
   padding: 0;
   border: 0;
+}
+.button-primary {
+  font-weight: bold;
 }
 
 .subtitle {
@@ -298,7 +308,7 @@ a.secondary {
     &:hover {
       .gradient(@color * 1.4, @color / 1.4);
     }
-    &:active {
+    &:active, &.active {
       .gradient(@color / 1.4, @color * 1.4);
     }
   }
@@ -646,7 +656,7 @@ a.secondary {
     text-align: right;
     padding: 5px 0;
     
-    input {
+    a {
       margin-left: 5px;
     }
   }
@@ -688,4 +698,50 @@ div#flash {
     background: #00ce00;
     border-bottom: 2px solid #00ce00 * 1.5;
   }
+}
+
+.new-post {
+  input[type="text"], textarea {
+    font-size: 14px;
+    display: block;
+    .border-box;
+    width: 100%;
+    border: 1px solid @gray;
+    .rounded-corners(2px);
+    padding: 5px;
+    color: @darkgray;
+    
+    &:focus {
+      outline: none;
+      border-color: @text;
+    }
+  }
+  
+  fieldset {
+    margin: 0 0 15px;
+    border: 0;
+    padding: 0;
+  }
+  
+  .form-actions {
+    float: right;
+    text-align: right;
+    padding: 5px 0;
+    
+    a {
+      margin-left: 5px;
+    }
+  }
+}
+
+.new-post-hint {
+  padding: 5px 0 0;
+  font-style: italic;
+  color: @text;
+}
+
+.new-post-notice {
+  float: left;
+  padding: 5px 0;
+  line-height: 24px;
 }
