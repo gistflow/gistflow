@@ -703,7 +703,6 @@ div#flash {
 .new-post {
   input[type="text"], textarea {
     font-size: 14px;
-    display: block;
     .border-box;
     width: 100%;
     border: 1px solid @gray;
@@ -744,4 +743,46 @@ div#flash {
   float: left;
   padding: 5px 0;
   line-height: 24px;
+}
+
+.bookmarks-search {
+  input {
+    font-size: 14px;
+    .border-box;
+    width: 100%;
+    border: 1px solid @gray;
+    .rounded-corners(2px);
+    padding: 5px;
+    color: @darkgray;
+    outline: none;
+  }
+}
+
+.bookmarks-tags {
+  margin: 10px 0 20px;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px 5px 0;
+
+    a {
+      border-bottom: 1px dashed;
+    
+      &.disabled {
+        color: @text;
+      }
+    }
+  }
+}
+.bookmarks-tags-show-all {
+  a {
+    text-transform: lowercase;
+    color: @text;
+    font-weight: bold;
+    border-bottom: 1px dashed;
+  }
 }

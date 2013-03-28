@@ -1,5 +1,32 @@
 - window_title 'Bookmarks'
-section class="posts"
-  header class="primary"
-    h1 Bookmarks
-  = render :partial => 'posts/index', :locals => { :posts => @posts }
+
+= render partial: 'posts/dynamic', locals: { posts: @posts }
+
+div class="row"
+  div class="left-column"
+    = render 'shared/profile'
+    = render 'shared/follow'
+  
+  div class="right-column"
+    section class="bookmarks"
+      header
+        h1 Bookmarks
+
+      - if @posts.any?
+        div class="bookmarks-search"
+          input type="search" placeholder="Search in #{@posts.size} posts" autofocus="true"
+        
+        nav class="bookmarks-tags"
+          ul
+            - @tags.first(10).each do |tag|
+              li = link_to tag.name, '#'
+            - if @tags.size > 10
+              li class="bookmarks-tags-show-all"
+                = link_to '#', title: 'Show all tags' do
+                  i class="icon-double-angle-right"
+            - @tags.drop(10).each do |tag|
+              li class="hidden" = link_to tag.name, '#'
+        - @posts.each do |post|
+          p = post.title
+  
+  div class="clear"

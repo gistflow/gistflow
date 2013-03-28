@@ -23,17 +23,13 @@ class PostsController < ApplicationController
   end
   
   def bookmarks
-    @posts = current_user.bookmarked_posts.page(params[:page])
+    @posts = current_user.bookmarked_posts
+    @tags = Tag.first(20) # @posts.tags_by_count
   end
 
   def show
     @post = Post.find_by_param params[:id]
     redirect_to(@post, status: 301) if params[:id] != @post.to_param
-    if can? :create, :comments
-      @comment = @post.comments.build do |c|
-        c.user = current_user
-      end
-    end
     @post.update_column(:page_views, @post.page_views + 1)
   end
 
