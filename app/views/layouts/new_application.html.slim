@@ -28,23 +28,12 @@ html
       div class="main-row" = yield
       footer class="main-footer"
         div class="row"
-          nav class="main-footer-menu"
+          nav class="main-footer-menu main-footer-menu-iconed"
             ul
               li class="main-footer-title" Contacts
-              li
-                - name = capture do
-                  i class="icon-envelope"
-                  span Email
-                = mail_to 'info@gistflow.com', name, class: 'secondary', encode: 'hex'
-              li
-                
-                a class="secondary" href="#"
-                  i class="icon-github"
-                  span Github
-              li
-                a class="secondary" href="#"
-                  i class="icon-twitter"
-                  span Twitter
+              li = mail_to 'info@gistflow.com', 'Email', class: 'secondary', encode: 'hex'
+              li = link_to 'Github', 'https://github.com/redstonelabs/gistflow', class: 'secondary'
+              li = link_to 'Twitter', 'https://twitter.com/gistflow', class: 'secondary'
             ul
               li class="main-footer-title" Buns
               li
