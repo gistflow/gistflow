@@ -169,14 +169,13 @@ a.secondary {
   background: #eee;
   border-bottom: 2px solid @red;
   .gradient(#eee * 1.03, #eee);
-  position: relative;
 }
 
 .main-logo {
-  font-size: 32px;
-  line-height: 32px;
-  padding-top: 1px 10px 0;
+  font-size: 30px;
+  line-height: 30px;
   font-weight: 600;
+  font-family: proxima-nova-condensed;
   a {
     color: #ccc;
     
@@ -185,10 +184,13 @@ a.secondary {
     }
   }
   position: absolute;
-  left: 34px;
-  top: 44px;
+  left: -55px;
+  top: 56px;
   -webkit-transform:rotate(-90deg);
   z-index: 100;
+  margin: 0;
+  padding: 0;
+/*  text-transform: lowercase;*/
 }
 
 .main-auth {
@@ -384,15 +386,18 @@ a.secondary {
 
 
 .posts {
-  
+  padding-top: 20px;
 }
 
 .posts-title {
-  font-size: 29px;
-  line-height: 64px;
-  margin: 0;
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0 0 10px;
   position: relative;
   top: -1px;
+  font-family: proxima-nova-condensed;
+  text-transform: uppercase;
+  color: @text;
 }
 
 
@@ -417,15 +422,17 @@ a.secondary {
 }
 
 .post-links {
-  padding: 8px 10px;
+  padding: 6px 10px;
   margin-top: 10px;
   font-size: 12px;
   background: url('grid.png');
   background-size: 3px 3px;
+  border: 1px solid #eee;
+  .rounded-corners(2px);
   
   a {
     color: @text;
-    margin-right: 10px;
+    margin-right: 18px;
     font-weight: 600;
     padding-left: 15px;
     position: relative;
@@ -448,7 +455,7 @@ a.secondary {
 
 .post-preview {
   .post-links {
-    margin-left: 60px;
+    margin-left: 50px;
   }
 }
 
@@ -470,28 +477,32 @@ a.secondary {
   float: left;
   
   a {
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     padding: 2px;
     display: inline-block;
+    .rounded-corners(2px);
     line-height: 0;
+    background: url('grid.png');
+    background-size: 3px 3px;
   }
   
   img {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
+    .rounded-corners(2px);
   }
 }
 
 .post-preview {
   > header {
-    width: 560px;
+    width: 570px;
     float: right;
   }
 }
 
 .post-content-preview {
   float: right;
-  width: 560px;
+  width: 570px;
   
   img {
     max-height: 100px;
