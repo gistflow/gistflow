@@ -2,7 +2,11 @@ section class="profile"
   header
     div class="profile-avatar"
       = avatar_image current_user, 160
-    h1 class="profile-title" = current_user.username
+    h1 class="profile-title"
+      = current_user.username
+      = link_to '#', class: 'profile-settings' do
+        i class="icon-cog"
+        i class="profile-settings-caret icon-caret-down"
     div class="profile-tags"
       a href="#" class="secondary" 15 notifications
     div class="clear"

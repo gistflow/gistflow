@@ -12,8 +12,8 @@ section class="comments"
   
   - if user_signed_in?
     h2 class="new-comment-title" New Comment
-    div class="new-comment-template hidden"
-      = render @comment
+    / div class="new-comment-template hidden"
+    /   = render @comment
     div class="new-comment-author"
       = link_to current_user, title: current_user.username do
         = avatar_image current_user, 84

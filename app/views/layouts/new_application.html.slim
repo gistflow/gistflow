@@ -15,38 +15,7 @@ html
     section class="main"
       header class="main-header"
         h1 class="main-logo" = link_to 'Gistflow', '/'
-        div class="row"
-          nav class="main-auth"
-            ul
-              li = link_to current_user.username, current_user, class: 'secondary'
-              li = link_to account_settings_path do
-                i class="icon-cog"
-              li = link_to logout_path, class: 'secondary' do
-                i class="icon-signout"
-          div class="main-search"
-            input type="search" placeholder="Search..."
       div class="main-row" = yield
       footer class="main-footer"
-        div class="row"
-          nav class="main-footer-menu main-footer-menu-iconed"
-            ul
-              li class="main-footer-title" Contacts
-              li = mail_to 'info@gistflow.com', 'Email', class: 'secondary', encode: 'hex'
-              li = link_to 'Github', 'https://github.com/redstonelabs/gistflow', class: 'secondary'
-              li = link_to 'Twitter', 'https://twitter.com/gistflow', class: 'secondary'
-            ul
-              li class="main-footer-title" Buns
-              li
-                a class="secondary" href="#" Leaderboard
-              li
-                a class="secondary" href="#" Tags cloud
-              li
-                a class="secondary" href="#" Map
-            p class="main-footer-copyright"
-              | Created by 
-              = link_to 'Redstone Labs', 'https://github.com/redstonelabs'
-              br
-              | & Sponsored by 
-              = link_to 'Evrone', 'http://evrone.com'
-            div class="clear"
+        
       div id="flash"

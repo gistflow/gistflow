@@ -169,19 +169,26 @@ a.secondary {
   background: #eee;
   border-bottom: 2px solid @red;
   .gradient(#eee * 1.03, #eee);
+  position: relative;
 }
 
 .main-logo {
   font-size: 32px;
-  line-height: 49px;
+  line-height: 32px;
   padding-top: 1px 10px 0;
   font-weight: 600;
-  width: 860px;
-  margin: 0 auto;
   a {
-    color: #5e5e5e;
-    text-shadow: 1px 1px rgba(255, 255, 255, 0.8);
+    color: #ccc;
+    
+    &:hover {
+      color: @gray;
+    }
   }
+  position: absolute;
+  left: 34px;
+  top: 44px;
+  -webkit-transform:rotate(-90deg);
+  z-index: 100;
 }
 
 .main-auth {
@@ -239,6 +246,26 @@ a.secondary {
 .profile-title {
   font-size: 22px;
   margin: 0 0 0 70px;
+}
+
+.profile-settings-caret {
+  display: none !important;
+  margin-left: 2px;
+  font-size: 13px;
+}
+
+.profile-settings {
+  font-size: 16px;
+  vertical-align: top;
+  margin-left: 5px;
+  color: #ccc;
+  
+  &:hover {
+    color: @gray;
+    .profile-settings-caret {
+      display: inline-block !important;
+    }
+  }
 }
 
 .profile-tags {
@@ -361,9 +388,11 @@ a.secondary {
 }
 
 .posts-title {
-  font-size: 28px;
+  font-size: 29px;
   line-height: 64px;
   margin: 0;
+  position: relative;
+  top: -1px;
 }
 
 
@@ -516,18 +545,14 @@ a.secondary {
 }
 
 .main-footer-title {
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: @text;
+  font-size: 18px;
   padding-bottom: 5px;
 }
 
 .main-footer-copyright {
-  float: right;
-  margin: 19px 0 0;
-  text-align: right;
+  margin-top: 40px;
   color: @text;
+  font-size: 13px;
   
   a {
     font-weight: bold;
