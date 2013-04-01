@@ -9,6 +9,24 @@ div class="row"
       = render 'shared/profile'
       = render 'shared/follow'
     - else
+      section class="profile"
+        header
+          div class="profile-avatar"
+            = avatar_image @user, 160
+          h1 class="profile-title"
+            = @user.username
+          div class="clear"
+        nav class="profile-stats"
+          ul
+            li
+              span class="profile-stats-stat" Posts
+              span class="profile-stats-value" = @user.posts.not_private.count
+            li
+              span class="profile-stats-stat" Followers
+              span class="profile-stats-value" = @user.followers.count
+            li
+              span class="profile-stats-stat" Likes
+              span class="profile-stats-value" = @user.rating
       section class="about"
         header
           h1 class="about-title" Gistflow
@@ -16,12 +34,13 @@ div class="row"
         div class="about-join"
           = link_to 'Sign up', auth_path, class: 'button button-primary'
         div class="about-ears"
+        div class="about-ears-mirror"
     = render 'shared/footer'
   
   div class="right-column"
     section class="posts"
       header
-        h1 class="posts-title" #{@user.username}'s blog
+        h1 class="posts-title" Blog
         
         - @posts.each do |post|
           = post_article post, class: 'post-preview' do

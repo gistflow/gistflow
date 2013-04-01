@@ -836,11 +836,6 @@ div#flash {
   padding: 16px 0;
   overflow: hidden;
   position: relative;
-  
-  &:hover .about-ears {
-    bottom: -98px;
-    .transition(1s);
-  }
 }
 
 .about-title {
@@ -851,12 +846,14 @@ div#flash {
   margin: 0;
   font-size: @size;
   line-height: @size;
+  text-shadow: 1px 1px 0 white;
 }
   
 .about-description {
   margin: 0;
   font-style: italic;
   margin-bottom: 10px;
+  text-shadow: 1px 1px 0 white;
 }
 
 .about-title, .about-description, .about-join {
@@ -873,6 +870,7 @@ div#flash {
     border: 1px solid #d4d4d4 * 0.9;
     text-shadow: 1px 1px 0 #fff; 
     .gradient(#f4f4f4, #ececec);
+    .transition(1s);
   }
   
   a:active {
@@ -880,16 +878,34 @@ div#flash {
   }
 }
 
-.about-ears {
+.about:hover {
+  .about-ears, .about-ears-mirror {
+    bottom: -58px;
+    left: -77px;
+    .transition(1s);
+  }
+  .about-ears-mirror {
+    left: 77px;
+  }
+}
+
+.about-ears, .about-ears-mirror {
   font-size: 120px;
   position: absolute;
   z-index: 10;
-  bottom: -156px;
-  left: 0;
+  bottom: -118px;
+  left: -137px;
   width: 218px;
   text-align: center;
   color: #eee;
-  background: url('octocat.png') no-repeat 10px 0;
-  background-size: 200px 166px;
+  background: url('octocat.png') no-repeat center center;
+  background-size: 160px 133px;
   height: 166px;
+  -webkit-transform:rotate(45deg);
+}
+
+.about-ears-mirror {
+  bottom: -118px;
+  left: 137px;
+  -webkit-transform:rotate(-45deg);
 }

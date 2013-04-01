@@ -17,6 +17,8 @@ html
         - if user_signed_in?
           div class="row"
             h1 class="main-logo" = link_to 'Gistflow', '/'
+        - else
+          
       div class="main-row" = yield
       footer class="main-footer"
         
