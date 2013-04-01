@@ -4,6 +4,7 @@
 @lightgray: #eee;
 @gray: #999;
 @red: #CC9090;
+@title-font: proxima-nova-condensed;
 
 .rounded-corners (@radius: 3px) {
   -webkit-border-radius: @radius;
@@ -53,6 +54,13 @@
     border: 1px solid #7a7a7a;
   }
   .rounded-corners(3px);
+}
+
+.highlighted {
+  background: url('grid.png');
+  background-size: 3px 3px;
+  border: 1px solid #eee;
+  .rounded-corners(2px);
 }
 
 
@@ -371,6 +379,8 @@ a.secondary {
 .follow-title {
   font-size: 22px;
   margin: 0 0 10px;
+  font-family: @title-font;
+  color: @darkgray;
 }
 
 .follow-list {
@@ -425,10 +435,7 @@ a.secondary {
   padding: 6px 10px;
   margin-top: 10px;
   font-size: 12px;
-  background: url('grid.png');
-  background-size: 3px 3px;
-  border: 1px solid #eee;
-  .rounded-corners(2px);
+  .highlighted;
   
   a {
     color: @text;
@@ -821,4 +828,68 @@ div#flash {
     font-weight: bold;
     border-bottom: 1px dashed;
   }
+}
+
+.about {
+  .highlighted;
+  text-align: center;
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+  
+  &:hover .about-ears {
+    bottom: -98px;
+    .transition(1s);
+  }
+}
+
+.about-title {
+  @size: 32px;
+  font-family: @title-font;
+  position: relative;
+  top: -3px;
+  margin: 0;
+  font-size: @size;
+  line-height: @size;
+}
+  
+.about-description {
+  margin: 0;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.about-title, .about-description, .about-join {
+  z-index: 100;
+  position: relative;
+}
+
+.about-join {
+  font-weight: bold;
+  font-size: 16px;
+  
+  a:hover {
+    color: green;
+    border: 1px solid #d4d4d4;
+    text-shadow: 1px 1px 0 #fff; 
+    .gradient(#f4f4f4, #ececec);
+  }
+  
+  a:active {
+    color: darkgreen;
+  }
+}
+
+.about-ears {
+  font-size: 120px;
+  position: absolute;
+  z-index: 10;
+  bottom: -156px;
+  left: 0;
+  width: 218px;
+  text-align: center;
+  color: #eee;
+  background: url('octocat.png') no-repeat 10px 0;
+  background-size: 200px 166px;
+  height: 166px;
 }

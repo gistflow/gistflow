@@ -1,6 +1,35 @@
-- title "#{@user}'s posts"
-= render :partial => 'sidebar', :locals => { :user => @user }
-section class="posts"
-  header class="primary"
-    h1 = @user.username
-  = render :partial => 'posts/index', :locals => { :posts => @posts }
+- title "#{@user}'s blog"
+
+- window_title 'Flow'
+= render partial: 'posts/dynamic', locals: { posts: @posts }
+
+div class="row"
+  div class="left-column"
+    - if user_signed_in?
+      = render 'shared/profile'
+      = render 'shared/follow'
+    - else
+      section class="about"
+        header
+          h1 class="about-title" Gistflow
+        p class="about-description" Social network for developers
+        div class="about-join"
+          = link_to 'Sign up', auth_path, class: 'button button-primary'
+        div class="about-ears"
+    = render 'shared/footer'
+  
+  div class="right-column"
+    section class="posts"
+      header
+        h1 class="posts-title" #{@user.username}'s blog
+        
+        - @posts.each do |post|
+          = post_article post, class: 'post-preview' do
+            header
+              h1 class="post-title" = link_to post.title, post
+            = render partial: 'posts/author', locals: { user: post.user }
+            div class="post-content post-content-preview markdown"
+              == Markdown.markdown post.preview, flavored: true
+            div class="clear"
+            = render partial: 'posts/links', locals: { post: post }
+  div class="clear"

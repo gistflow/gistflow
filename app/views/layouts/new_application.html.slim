@@ -14,8 +14,9 @@ html
   body
     section class="main"
       header class="main-header"
-        div class="row"
-          h1 class="main-logo" = link_to 'Gistflow', '/'
+        - if user_signed_in?
+          div class="row"
+            h1 class="main-logo" = link_to 'Gistflow', '/'
       div class="main-row" = yield
       footer class="main-footer"
         
