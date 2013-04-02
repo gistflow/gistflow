@@ -12,35 +12,28 @@ div class="row"
       section class="profile"
         header
           div class="profile-avatar"
-            = avatar_image @user, 160
+            = link_to user_path(@user) do
+              = avatar_image @user, 160
           h1 class="profile-title"
-            = @user.username
+            = link_to user_path(@user) do
+              = @user.username
+          div class="profile-follow"
+            = link_to auth_path, class: 'button' do
+              i class="icon-user"
+              | Follow
           div class="clear"
-        nav class="profile-stats"
+        div class="profile-data"
           ul
-            li
-              span class="profile-stats-stat" Posts
-              span class="profile-stats-value" = @user.posts.not_private.count
-            li
-              span class="profile-stats-stat" Followers
-              span class="profile-stats-value" = @user.followers.count
-            li
-              span class="profile-stats-stat" Likes
-              span class="profile-stats-value" = @user.rating
-      section class="about"
-        header
-          h1 class="about-title" Gistflow
-        p class="about-description" Social network for developers
-        div class="about-join"
-          = link_to 'Sign up', auth_path, class: 'button button-primary'
-        div class="about-ears"
-        div class="about-ears-mirror"
+            - if @user.profile.company?
+              li = @user.profile.company
+            - if @user.profile.email?
+              li = mail_to @user.profile.email, @user.profile.email, encode: :hex
     = render 'shared/footer'
   
   div class="right-column"
     section class="posts"
       header
-        h1 class="posts-title" Blog
+        h1 class="posts-title" #{@user.name}'s Blog
         
         - @posts.each do |post|
           = post_article post, class: 'post-preview' do

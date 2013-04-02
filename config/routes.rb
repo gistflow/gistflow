@@ -70,7 +70,7 @@ Gistflow::Application.routes.draw do
   
   resource :map, only: :show
   
-  match '/:username' => 'users#show'
+  match '/:username' => 'users#show', as: :user
   
   root to: 'landings#show'
   match '*a', to: 'errors#not_found'

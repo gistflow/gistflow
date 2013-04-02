@@ -1,7 +1,8 @@
 section class="profile"
   header
     div class="profile-avatar"
-      = avatar_image current_user, 160
+      = link_to user_path(current_user) do
+        = avatar_image current_user, 160
     h1 class="profile-title"
       = current_user.username
       = link_to '#', class: 'profile-settings' do

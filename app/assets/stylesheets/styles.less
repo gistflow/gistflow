@@ -4,7 +4,7 @@
 @lightgray: #eee;
 @gray: #999;
 @red: #CC9090;
-@title-font: proxima-nova-condensed;
+@title-font: proxima-nova-condensed, sans-serif;
 
 .rounded-corners (@radius: 3px) {
   -webkit-border-radius: @radius;
@@ -59,7 +59,7 @@
 .highlighted {
   background: url('grid.png');
   background-size: 3px 3px;
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
   .rounded-corners(2px);
 }
 
@@ -174,16 +174,14 @@ a.secondary {
 }
 
 .main-header {
-  background: #eee;
-  border-bottom: 2px solid @red;
-  .gradient(#eee * 1.03, #eee);
+  border-top: 2px solid @red;
 }
 
 .main-logo {
   font-size: 30px;
   line-height: 30px;
   font-weight: 600;
-  font-family: proxima-nova-condensed;
+  font-family: @title-font;
   a {
     color: #ccc;
     
@@ -256,6 +254,55 @@ a.secondary {
 .profile-title {
   font-size: 22px;
   margin: 0 0 0 70px;
+  
+  a {
+    color: @darkgray;
+    
+    &:hover {
+      color: @text;
+    }
+  }
+}
+
+.profile-follow {
+  float: left;
+  padding: 5px 10px;
+  
+  i {
+    margin-right: 6px;
+  }
+}
+
+.profile-data {
+  font-size: 16px;
+  color: @darkgray;
+  margin: 15px 0;
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 2px;
+    
+    &:before {
+      content: "·";
+      margin: 0 8px 0 4px;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 16px;
+    }
+  }
+  
+  a {
+    color: @darkgray;
+    
+    &:hover {
+      color: @text;
+    }
+  }
 }
 
 .profile-settings-caret {
@@ -288,9 +335,17 @@ a.secondary {
   line-height: 0;
   font-size: 0;
   
+  border: 1px solid #ddd;
+  padding: 2px;
+  display: inline-block;
+  .rounded-corners(2px);
+  line-height: 0;
+  background: url('grid.png');
+  background-size: 3px 3px;
+  
   img {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 4px;
   }
 }
@@ -320,6 +375,37 @@ a.secondary {
   text-transform: uppercase;
   font-size: 12px;
   display: block;
+}
+
+.profile-stats-mini {
+  float: left;
+  width: 150px;
+  margin-left: 10px;
+  padding: 6px 0;
+  position: relative;
+  left: -3px;
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: table-cell;
+    width: 30%;
+    font-size: 14px;
+    line-height: 16px;
+    white-space: nowrap;
+    padding: 0 10px 0 0;
+    font-family: @title-font;
+    color: @text;
+  }
+  
+  i {
+    margin-right: 2px;
+    font-size: 16px;
+  }
 }
 
 .profile-stats-value {
@@ -405,7 +491,7 @@ a.secondary {
   margin: 0 0 10px;
   position: relative;
   top: -1px;
-  font-family: proxima-nova-condensed;
+  font-family: @title-font;
   text-transform: uppercase;
   color: @text;
 }
@@ -484,7 +570,7 @@ a.secondary {
   float: left;
   
   a {
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     padding: 2px;
     display: inline-block;
     .rounded-corners(2px);
@@ -544,37 +630,20 @@ a.secondary {
   }
 }
 
-.main-footer {
-  margin-top: 20px;
-  border-top: 2px solid @red;
-  .gradient(#eee, #eee * 1.03);
-}
-
-.main-footer-menu {
-  padding: 20px 0;
-  
-  ul {
-    margin: 0;
-    width: 240px;
-    padding: 0;
-    list-style: none;
-    float: left;
-  }
-}
-
-.main-footer-title {
-  font-size: 18px;
-  padding-bottom: 5px;
-}
-
 .main-footer-copyright {
-  margin-top: 40px;
+  margin-top: 20px;
   color: @text;
   font-size: 13px;
   
   a {
     font-weight: bold;
   }
+}
+
+.main-footer-hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin-top: 30px;
 }
 
 .posts-similar {
@@ -908,4 +977,42 @@ div#flash {
   bottom: -118px;
   left: 137px;
   -webkit-transform:rotate(-45deg);
+}
+
+.main-promo {
+  .highlighted;
+  padding: 20px;
+  margin: 5px 0 0 0;
+}
+
+.main-promo-title {
+  @size: 32px;
+  font-family: @title-font;
+  margin: 0;
+  font-size: @size;
+  line-height: @size;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 white;
+  float: left;
+}
+
+.main-promo-description {
+  margin: 0;
+  text-shadow: 1px 1px 0 white;
+  font-family: @title-font;
+  font-size: 32px;
+  line-height: 32px;
+  float: left;
+}
+
+.main-promo-join {
+  font-family: @title-font;
+  font-size: 32px;
+  line-height: 32px;
+  float: right;
+  margin-left: 1em;
+  
+  a:hover {
+    color: @darkgray;
+  }
 }
