@@ -10,7 +10,7 @@ div class="row"
   div class="right-column"
     section class="bookmarks"
       header
-        h1 Bookmarks
+        h1 class="content-title" Bookmarks
 
       - if @posts.any?
         div class="bookmarks-search"
@@ -26,7 +26,12 @@ div class="row"
                   i class="icon-double-angle-right"
             - @tags.drop(10).each do |tag|
               li class="hidden" = link_to tag.name, '#'
-        - @posts.each do |post|
-          p = post.title
-  
+        nav class="bookmarks-posts"
+          ul
+            - @posts.each do |post|
+              li
+                = link_to post, class: 'bookmarks-posts-post secondary' do
+                  i class="icon-bookmark"
+                  |  
+                  = post.title
   div class="clear"

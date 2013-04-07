@@ -58,13 +58,13 @@
 }
 
 .highlighted {
-  background: url('grid.png');
-  background-size: 3px 3px;
+  .easy-highlighted;
   border: 1px solid #ddd;
   .rounded-corners(2px);
 }
-body.highlighted {
-  border: none;
+.easy-highlighted {
+  background: url('grid.png');
+  background-size: 3px 3px;
 }
 
 .button { 
@@ -137,6 +137,7 @@ body {
   width: 620px;
   float: right;
   overflow: hidden;
+  padding: 20px 0;
 }
 
 .row {
@@ -471,21 +472,16 @@ a.secondary {
   }
 }
 
-
-.posts {
-  padding-top: 20px;
-}
-
-.posts-title {
+.posts-title, .content-title {
   font-size: 18px;
   line-height: 18px;
-  margin: 0 0 10px;
+  margin: 6px 0 10px;
   position: relative;
   top: -1px;
   font-weight: 600;
   font-family: @title-font;
   text-transform: uppercase;
-  color: @text;
+  color: @darkgray;
 }
 
 
@@ -507,6 +503,18 @@ a.secondary {
   font-size: 11px;
   text-align: center;
   color: @text;
+}
+
+.post-back {
+  font-size: 12px;
+  margin-bottom: 10px;
+  a {
+    display: block;
+    
+    padding: 5px;
+    .easy-highlighted;
+    font-family: @title-font;
+  }
 }
 
 .post-links {
@@ -607,7 +615,7 @@ a.secondary {
     top: 0;
     font-size: 28px;
     line-height: 34px;
-    padding: 15px 0 0;
+    padding: 0;
   }
 }
 
@@ -622,6 +630,10 @@ a.secondary {
   }
 }
 
+.main-footer {
+  margin-top: 20px;
+  border-bottom: 2px solid @red;
+}
 .main-footer-copyright {
   margin-top: 20px;
   color: @text;
@@ -882,12 +894,38 @@ div#flash {
     }
   }
 }
+
 .bookmarks-tags-show-all {
   a {
     text-transform: lowercase;
     color: @text;
     font-weight: bold;
     border-bottom: 1px dashed;
+  }
+}
+
+.bookmarks-posts {
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    list-style: none;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  a {
+    display: block;
+    padding: 5px;
+    
+    i { color: #bbb; }
+    
+    &:hover {
+      .easy-highlighted;
+      i { color: @darkgray; }
+    }
   }
 }
 

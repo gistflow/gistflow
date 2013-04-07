@@ -15,6 +15,11 @@ div class="row"
   div class="right-column"
     = post_article @post, class: 'post-detail' do
       header
+        - if user_signed_in?
+          div class="post-back"
+            = link_to flow_path, class: 'secondary' do
+              i class="icon-reply"
+              |  Back to Flow
         h1 class="post-title" = @post.title
         div class="post-data"
           | by 
