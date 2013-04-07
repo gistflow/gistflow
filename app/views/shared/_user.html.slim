@@ -1,0 +1,19 @@
+section class="profile"
+  header
+    div class="profile-avatar"
+      = link_to user_path(user) do
+        = avatar_image user, 160
+    h1 class="profile-title"
+      = link_to user_path(user) do
+        = user.username
+    div class="profile-follow"
+      = link_to auth_path, class: 'button' do
+        i class="icon-user"
+        | Follow
+    div class="clear"
+  div class="profile-data"
+    ul
+      - if user.profile.company?
+        li = user.profile.company
+      - if user.profile.email?
+        li = mail_to user.profile.email, user.profile.email, encode: :hex

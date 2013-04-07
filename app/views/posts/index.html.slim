@@ -1,14 +1,25 @@
-- window_title 'All'
-section class="posts"
-  header
-    - if user_signed_in?
-      nav class="submenu"
-        = link_to_new_post
-    nav class="menu"
-      ul
-        - if user_signed_in?
-          li = link_to_unless_current 'Flow', flow_url, :class => 'menu flow_posts', :rel => :nofollow
-          li = link_to_unless_current 'All', all_url, :class => 'menu all_posts', :rel => :nofollow
-        - else
-          li Posts
-  = render :partial => 'index', :locals => { :posts => @posts }
+- window_title 'Posts'
+
+= render partial: 'posts/dynamic', locals: { posts: @posts }
+
+div class="row"
+  div class="left-column"
+    # = render 'shared/profile'
+    # = render 'shared/follow'
+    = render 'shared/footer'
+  
+  div class="right-column"
+    section class="posts"
+      header
+        h1 class="posts-title" Posts
+        
+        - @posts.each do |post|
+          = post_article post, class: 'post-preview' do
+            header
+              h1 class="post-title" = link_to post.title, post
+            = render partial: 'posts/author', locals: { user: post.user }
+            div class="post-content post-content-preview markdown"
+              == Markdown.markdown post.preview, flavored: true
+            div class="clear"
+            = render partial: 'posts/links', locals: { post: post }
+  div class="clear"

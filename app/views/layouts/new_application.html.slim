@@ -15,17 +15,9 @@ html
     section class="main"
       header class="main-header"
         div class="row"
-          - if user_signed_in?
-              h1 class="main-logo" = link_to 'Gistflow', '/'
-          - else
-            div class="main-promo"
-              h1 class="main-promo-title" Gistflow&nbsp;
-              p class="main-promo-description" is a social network for developers.
-              div class="main-promo-join"
-                = link_to 'Sign up', auth_path
-                |  or 
-                = link_to 'Sign in', auth_path
-              div class="clear"
+          h1 class="main-logo" = link_to 'Gistflow', '/'
+          - unless user_signed_in?
+            div class="main-sign-in" = link_to 'Sign In', auth_path
       div class="main-row" = yield
       footer class="main-footer"
         

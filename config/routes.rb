@@ -22,7 +22,7 @@ Gistflow::Application.routes.draw do
     post   '/subscriptions/:tag_id' => 'subscriptions#create', :as => :subscribe
     delete '/subscriptions/:tag_id' => 'subscriptions#destroy'
     resources :subscriptions, only: :index
-
+  
     resources :likes, only: [:create] do
       delete :destroy, on: :collection
     end
@@ -36,13 +36,12 @@ Gistflow::Application.routes.draw do
       get :new_private
       get :leaderboard
     end
-
+  
     resources :comments, except: :index, module: :posts
   end
   
   resource :search, only: :create
   
-  get '/empty_search'  => 'searches#empty', as: 'nil_search'
   get '/search/:query' => 'searches#show',  as: 'show_search'
   
   resources :tags, only: :show do
@@ -70,8 +69,6 @@ Gistflow::Application.routes.draw do
   
   resource :map, only: :show
   
-  match '/:username' => 'users#show', as: :user
-  
   root to: 'landings#show'
-  match '*a', to: 'errors#not_found'
+  match ':username', to: 'errors#not_found', as: :user
 end

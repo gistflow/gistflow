@@ -1,10 +1,10 @@
 section class="profile"
   header
     div class="profile-avatar"
-      = link_to user_path(current_user) do
+      = link_to user_path(current_user.username) do
         = avatar_image current_user, 160
     h1 class="profile-title"
-      = current_user.username
+      = link_to current_user.username, user_path(current_user.username)
       = link_to '#', class: 'profile-settings' do
         i class="icon-cog"
         i class="profile-settings-caret icon-caret-down"

@@ -1,4 +1,5 @@
 @link: #0069D6;
+@auth: #00a000;
 @darkgray: #4b4b4b;
 @text: #7a7a7a;
 @lightgray: #eee;
@@ -62,7 +63,9 @@
   border: 1px solid #ddd;
   .rounded-corners(2px);
 }
-
+body.highlighted {
+  border: none;
+}
 
 .button { 
   position: relative;
@@ -180,10 +183,10 @@ a.secondary {
 .main-logo {
   font-size: 30px;
   line-height: 30px;
-  font-weight: 600;
+  font-weight: 400;
   font-family: @title-font;
   a {
-    color: #ccc;
+    color: #bbb;
     
     &:hover {
       color: @gray;
@@ -199,32 +202,19 @@ a.secondary {
 /*  text-transform: lowercase;*/
 }
 
-.main-auth {
+.main-sign-in {
   position: absolute;
-  right: 0;
-  top: -32px;
-  
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 16px;
-    line-height: 16px;
-    font-weight: 600;
-  }
-  
-  li {
-    display: inline-block;
-    margin-left: 5px;
-  }
+  right: 10px;
+  top: 19px;
+  font-family: @title-font;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  z-index: 100;
+  text-transform: uppercase;
   
   a {
-    color: #4b4b4b;
-  }
-  
-  a:hover {
-    color: @text;
-    text-decoration: none;
+    color: @auth;
   }
 }
 
@@ -465,6 +455,7 @@ a.secondary {
 .follow-title {
   font-size: 22px;
   margin: 0 0 10px;
+  font-weight: 600;
   font-family: @title-font;
   color: @darkgray;
 }
@@ -491,6 +482,7 @@ a.secondary {
   margin: 0 0 10px;
   position: relative;
   top: -1px;
+  font-weight: 600;
   font-family: @title-font;
   text-transform: uppercase;
   color: @text;
@@ -979,40 +971,43 @@ div#flash {
   -webkit-transform:rotate(-45deg);
 }
 
-.main-promo {
-  .highlighted;
-  padding: 20px;
-  margin: 5px 0 0 0;
+.landing {
+  width: 620px;
+  position: relative;
+  margin: 0 auto 40px;
 }
 
-.main-promo-title {
-  @size: 32px;
+.landing-sign-up {
+  text-align: center;
   font-family: @title-font;
-  margin: 0;
-  font-size: @size;
-  line-height: @size;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 white;
-  float: left;
-}
-
-.main-promo-description {
-  margin: 0;
-  text-shadow: 1px 1px 0 white;
-  font-family: @title-font;
+  font-weight: 400;
   font-size: 32px;
-  line-height: 32px;
-  float: left;
-}
-
-.main-promo-join {
-  font-family: @title-font;
-  font-size: 32px;
-  line-height: 32px;
-  float: right;
-  margin-left: 1em;
+  color: #888;
   
-  a:hover {
-    color: @darkgray;
+  a {
+    color: #00a000;
+  }
+}
+
+.landing-slogan {
+  font-size: 62px;
+  font-family: @title-font;
+  color: @darkgray;
+  font-weight: 300;
+  text-align: center;
+}
+
+.landing-background {
+  .post {
+    width: 620px;
+    z-index: 1;
+    background: white;
+    border: 3px solid @lightgray;
+    padding: 10px;
+    margin: 0 auto 20px;
+  }
+  
+  header {
+    width: 620px;
   }
 }

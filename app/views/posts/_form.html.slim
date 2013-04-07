@@ -16,7 +16,7 @@ section class="new-post"
       |  
       = link_to '#ruby', tag_path('ruby')
   div class="new-post-notice"
-    | Content will be parsed by 
+    | Content parses by 
     = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', target: '_blank'
   div class="form-actions"
     = link_to 'Preview', api_markdown_path, class: 'button new-post-preview', remote: true

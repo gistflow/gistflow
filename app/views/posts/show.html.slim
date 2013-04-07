@@ -6,8 +6,11 @@
 
 div class="row"
   div class="left-column"
-    = render 'shared/profile'
-    = render 'shared/follow'
+    - if user_signed_in?
+      = render 'shared/profile'
+      = render 'shared/follow'
+    - else
+      = render partial: 'shared/user', locals: { user: @post.user }
   
   div class="right-column"
     = post_article @post, class: 'post-detail' do
@@ -15,7 +18,7 @@ div class="row"
         h1 class="post-title" = @post.title
         div class="post-data"
           | by 
-          = link_to @post.user.username, @post.user
+          = link_to @post.user.username, user_path(@post.user.username)
           |  at 
           = time_tag @post.created_at, @post.created_at.to_date.to_s(:long)
         div class="post-content markdown"
