@@ -51,6 +51,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'rake', '0.9.2.2'
+  gem "rails_best_practices"
 end
 
 group :assets do
