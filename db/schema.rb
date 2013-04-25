@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201112320) do
+ActiveRecord::Schema.define(:version => 20130424174900) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
 
   add_index "account_githubs", ["github_id"], :name => "index_account_githubs_on_github_id", :unique => true
   add_index "account_githubs", ["token"], :name => "index_account_githubs_on_token", :unique => true
+  add_index "account_githubs", ["user_id"], :name => "index_account_githubs_on_user_id"
 
   create_table "account_tokens", :force => true do |t|
     t.integer "user_id"
@@ -50,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
     t.datetime "deleted_at"
   end
 
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
   create_table "followings", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_user_id"
@@ -67,6 +71,9 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
     t.string  "source_type"
     t.integer "github_id"
   end
+
+  add_index "gists", ["source_id", "source_type"], :name => "index_gists_on_source_id_and_source_type"
+  add_index "gists", ["user_id"], :name => "index_gists_on_user_id"
 
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
@@ -133,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
   end
 
   add_index "posts", ["private_key"], :name => "index_posts_on_private_key", :unique => true
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.string   "email"
@@ -214,5 +222,6 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
   end
 
   add_index "wikis", ["id", "tag_id"], :name => "index_wikis_on_id_and_tag_id"
+  add_index "wikis", ["user_id"], :name => "index_wikis_on_user_id"
 
 end
