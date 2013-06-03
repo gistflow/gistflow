@@ -19,20 +19,21 @@ section.leaderboard {
     tbody tr:nth-child(even) {
        background-color: rgba(240, 240, 240, 0.5);
     }
-    
+
     td:first-child, th:first-child {
       text-align: left;
     }
-    
+
     a.sort_link {
       white-space: nowrap;
     }
 
     div.tags {
+      width: 300px;
       ul {
         li {
-          display: inline;
-          margin-right: 3px; 
+          margin-right: 3px;
+          float: left;
 
           a {
             font-size: 11px;
@@ -41,7 +42,7 @@ section.leaderboard {
               color: #666;
             }
           }
-        }  
+        }
       }
     }
   }
