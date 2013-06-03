@@ -29,11 +29,10 @@ section.leaderboard {
     }
 
     div.tags {
-      width: 300px;
       ul {
         li {
           margin-right: 3px;
-          float: left;
+          display: inline-block;
 
           a {
             font-size: 11px;
