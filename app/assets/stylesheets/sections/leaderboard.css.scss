@@ -19,11 +19,11 @@ section.leaderboard {
     tbody tr:nth-child(even) {
        background-color: rgba(240, 240, 240, 0.5);
     }
-    
+
     td:first-child, th:first-child {
       text-align: left;
     }
-    
+
     a.sort_link {
       white-space: nowrap;
     }
@@ -31,8 +31,8 @@ section.leaderboard {
     div.tags {
       ul {
         li {
-          display: inline;
-          margin-right: 3px; 
+          margin-right: 3px;
+          display: inline-block;
 
           a {
             font-size: 11px;
@@ -41,7 +41,7 @@ section.leaderboard {
               color: #666;
             }
           }
-        }  
+        }
       }
     }
   }
