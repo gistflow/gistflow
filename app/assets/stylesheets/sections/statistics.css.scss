@@ -1,0 +1,19 @@
+@import "configuration";
+
+section.sidebar {
+  padding-top: 0;
+
+  section {
+    margin-bottom: 10px;
+  }
+
+  section.statistics {
+    table {
+      border-collapse: collapse;
+
+      td {
+        padding-right: 5px;
+      }
+    }
+  }
+}
