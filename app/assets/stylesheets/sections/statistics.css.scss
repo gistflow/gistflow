@@ -2,9 +2,12 @@ section.sidebar {
   section.statistics {
     table {
       th {
-        border-collapse: collapse;
-        padding-right: 5px;
         text-align: left;
+        width: 80px;
+      }
+
+      td {
+        font-weight: 600;
       }
     }
   }
