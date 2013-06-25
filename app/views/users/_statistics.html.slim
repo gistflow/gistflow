@@ -1,0 +1,17 @@
+- cache user.cache_key(:statistics), expires_in: 15.minutes do
+  section class="statistics"
+    header
+      h1 Statistics
+    table
+      tr
+        th Total views
+        td = user.posts.sum(:page_views)
+      tr
+        th Last day
+        td = user.posts.last_day.sum(:page_views)
+      tr
+        th Last week
+        td = user.posts.last_week.sum(:page_views)
+      tr
+        th Last month
+        td = user.posts.last_month.sum(:page_views)
