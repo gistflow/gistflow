@@ -1,10 +1,10 @@
 section.sidebar {
   section.statistics {
     table {
-      border-collapse: collapse;
-
-      td {
+      th {
+        border-collapse: collapse;
         padding-right: 5px;
+        text-align: left;
       }
     }
   }

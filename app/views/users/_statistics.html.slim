@@ -4,14 +4,14 @@
       h1 Statistics
     table
       tr
-        td Total views
+        th Total views
         td = user.posts.sum(:page_views)
       tr
-        td Last day
+        th Last day
         td = user.posts.last_day.sum(:page_views)
       tr
-        td Last week
+        th Last week
         td = user.posts.last_week.sum(:page_views)
       tr
-        td Last month
+        th Last month
         td = user.posts.last_month.sum(:page_views)
