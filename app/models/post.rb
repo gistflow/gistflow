@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   validates :tags_size, numericality: { greater_than: 0 }
   validates :status, length: { maximum: 120 }, if: :status?
 
-  attr_accessible :title, :content, :question, :status, :is_private
+  attr_accessible :title, :content, :status, :is_private
 
   after_create :setup_observing_for_author
   after_commit :notify_audience, on: :create

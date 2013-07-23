@@ -7,16 +7,13 @@
     div class="post-hint" You can add tags (at least one is needed) by mentioning in post's body: #gistflow #code #ruby
   div class="preview markdown"
   fieldset
-    = f.check_box :question
-    = f.label :question, 'Question?'
-  fieldset
     = f.check_box :is_private
     = f.label :is_private, 'Private'
   div class="actions group"
     div class="left"
-      | This text will be parsed by 
+      | This text will be parsed by&nbsp;
       = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/syntax', :class => 'highlight'
-      | . See 
+      | . See&nbsp;
       = link_to 'hints', '#', :class => 'hints'
       |.
     div class="button-groups"
@@ -27,4 +24,4 @@
         = link_to 'Edit', '#', class: 'button edit'
         = link_to 'Preview', '#', class: 'button preview'
         = f.submit commit_title, class: 'button'
-    = render :partial => 'shared/markdown_hints'  
+    = render :partial => 'shared/markdown_hints'

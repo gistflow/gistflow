@@ -2,9 +2,7 @@ fieldset
   = f.text_area :content, :size => '40x2', :id => 'post_content', :class => 'at-username'
 div class="actions group"
   div class="left"
-    = f.check_box :question
-    = f.label :question, 'Is it a Question?'
-    |  See markdown 
+    | See markdown&nbsp;
     = link_to 'hints', '#', :class => 'hints'
     |.
   div class="button-groups"

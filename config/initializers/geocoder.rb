@@ -1,5 +1,5 @@
-Geocoder.configure do |config|
-  config.lookup = :google
-  config.timeout = 5
-  config.units = :km
-end
+Geocoder.configure(
+  lookup: :google,
+  timeout: 5,
+  units: :km
+)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201112320) do
+ActiveRecord::Schema.define(:version => 20130723085515) do
 
   create_table "account_githubs", :force => true do |t|
     t.string  "token"
@@ -40,13 +40,12 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
   add_index "bookmarks", ["user_id"], :name => "index_bookmarks_on_user_id"
 
   create_table "comments", :force => true do |t|
-    t.boolean  "question",    :default => false
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "likes_count", :default => 0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.datetime "deleted_at"
   end
 
@@ -123,7 +122,6 @@ ActiveRecord::Schema.define(:version => 20121201112320) do
     t.integer  "user_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
-    t.boolean  "question",       :default => false
     t.text     "preview_cache"
     t.datetime "deleted_at"
     t.string   "status"
