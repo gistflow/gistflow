@@ -7,5 +7,6 @@
 //= require twitter_tooltips
 //= require areacomplete
 //= require jquery.tabby
+//= require scroll_depth
 //= require_tree .
 
