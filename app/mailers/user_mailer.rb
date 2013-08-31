@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   
-  default :from => 'Gistflow Notifier <info@gistflow.com>'
+  default :from => 'Gistflow Notifier <info@gistflow.mailgun.org>', reply_to: "info@gistflow.com"
   
   def welcome_email(user_id)
     @user = User.find(user_id)
