@@ -36,6 +36,7 @@ Every new feature comes with bunch of rspec and capybara tests. Be sure to write
 * [Anatoli Makarevich](https://github.com/makaroni4) (makaroni4)
 * [Nick Shebanov](https://github.com/killthekitten) (killthekitten)
 * [Vasilij Melnychuk](https://github.com/SqREL) (SqREL)
+* [Mac Shifford](https://github.com/shiroginne) (shiroginne)
 
 ## License
 
