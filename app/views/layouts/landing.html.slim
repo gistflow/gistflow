@@ -57,82 +57,82 @@ html
           = link_to 'Sign up', auth_path
         div class="description"
           p
-            | When you learn something new share it with
+            ' When you learn something new share it with
             = link_to 'gistflow', auth_path
         div class="more" id="more"
           div class="message"
             h2 We made a place where developers can share their skills by writing code-related posts
             p
-              | User
+              ' User
               strong following
-              | ,
+              ' ,
               strong subscriptions
-              | for
+              '  for
               strong tags
-              | , post
+              ' , post
               strong comments,
-              | personal
+              '  personal
               strong bookmarks
-              | ,
+              ' ,
               strong ratings
-              | , import code to posts from gist.github.com,
+              ' , import code to posts from gist.github.com,
               strong markdown
-              | and
+              '  and
               strong code highlighting
-              | – by now all the necessary social features are implemented.
+              '  – by now all the necessary social features are implemented.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/github.png')
             h3 Github account
             p
-              | Start your developer blog in two clicks using Github account. By our opinion Github – the best place to share code. You can find many
+              ' Start your developer blog in two clicks using Github account. By our opinion Github – the best place to share code. You can find many
               em open source
-              | projects there including Rails, jQuery and a lot more. So you definitely need to have Github to be a social coder and to be able to sign up for Gistflow.
+              |  projects there including Rails, jQuery and a lot more. So you definitely need to have Github to be a social coder and to be able to sign up for Gistflow.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/following.png')
             h3 User following
 
             p
-              | We have following posts wall for you to be aware of all new posts from users you follow. Following developers is
+              ' We have following posts wall for you to be aware of all new posts from users you follow. Following developers is
               em a good way to learn
-              | something new.
+              |  something new.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/tags.png')
             h3 Tags
             p
-              | As simple as in Twitter. Use inline
+              ' As simple as in Twitter. Use inline
               em hash #tags
-              | to tag your posts. Subscribe for tags – your flow is basically posts tagged with tags you subscribed for. Search tags easily prepending "#" in search field.
+              |  to tag your posts. Subscribe for tags – your flow is basically posts tagged with tags you subscribed for. Search tags easily prepending "#" in search field.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/discuss.png')
             h3 Discussions
             p
-              | Post questions and write comments,
+              ' Post questions and write comments,
               em @mention users
-              | easily and subscribe for comments to featured posts – you will be notified by email and receive internal notification to not miss anything.
+              |  easily and subscribe for comments to featured posts – you will be notified by email and receive internal notification to not miss anything.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/gists.png')
             h3 Import code to posts from gist.github.com
             p
-              | As you can see Gistflow is inspired
+              ' As you can see Gistflow is inspired
               em by gist.github.com
-              | , so if you have any gists in Github we will
+              ' , so if you have any gists in Github we will
               em import them
-              | carefully for you to be able to write posts based on gists.
+              |  carefully for you to be able to write posts based on gists.
 
           div class="group message"
             div class="image" = image_tag asset_path('landing/more/markdown.png')
             h3 Markdown
             p
-              | Write beautiful posts with
+              ' Write beautiful posts with
               em Markdown
-              | syntax, include
+              '  syntax, include
               em code snippets
-              | directly in post body and it will be highlighted. Never heard about
+              '  directly in post body and it will be highlighted. Never heard about
               = link_to 'Markdown', 'http://daringfireball.net/projects/markdown/', target: :blank
               | ?
 
@@ -145,14 +145,14 @@ html
 
           div class="message"
             h2
-              | You can start posting right away!
+              ' You can start posting right away!
               = link_to 'Sign up', auth_path
             p class="center"
-              | Feel free to talk to us
-              = mail_to 'info@gistflow.com', 'info@gistflow.com', :encode => :hex
-              = " or directly post here with "
-              = link_to '#gistflow', tag_path('gistflow'), target: :blank
-              = " tag."
+              ' Feel free to talk to us
+              =' mail_to 'info@gistflow.com', 'info@gistflow.com', :encode => :hex
+              ' or directly post here with
+              =' link_to '#gistflow', tag_path('gistflow'), target: :blank
+              ' tag.
     = render partial: 'shared/gauges'
     = render partial: 'shared/yandex_analytics'
 = render_git_version
