@@ -1,31 +1,7 @@
 <script type="text/javascript">
-  var _gauges = _gauges || [];
-  (function() {
-    var t   = document.createElement('script');
-    t.type  = 'text/javascript';
-    t.async = true;
-    t.id    = 'gauges-tracker';
-    t.setAttribute('data-site-id', '5208951f108d7b4887000157');
-    t.src = '//secure.gaug.es/track.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(t, s);
+  (function () {
+    var yaz = document.createElement("script"); yaz.type = "text/javascript"; yaz.async = true;
+    yaz.src = "http://50likes.com/tracker.js";
+    document.getElementsByTagName("head")[0].appendChild(yaz);
   })();
-</script>
-
-<script type="text/javascript">
-  var GoSquared = {};
-  GoSquared.acct = "GSN-812822-R";
-  (function(w){
-    function gs(){
-      w._gstc_lt = +new Date;
-      var d = document, g = d.createElement("script");
-      g.type = "text/javascript";
-      g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-      var s = d.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(g, s);
-    }
-    w.addEventListener ?
-      w.addEventListener("load", gs, false) :
-      w.attachEvent("onload", gs);
-  })(window);
 </script>
