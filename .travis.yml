@@ -12,5 +12,6 @@ services:
   - elasticsearch
 notifications:
   webhooks:
-    urls: - https://space-notice.com/travis/e5e1095d31d53657ce93317d65336692
+    urls:
+      - https://space-notice.com/travis/e5e1095d31d53657ce93317d65336692
 
