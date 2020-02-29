@@ -49,7 +49,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'rake', '0.9.2.2'
+  gem 'rake', '13.0.1'
 end
 
 group :assets do
